@@ -1,24 +1,28 @@
-from rest_framework import serializers
-from .models import User
+from rest_framework import serializers 
+from givepaws.models import Hospital
 
-class UserSerializer(serializers.ModelSerializer):
+class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
+    def __init__(self, **kwargs):
+        self.serializer = kwargs.pop('serializer', None)
+        if self.serializer is not None and not issubclass(self.serializer, serializers.Serializer):
+            raise TypeError('"serializer" is not a valid serializer class')
+
+        super().__init__(**kwargs)
+
+    def use_pk_only_optimization(self):
+        return False if self.serializer else True
+
+    def to_representation(self, instance):
+        if self.serializer:
+            return self.serializer(instance, context=self.context).data
+        return super().to_representation(instance)
+
+class HospitalSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = [
-            'id',
-            'username',
-            'name',
-            'email',
-            'password',
-        ]
-        extra_kwargs ={
-            'password' : {'write_only': True}
-        }
-    def create(self, validated_data):
-        password = validated_data.pop('password', None)
-        instance = self.Meta.model(**validated_data)
-        if password is not None:
-            instance.set_password(password)
-        instance.save()
-        return instance
-        
+        model = Hospital
+        fields = ['hospitalid',
+                  'name',
+                  'email',
+                  'address',
+                  'tel',
+                  'isaccept',]

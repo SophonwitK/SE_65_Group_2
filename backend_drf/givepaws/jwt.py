@@ -4,11 +4,11 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.conf import settings 
 from users.models import User
 class JWTAuthentication(BaseAuthentication):
-    def authenticate(self, request):     
+    def authenticate(self, request):
         try:
             token = request.COOKIES.get('jwt')
             if not token:
-                raise AuthenticationFailed('Unauthenticaed!')
+                return None  
             try:
                 payload = jwt.decode(token, "secret", algorithms=["HS256"])
             except jwt.ExpiredSignatureError:
