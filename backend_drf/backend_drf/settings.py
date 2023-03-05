@@ -56,6 +56,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend_drf.urls'
 
+REST_FRAMEWORK ={
+    'NON_FIELD_ERROR_KEY': 'errors',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'givepaws.jwt.JWTAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+
+    ],
+}
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
