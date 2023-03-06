@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from givepaws.models import Hospital
+from givepaws.models import Hospital,UsersUser
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
     def __init__(self, **kwargs):
@@ -26,3 +26,16 @@ class HospitalSerializer(serializers.ModelSerializer):
                   'address',
                   'tel',
                   'isaccept',]
+
+class UsersUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hospital
+        fields = ['is_staff',
+                  'date_joined',
+                  'name',
+                  'email',
+                  'username',
+                  'is_employee',
+                  'is_hospitalcoordinator',
+                  'is_authen',]
+

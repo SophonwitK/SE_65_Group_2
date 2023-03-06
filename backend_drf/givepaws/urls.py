@@ -4,4 +4,6 @@ from django.urls import path
 urlpatterns = [
     path("hospitals/",views.hospital_list,name="hospital_list"),
     path("hospitals/<int:pk>",views.hospital_detail,name="hospital_detail"),
+    path("users/",views.user_list,name="hospital_list"),
+    path("users/<int:pk>",views.user_detail,name="hospital_detail"),
 ]
