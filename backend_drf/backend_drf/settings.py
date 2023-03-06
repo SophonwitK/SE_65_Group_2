@@ -64,7 +64,7 @@ REST_FRAMEWORK ={
         'givepaws.jwt.JWTAuthentication'
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-      
+        
     ],
 }
 

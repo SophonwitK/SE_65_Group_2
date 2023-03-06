@@ -15,7 +15,6 @@ class JWTAuthentication(BaseAuthentication):
                 raise AuthenticationFailed('Unauthenticated!')
             
             user = User.objects.filter(id=payload['id']).first()
-            print(user)
             return (user, None)
             
         except jwt.ExpiredSignatureError:

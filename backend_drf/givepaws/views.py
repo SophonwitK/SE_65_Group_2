@@ -7,7 +7,9 @@ from givepaws.serializers import HospitalSerializer,UsersUserSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
-from permissions import isEmployee
+from givepaws.permissions import IsEmployee
+import jwt
+from users.models import User
 
 
 @api_view(['GET', 'POST'])
@@ -54,7 +56,10 @@ def hospital_detail(request, pk):
 @permission_classes([IsAdminUser]) 
 def user_list(request):
     if request.method == 'GET': 
-        users = UsersUser.objects.all()
+        token = request.COOKIES.get('jwt')
+        payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        user = User.objects.filter(id=payload['id']).first()
+        users = UsersUser.objects.all().exclude(id=user.id)
         users_serializer = UsersUserSerializer( users, many=True)
         return Response( users_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':

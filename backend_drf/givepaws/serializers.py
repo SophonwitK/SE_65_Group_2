@@ -29,7 +29,7 @@ class HospitalSerializer(serializers.ModelSerializer):
 
 class UsersUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Hospital
+        model = UsersUser
         fields = ['is_staff',
                   'date_joined',
                   'name',
