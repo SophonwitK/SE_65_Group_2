@@ -57,10 +57,10 @@ class Authen(models.Model):
 class Authenimg(models.Model):
     authenimgid = models.AutoField(db_column='authenimgID', primary_key=True)  # Field name made lowercase.
     authid = models.ForeignKey(Authen, models.DO_NOTHING,related_name='authen', db_column='authID')  # Field name made lowercase.
-    emimgpath = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="images/")
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'authenimg'
 
 

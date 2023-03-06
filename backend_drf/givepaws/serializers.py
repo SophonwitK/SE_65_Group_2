@@ -43,12 +43,12 @@ class UsersUserSerializer(serializers.ModelSerializer):
 
 
 class AuthenimgSerializer(serializers.ModelSerializer):
+ 
     class Meta:
         model = Authenimg
         fields = ['authenimgid',
                   'authid',
-                  'emimgpath',]
-
+                  'image',]
 
 
 class AuthenSerializer(serializers.ModelSerializer):

@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes
 from givepaws.models import Hospital,UsersUser,Authen,Authenimg
 from rest_framework.parsers import JSONParser 
-from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer
+from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimgSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
@@ -132,8 +132,46 @@ def authen_detail(request, pk):
     elif request.method == 'DELETE': 
         authen.delete() 
         return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def authenimg_list(request):
+    if request.method == 'GET': 
+       authenimg = Authenimg.objects.all()
+       authenimg_serializer = AuthenimgSerializer( authenimg, many=True)
+       return Response( authenimg_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        authenimg_data = JSONParser().parse(request)
+        authenimg_serializer =AuthenimgSerializer(data=authenimg_data)
+        if authenimg_serializer.is_valid():
+            authenimg_serializer.save()
+            return Response(authenimg_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(authenimg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+@api_view(['GET','PUT', 'POST', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def authenimg_detail(request, pk):
+    try:
+       authenimg = Authenimg.objects.get(pk=pk)
+    except:
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        authenimg_serializer = AuthenimgSerializer(authenimg)
+        if authenimg:
+            return Response(authenimg_serializer.data, status=status.HTTP_200_OK) 
+    elif request.method == 'PUT': 
+        authenimg_data = JSONParser().parse(request) 
+        authenimg_serializer = AuthenimgSerializer(authenimg, data=authenimg_data) 
+        if  authenimg_serializer.is_valid(): 
+            authenimg_serializer.save() 
+            return Response(authenimg_serializer.data) 
+        return Response(authenimg_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    elif request.method == 'DELETE': 
+        authenimg.delete() 
+        return Response({'message': 'authenimg was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
 
 
 

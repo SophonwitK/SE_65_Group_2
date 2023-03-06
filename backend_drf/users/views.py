@@ -45,7 +45,7 @@ def user(request):
     try:
         payload = jwt.decode(token, "secret", algorithms=["HS256"])
     except jwt.ExpiredSignatureError:
-        raise AuthenticationFailed('Unauthenticated!')
+        raise AuthenticationFailed('Token is expire, Pleas login again')
     
     user = User.objects.filter(id=payload['id']).first()
     serializer = UserSerializer(user)
