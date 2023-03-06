@@ -10,8 +10,8 @@ from givepaws.jwt import JWTAuthentication
 
 
 @api_view(['GET', 'POST'])
-@authentication_classes([JWTAuthentication])
-@permission_classes([IsAdminUser])
+@authentication_classes([JWTAuthentication]) #check jwt token are correct or not?
+@permission_classes([IsAdminUser]) #check user permission isAdmin = is_staff = true in user_users in database
 def hospital_list(request):
     if request.method == 'GET':
         hospitals = Hospital.objects.all()
