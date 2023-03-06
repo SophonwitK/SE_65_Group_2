@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from givepaws.models import Hospital,UsersUser
+from givepaws.models import Hospital,UsersUser,Authen,Authenimg
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
     def __init__(self, **kwargs):
@@ -30,7 +30,9 @@ class HospitalSerializer(serializers.ModelSerializer):
 class UsersUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsersUser
-        fields = ['is_staff',
+        fields = [
+                  'id',
+                  'is_staff',
                   'date_joined',
                   'name',
                   'email',
@@ -38,4 +40,31 @@ class UsersUserSerializer(serializers.ModelSerializer):
                   'is_employee',
                   'is_hospitalcoordinator',
                   'is_authen',]
+
+
+class AuthenimgSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UsersUser
+        fields = ['authenimgid',
+                  'authid',
+                  'emimgpath',]
+
+
+
+class AuthenSerializer(serializers.ModelSerializer):
+    class Meta:
+        authenimgid = RelatedFieldAlternative(queryset=Authenimg.objects.all(), serializer=AuthenimgSerializer)
+
+        model = UsersUser
+        fields = ['authid',
+                  'firstname',
+                  'surename',
+                  'dob',
+                  'address',
+                  'tel',
+                  'dateauthen',
+                  'idcard'
+                  'authenimgid',
+                  'user',]
+
 
