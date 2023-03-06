@@ -13,11 +13,11 @@ from givepaws.jwt import JWTAuthentication
 @authentication_classes([JWTAuthentication]) #check jwt token are correct or not?
 @permission_classes([IsAdminUser]) #check user permission isAdmin = is_staff = true in user_users in database
 def hospital_list(request):
-    if request.method == 'GET':
+    if request.method == 'GET': #return all object
         hospitals = Hospital.objects.all()
         hospitals_serializer = HospitalSerializer( hospitals, many=True)
         return Response( hospitals_serializer.data, status=status.HTTP_200_OK)
-    elif request.method == 'POST':
+    elif request.method == 'POST': #create object
         hospital_data = JSONParser().parse(request)
         hospital_serializer = HospitalSerializer(data=hospital_data)
         if hospital_serializer.is_valid():
@@ -33,17 +33,19 @@ def hospital_detail(request, pk):
         hospital = Hospital.objects.get(pk=pk)
     except:
         return Response(status=status.HTTP_204_NO_CONTENT) 
-    if request.method == 'GET':
+    if request.method == 'GET': #return sigle object
         hospital_serializer = HospitalSerializer(hospital)
         if hospital:
             return Response(hospital_serializer.data, status=status.HTTP_200_OK) 
-    elif request.method == 'PUT':
+    elif request.method == 'PUT': #update object
         hospital_data = JSONParser().parse(request) 
         hospital_serializer = HospitalSerializer( hospital, data=hospital_data) 
         if  hospital_serializer.is_valid(): 
             hospital_serializer.save() 
             return Response(hospital_serializer.data) 
         return Response(hospital_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-    elif request.method == 'DELETE': 
+    elif request.method == 'DELETE': #delete object
         hospital.delete() 
         return Response({'message': 'Hospital was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+
