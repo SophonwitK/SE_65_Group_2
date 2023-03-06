@@ -44,7 +44,7 @@ class UsersUserSerializer(serializers.ModelSerializer):
 
 class AuthenimgSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UsersUser
+        model = Authenimg
         fields = ['authenimgid',
                   'authid',
                   'emimgpath',]
@@ -52,10 +52,10 @@ class AuthenimgSerializer(serializers.ModelSerializer):
 
 
 class AuthenSerializer(serializers.ModelSerializer):
+    user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
+    authenimg = AuthenimgSerializer(many=True, read_only=True,source='authen')
     class Meta:
-        authenimgid = RelatedFieldAlternative(queryset=Authenimg.objects.all(), serializer=AuthenimgSerializer)
-
-        model = UsersUser
+        model = Authen
         fields = ['authid',
                   'firstname',
                   'surename',
@@ -63,8 +63,9 @@ class AuthenSerializer(serializers.ModelSerializer):
                   'address',
                   'tel',
                   'dateauthen',
-                  'idcard'
-                  'authenimgid',
-                  'user',]
+                  'idcard',
+                  'user',
+                  'authenimg',
+                  ]
 
 
