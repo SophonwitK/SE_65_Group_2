@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import User
 import re
 from django.core.validators import EmailValidator
-from django.db import IntegrityError
 from django.core.validators import RegexValidator
 
 class UserSerializer(serializers.ModelSerializer):
