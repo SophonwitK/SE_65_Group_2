@@ -8,6 +8,4 @@ urlpatterns = [
     path("users/<int:pk>",views.user_detail,name="hospital_detail"),
     path("authens/",views.authen_list,name="authen_list"),
     path("authens/<int:pk>",views.authen_detail,name="authen_detail"),
-    path("authenimgs/",views.authenimg_list,name="authenimg_list"),
-    path("authenimgs/<int:pk>",views.authenimg_detail,name="authenimg_detail"),
 ]

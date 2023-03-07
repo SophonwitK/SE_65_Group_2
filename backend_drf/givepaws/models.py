@@ -39,30 +39,23 @@ class AuthPermission(models.Model):
 
 
 class Authen(models.Model):
-    authid = models.AutoField(db_column='authID', primary_key=True)  # Field name made lowercase.
-    firstname = models.CharField(max_length=100)
-    surename = models.CharField(max_length=100)
+    authid = models.AutoField(primary_key=True)
+    firstname = models.CharField(max_length=200)
+    surename = models.CharField(max_length=200)
     dob = models.DateTimeField(db_column='DOB')  # Field name made lowercase.
-    address = models.CharField(max_length=100)
-    tel = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+    tel = models.CharField(max_length=200)
     dateauthen = models.DateTimeField(db_column='DateAuthen')  # Field name made lowercase.
-    idcard = models.CharField(db_column='IDcard', max_length=100)  # Field name made lowercase.
-    user = models.OneToOneField('UsersUser', models.DO_NOTHING)
+    idcard = models.CharField(db_column='IDcard', max_length=13)  # Field name made lowercase.
+    userid = models.OneToOneField('UsersUser', models.DO_NOTHING, db_column='userid')
 
     class Meta:
         managed = False
         db_table = 'authen'
 
-
-class Authenimg(models.Model):
-    authenimgid = models.AutoField(db_column='authenimgID', primary_key=True)  # Field name made lowercase.
-    authid = models.ForeignKey(Authen, models.DO_NOTHING,related_name='authen', db_column='authID')  # Field name made lowercase.
-    image = models.ImageField(upload_to="images/")
-
-    class Meta:
-        managed = True
-        db_table = 'authenimg'
-
+class AuthenImage(models.Model):
+    authenid = models.ForeignKey(Authen,on_delete=models.CASCADE,related_name='images')
+    image = models.ImageField(upload_to="img/authen",default="",null=True,blank=True)
 
 class Card(models.Model):
     cardid = models.AutoField(db_column='cardID', primary_key=True)  # Field name made lowercase.

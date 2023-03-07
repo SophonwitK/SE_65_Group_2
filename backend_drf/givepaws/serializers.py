@@ -1,5 +1,6 @@
 from rest_framework import serializers 
-from givepaws.models import Hospital,UsersUser,Authen,Authenimg
+from givepaws.models import Hospital,UsersUser,Authen,AuthenImage
+from PIL import Image as PilImage
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
     def __init__(self, **kwargs):
@@ -25,7 +26,7 @@ class HospitalSerializer(serializers.ModelSerializer):
                   'email',
                   'address',
                   'tel',
-                  'isaccept',]
+                  'isaccept']
 
 class UsersUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,21 +40,19 @@ class UsersUserSerializer(serializers.ModelSerializer):
                   'username',
                   'is_employee',
                   'is_hospitalcoordinator',
-                  'is_authen',]
+                  'is_authen']
 
-
-class AuthenimgSerializer(serializers.ModelSerializer):
- 
+class AuthenImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Authenimg
-        fields = ['authenimgid',
-                  'authid',
-                  'image',]
-
+        model = AuthenImage
+        fields = ['id','authenid','image']
 
 class AuthenSerializer(serializers.ModelSerializer):
-    user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
-    authenimg = AuthenimgSerializer(many=True, read_only=True,source='authen')
+    userid = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
+    images = AuthenImageSerializer(many=True, read_only=True)
+    uploaded_images = serializers.ListField(
+        child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
+        write_only=True)
     class Meta:
         model = Authen
         fields = ['authid',
@@ -64,8 +63,15 @@ class AuthenSerializer(serializers.ModelSerializer):
                   'tel',
                   'dateauthen',
                   'idcard',
-                  'user',
-                  'authenimg',
+                  'images',
+                  'uploaded_images',
+                  'userid'
                   ]
+        
+    def create(self, validated_data):
+        uploaded_imgs = validated_data.pop("uploaded_images")
+        authen = Authen.objects.create(**validated_data)
+        for image in uploaded_imgs:
+            newAuthenImg = AuthenImage.objects.create(authenid=authen,image=image)
 
-
+        return authen
