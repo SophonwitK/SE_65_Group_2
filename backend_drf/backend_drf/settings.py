@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'backend_drf.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'givepaw',
+        'NAME': 'givepaws',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',

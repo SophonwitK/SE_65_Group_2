@@ -3,11 +3,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
 from givepaws.models import Hospital,UsersUser,Authen
 from rest_framework.parsers import JSONParser 
-from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenImageSerializer
+from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer,Authenimage
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
-from givepaws.permissions import IsEmployee
 import jwt
 from users.models import User
 from rest_framework.parsers import MultiPartParser, FormParser

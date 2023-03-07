@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from givepaws.models import Hospital,UsersUser,Authen,AuthenImage
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage
 from PIL import Image as PilImage
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
@@ -42,14 +42,14 @@ class UsersUserSerializer(serializers.ModelSerializer):
                   'is_hospitalcoordinator',
                   'is_authen']
 
-class AuthenImageSerializer(serializers.ModelSerializer):
+class AuthenimageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AuthenImage
-        fields = ['id','authenid','image']
+        model = Authenimage
+        fields = ['id','authen','image']
 
 class AuthenSerializer(serializers.ModelSerializer):
-    userid = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
-    images = AuthenImageSerializer(many=True, read_only=True)
+    user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
+    images = AuthenimageSerializer(many=True,read_only=True)
     uploaded_images = serializers.ListField(
         child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
         write_only=True)
@@ -65,13 +65,13 @@ class AuthenSerializer(serializers.ModelSerializer):
                   'idcard',
                   'images',
                   'uploaded_images',
-                  'userid'
+                  'user'
                   ]
         
     def create(self, validated_data):
         uploaded_imgs = validated_data.pop("uploaded_images")
         authen = Authen.objects.create(**validated_data)
         for image in uploaded_imgs:
-            newAuthenImg = AuthenImage.objects.create(authenid=authen,image=image)
+            newAuthenImg = Authenimage.objects.create(authen=authen,image=image)
 
         return authen

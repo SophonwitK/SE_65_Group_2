@@ -39,27 +39,28 @@ class AuthPermission(models.Model):
 
 
 class Authen(models.Model):
-    authid = models.AutoField(primary_key=True)
-    firstname = models.CharField(max_length=200)
-    surename = models.CharField(max_length=200)
+    authid = models.AutoField(db_column='authID', primary_key=True)  # Field name made lowercase.
+    firstname = models.CharField(max_length=100)
+    surename = models.CharField(max_length=100)
     dob = models.DateTimeField(db_column='DOB')  # Field name made lowercase.
-    address = models.CharField(max_length=200)
-    tel = models.CharField(max_length=200)
+    address = models.CharField(max_length=100)
+    tel = models.CharField(max_length=100)
     dateauthen = models.DateTimeField(db_column='DateAuthen')  # Field name made lowercase.
-    idcard = models.CharField(db_column='IDcard', max_length=13)  # Field name made lowercase.
-    userid = models.OneToOneField('UsersUser', models.DO_NOTHING, db_column='userid')
+    idcard = models.CharField(db_column='IDcard', max_length=100)  # Field name made lowercase.
+    user = models.OneToOneField('UsersUser', models.DO_NOTHING, db_column='user', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'authen'
 
-class AuthenImage(models.Model):
-    authenid = models.ForeignKey(Authen,on_delete=models.CASCADE,related_name='images')
-    image = models.ImageField(upload_to="img/authen",default="",null=True,blank=True)
+class Authenimage(models.Model):
+    authen = models.ForeignKey(Authen, on_delete=models.CASCADE, related_name = "images")
+    image = models.ImageField(upload_to="img/authen", default="", null=True, blank=True)
+
 
 class Card(models.Model):
     cardid = models.AutoField(db_column='cardID', primary_key=True)  # Field name made lowercase.
-    memberid = models.ForeignKey('Member', models.DO_NOTHING, db_column='memberID')  # Field name made lowercase.
+    memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     hospitalid = models.IntegerField(db_column='hospitalID')  # Field name made lowercase.
     donateacceptid = models.OneToOneField('Donateaccept', models.DO_NOTHING, db_column='donateacceptID')  # Field name made lowercase.
@@ -74,20 +75,6 @@ class Card(models.Model):
     class Meta:
         managed = False
         db_table = 'card'
-
-
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey('UsersUser', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
 
 
 class DjangoContentType(models.Model):
@@ -109,16 +96,6 @@ class DjangoMigrations(models.Model):
     class Meta:
         managed = False
         db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
 
 
 class Donar(models.Model):
@@ -187,66 +164,21 @@ class Hospitalcoordinator(models.Model):
     hospitalid = models.ForeignKey(Hospital, models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    hcdocid = models.IntegerField(db_column='hcdocID', blank=True, null=True)  # Field name made lowercase.
+    hcdocid = models.IntegerField(db_column='hcdocID')  # Field name made lowercase.
     firstname = models.CharField(max_length=100)
     surename = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
     iscomplete = models.CharField(max_length=100)
-    user = models.OneToOneField('UsersUser', models.DO_NOTHING)
 
     class Meta:
         managed = False
         db_table = 'hospitalcoordinator'
 
 
-class Imgcard(models.Model):
-    imgcardid = models.AutoField(db_column='imgcardID', primary_key=True)  # Field name made lowercase.
-    cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
-    filepath = models.CharField(db_column='filePath', max_length=100)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'imgcard'
-
-
-class Imgdonar(models.Model):
-    imgdonarid = models.AutoField(db_column='imgdonarID', primary_key=True)  # Field name made lowercase.
-    donarid = models.ForeignKey(Donar, models.DO_NOTHING, db_column='donarID')  # Field name made lowercase.
-    filepath = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'imgdonar'
-
-
-class Imgdonateaccept(models.Model):
-    imgdonateacceptid = models.AutoField(db_column='imgdonateacceptID', primary_key=True)  # Field name made lowercase.
-    donateacceptid = models.ForeignKey(Donateaccept, models.DO_NOTHING, db_column='donateacceptID')  # Field name made lowercase.
-    filepath = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'imgdonateaccept'
-
-
-class Member(models.Model):
-    memberid = models.AutoField(db_column='memberID', primary_key=True)  # Field name made lowercase.
-    name = models.CharField(max_length=100)
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    userlevelid = models.ForeignKey('Userlevel', models.DO_NOTHING, db_column='userlevelID')  # Field name made lowercase.
-    authid = models.OneToOneField(Authen, models.DO_NOTHING, db_column='authID')  # Field name made lowercase.
-    email = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'member'
-
-
 class Paymentcard(models.Model):
     paymentcardid = models.AutoField(db_column='paymentcardID', primary_key=True)  # Field name made lowercase.
-    memberid = models.ForeignKey(Member, models.DO_NOTHING, db_column='memberID')  # Field name made lowercase.
+    memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.
     contribution = models.FloatField()
     date = models.DateTimeField()
     paymentcardimg = models.CharField(max_length=100)
@@ -268,7 +200,7 @@ class Receipttype(models.Model):
 
 
 class Report(models.Model):
-    memberid = models.ForeignKey(Member, models.DO_NOTHING, db_column='memberID')  # Field name made lowercase.
+    memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     description = models.CharField(max_length=10000)
@@ -277,15 +209,6 @@ class Report(models.Model):
     class Meta:
         managed = False
         db_table = 'report'
-
-
-class Userlevel(models.Model):
-    userlevelid = models.AutoField(db_column='userlevelID', primary_key=True)  # Field name made lowercase.
-    userlevelname = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'userlevel'
 
 
 class UsersUser(models.Model):
