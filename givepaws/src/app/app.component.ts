@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'givepaws';
+  
+  authenticated (){
+    return false
+  }
 }

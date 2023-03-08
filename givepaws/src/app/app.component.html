@@ -1,7 +1,9 @@
-<router-outlet>
+<router-outlet *ngIf="authenticated() == false">
     <p>
       <mat-toolbar color="primary" class="nav">
-        <span><a href="#" class="nav-home-link">Home</a></span>
+        <span>
+          <a href="#" class="nav-home-link">Home</a>
+        </span>
         <mat-nav-list class = "nav-link">
           <a routerLink="/login">login</a>
           <a routerLink="/register">register</a>

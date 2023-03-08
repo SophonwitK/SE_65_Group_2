@@ -19,10 +19,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
-import { HomeComponent } from './componenets/home/home.component';
-import { AdminComponent } from './componenets/admin/admin.component';
-import { LoginComponent } from './componenets/login/login.component';
-import { RegisterComponent } from './componenets/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
