@@ -24,6 +24,10 @@ class UserSerializer(serializers.ModelSerializer):
             'name',
             'email',
             'password',
+            'is_staff',
+            'is_employee',
+            'is_hospitalcoordinator',
+            'is_authen',
         ]
         extra_kwargs ={
             'password' : {'write_only': True}

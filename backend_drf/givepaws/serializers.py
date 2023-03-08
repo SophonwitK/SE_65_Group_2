@@ -33,11 +33,11 @@ class UsersUserSerializer(serializers.ModelSerializer):
         model = UsersUser
         fields = [
                   'id',
-                  'is_staff',
                   'date_joined',
                   'name',
                   'email',
                   'username',
+                  'is_staff',
                   'is_employee',
                   'is_hospitalcoordinator',
                   'is_authen']

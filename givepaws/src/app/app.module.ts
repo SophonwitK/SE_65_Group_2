@@ -23,6 +23,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MatCardModule } from '@angular/material/card';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,11 @@ import { RegisterComponent } from './components/register/register.component';
     MatTableModule,
     MatSortModule,
     MatSnackBarModule,
-    MatListModule
+    MatListModule,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+    }),
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
