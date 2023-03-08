@@ -1,0 +1,28 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.nav{
+  display: flex;
+  justify-content: space-between;
+  margin-top: -20px;
+  .nav-home-link{
+    text-decoration: none;
+    color: aliceblue;
+  }
+  .nav-home-link:hover{
+    color: rgb(56, 51, 51);
+  }
+  .nav-link{
+    display: flex;
+    a{
+      width: 6rem;
+      color: aliceblue;
+      text-decoration: none;
+      
+    }
+    a:hover{
+      color: rgb(56, 51, 51);
+    }
+    
+  }
+}

@@ -1,0 +1,29 @@
+<div class="body">
+    <div class="main-register">
+        <h1> Register </h1>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your Username</mat-label>
+            <input matInput placeholder="spw-user" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your Name</mat-label>
+            <input matInput placeholder="sophonwit" required>
+            <input matInput>
+        </mat-form-field>
+            <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="email" required>
+            </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="bt-add-std">
+        <button mat-raised-button routerLink="/">Cancel</button>
+        <button mat-raised-button routerLink="/" color="primary" type="submit">Create</button>
+    </div>
+</div>
