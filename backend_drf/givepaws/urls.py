@@ -8,4 +8,6 @@ urlpatterns = [
     path("users/<int:pk>",views.user_detail,name="hospital_detail"),
     path("authens/",views.authen_list,name="authen_list"),
     path("authens/<int:pk>",views.authen_detail,name="authen_detail"),
+    path("authenimages/",views.authenimages_list,name="authenimages_list"),
+    path("authenimages/<int:pk>",views.authenimages_detail,name="authenimages_detail"),
 ]

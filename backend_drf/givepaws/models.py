@@ -6,7 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
+import os
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
@@ -57,7 +57,6 @@ class Authenimage(models.Model):
     authen = models.ForeignKey(Authen, on_delete=models.CASCADE, related_name = "images")
     image = models.ImageField(upload_to="img/authen", default="", null=True, blank=True)
 
-
 class Card(models.Model):
     cardid = models.AutoField(db_column='cardID', primary_key=True)  # Field name made lowercase.
     memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.
@@ -75,6 +74,20 @@ class Card(models.Model):
     class Meta:
         managed = False
         db_table = 'card'
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey('UsersUser', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
 
 
 class DjangoContentType(models.Model):
@@ -96,6 +109,16 @@ class DjangoMigrations(models.Model):
     class Meta:
         managed = False
         db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
 
 
 class Donar(models.Model):
@@ -135,14 +158,14 @@ class Donatetopic(models.Model):
         db_table = 'donatetopic'
 
 
-class Hcapprovedocument(models.Model):
-    hcadid = models.AutoField(db_column='hcadID', primary_key=True)  # Field name made lowercase.
-    hcid = models.ForeignKey('Hospitalcoordinator', models.DO_NOTHING, db_column='hcID')  # Field name made lowercase.
-    emimgpath = models.CharField(max_length=100)
+class GivepawsAuthenimage(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    image = models.CharField(max_length=100, blank=True, null=True)
+    authen = models.ForeignKey(Authen, models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'hcapprovedocument'
+        db_table = 'givepaws_authenimage'
 
 
 class Hospital(models.Model):
@@ -253,3 +276,6 @@ class UsersUserUserPermissions(models.Model):
         managed = False
         db_table = 'users_user_user_permissions'
         unique_together = (('user', 'permission'),)
+
+
+
