@@ -20,8 +20,20 @@
                     <mat-label>Enter your password</mat-label>
                     <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
                     <mat-hint>at least 8 character</mat-hint>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm your password</mat-label>
+                    <input matInput formControlName="password2nd" [type]="hide2 ? 'password' : 'text'">
+                    <mat-hint>
+                        <div *ngIf="registerForm.hasError('passwordMatch')">
+                            {{ registerForm.getError('passwordMatch').message }}
+                        </div>
+                    </mat-hint>
+                    <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
                 <div mat-dialog-actions class="bt-add-std">

@@ -25,6 +25,12 @@
     justify-content: center;
     
   }
+  mat-form-field {
+    padding: 0.5rem;
+    mat-hint{
+      color: gray;
+    }
+  }
   
   .bt-add-std{
       button{

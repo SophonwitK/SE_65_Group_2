@@ -12,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  hide = true;
+  hide=true;
+  hide2=true;
 
   constructor(
     private _fb:FormBuilder,
@@ -24,21 +25,37 @@ export class RegisterComponent {
         username:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(5),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
         name:this._fb.control('',Validators.required),
         email:this._fb.control('',Validators.compose([Validators.required, Validators.email])),
-        password :this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
-        //password2nd :this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]))
-      })
+        password:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
+        password2nd:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
+      });
+      this.registerForm.addValidators(
+        createCompareValidator(this.registerForm.get('password'),this.registerForm.get('password2nd'))
+      );
     }
-  
 
   validateRegister(){
     if(this.registerForm.valid){
-      this._authService.register(this.registerForm.value).subscribe( res => {
-        this._toastr.success('Registered Sucessfully')
-        this._router.navigate(['login'])
+      this.registerForm.removeControl('password2nd')
+      this._authService.register(this.registerForm.value).subscribe({
+        next: () =>{
+          this._toastr.success('Registered Sucessfully')
+          this._router.navigate(['login'])
+        },
+        error: (err: any) =>{
+          console.error(err)
+        },
       });
     }else{
-      console.log("error")
       this._toastr.warning("Please enter valid data")
     }
   }
+  
+}
+
+function createCompareValidator(controlOne: any, controlTwo: any) {
+  return () => {
+  if (controlOne.value !== controlTwo.value)
+    return { passwordMatch: { message: 'Passwords do not match.' } };
+  return null;
+  };
 }

@@ -1,4 +1,4 @@
-<router-outlet *ngIf="authenticated() == false">
+<router-outlet #outlet="outlet">
     <p>
       <mat-toolbar color="primary" class="nav">
         <span>
