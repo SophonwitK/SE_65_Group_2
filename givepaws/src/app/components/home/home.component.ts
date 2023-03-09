@@ -15,7 +15,7 @@ export class HomeComponent {
   }
   ngOnInit (){
     this._authService.getLoginUser().subscribe({
-      next: rest=>{
+      next: (rest:any) =>{
         console.log(rest)
       },
       error: err =>{
