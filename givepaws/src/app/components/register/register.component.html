@@ -28,7 +28,7 @@
                     <mat-label>Confirm your password</mat-label>
                     <input matInput formControlName="password2nd" [type]="hide2 ? 'password' : 'text'">
                     <mat-hint>
-                        <div *ngIf="registerForm.hasError('passwordMatch')">
+                        <div class="pwd-error" *ngIf="registerForm.hasError('passwordMatch')">
                             {{ registerForm.getError('passwordMatch').message }}
                         </div>
                     </mat-hint>

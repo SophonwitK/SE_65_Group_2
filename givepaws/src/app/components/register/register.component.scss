@@ -30,6 +30,9 @@
     padding: 0.5rem;
     mat-hint{
       color: gray;
+      .pwd-error{
+        color: red;
+      }
     }
   }
   

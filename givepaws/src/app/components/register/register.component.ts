@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -52,7 +51,7 @@ export class RegisterComponent {
   
 }
 
-function createCompareValidator(controlOne: any, controlTwo: any) {
+function createCompareValidator(controlOne: any, controlTwo: any){
   return () => {
   if (controlOne.value !== controlTwo.value)
     return { passwordMatch: { message: 'Passwords do not match.' } };

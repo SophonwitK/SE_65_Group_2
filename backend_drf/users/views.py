@@ -5,7 +5,6 @@ from .models import User
 from rest_framework.exceptions import AuthenticationFailed
 import jwt,datetime
 
-
 @api_view(['POST'])
 def register(request):
     serializer = UserSerializer(data=request.data)
@@ -13,7 +12,7 @@ def register(request):
     serializer.save()
     return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['POST','OPTIONS'])
 def login(request):
     username = request.data['username']
     password = request.data['password']
@@ -30,11 +29,11 @@ def login(request):
     token = jwt.encode(payload, "secret", algorithm="HS256")
     
     response = Response()
-    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.set_cookie(key='jwt', value=token, httponly=True,samesite='lax')
     response.data = {
         'jwt': token
     }
-
+    
     return response
 
 @api_view(['GET'])
