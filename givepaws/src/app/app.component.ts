@@ -1,5 +1,6 @@
 import { Component,DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ export class AppComponent {
   
   constructor(
     private _router:Router,
+    private _authService: AuthService,
   ){
   }
   ngDoCheck(): void{
@@ -20,6 +22,6 @@ export class AppComponent {
       this.Navbar=true;
     }else{
       this.Navbar=false
-    }     
+    }
   }
 }

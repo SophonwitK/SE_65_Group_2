@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
 import jwt
 from users.models import User
-from rest_framework.parsers import MultiPartParser, FormParser
+
 
 
 @api_view(['GET', 'POST'])

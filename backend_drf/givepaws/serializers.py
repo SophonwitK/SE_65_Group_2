@@ -1,6 +1,5 @@
 from rest_framework import serializers 
 from givepaws.models import Hospital,UsersUser,Authen,Authenimage
-from PIL import Image as PilImage
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
     def __init__(self, **kwargs):

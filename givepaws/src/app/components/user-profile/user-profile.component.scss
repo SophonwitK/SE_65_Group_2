@@ -1,19 +1,29 @@
-.main-body{
-    background-image: url("/assets/background/abstract-envelope.svg");
+.main-bg{
+    background-image: url("/assets/background/dogcat.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
     height: 100%;
-    .nav-link{
-        display: flex;
-        margin-left: 2rem;
-        a{
-          width: 6rem;
-          color: aliceblue;
-          text-decoration: none;
-          
-        }
-        a:hover{
-          color:   #F0C993;
-        }
-    }
+    z-index: -1;
+    .bg-blur{
+      position: fixed;
+      backdrop-filter: blur(5px);
+      width: 100%;
+      height: 100%;
+      .nav-link{
+          display: flex;
+          margin-left: 2rem;
+          a{
+            width: 6rem;
+            color: aliceblue;
+            text-decoration: none;
+            
+          }
+          a:hover{
+            color:   #F0C993;
+          }
+      }
+  }
 }
 .main-card{
     display: flex;

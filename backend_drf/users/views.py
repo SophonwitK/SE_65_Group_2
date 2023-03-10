@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
 import jwt,datetime
+from givepaws.jwt import JWTAuthentication
+from rest_framework.decorators import authentication_classes
+from rest_framework.parsers import JSONParser 
+from rest_framework import status
 
 @api_view(['POST'])
 def register(request):
@@ -29,14 +33,25 @@ def login(request):
     token = jwt.encode(payload, "secret", algorithm="HS256")
     
     response = Response()
-    response.set_cookie(key='jwt', value=token, httponly=True,samesite='none',secure=True, max_age=43200)
+    response.set_cookie(key='jwt', value=token, httponly=True,samesite='none', max_age=43200)
     response.data = {
         'jwt': token
     }
     
     return response
 
-@api_view(['GET'])
+@api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+def userupdate(request,pk):
+    user = User.objects.get(pk=pk)
+    user_data = JSONParser().parse(request)
+    user_serializer = UserSerializer(user,data=user_data)
+    if user_serializer.is_valid():
+        user_serializer.save()
+        return Response(user_serializer.data, status=status.HTTP_201_CREATED) 
+    return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','PATCH'])
 def user(request):
     token = request.COOKIES.get('jwt')
     if not token:
@@ -45,7 +60,6 @@ def user(request):
         payload = jwt.decode(token, "secret", algorithms=["HS256"])
     except jwt.ExpiredSignatureError:
         raise AuthenticationFailed('Token is expire, Pleas login again')
-    
     user = User.objects.filter(id=payload['id']).first()
     serializer = UserSerializer(user)
 

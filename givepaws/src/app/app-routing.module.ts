@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:'admin',component:AdminComponent,canActivate:[AuthGuard]},
   {path:'employee',component:EmployeeComponent,canActivate:[AuthGuard]},
   {path:'hospitalcoordinator',component:HospitalCoordinatorComponent,canActivate:[AuthGuard]},
-  {path:'username/profile',component:UserProfileComponent,canActivate:[AuthGuard]},
+  {path:':username/profile',component:UserProfileComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

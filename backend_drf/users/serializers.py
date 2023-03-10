@@ -43,3 +43,23 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+    
+    
+    def update(self, instance, validated_data):
+        
+        # Check if 'password' is in validated_data
+        if 'password' in validated_data:
+            password = validated_data.pop('password')
+            pattern = r'^[A-Za-z0-9@#$%^&+-=]+$'
+            if not re.match(pattern, password):
+                raise serializers.ValidationError("Password must contain only English letters (both uppercase and lowercase) or numbers or special characters.")
+            # Set the password on the instance
+            instance.set_password(password)
+        
+        # Update other fields on the instance
+        instance.username = validated_data.get('username', instance.username)
+        
+        # Save the updated instance
+        instance.save()
+        
+        return instance

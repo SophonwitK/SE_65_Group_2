@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class HomeComponent {
-
+  username = sessionStorage.getItem('username')
   constructor(
     private _authService: AuthService
   ){
