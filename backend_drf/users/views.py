@@ -23,13 +23,13 @@ def login(request):
         raise AuthenticationFailed('Incorrect Password!')
     payload = {
         'id': user.id,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=1),
         'iat': datetime.datetime.utcnow()
     }
     token = jwt.encode(payload, "secret", algorithm="HS256")
     
     response = Response()
-    response.set_cookie(key='jwt', value=token, httponly=True,samesite='lax')
+    response.set_cookie(key='jwt', value=token, httponly=True,samesite='none',secure=True, max_age=60)
     response.data = {
         'jwt': token
     }

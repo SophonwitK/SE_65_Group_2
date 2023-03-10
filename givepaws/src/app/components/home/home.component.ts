@@ -1,5 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-home',
@@ -13,14 +14,5 @@ export class HomeComponent {
   ){
 
   }
-  ngOnInit (){
-    this._authService.getLoginUser().subscribe({
-      next: (rest:any) =>{
-        console.log(rest)
-      },
-      error: err =>{
-        console.log(err)
-      }
-    })
-  }
+  
 }
