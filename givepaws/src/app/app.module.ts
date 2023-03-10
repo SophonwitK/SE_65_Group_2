@@ -62,7 +62,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatSnackBarModule,
     MatListModule,
     ToastrModule.forRoot({
-      timeOut: 1500,
+      timeOut: 1000,
     }),
     MatCardModule,
   ],
