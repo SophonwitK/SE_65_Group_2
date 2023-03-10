@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   .nav-home-link{
+    text-transform: uppercase;
     text-decoration: none;
     color: aliceblue;
   }
@@ -14,6 +15,7 @@
   .nav-link{
     display: flex;
     a{
+      text-transform: uppercase;
       width: 6rem;
       color: aliceblue;
       text-decoration: none;

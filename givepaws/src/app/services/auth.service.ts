@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http';
-import { Observable,lastValueFrom } from 'rxjs';
-import { Router } from '@angular/router';
+import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { Observable,of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +11,6 @@ export class AuthService {
 
   constructor(
     private _http:HttpClient,
-    private _router: Router,
     ) { }
 
   register(data:any): Observable<any>{

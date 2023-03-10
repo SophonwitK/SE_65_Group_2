@@ -1,24 +1,26 @@
 <div class="body">
-    <mat-card>
-        <mat-card-header><h2> Login </h2></mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="loginForm" class="main-register" (ngSubmit)="proceedLogin()">
-                <mat-form-field appearance="outline">
-                    <mat-label>Enter your Username</mat-label>
-                    <input matInput formControlName="username" placeholder="spw-user">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Enter your password</mat-label>
-                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
-                <div mat-dialog-actions class="bt-add-std">
-                    <button mat-raised-button routerLink="/">Cancel</button>
-                    <button mat-raised-button color="primary" type="submit">Login</button>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
+    <div class="blur">
+        <mat-card class="card">
+            <mat-card-header><h2> Login </h2></mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="loginForm" class="main-login" (ngSubmit)="proceedLogin()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your Username</mat-label>
+                        <input matInput formControlName="username" placeholder="spw-user">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your password</mat-label>
+                        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <div mat-dialog-actions class="bt-add-std">
+                        <button mat-raised-button routerLink="/">Cancel</button>
+                        <button mat-raised-button color="primary" type="submit">Login</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

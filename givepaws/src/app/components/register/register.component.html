@@ -1,46 +1,48 @@
 <div class="body">
-    <mat-card>
-        <mat-card-header><h2>Register</h2></mat-card-header>
-        <mat-card-content>
-            <form class="main-register" [formGroup]="registerForm" (ngSubmit)="validateRegister()">
-                <mat-form-field appearance="outline">
-                    <mat-label>Enter your Username</mat-label>
-                    <input matInput formControlName="username" placeholder="spw-user">
-                    <mat-hint>at least 5 character</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Enter your Name</mat-label>
-                    <input matInput formControlName="name" placeholder="sophonwit">
-                </mat-form-field>
+    <div class="blur">
+        <mat-card class="card">
+            <mat-card-header><h2>Register</h2></mat-card-header>
+            <mat-card-content>
+                <form class="main-register" [formGroup]="registerForm" (ngSubmit)="validateRegister()">
                     <mat-form-field appearance="outline">
-                    <mat-label>Enter your email</mat-label>
-                    <input matInput placeholder="pat@example.com" formControlName="email">
+                        <mat-label>Enter your Username</mat-label>
+                        <input matInput formControlName="username" placeholder="spw-user">
+                        <mat-hint>at least 5 character</mat-hint>
                     </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Enter your password</mat-label>
-                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-                    <mat-hint>at least 8 character</mat-hint>
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Confirm your password</mat-label>
-                    <input matInput formControlName="password2nd" [type]="hide2 ? 'password' : 'text'">
-                    <mat-hint>
-                        <div class="pwd-error" *ngIf="registerForm.hasError('passwordMatch')">
-                            {{ registerForm.getError('passwordMatch').message }}
-                        </div>
-                    </mat-hint>
-                    <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
-                        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
-                <div mat-dialog-actions class="bt-add-std">
-                    <button mat-raised-button routerLink="/">Cancel</button>
-                    <button mat-raised-button color="primary" type="submit">Create</button>
-                </div>
-            </form >
-        </mat-card-content>
-    </mat-card>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your Name</mat-label>
+                        <input matInput formControlName="name" placeholder="sophonwit">
+                    </mat-form-field>
+                        <mat-form-field appearance="outline">
+                        <mat-label>Enter your email</mat-label>
+                        <input matInput placeholder="pat@example.com" formControlName="email">
+                        </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your password</mat-label>
+                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                        <mat-hint>at least 8 character</mat-hint>
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm your password</mat-label>
+                        <input matInput formControlName="password2nd" [type]="hide2 ? 'password' : 'text'">
+                        <mat-hint>
+                            <div class="pwd-error" *ngIf="registerForm.hasError('passwordMatch')">
+                                {{ registerForm.getError('passwordMatch').message }}
+                            </div>
+                        </mat-hint>
+                        <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                            <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <div mat-dialog-actions class="bt-add-std">
+                        <button mat-raised-button routerLink="/">Cancel</button>
+                        <button mat-raised-button color="primary" type="submit">Create</button>
+                    </div>
+                </form >
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
