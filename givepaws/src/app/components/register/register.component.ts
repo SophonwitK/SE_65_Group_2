@@ -25,7 +25,7 @@ export class RegisterComponent {
         name:this._fb.control('',Validators.required),
         email:this._fb.control('',Validators.compose([Validators.required, Validators.email])),
         password:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
-        password2nd:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
+        password2nd:this._fb.control('',Validators.required),
       });
       this.registerForm.addValidators(
         createCompareValidator(this.registerForm.get('password'),this.registerForm.get('password2nd'))
@@ -48,7 +48,7 @@ export class RegisterComponent {
         },
         error: (err: any) =>{
           console.error(err)
-        },
+        }
       });
     }else{
       this._toastr.warning("Please enter valid data")

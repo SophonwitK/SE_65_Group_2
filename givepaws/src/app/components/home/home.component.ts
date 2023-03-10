@@ -14,5 +14,9 @@ export class HomeComponent {
   ){
   
   }
+
+  logout(){
+    this._authService.logout(null)
+  } 
   
 }

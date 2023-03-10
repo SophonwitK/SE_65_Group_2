@@ -12,4 +12,8 @@ export class HospitalCoordinatorComponent {
   ){
 
   }
+
+  logout(){
+    this._authService.logout(null)
+  } 
 }

@@ -12,4 +12,8 @@ export class EmployeeComponent {
   ){
 
   }
+
+  logout(){
+    this._authService.logout(null)
+  } 
 }

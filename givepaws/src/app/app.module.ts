@@ -28,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { EmployeeComponent } from './components/employee/employee.component';
     RegisterComponent,
     HospitalCoordinatorComponent,
     EmployeeComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
