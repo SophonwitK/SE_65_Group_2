@@ -23,15 +23,20 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-
-    if(this._authService.isExpire()){
-      return true
+    if(this._authService.isActive()){
+      if(this._authService.isExpire()){
+        return true
+      }else{
+        this._toastr.warning("Sessions expire! please login again")
+        this._router.navigate(['login'])
+        return false
+      }
+      
     }else{
-      this._toastr.warning("Sessions expire! please login again")
+      this._toastr.warning("Unauthorize! please login")
       this._router.navigate(['login'])
       return false
     }
-    
 
   }
   

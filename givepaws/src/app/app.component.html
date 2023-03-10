@@ -1,13 +1,12 @@
-
-    <p>
-      <mat-toolbar color="primary" class="nav">
-        <span>
-          <a href="#" class="nav-home-link">Home</a>
-        </span>
-        <mat-nav-list class = "nav-link">
-          <a routerLink="/login">login</a>
-          <a routerLink="/register">register</a>
-        </mat-nav-list>
-      </mat-toolbar>
-    </p>
-    <router-outlet></router-outlet>
+<div *ngIf="Navbar">
+    <mat-toolbar color="primary" class="nav">
+      <span>
+        <a href="#" class="nav-home-link">Home</a>
+      </span>
+      <mat-nav-list class = "nav-link">
+        <a routerLink="/login">login</a>
+        <a routerLink="/register">register</a>
+      </mat-nav-list>
+    </mat-toolbar>
+</div>
+<router-outlet ></router-outlet>

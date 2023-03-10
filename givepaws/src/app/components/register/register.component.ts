@@ -36,9 +36,15 @@ export class RegisterComponent {
     if(this.registerForm.valid){
       this.registerForm.removeControl('password2nd')
       this._authService.register(this.registerForm.value).subscribe({
-        next: () =>{
-          this._toastr.success('Registered Sucessfully')
-          this._router.navigate(['login'])
+        next: (res) =>{
+          if(res){
+            this._toastr.success('Registered Sucessfully')
+            this._router.navigate(['login'])
+          }
+          else{
+            this._toastr.warning("Uername or email are exist")
+          }
+          
         },
         error: (err: any) =>{
           console.error(err)

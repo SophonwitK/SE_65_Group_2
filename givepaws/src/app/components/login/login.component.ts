@@ -46,12 +46,15 @@ export class LoginComponent {
                 }
                 else if(res.is_employee){
                   sessionStorage.setItem('role',"employee");
+                  this._router.navigate(['employee']);
                 }
                 else if(res.is_hospitalcoordinator){
                   sessionStorage.setItem('role',"hospital-coordinator");
+                  this._router.navigate(['hospitalcoordinator']);
 
                 }else if(res.is_authen){
                   sessionStorage.setItem('role',"authen-user");
+                  this._router.navigate(['home']);
 
                 }
                 else{

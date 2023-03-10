@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'givepaws';
+  Navbar = true;
   
-  authenticated (){
-    return false
+  constructor(
+    private _router:Router,
+  ){
+  }
+  ngDoCheck(): void{
+    let currenurl=this._router.url;
+    if(currenurl=='/'){
+      this.Navbar=true;
+    }else{
+      this.Navbar=false
+    }     
   }
 }

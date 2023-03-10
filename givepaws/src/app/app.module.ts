@@ -26,6 +26,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { MatCardModule } from '@angular/material/card';
 import { ToastrModule } from 'ngx-toastr';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
+import { EmployeeComponent } from './components/employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     AdminComponent,
     LoginComponent,
     RegisterComponent,
+    HospitalCoordinatorComponent,
+    EmployeeComponent,
   ],
   imports: [
     BrowserModule,

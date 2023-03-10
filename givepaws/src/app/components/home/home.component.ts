@@ -13,7 +13,6 @@ export class HomeComponent {
     private _authService: AuthService
   ){
   
-    
   }
   
 }
