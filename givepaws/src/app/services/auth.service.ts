@@ -70,5 +70,13 @@ export class AuthService {
   isActive(){
     return sessionStorage.getItem('username')!=null?sessionStorage.getItem('username')?.toString():'';
   }
+  
+  createCompareValidator(controlOne: any, controlTwo: any){
+    return () => {
+    if (controlOne.value !== controlTwo.value)
+      return { passwordMatch: { message: 'Passwords do not match.' } };
+    return null;
+    };
+  }
 
 }

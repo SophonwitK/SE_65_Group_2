@@ -28,7 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
 import { EmployeeComponent } from './components/employee/employee.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileComponent,UpdateUserDialog } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     HospitalCoordinatorComponent,
     EmployeeComponent,
     UserProfileComponent,
+    UpdateUserDialog,
   ],
   imports: [
     BrowserModule,
@@ -62,11 +63,12 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatSnackBarModule,
     MatListModule,
     ToastrModule.forRoot({
-      timeOut: 1000,
+      positionClass: 'toast-bottom-right',
+      timeOut: 1500,
     }),
     MatCardModule,
   ],
   providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

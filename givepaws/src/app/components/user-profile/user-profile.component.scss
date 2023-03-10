@@ -23,23 +23,22 @@
           }
       }
   }
-}
-.main-card{
+  .main-card{
     display: flex;
     justify-content: center;
     mat-card{
         background-color: azure;
-        width: 50%;
-        height: 50%;
+        width: 35%;
+        height: 35%;
         margin-top: 3rem;
     }
-    
-}
-.bt{
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  button{
-    margin: 1rem 1rem 1rem 0rem;
+    .bt{
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      button{
+        margin: 1rem 1rem 1rem 0rem;
+      }
+    }
   }
 }

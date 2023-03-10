@@ -39,6 +39,8 @@ export class LoginComponent {
             sessionStorage.setItem('expire-date',JSON.stringify(jwt_decode(res.jwt)))
             this._authService.isLogin().subscribe({
               next: (res)=>{
+                console.log(res)
+                sessionStorage.setItem('id',res.id)
                 sessionStorage.setItem('username',res.username)
                 if(res.is_staff){
                   sessionStorage.setItem('role',"admin");
@@ -69,7 +71,7 @@ export class LoginComponent {
             })
           }
           else{
-            this._toastr.warning('username or password are incorrect');
+            this._toastr.error('username or password are incorrect');
           }
           }
       })

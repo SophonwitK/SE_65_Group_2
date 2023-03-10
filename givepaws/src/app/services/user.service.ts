@@ -14,7 +14,7 @@ export class UserService {
 
   }
   updateUser(id:number,data: any): Observable<any>{
-    return this._http.post(`http://127.0.0.1:8000/api/users/user/${id}`,data).pipe(
+    return this._http.put(`http://127.0.0.1:8000/api/users/user/${id}`,data).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {
           console.log('error:', error);

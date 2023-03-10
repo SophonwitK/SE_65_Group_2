@@ -28,7 +28,7 @@ export class RegisterComponent {
         password2nd:this._fb.control('',Validators.required),
       });
       this.registerForm.addValidators(
-        createCompareValidator(this.registerForm.get('password'),this.registerForm.get('password2nd'))
+        this._authService.createCompareValidator(this.registerForm.get('password'),this.registerForm.get('password2nd'))
       );
     }
 
@@ -55,12 +55,4 @@ export class RegisterComponent {
     }
   }
   
-}
-
-function createCompareValidator(controlOne: any, controlTwo: any){
-  return () => {
-  if (controlOne.value !== controlTwo.value)
-    return { passwordMatch: { message: 'Passwords do not match.' } };
-  return null;
-  };
 }

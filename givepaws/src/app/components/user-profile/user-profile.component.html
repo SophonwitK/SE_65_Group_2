@@ -9,11 +9,11 @@
                     <h2>Profile</h2>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>Display Name :</p> 
-                    <p>Username :</p>
-                    <p>Email :</p>
-                    <div mat-dialog-actions class="bt">
-                        <button type="button" mat-raised-button >Updata Profile</button>
+                    <p>Display Name : {{userData.name}}</p> 
+                    <p>Username : {{userData.username}}</p>
+                    <p>Email : {{userData.email}}</p>
+                    <div class="bt">
+                        <button type="button" mat-raised-button (click)="updateUser('0ms', '0ms')">Update Profile</button>
                         <button type="button" mat-raised-button >Donate History</button>
                         <button type="button" mat-raised-button >Open Donation History</button>
                         <button type="button" mat-raised-button >Authentication</button>

@@ -1,0 +1,32 @@
+  <div class="main-card">
+    <div mat-dialog-title class="title"><h2>Update Profile</h2></div>
+    <div mat-dialog-content class="content">
+      <form class="form-update-user" [formGroup]="userData" (ngSubmit)="updateUserDialog()">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your Username</mat-label>
+          <input matInput formControlName="username" placeholder="spw-user">
+          <mat-hint>at least 5 character</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your Name</mat-label>
+          <input matInput formControlName="name" placeholder="sophonwit">
+        </mat-form-field>
+          <mat-form-field appearance="outline">
+          <mat-label>Enter your email</mat-label>
+          <input matInput placeholder="pat@example.com" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter password to update</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <mat-hint>at least 8 character</mat-hint>
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div mat-dialog-actions class="bt">
+          <button mat-button [mat-dialog-close]="false">Cancel</button>
+          <button mat-button cdkFocusInitial type="submit">Ok</button>
+        </div>
+      </form>
+    </div>
+</div>

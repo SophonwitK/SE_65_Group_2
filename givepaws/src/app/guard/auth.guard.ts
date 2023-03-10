@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
       }
       
     }else{
-      this._toastr.warning("Unauthorize! please login")
+      this._toastr.error("Unauthorize! please login")
       this._router.navigate(['login'])
       return false
     }
