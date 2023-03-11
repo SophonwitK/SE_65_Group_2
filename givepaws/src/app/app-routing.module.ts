@@ -8,6 +8,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthenticationComponent } from './components/authentication/authentication.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'employee',component:EmployeeComponent,canActivate:[AuthGuard]},
   {path:'hospitalcoordinator',component:HospitalCoordinatorComponent,canActivate:[AuthGuard]},
   {path:'profile/:username',component:UserProfileComponent,canActivate:[AuthGuard]},
+  {path:'authentication/:username',component:AuthenticationComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

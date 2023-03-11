@@ -25,9 +25,33 @@ export class UserService {
     );
   }
 
+  confirmPwd(id:number,data: any): Observable<any>{
+    return this._http.put(`http://127.0.0.1:8000/api/users/user/${id}`,data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+  requestAuthen(data: any): Observable<any>{
+    return this._http.put('http://127.0.0.1:8000/api/authens/',data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+
   async getCurrentUser():  Promise<any>{
     const response = await lastValueFrom(this._http.get('http://127.0.0.1:8000/api/users/user'))
     return response;
   }
-  
 }

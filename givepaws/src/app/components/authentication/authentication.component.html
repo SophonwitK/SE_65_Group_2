@@ -1,0 +1,54 @@
+<div class="body">
+    <div class="blur">
+        <mat-card class="card">
+            <mat-card-header><h2>Authentication</h2></mat-card-header>
+            <mat-card-content>
+                <form class="main-authen" >
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your Firstname</mat-label>
+                            <input matInput placeholder="spw-user">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your Lastname</mat-label>
+                            <input matInput placeholder="sophonwit">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your email</mat-label>
+                            <input matInput placeholder="pat@example.com">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="outline" class="address">
+                        <mat-label>Enter your address</mat-label>
+                        <textarea matInput></textarea>
+                    </mat-form-field>
+                    <div class="row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tel</mat-label>
+                            <input matInput placeholder="090xxxxxxx">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>IDCard</mat-label>
+                            <input matInput placeholder="310xxxxxxxxxx">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <div mat-dialog-actions class="bt-add-std">
+                            <button type="button" mat-raised-button routerLink="/profile/{{username}}">Cancel</button>
+                            <button mat-raised-button color="primary" type="submit">Create</button>
+                        </div>
+                    </div>
+                </form >
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

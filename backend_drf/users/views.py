@@ -33,14 +33,14 @@ def login(request):
     token = jwt.encode(payload, "secret", algorithm="HS256")
     
     response = Response()
-    response.set_cookie(key='jwt', value=token, httponly=True,samesite='none',secure=True, max_age=43200)
+    response.set_cookie(key='jwt', value=token, httponly=True,samesite='none', max_age=43200)
     response.data = {
         'jwt': token
     }
     
     return response
 
-@api_view(['PUT'])
+@api_view(['PUT','PATCH'])
 @authentication_classes([JWTAuthentication])
 def userupdate(request,pk):
     try:
@@ -49,12 +49,17 @@ def userupdate(request,pk):
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
     user_data = JSONParser().parse(request)
     if not user.check_password(user_data['password']):
-        return Response({'error': 'Incorrect old password.'},status=status.HTTP_401_UNAUTHORIZED)
-    user_serializer = UserSerializer(user,data=user_data,partial=True)
-    if user_serializer.is_valid():
-        user_serializer.save()
-        return Response(user_serializer.data, status=status.HTTP_201_CREATED) 
-    return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Incorrect wrong password.'},status=status.HTTP_401_UNAUTHORIZED)
+
+    if request.method == 'PUT':
+        user_serializer = UserSerializer(user,data=user_data,partial=True)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_200_OK) 
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PATCH':
+        return Response({"message" : "Confirm"},status=status.HTTP_200_OK)
+
 
 @api_view(['GET'])
 def user(request):

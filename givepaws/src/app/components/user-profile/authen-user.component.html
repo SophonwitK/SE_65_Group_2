@@ -1,0 +1,18 @@
+<div class="main-card">
+    <div mat-dialog-content class="content">
+      <form class="form-update-user" [formGroup]="userData" (ngSubmit)="confirmPwdUserDialog()">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter password to access</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <mat-hint>at least 8 character</mat-hint>
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div class="bt">
+          <button mat-button [mat-dialog-close]="false">Cancel</button>
+          <button mat-button cdkFocusInitial type="submit">Ok</button>
+        </div>
+      </form>
+    </div>
+</div>

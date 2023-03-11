@@ -13,10 +13,10 @@
                     <p>Display Name : {{userData.name}}</p> 
                     <p>Email : {{userData.email}}</p>
                     <div class="bt">
-                        <button type="button" mat-raised-button (click)="updateUser('0ms', '0ms')">Update Profile</button>
-                        <button type="button" mat-raised-button >Donate History</button>
-                        <button type="button" mat-raised-button >Open Donation History</button>
-                        <button type="button" mat-raised-button >Authentication</button>
+                        <button type="button" mat-stroked-button (click)="openUpdateUser('250ms', '250ms')">Update Profile</button>
+                        <button type="button" mat-stroked-button >Donate History</button>
+                        <button type="button" mat-stroked-button >Open Donation History</button>
+                        <button type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
                     </div>
                 </mat-card-content>
             </mat-card>
