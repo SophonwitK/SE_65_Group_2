@@ -9,9 +9,10 @@ import { HospitalCoordinatorComponent } from './components/hospital-coordinator/
 import { EmployeeComponent } from './components/employee/employee.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { UserGuard } from './guard/user.guard';
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
+  {path:'home',component:HomeComponent,canActivate:[AuthGuard,UserGuard]},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
   {path:'admin',component:AdminComponent,canActivate:[AuthGuard]},

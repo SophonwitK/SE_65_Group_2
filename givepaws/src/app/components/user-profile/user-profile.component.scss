@@ -26,18 +26,31 @@
   .main-card{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     mat-card{
-        background-color: azure;
-        width: 35%;
-        height: 35%;
-        margin-top: 3rem;
-    }
-    .bt{
-      width: 30%;
-      display: flex;
-      flex-direction: column;
-      button{
-        margin: 1rem 1rem 1rem 0rem;
+      background-color: azure;
+      width: 35%;
+      height: 35%;
+      margin-top: 3rem;
+      .content{
+        display: flex;
+        .bt{
+          width: 30%;
+          display: flex;
+          flex-direction: column;
+          button{
+            margin: 1rem 1rem 1rem 0rem;
+          }
+        }
+        .authen{
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
   }

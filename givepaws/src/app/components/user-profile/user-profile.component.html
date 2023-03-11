@@ -10,13 +10,20 @@
                 </mat-card-header>
                 <mat-card-content>
                     <p>Username : {{userData.username}}</p>
-                    <p>Display Name : {{userData.name}}</p> 
+                    <p>Name : {{userData.name}}</p> 
                     <p>Email : {{userData.email}}</p>
-                    <div class="bt">
-                        <button type="button" mat-stroked-button (click)="openUpdateUser('250ms', '250ms')">Update Profile</button>
-                        <button type="button" mat-stroked-button >Donate History</button>
-                        <button type="button" mat-stroked-button >Open Donation History</button>
-                        <button type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
+                    <div class="content">
+                        <div class="bt">
+                            <button type="button" mat-stroked-button (click)="openUpdateUser('250ms', '250ms')">Update Profile</button>
+                            <button type="button" mat-stroked-button (click)="openChangePwd('250ms', '250ms')">Change Password</button>
+                            <button type="button" mat-stroked-button >Donate History</button>
+                            <button type="button" mat-stroked-button >Open Donation History</button>
+                            <button *ngIf="auth_bt" type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
+                        </div>
+                        <div class="authen" *ngIf="authen">
+                            <h3>Wating for admin to approve</h3>
+                            <mat-spinner></mat-spinner>
+                        </div>
                     </div>
                 </mat-card-content>
             </mat-card>

@@ -28,8 +28,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
 import { EmployeeComponent } from './components/employee/employee.component';
-import { UserProfileComponent,UpdateUserDialog,AuthenDialog } from './components/user-profile/user-profile.component';
+import { UserProfileComponent,UpdateUserDialog,AuthenDialog,UpdatePasswordDialog } from './components/user-profile/user-profile.component';
+import { MatCommonModule } from '@angular/material/core';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { AuthenticationComponent } from './components/authentication/authenticat
     UpdateUserDialog,
     AuthenDialog,
     AuthenticationComponent,
+    UpdatePasswordDialog,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,9 @@ import { AuthenticationComponent } from './components/authentication/authenticat
     MatSortModule,
     MatSnackBarModule,
     MatListModule,
+    MatCommonModule,
+    NgxDropzoneModule,
+    MatProgressSpinnerModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 1500,

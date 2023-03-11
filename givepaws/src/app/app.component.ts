@@ -1,4 +1,4 @@
-import { Component,DoCheck } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -7,13 +7,12 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements DoCheck{
   title = 'givepaws';
   Navbar = true;
   
   constructor(
     private _router:Router,
-    private _authService: AuthService,
   ){
   }
   ngDoCheck(): void{

@@ -41,9 +41,9 @@ class AuthPermission(models.Model):
 class Authen(models.Model):
     authid = models.AutoField(db_column='authID', primary_key=True)  # Field name made lowercase.
     firstname = models.CharField(max_length=100)
-    surename = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
     dob = models.DateTimeField(db_column='DOB')  # Field name made lowercase.
-    address = models.CharField(max_length=100)
+    address = models.CharField(max_length=1000)
     tel = models.CharField(max_length=100)
     dateauthen = models.DateTimeField(db_column='DateAuthen')  # Field name made lowercase.
     idcard = models.CharField(db_column='IDcard', max_length=100)  # Field name made lowercase.
@@ -56,6 +56,16 @@ class Authen(models.Model):
 class Authenimage(models.Model):
     authen = models.ForeignKey(Authen, on_delete=models.CASCADE, related_name = "images")
     image = models.ImageField(upload_to="img/authen", default="", null=True, blank=True)
+
+class AuthenCheck(models.Model):
+    comment = models.CharField(max_length=1000)
+    status = models.IntegerField()
+    authen = models.OneToOneField(Authen, models.DO_NOTHING, db_column='authen')
+
+    class Meta:
+        managed = False
+        db_table = 'authen_check'
+
 
 class Card(models.Model):
     cardid = models.AutoField(db_column='cardID', primary_key=True)  # Field name made lowercase.
@@ -189,7 +199,7 @@ class Hospitalcoordinator(models.Model):
     password = models.CharField(max_length=100)
     hcdocid = models.IntegerField(db_column='hcdocID')  # Field name made lowercase.
     firstname = models.CharField(max_length=100)
-    surename = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
     iscomplete = models.CharField(max_length=100)

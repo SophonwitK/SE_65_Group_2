@@ -56,7 +56,7 @@ class AuthenSerializer(serializers.ModelSerializer):
         model = Authen
         fields = ['authid',
                   'firstname',
-                  'surename',
+                  'surname',
                   'dob',
                   'address',
                   'tel',

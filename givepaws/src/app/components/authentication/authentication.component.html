@@ -1,27 +1,28 @@
 <div class="body">
     <div class="blur">
         <mat-card class="card">
-            <mat-card-header><h2>Authentication</h2></mat-card-header>
+            <mat-card-header><h2>Authentication Request</h2></mat-card-header>
             <mat-card-content>
-                <form class="main-authen" >
+                <form class="main-authen" [formGroup]="authenData" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <mat-form-field appearance="outline">
                             <mat-label>Enter your Firstname</mat-label>
-                            <input matInput placeholder="spw-user">
+                            <input matInput formControlName="firstname" placeholder="spw-user">
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                            <mat-label>Enter your Lastname</mat-label>
-                            <input matInput placeholder="sophonwit">
+                            <mat-label>Enter your Surname</mat-label>
+                            <input matInput formControlName="surname" placeholder="sophonwit">
                         </mat-form-field>
                     </div>
                     <div class="row">
                         <mat-form-field appearance="outline">
-                            <mat-label>Enter your email</mat-label>
-                            <input matInput placeholder="pat@example.com">
+                            <mat-label>Tel</mat-label>
+                            <input matInput formControlName="tel" placeholder="090xxxxxxx" maxlength="10">
+                            <mat-hint>Enter 10 numbers</mat-hint>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                             <mat-label>Date of Birth</mat-label>
-                            <input matInput [matDatepicker]="picker">
+                            <input matInput formControlName="dob" [matDatepicker]="picker">
                             <mat-hint>MM/DD/YYYY</mat-hint>
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
@@ -29,22 +30,27 @@
                     </div>
                     <mat-form-field appearance="outline" class="address">
                         <mat-label>Enter your address</mat-label>
-                        <textarea matInput></textarea>
+                        <textarea matInput formControlName="address"></textarea>
                     </mat-form-field>
                     <div class="row">
                         <mat-form-field appearance="outline">
-                            <mat-label>Tel</mat-label>
-                            <input matInput placeholder="090xxxxxxx">
+                            <mat-label>ID Card</mat-label>
+                            <input matInput formControlName="idcard" placeholder="310xxxxxxxxxx" maxlength="13">
+                            <mat-hint>Enter 13 numbers</mat-hint>
                         </mat-form-field>
-                        <mat-form-field appearance="outline">
-                            <mat-label>IDCard</mat-label>
-                            <input matInput placeholder="310xxxxxxxxxx">
-                        </mat-form-field>
+                    </div>
+                    <div class="img-zone">
+                        <ngx-dropzone (change)="onSelect($event)" class="img-zone-bg" required>
+                            <ngx-dropzone-label [ngClass]="getColorClass(imgMessage)">{{imgMessage}}</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" [file]="f">
+                            <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
                     </div>
                     <div class="row">
                         <div mat-dialog-actions class="bt-add-std">
-                            <button type="button" mat-raised-button routerLink="/profile/{{username}}">Cancel</button>
-                            <button mat-raised-button color="primary" type="submit">Create</button>
+                            <button mat-raised-button routerLink="/profile/{{username}}" type="button">Cancel</button>
+                            <button mat-raised-button color="primary" type="submit">Confirm</button>
                         </div>
                     </div>
                 </form >

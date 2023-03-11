@@ -73,10 +73,16 @@ export class AuthService {
       return true
     return false
   }
+
   isActive(){
     return sessionStorage.getItem('username')!=null?sessionStorage.getItem('username')?.toString():'';
   }
-  
+
+  getUserRole(){
+    return sessionStorage.getItem('role')!=null?sessionStorage.getItem('role')?.toString():'';
+  }
+
+
   createCompareValidator(controlOne: any, controlTwo: any){
     return () => {
     if (controlOne.value !== controlTwo.value)

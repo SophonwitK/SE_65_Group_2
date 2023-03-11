@@ -170,7 +170,17 @@ def authenimages_detail(request, pk):
         authenimage.delete() 
         return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
-
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def check_authen_detail(request, pk):
+    try:
+        authen = Authen.objects.get(user=pk)
+    except:
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+    authen_serializer = AuthenSerializer(authen)
+    if authen:
+        return Response(authen_serializer.data, status=status.HTTP_200_OK) 
 
 
 

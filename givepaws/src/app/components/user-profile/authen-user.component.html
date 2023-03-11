@@ -4,7 +4,6 @@
         <mat-form-field appearance="outline">
           <mat-label>Enter password to access</mat-label>
           <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-          <mat-hint>at least 8 character</mat-hint>
           <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>

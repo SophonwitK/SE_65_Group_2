@@ -1,4 +1,4 @@
-import { Component,Inject,OnInit } from '@angular/core';
+import { Component,Inject,OnInit,OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,22 +13,64 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserProfileComponent implements OnInit {
   userData: any;
+  authenData: any;
+  authen = false
+  auth_bt = true
+
   constructor(
     private _dialog: MatDialog,
     private _authService: AuthService,
     private _router : Router,
+    private _userService: UserService,
   ){
 
   }
-  async ngOnInit() {
+  ngOnInit() {
     this.refresh()
+    this.isAuthen()
+  }
+
+  isAuthen(){
+    this._userService.isAuthen(Number(sessionStorage.getItem('id'))).subscribe({
+      next: (res)=>{
+        if(res){
+          this.authen=true
+          this.auth_bt=false
+          if(res.user.is_authen){
+            this.authen=false
+          }
+        }else{
+          this.authen=false
+          this.auth_bt=true
+        }
+      }
+    })
+  }
+
+  openChangePwd(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialog = this._dialog.open(UpdatePasswordDialog, {
+      width:'20%',
+      height: '40%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        if(res){
+          this.userData = res
+        }
+        else{
+          this.refresh()
+        }
+      }
+    })
   }
 
   openUpdateUser(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialog = this._dialog.open(UpdateUserDialog, {
       data: this.userData,
       width:'20%',
-      height: '60%',
+      height: '55%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -116,6 +158,7 @@ export class UpdateUserDialog {
       }
     }
 
+
 }
 
 @Component({
@@ -132,7 +175,6 @@ export class AuthenDialog {
     private _fb : FormBuilder,
     private _userService: UserService,
     private _toastr : ToastrService,
-    private _router : Router,
 
     ) {
       this.userData = this._fb.group({
@@ -148,6 +190,53 @@ export class AuthenDialog {
               this._dialogRef.close(res);
             }else{
               this._toastr.warning('wrong password');
+            }
+          }
+        })
+      }
+      else{
+        this._toastr.warning('please enter valid data');
+      }
+    }
+
+}
+
+@Component({
+  selector: 'update-password',
+  templateUrl: './update-password.component.html',
+  styleUrls: ['./update-password.component.scss'],
+})
+export class UpdatePasswordDialog {
+  hide=true;
+  userData: FormGroup;
+  constructor(
+    public _dialogRef: MatDialogRef<UpdatePasswordDialog>,
+    private _fb : FormBuilder,
+    private _userService:UserService,
+    private _toastr : ToastrService,
+    private _authService: AuthService
+    ) {
+      this.userData = this._fb.group({
+        old_password:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
+        password:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
+        confirm_password:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
+      })
+      this.userData.addValidators(
+        this._authService.createCompareValidator(this.userData.get('password'),this.userData.get('confirm_password'))
+      )
+    }
+
+    updatePwd(){
+      if(this.userData.valid){
+        this.userData.removeControl('confirm_password')
+        this._userService.updatePassword(Number(sessionStorage.getItem('id')),this.userData.value).subscribe({
+          next: (res) =>{
+            console.log(res)
+            if(res){
+              this._toastr.success('password change successfully');
+              this._dialogRef.close(res);
+            }else{
+              this._toastr.warning('wrong old password');
             }
           }
         })
