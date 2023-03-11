@@ -17,23 +17,33 @@ export class UserProfileComponent implements OnInit {
     private _dialog: MatDialog,
     private _authService: AuthService,
   ){
-    
+
   }
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.refresh()
+  }
+
+  updateUser(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialog = this._dialog.open(UpdateUserDialog, {
+      data: this.userData,
+      width:'20%',
+      height: '60%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.userData = res
+      }
+    })
+  }
+
+  refresh(){
     this._authService.isLogin().subscribe(
       data => this.userData=data
     )
   }
 
-  updateUser(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this._dialog.open(UpdateUserDialog, {
-      width:'20%',
-      height: '60%',
-      data: this.userData,
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-  }
 }
 
 
@@ -66,11 +76,10 @@ export class UpdateUserDialog {
         this._userService.updateUser(Number(sessionStorage.getItem('id')),this.userData.value).subscribe({
           next: (res) =>{
             if(res){
+              this._toastr.success('update successfully');
               sessionStorage.removeItem('username')
               sessionStorage.setItem('username',res.username)
-              this._dialogRef.close();
-              this._router.navigate(['/profile',sessionStorage.getItem('username')])
-              this._toastr.success('update successfully');
+              this._dialogRef.close(res);
             }else{
               this._toastr.warning('wrong password');
             }

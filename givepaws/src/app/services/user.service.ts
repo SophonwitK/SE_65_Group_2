@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpErrorResponse  } from '@angular/common/http';
-import { Observable,of } from 'rxjs';
+import { Observable,of,lastValueFrom } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -23,6 +23,11 @@ export class UserService {
         return of(true);
       })
     );
+  }
+
+  async getCurrentUser():  Promise<any>{
+    const response = await lastValueFrom(this._http.get('http://127.0.0.1:8000/api/users/user'))
+    return response;
   }
   
 }

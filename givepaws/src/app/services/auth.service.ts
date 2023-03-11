@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { Observable,of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,9 @@ export class AuthService {
   exp:any;
 
   constructor(
-    private _http:HttpClient,
+    private _http: HttpClient,
+    private _toastr: ToastrService,
+    private _router: Router,
     ) { }
 
   register(data:any): Observable<any>{
@@ -27,6 +31,8 @@ export class AuthService {
 
   logout(data:any): Observable<any>{
     sessionStorage.clear()
+    this._router.navigate(['/'])
+    this._toastr.success('logout sucessfuly')
     return this._http.post('http://127.0.0.1:8000/api/users/logout',data)
   }
   isLogin(): Observable<any>{
