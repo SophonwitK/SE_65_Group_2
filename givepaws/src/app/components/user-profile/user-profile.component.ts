@@ -49,13 +49,13 @@ export class UserProfileComponent implements OnInit {
           this.authen_req=true
           this.auth_bt=false
           if(this.authenData){
+            this.auth_bt = false
             if(this.authenData.isapprove){
               this.authen_status=true
               this.authen_req=false
 
             }else{
               this.authen_req=false
-              this.auth_bt = true
             }
           }
         }else{
