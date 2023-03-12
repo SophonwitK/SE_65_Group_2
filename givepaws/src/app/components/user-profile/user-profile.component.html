@@ -8,7 +8,7 @@
                 <mat-card-header>
                     <h2>Profile</h2>
                 </mat-card-header>
-                <mat-card-content>
+                <mat-card-content *ngIf="userData">
                     <p>Username : {{userData.username}}</p>
                     <p>Name : {{userData.name}}</p> 
                     <p>Email : {{userData.email}}</p>
@@ -20,18 +20,18 @@
                             <button type="button" mat-stroked-button >Open Donation History</button>
                             <button *ngIf="auth_bt" type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
                         </div>
-                        <div class="authen" *ngIf="authen_req">
+                        <div class="authen-wait" *ngIf="authen_req">
                             <h3>Wating for admin to approve</h3>
                             <mat-spinner diameter="130" strokeWidth="9"></mat-spinner>
                         </div>
-                        <div class="authen-status" *ngIf="authen_status">
+                        <div class="authen-status" *ngIf="authenData">
                             <div *ngIf="authenData.isapprove else reject">
                                 <h3 style="color: green;">Authentication Approve</h3>
                             </div>
                             <ng-template #reject>
                                 <h3 style="color: red;" #reject>Authentication Reject</h3>
                                 <p>{{authenData.comment}}</p>
-                                <button type="button" mat-stroked-button >Edit Authentication</button>
+                                <button type="button" mat-stroked-button style="margin-top: 1rem;">Edit Authentication</button>
                             </ng-template>
                         </div>
                     </div>
