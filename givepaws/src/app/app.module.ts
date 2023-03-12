@@ -74,7 +74,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
-      timeOut: 1500,
+      timeOut: 2000,
     }),
     MatCardModule,
   ],

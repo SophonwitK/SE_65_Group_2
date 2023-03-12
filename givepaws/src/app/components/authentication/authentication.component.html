@@ -1,10 +1,10 @@
 <div class="body">
     <div class="blur">
         <mat-card class="card">
-            <mat-card-header><h2>Authentication Request</h2></mat-card-header>
+            <mat-card-header><h2 style="color: black;">Authentication Request</h2></mat-card-header>
             <mat-card-content>
                 <form class="main-authen" [formGroup]="authenData" (ngSubmit)="onSubmit()">
-                    <div class="row">
+                    <div class="rows">
                         <mat-form-field appearance="outline">
                             <mat-label>Enter your Firstname</mat-label>
                             <input matInput formControlName="firstname" placeholder="spw-user">
@@ -14,7 +14,7 @@
                             <input matInput formControlName="surname" placeholder="sophonwit">
                         </mat-form-field>
                     </div>
-                    <div class="row">
+                    <div class="rows">
                         <mat-form-field appearance="outline">
                             <mat-label>Tel</mat-label>
                             <input matInput formControlName="tel" placeholder="090xxxxxxx" maxlength="10">
@@ -32,7 +32,7 @@
                         <mat-label>Enter your address</mat-label>
                         <textarea matInput formControlName="address" style="resize:none; height: 9rem;" ></textarea>
                     </mat-form-field>
-                    <div class="row">
+                    <div class="rows">
                         <mat-form-field appearance="outline">
                             <mat-label>ID Card</mat-label>
                             <input matInput formControlName="idcard" placeholder="310xxxxxxxxxx" maxlength="13">
@@ -47,7 +47,7 @@
                             </ngx-dropzone-image-preview>
                         </ngx-dropzone>
                     </div>
-                    <div class="row">
+                    <div class="rows">
                         <div mat-dialog-actions class="bt-add-std">
                             <button mat-raised-button routerLink="/profile/{{username}}" type="button">Cancel</button>
                             <button mat-raised-button color="primary" type="submit">Confirm</button>

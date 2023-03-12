@@ -1,12 +1,2 @@
-<div *ngIf="Navbar">
-    <mat-toolbar color="primary" class="nav">
-      <span>
-        <a href="#" class="nav-home-link">Home</a>
-      </span>
-      <mat-nav-list class = "nav-link">
-        <a routerLink="/login">login</a>
-        <a routerLink="/register">register</a>
-      </mat-nav-list>
-    </mat-toolbar>
-</div>
+<app-home *ngIf="main"></app-home>
 <router-outlet ></router-outlet>

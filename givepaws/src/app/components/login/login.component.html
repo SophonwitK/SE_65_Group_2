@@ -1,7 +1,7 @@
 <div class="body">
     <div class="blur">
         <mat-card class="card">
-            <mat-card-header><h2> Login </h2></mat-card-header>
+            <mat-card-header><h2 style="color: black;"> Login </h2></mat-card-header>
             <mat-card-content>
                 <form [formGroup]="loginForm" class="main-login" (ngSubmit)="proceedLogin()">
                     <mat-form-field appearance="outline">
@@ -12,7 +12,7 @@
                         <mat-label>Enter your password</mat-label>
                         <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
                         <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-icon style="color: gray;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
                     <div mat-dialog-actions class="bt-add-std">

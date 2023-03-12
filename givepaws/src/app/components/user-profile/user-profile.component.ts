@@ -29,6 +29,7 @@ export class UserProfileComponent implements OnInit {
     this.refresh();
     this.isApprove();
     this.isAuthen();
+    console.log(this.authenData)
   }
 
   isApprove(){
@@ -61,7 +62,7 @@ export class UserProfileComponent implements OnInit {
   openChangePwd(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialog = this._dialog.open(UpdatePasswordDialog, {
       width:'20%',
-      height: '45%',
+      height: '50%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -219,6 +220,8 @@ export class AuthenDialog {
 })
 export class UpdatePasswordDialog {
   hide=true;
+  hide2=true;
+  hide3=true;
   userData: FormGroup;
   constructor(
     public _dialogRef: MatDialogRef<UpdatePasswordDialog>,

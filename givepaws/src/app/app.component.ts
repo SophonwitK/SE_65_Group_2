@@ -7,9 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements DoCheck{
-  title = 'givepaws';
-  Navbar = true;
+export class AppComponent {
+  main = true;
   
   constructor(
     private _router:Router,
@@ -18,9 +17,9 @@ export class AppComponent implements DoCheck{
   ngDoCheck(): void{
     let currenurl=this._router.url;
     if(currenurl=='/'){
-      this.Navbar=true;
+      this.main=true;
     }else{
-      this.Navbar=false
+      this.main=false
     }
   }
 }

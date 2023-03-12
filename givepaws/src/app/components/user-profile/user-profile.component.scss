@@ -11,15 +11,16 @@
       height: 100%;
       .nav-link{
           display: flex;
+          margin-top: 2rem;
           margin-left: 2rem;
           a{
             width: 6rem;
             color: aliceblue;
             text-decoration: none;
+            h2:hover{
+              color:   #F0C993;
+            }
             
-          }
-          a:hover{
-            color:   #F0C993;
           }
       }
   }
@@ -33,40 +34,47 @@
       width: 40%;
       height: auto;
       margin-top: 3rem;
-      .content{
-        display: flex;
-        .bt{
-          width: 30%;
-          display: flex;
-          flex-direction: column;
-          button{
-            margin: 1rem 1rem 1rem 0rem;
-          }
+      mat-card-content{
+        p{
+          color: black;
+          margin: 1rem;
         }
-        .authen-wait{
-          width: 70%;
+        .content{
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          h3{
-            margin-top: 0;
+          .bt{
+            margin-left: 1rem;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            button{
+              margin: 1rem 1rem 1rem 0rem;
+            }
           }
-          mat-spinner{
-            margin-top: 2rem;
+          .authen-wait{
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            h3{
+              margin-top: 0;
+            }
+            mat-spinner{
+              margin-top: 2rem;
+            }
           }
-        }
-        .authen-status{
-          width: 70%;
-          margin: 0 auto auto auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          p{
-            width: 75%;
-            word-break: break-all;
-            white-space: normal;
+          .authen-status{
+            width: 70%;
+            margin: 0 auto auto auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            p{
+              width: 75%;
+              word-break: break-all;
+              white-space: normal;
+            }
           }
         }
       }

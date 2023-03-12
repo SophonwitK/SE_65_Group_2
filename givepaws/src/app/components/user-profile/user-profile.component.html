@@ -6,7 +6,7 @@
         <div class="main-card">
             <mat-card>
                 <mat-card-header>
-                    <h2>Profile</h2>
+                    <h2 style="color: black; text-transform: uppercase; margin-top: 1rem; margin-left: 1rem;">Profile</h2>
                 </mat-card-header>
                 <mat-card-content *ngIf="userData">
                     <p>Username : {{userData.username}}</p>
@@ -20,8 +20,8 @@
                             <button type="button" mat-stroked-button >Open Donation History</button>
                             <button *ngIf="auth_bt" type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
                         </div>
-                        <div class="authen-wait" *ngIf="authen_req">
-                            <h3>Wating for admin to approve</h3>
+                        <div class="authen-status" *ngIf="authen_req">
+                            <h3 style="color: black; margin-bottom: 3rem; margin-top: 1.5rem;">Wating for admin to approve</h3>
                             <mat-spinner diameter="130" strokeWidth="9"></mat-spinner>
                         </div>
                         <div class="authen-status" *ngIf="authenData">
