@@ -16,6 +16,7 @@ export class UserProfileComponent implements OnInit {
   authenData: any;
   authen = false
   auth_bt = true
+  authen_status = false
 
   constructor(
     private _dialog: MatDialog,
@@ -26,8 +27,19 @@ export class UserProfileComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.refresh()
-    this.isAuthen()
+    this.refresh();
+    this.isApprove();
+    this.isAuthen();
+  }
+
+  isApprove(){
+    this._userService.authenStatusCheck(Number(sessionStorage.getItem('id'))).subscribe({
+      next: (res)=>{
+        if(res){
+          this.authenData = res
+        }
+      }
+    })
   }
 
   isAuthen(){
@@ -36,9 +48,12 @@ export class UserProfileComponent implements OnInit {
         if(res){
           this.authen=true
           this.auth_bt=false
-          if(res.user.is_authen){
+          if(this.authenData){
+            this.authen_status=true
             this.authen=false
+            this.auth_bt = true
           }
+          
         }else{
           this.authen=false
           this.auth_bt=true

@@ -50,6 +50,9 @@
           flex-direction: column;
           justify-content: space-between;
           align-items: center;
+          mat-spinner{
+            margin-top: 2.5rem;
+          }
         }
       }
     }

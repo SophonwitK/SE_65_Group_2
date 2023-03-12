@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
     def __init__(self, **kwargs):
@@ -64,7 +64,7 @@ class AuthenSerializer(serializers.ModelSerializer):
                   'idcard',
                   'images',
                   'uploaded_images',
-                  'user'
+                  'user',
                   ]
         
     def create(self, validated_data):
@@ -74,3 +74,13 @@ class AuthenSerializer(serializers.ModelSerializer):
             newAuthenImg = Authenimage.objects.create(authen=authen,image=image)
 
         return authen
+
+class AuthenCheckSerializer(serializers.ModelSerializer):
+    authen = RelatedFieldAlternative(read_only=True)
+
+    class Meta:
+        model = AuthenCheck
+        fields = ['id',
+                  'comment',
+                  'isapprove',
+                  'authen']

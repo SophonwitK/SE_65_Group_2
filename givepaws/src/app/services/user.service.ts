@@ -14,6 +14,18 @@ export class UserService {
 
   }
 
+  authenStatusCheck(id:number): Observable<any>{
+    return this._http.get(`http://127.0.0.1:8000/api/user/authen/check/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
   isAuthen(id:number): Observable<any>{
     return this._http.get(`http://127.0.0.1:8000/api/user/authen/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {

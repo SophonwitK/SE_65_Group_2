@@ -11,4 +11,7 @@ urlpatterns = [
     path("authenimages/",views.authenimages_list,name="authenimages_list"),
     path("authenimages/<int:pk>",views.authenimages_detail,name="authenimages_detail"),
     path("user/authen/<int:pk>",views.check_authen_detail,name="check_authen_detail"),
+    path("authen/check/",views.authen_check_list,name="authen_check_list"),
+    path("authen/check/<int:pk>",views.authen_check_detail,name="authen_check_detail"),
+    path("user/authen/check/<int:pk>",views.user_check_authen,name="user_check_authen"),
 ]

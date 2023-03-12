@@ -1,9 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck
 from rest_framework.parsers import JSONParser 
-from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer
+from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,AuthenCheckSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
@@ -14,6 +14,59 @@ from users.models import User
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication]) #check jwt token are correct or not?
+@permission_classes([IsAdminUser]) #check user permission isAdmin = is_staff = true in user_users in database
+def authen_check_list(request):
+    if request.method == 'GET': #return all object
+        authen_checks = AuthenCheck.objects.all()
+        authen_checks_serializer = AuthenCheckSerializer( authen_checks, many=True)
+        return Response( authen_checks_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST': #create object
+        authen_check_data = JSONParser().parse(request)
+        authen_check_serializer = AuthenCheckSerializer(data=authen_check_data)
+        if authen_check_serializer.is_valid():
+            authen_check_serializer.save()
+            return Response(authen_check_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(authen_check_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','PUT', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAdminUser])
+def authen_check_detail(request, pk):
+    try:
+        authen_check = AuthenCheck.objects.get(pk=pk)
+    except:
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET': #return sigle object
+        authen_check_serializer = AuthenCheckSerializer(authen_check)
+        if authen_check:
+            return Response(authen_check_serializer.data, status=status.HTTP_200_OK) 
+    elif request.method == 'PUT': #update object
+        authen_check_data = JSONParser().parse(request) 
+        authen_check_serializer = AuthenCheckSerializer( authen_check, data=authen_check_data) 
+        if  authen_check_serializer.is_valid(): 
+            authen_check_serializer.save() 
+            return Response(authen_check_serializer.data) 
+        return Response(authen_check_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    elif request.method == 'DELETE': #delete object
+        authen_check.delete() 
+        return Response({'message': 'authen check was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def user_check_authen(request, pk):
+    try:
+        authen_check = AuthenCheck.objects.get(authen__user=pk)
+    except:
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+    authen_check_serializer = AuthenCheckSerializer(authen_check)
+    if authen_check:
+        return Response(authen_check_serializer.data, status=status.HTTP_200_OK) 
+
+
+
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication]) #check jwt are correct or not?
 @permission_classes([IsAdminUser]) #check user permission isAdmin = is_staff = true in user_users in database
 def hospital_list(request):
     if request.method == 'GET': #return all object
