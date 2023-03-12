@@ -12,14 +12,14 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { UserGuard } from './guard/user.guard';
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent,canActivate:[AuthGuard,UserGuard]},
+  {path:'home',component:HomeComponent},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
-  {path:'admin',component:AdminComponent,canActivate:[AuthGuard]},
-  {path:'employee',component:EmployeeComponent,canActivate:[AuthGuard]},
-  {path:'hospitalcoordinator',component:HospitalCoordinatorComponent,canActivate:[AuthGuard]},
-  {path:'profile/:username',component:UserProfileComponent,canActivate:[AuthGuard]},
-  {path:'authentication/:username',component:AuthenticationComponent,canActivate:[AuthGuard]},
+  {path:'admin',component:AdminComponent},
+  {path:'employee',component:EmployeeComponent},
+  {path:'hospitalcoordinator',component:HospitalCoordinatorComponent},
+  {path:'profile/:username',component:UserProfileComponent},
+  {path:'authentication/:username',component:AuthenticationComponent},
 ];
 
 @NgModule({

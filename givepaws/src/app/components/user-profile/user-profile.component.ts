@@ -14,9 +14,9 @@ import { ToastrService } from 'ngx-toastr';
 export class UserProfileComponent implements OnInit {
   userData: any;
   authenData: any;
-  authen = false
+  authen_req = false
   auth_bt = true
-  authen_status = false
+  authen_status = true
 
   constructor(
     private _dialog: MatDialog,
@@ -46,16 +46,20 @@ export class UserProfileComponent implements OnInit {
     this._userService.isAuthen(Number(sessionStorage.getItem('id'))).subscribe({
       next: (res)=>{
         if(res){
-          this.authen=true
+          this.authen_req=true
           this.auth_bt=false
           if(this.authenData){
-            this.authen_status=true
-            this.authen=false
-            this.auth_bt = true
+            if(this.authenData.isapprove){
+              this.authen_status=true
+              this.authen_req=false
+
+            }else{
+              this.authen_req=false
+              this.auth_bt = true
+            }
           }
-          
         }else{
-          this.authen=false
+          
           this.auth_bt=true
         }
       }
@@ -65,7 +69,7 @@ export class UserProfileComponent implements OnInit {
   openChangePwd(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialog = this._dialog.open(UpdatePasswordDialog, {
       width:'20%',
-      height: '40%',
+      height: '45%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -85,7 +89,7 @@ export class UserProfileComponent implements OnInit {
     const dialog = this._dialog.open(UpdateUserDialog, {
       data: this.userData,
       width:'20%',
-      height: '55%',
+      height: '60%',
       enterAnimationDuration,
       exitAnimationDuration,
     });

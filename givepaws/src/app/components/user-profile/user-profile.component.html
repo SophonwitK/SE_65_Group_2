@@ -20,18 +20,18 @@
                             <button type="button" mat-stroked-button >Open Donation History</button>
                             <button *ngIf="auth_bt" type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
                         </div>
-                        <div class="authen" *ngIf="authen">
+                        <div class="authen" *ngIf="authen_req">
                             <h3>Wating for admin to approve</h3>
                             <mat-spinner diameter="130" strokeWidth="9"></mat-spinner>
                         </div>
-                        <div class="authen" *ngIf="authen_status">
-                            <div *ngIf="authenData.isapprove" else reject>
-                                <h3>Approve</h3>
+                        <div class="authen-status" *ngIf="authen_status">
+                            <div *ngIf="authenData.isapprove else reject">
+                                <h3 style="color: green;">Authentication Approve</h3>
                             </div>
-                            <div>
-                                <h3 #reject>Reject</h3>
+                            <ng-template #reject>
+                                <h3 style="color: red;" #reject>Authentication Reject</h3>
                                 <p>{{authenData.comment}}</p>
-                            </div>
+                            </ng-template>
                         </div>
                     </div>
                 </mat-card-content>
