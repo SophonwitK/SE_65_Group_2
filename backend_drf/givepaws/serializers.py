@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard
 import os
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
@@ -86,3 +86,16 @@ class AuthenCheckSerializer(serializers.ModelSerializer):
                   'comment',
                   'isapprove',
                   'authen']
+
+class PaymentCardSerializer(serializers.ModelSerializer):
+    user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
+
+    class Meta:
+        model = Paymentcard
+        fields = ['paymentcardid',
+                  'contribution',
+                  'date',
+                  'paymentcardimg',
+                  'iscomplete',
+                  'donatetopicid',
+                  'user']

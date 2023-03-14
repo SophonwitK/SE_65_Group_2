@@ -162,7 +162,6 @@ class Donatetopic(models.Model):
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     amount = models.FloatField()
-    slipfilepath = models.CharField(max_length=100)
 
     class Meta:
         managed = False
@@ -209,7 +208,7 @@ class Paymentcard(models.Model):
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     contribution = models.FloatField()
     date = models.DateTimeField()
-    paymentcardimg = models.CharField(max_length=100)
+    paymentcardimg = models.ImageField(upload_to="img/payment", default="", null=True, blank=True)
     iscomplete = models.CharField(max_length=100)
     donatetopicid = models.ForeignKey(Donatetopic, models.DO_NOTHING, db_column='donatetopicID')  # Field name made lowercase.
 

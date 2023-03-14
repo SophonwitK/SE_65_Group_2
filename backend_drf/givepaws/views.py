@@ -1,9 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard
 from rest_framework.parsers import JSONParser 
-from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,AuthenCheckSerializer
+from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,AuthenCheckSerializer,PaymentCardSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
@@ -259,6 +259,45 @@ def authenimages_detail(request, pk):
     elif request.method == 'DELETE': 
         authenimage.delete() 
         return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def payment_list(request):
+    if request.method == 'GET': 
+        payments = Paymentcard.objects.all()
+        payment_serializer = PaymentCardSerializer( payments, many=True)
+        return Response( payment_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        payment_serializer = PaymentCardSerializer(data=request.data)
+        if payment_serializer.is_valid():
+            payment_serializer.save()
+            return Response(payment_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(payment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET','PUT', 'POST', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def payments_detail(request, pk):
+    try:
+      payment = Paymentcard.objects.get(pk=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        payment_serializer =PaymentCardSerializer(payment)
+        if payment:
+            return Response(payment_serializer.data, status=status.HTTP_200_OK) 
+    elif request.method == 'PUT': 
+        payment_serializer = PaymentCardSerializer(payment, data=request.data) 
+        if  payment_serializer.is_valid(): 
+            payment_serializer.save() 
+            return Response(payment_serializer.data) 
+        return Response(payment_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    elif request.method == 'DELETE':
+        os.remove(payment.paymentcardimg.path) 
+        payment.delete() 
+        return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
 
 
 
