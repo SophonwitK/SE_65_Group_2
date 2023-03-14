@@ -14,6 +14,19 @@ export class UserService {
 
   }
 
+
+  deleteAuthen(id:number): Observable<any>{
+    return this._http.delete(`http://127.0.0.1:8000/api/authens/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
   authenStatusCheck(id:number): Observable<any>{
     return this._http.get(`http://127.0.0.1:8000/api/user/authen/check/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {

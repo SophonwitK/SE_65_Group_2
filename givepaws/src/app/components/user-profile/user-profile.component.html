@@ -31,7 +31,7 @@
                             <ng-template #reject>
                                 <h3 style="color: red;" #reject>Authentication Reject</h3>
                                 <p>{{authenData.comment}}</p>
-                                <button type="button" mat-stroked-button style="margin-top: 1rem;">Edit Authentication</button>
+                                <button type="button" mat-stroked-button style="margin-top: 1rem;" (click)="openAuthen('250ms', '250ms')">Authentication Again</button>
                             </ng-template>
                         </div>
                     </div>

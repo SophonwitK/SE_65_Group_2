@@ -7,7 +7,7 @@ from givepaws.serializers import HospitalSerializer,UsersUserSerializer,AuthenSe
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
-import jwt
+import jwt,os
 from users.models import User
 
 
@@ -181,7 +181,10 @@ def authen_detail(request, pk):
             authen_serializer.save() 
             return Response(authen_serializer.data) 
         return Response(authen_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-    elif request.method == 'DELETE': 
+    elif request.method == 'DELETE':
+        images = Authenimage.objects.all().filter(authen=pk)
+        for image in images:
+             os.remove(image.image.path)
         authen.delete() 
         return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
@@ -235,6 +238,27 @@ def check_authen_detail(request, pk):
     if authen:
         return Response(authen_serializer.data, status=status.HTTP_200_OK) 
 
+@api_view(['GET','PUT', 'POST', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def authenimages_detail(request, pk):
+    try:
+       authenimage = Authenimage.objects.get(pk=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        authenimage_serializer = AuthenimageSerializer(authenimage)
+        if authenimage:
+            return Response(authenimage_serializer.data, status=status.HTTP_200_OK) 
+    elif request.method == 'PUT': 
+        authenimage_serializer = AuthenimageSerializer(authenimage, data=request.data) 
+        if  authenimage_serializer.is_valid(): 
+            authenimage_serializer.save() 
+            return Response(authenimage_serializer.data) 
+        return Response(authenimage_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    elif request.method == 'DELETE': 
+        authenimage.delete() 
+        return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
 

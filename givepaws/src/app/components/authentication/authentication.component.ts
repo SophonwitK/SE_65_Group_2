@@ -65,6 +65,17 @@ export class AuthenticationComponent {
         dob: this.authenData.value.dob.toISOString().slice(0, 19).replace('T', ' '),
         dateauthen: now.toISOString().slice(0, 19).replace('T', ' ')
       })
+      this._userService.isAuthen(Number(sessionStorage.getItem('id'))).subscribe({
+        next: (res)=>{
+          if(res){
+              this._userService.deleteAuthen(res.authid).subscribe({
+                next: (res) =>{
+                  console.log(res)
+                }
+              })
+          }
+        }
+      })
       this._userService.requestAuthen(this.authenData.value).subscribe({
         next: (res) =>{
           if(res){

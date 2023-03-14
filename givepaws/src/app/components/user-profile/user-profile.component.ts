@@ -115,6 +115,24 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+   editAuthen(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialog = this._dialog.open(AuthenDialog, {
+      data: this.userData,
+      width:'20%',
+      height: '20%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        if(res){
+          this._router.navigate(['authentication/',sessionStorage.getItem('username')])
+        }
+      }
+    })
+  }
+
+
 
 
   refresh(){

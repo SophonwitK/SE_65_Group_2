@@ -1,5 +1,6 @@
 from rest_framework import serializers 
 from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck
+import os
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
     def __init__(self, **kwargs):
@@ -52,6 +53,7 @@ class AuthenSerializer(serializers.ModelSerializer):
     uploaded_images = serializers.ListField(
         child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
         write_only=True)
+
     class Meta:
         model = Authen
         fields = ['authid',

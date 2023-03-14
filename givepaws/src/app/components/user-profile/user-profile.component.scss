@@ -71,6 +71,8 @@
             align-items: center;
             flex-direction: column;
             p{
+              display: flex;
+              justify-content: center;
               width: 75%;
               word-break: break-all;
               white-space: normal;
