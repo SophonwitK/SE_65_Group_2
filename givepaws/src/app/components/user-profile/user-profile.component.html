@@ -35,7 +35,7 @@
                                     <p>เบอร์โทรศัพท์: {{authenData.tel}}</p>
                                 </div>
                                 <div style="width: 100%; display: flex; flex-direction: row;">
-                                    <img *ngFor="let image of authenData.images" style="width:10rem; display: flex; flex-direction: row; margin: 0.75rem;" src="http://127.0.0.1:8000/{{image.image}}"/>
+                                    <img *ngFor="let image of authenData.images" style="width: 10rem; display: flex; flex-direction: row; margin: 0.25rem;" src="http://127.0.0.1:8000/{{image.image}}"/>
                                 </div>
                             </div>
                             <ng-template #reject>
