@@ -1,11 +1,13 @@
+
 .main-bg{
     background-image: url("/assets/background/profile-bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
+    width: 100%;
     height: 100%;
+    display: flex;
     .bg-blur{
-      position: fixed;
       backdrop-filter: blur(5px);
       width: 100%;
       height: 100%;
@@ -29,6 +31,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+    height: auto;
     mat-card{
       background-color: azure;
       width: 40%;
@@ -47,6 +51,7 @@
             display: flex;
             flex-direction: column;
             button{
+              padding: 1.75rem;
               margin: 1rem 1rem 1rem 0rem;
             }
           }
@@ -70,7 +75,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            p{
+            .pt-reject{
               display: flex;
               justify-content: center;
               width: 75%;
@@ -81,5 +86,11 @@
         }
       }
     }
+  }
+}
+.authen-data{
+  p{
+    padding: 0;
+    text-align: start;
   }
 }
