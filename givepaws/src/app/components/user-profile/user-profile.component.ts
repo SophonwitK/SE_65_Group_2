@@ -12,10 +12,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  userData: any;
-  authenData: any;
+  userData: any
+  authenData: any
   authen_req = false
   auth_bt = true
+  username = sessionStorage.getItem('username')
 
   constructor(
     private _dialog: MatDialog,
@@ -77,6 +78,15 @@ export class UserProfileComponent implements OnInit {
       }
     })
   }
+
+  openDonate(){
+    this._router.navigate(['/donate/history/',sessionStorage.getItem('username')])
+  }
+
+  openAcceptDonate(){
+    this._router.navigate(['/acceptdonate/history/',])
+  }
+
 
   openUpdateUser(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialog = this._dialog.open(UpdateUserDialog, {

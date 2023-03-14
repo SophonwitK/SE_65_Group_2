@@ -4,7 +4,6 @@ import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',

@@ -33,6 +33,9 @@ import { MatCommonModule } from '@angular/material/core';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UploaderModule } from "angular-uploader";
+import { DonateHistoryComponent } from './components/donate-history/donate-history.component';
+import { AcceptingDonationHistoryComponent } from './components/accepting-donation-history/accepting-donation-history.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AuthenDialog,
     AuthenticationComponent,
     UpdatePasswordDialog,
+    DonateHistoryComponent,
+    AcceptingDonationHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +77,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatCommonModule,
     NgxDropzoneModule,
     MatProgressSpinnerModule,
+    UploaderModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 2000,

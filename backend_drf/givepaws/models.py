@@ -69,9 +69,7 @@ class AuthenCheck(models.Model):
 
 class Card(models.Model):
     cardid = models.AutoField(db_column='cardID', primary_key=True)  # Field name made lowercase.
-    memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.
     topic = models.CharField(max_length=100)
-    hospitalid = models.IntegerField(db_column='hospitalID')  # Field name made lowercase.
     donateacceptid = models.OneToOneField('Donateaccept', models.DO_NOTHING, db_column='donateacceptID')  # Field name made lowercase.
     description = models.CharField(max_length=10000)
     date = models.DateTimeField()
@@ -80,6 +78,8 @@ class Card(models.Model):
     receipttypeid = models.ForeignKey('Receipttype', models.DO_NOTHING, db_column='receipttypeID')  # Field name made lowercase.
     receiptnumber = models.CharField(max_length=100)
     receiptimgpath = models.CharField(max_length=100)
+    user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
+    hospitalid = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -150,6 +150,7 @@ class Donateaccept(models.Model):
     date = models.DateTimeField()
     description = models.CharField(max_length=10000)
     isaccept = models.CharField(max_length=100)
+    cardid = models.OneToOneField(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -184,8 +185,6 @@ class Hospital(models.Model):
     email = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
-    isaccept = models.CharField(max_length=100)
-    field = models.IntegerField()
 
     class Meta:
         managed = False
@@ -195,14 +194,10 @@ class Hospital(models.Model):
 class Hospitalcoordinator(models.Model):
     hcid = models.AutoField(db_column='hcID', primary_key=True)  # Field name made lowercase.
     hospitalid = models.ForeignKey(Hospital, models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
     hcdocid = models.IntegerField(db_column='hcdocID')  # Field name made lowercase.
     firstname = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
-    iscomplete = models.CharField(max_length=100)
 
     class Meta:
         managed = False
@@ -211,7 +206,7 @@ class Hospitalcoordinator(models.Model):
 
 class Paymentcard(models.Model):
     paymentcardid = models.AutoField(db_column='paymentcardID', primary_key=True)  # Field name made lowercase.
-    memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.
+    user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     contribution = models.FloatField()
     date = models.DateTimeField()
     paymentcardimg = models.CharField(max_length=100)

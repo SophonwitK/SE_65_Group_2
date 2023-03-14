@@ -4,12 +4,14 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AuthGuard } from './guard/auth.guard';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { AcceptingDonationHistoryComponent } from './components/accepting-donation-history/accepting-donation-history.component';
+import { DonateHistoryComponent } from './components/donate-history/donate-history.component';
 import { UserGuard } from './guard/user.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -20,6 +22,9 @@ const routes: Routes = [
   {path:'hospitalcoordinator',component:HospitalCoordinatorComponent},
   {path:'profile/:username',component:UserProfileComponent},
   {path:'authentication/:username',component:AuthenticationComponent},
+  {path:'donate/history/:username',component:DonateHistoryComponent},
+  {path:'acceptdonate/history/:username',component:AcceptingDonationHistoryComponent},
+  
 ];
 
 @NgModule({
