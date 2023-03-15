@@ -94,7 +94,6 @@ class CardSerializer(serializers.ModelSerializer):
                   'topic',
                   'description',
                   'date',
-                  'iscomplete',
                   'cardstatus',
                   'receipttypeid',
                   'receiptnumber',

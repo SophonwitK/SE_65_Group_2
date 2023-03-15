@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent {
   main = true;
   username = sessionStorage.getItem('username')
+  role = sessionStorage.getItem('role')
   constructor(
     private _router:Router,
     private _authService: AuthService,

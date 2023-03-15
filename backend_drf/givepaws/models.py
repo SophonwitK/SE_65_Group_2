@@ -72,7 +72,6 @@ class Card(models.Model):
     topic = models.CharField(max_length=100)
     description = models.CharField(max_length=10000)
     date = models.DateTimeField()
-    iscomplete = models.CharField(max_length=100)
     cardstatus = models.CharField(max_length=100)
     receipttypeid = models.ForeignKey('Receipttype', models.DO_NOTHING, db_column='receipttypeID')  # Field name made lowercase.
     receiptnumber = models.CharField(max_length=100)

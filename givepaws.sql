@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2023 at 01:48 PM
+-- Generation Time: Mar 15, 2023 at 04:35 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -39,6 +39,13 @@ CREATE TABLE `authen` (
   `user` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `authen`
+--
+
+INSERT INTO `authen` (`authID`, `firstname`, `surname`, `DOB`, `address`, `tel`, `DateAuthen`, `IDcard`, `user`) VALUES
+(70, 'โสภณวิชญ์', 'ควันไชย', '2023-03-07 17:00:00', '43 หมู่ 6 ตำบลกำแพงแสน จังหวัดนครปฐม', '0638545547', '2023-03-14 13:04:41', '1245874699875', 40);
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +58,13 @@ CREATE TABLE `authen_check` (
   `isApprove` tinyint(1) NOT NULL,
   `authen` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `authen_check`
+--
+
+INSERT INTO `authen_check` (`id`, `comment`, `isApprove`, `authen`) VALUES
+(16, 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', 1, 70);
 
 -- --------------------------------------------------------
 
@@ -225,7 +239,6 @@ CREATE TABLE `card` (
   `topic` varchar(100) NOT NULL,
   `description` varchar(10000) NOT NULL,
   `date` datetime NOT NULL,
-  `iscomplete` varchar(100) NOT NULL,
   `cardstatus` varchar(100) NOT NULL,
   `receipttypeID` int(20) NOT NULL,
   `receiptnumber` varchar(100) NOT NULL,
@@ -238,8 +251,8 @@ CREATE TABLE `card` (
 -- Dumping data for table `card`
 --
 
-INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `iscomplete`, `cardstatus`, `receipttypeID`, `receiptnumber`, `receiptimgpath`, `user`, `hospitalID`) VALUES
-(1, 'test', 'test', '2023-03-14 13:18:20', 'test', 'test', 1, 'test', 'test', 40, 1);
+INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttypeID`, `receiptnumber`, `receiptimgpath`, `user`, `hospitalID`) VALUES
+(1, 'Topic Card', 'test', '2023-03-14 13:18:20', 'test', 1, 'test', 'test', 40, 1);
 
 -- --------------------------------------------------------
 
@@ -408,7 +421,7 @@ CREATE TABLE `donatetopic` (
 --
 
 INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`) VALUES
-(1, 1, 'test', 5000);
+(1, 1, 'ค่าอาหาร', 5000);
 
 -- --------------------------------------------------------
 
@@ -421,6 +434,14 @@ CREATE TABLE `givepaws_authenimage` (
   `image` varchar(1000) DEFAULT NULL,
   `authen_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `givepaws_authenimage`
+--
+
+INSERT INTO `givepaws_authenimage` (`id`, `image`, `authen_id`) VALUES
+(77, 'img/authen/012490_1280x720_740026_007.jpg', 70),
+(78, 'img/authen/936378.jpg', 70);
 
 -- --------------------------------------------------------
 
@@ -477,16 +498,20 @@ CREATE TABLE `paymentcard` (
   `contribution` float NOT NULL,
   `date` datetime NOT NULL,
   `paymentcardimg` varchar(1000) NOT NULL,
-  `iscomplete` varchar(100) NOT NULL,
-  `donatetopicID` int(20) NOT NULL
+  `status` varchar(100) NOT NULL,
+  `donatetopicID` int(20) NOT NULL,
+  `comment` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `paymentcard`
 --
 
-INSERT INTO `paymentcard` (`paymentcardID`, `user`, `contribution`, `date`, `paymentcardimg`, `iscomplete`, `donatetopicID`) VALUES
-(1, 40, 400, '2023-03-14 13:22:33', '', '', 1);
+INSERT INTO `paymentcard` (`paymentcardID`, `user`, `contribution`, `date`, `paymentcardimg`, `status`, `donatetopicID`, `comment`) VALUES
+(3, 40, 50000, '2023-03-06 05:32:05', 'img/payment/1124772.jpg', 'waiting', 1, ''),
+(5, 41, 500, '2023-03-15 07:37:16', 'test', 'test', 1, ''),
+(6, 40, 47584, '2023-03-09 05:32:05', 'img/payment/astronaut-black-hole-galaxy-space-4k-a0_8o6iHAN.jpg', 'complete', 1, ''),
+(18, 40, 5000, '2023-03-09 05:32:05', 'img/payment/kena-bridge-of-spirits-game-4k-wallpaper-3840x2160-uhdpaper.com-237.0_b.jpg', 'reject', 1, 'สลิปไม่ตรงกรุณาส่งมาใหม่');
 
 -- --------------------------------------------------------
 
@@ -554,7 +579,7 @@ INSERT INTO `users_user` (`id`, `last_login`, `is_superuser`, `first_name`, `las
 (21, NULL, 0, '', '', 0, 1, '2023-03-10 07:30:53.631110', 'employee-spw', 'employee-spw@gmail.com', 'pbkdf2_sha256$390000$OFpej4UE7t80EWl6KvJjYY$WGyCCMpHUl0MDsgqIO3Oo6+ijrIDSqJgHpadocOl67Y=', 'employee-spw', 1, 0, 0),
 (22, NULL, 0, '', '', 0, 1, '2023-03-10 07:32:28.249206', 'hospital-spw', 'hospital-spw@gmail.com', 'pbkdf2_sha256$390000$oxeocjmFevo6YC1LH2IKhW$ibUmislx8P0b1UJnIHsGW/SBLcuYbZULSFMh8pYVOyo=', 'hospital-spw', 0, 1, 0),
 (35, NULL, 0, '', '', 0, 1, '2023-03-11 15:07:00.733636', 'spw-kwc007', 'spw-kwc@gmail.com', 'pbkdf2_sha256$390000$5QwiWHR4EYuUajQXOti7K9$HVQ45KSv9JFtEWs0c6RiGCegqj6vlzcE0ngY1FQS5ac=', 'spw-kwc007', 0, 0, 0),
-(40, NULL, 0, '', '', 0, 1, '2023-03-12 17:07:46.977567', 'Kwanchai', 'Kwanchai@ku.th', 'pbkdf2_sha256$390000$HlJZeGcWNmqLH2JC2TLXvC$qOxRXF25LsLr1vLwBZEjCvA/feZeCIC2PW1ynTG5oiI=', 'Kwanchai', 0, 0, 0),
+(40, NULL, 0, '', '', 0, 1, '2023-03-12 17:07:46.977567', 'Boss', 'Kwanchai@ku.th', 'pbkdf2_sha256$390000$ydzeSrsjGk0uEJEgiXjWHJ$ivWGWT4irEH8VYa9A/ftM3OiyUPT0WmM6DbdXLYD27c=', 'Kwanchai', 0, 0, 1),
 (41, NULL, 0, '', '', 0, 1, '2023-03-14 07:06:44.448066', 'test', 'test@gmail.com', 'pbkdf2_sha256$390000$kL9KyP8jUEJ5D6XRScNYy6$tFvi+SXOnNHBoGHSFPkdbzx4lHmulFZAz1U03dkG5yg=', 'test-authen', 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -758,13 +783,13 @@ ALTER TABLE `users_user_user_permissions`
 -- AUTO_INCREMENT for table `authen`
 --
 ALTER TABLE `authen`
-  MODIFY `authID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `authID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `authen_check`
 --
 ALTER TABLE `authen_check`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `auth_group`
@@ -830,7 +855,7 @@ ALTER TABLE `donatetopic`
 -- AUTO_INCREMENT for table `givepaws_authenimage`
 --
 ALTER TABLE `givepaws_authenimage`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `hospital`
@@ -848,7 +873,7 @@ ALTER TABLE `hospitalcoordinator`
 -- AUTO_INCREMENT for table `paymentcard`
 --
 ALTER TABLE `paymentcard`
-  MODIFY `paymentcardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `paymentcardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `receipttype`
@@ -866,7 +891,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `users_user`
 --
 ALTER TABLE `users_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `users_user_groups`
