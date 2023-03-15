@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   authen_req = false
   auth_bt = true
   username = sessionStorage.getItem('username')
+  role = sessionStorage.getItem('role')
 
   constructor(
     private _dialog: MatDialog,
