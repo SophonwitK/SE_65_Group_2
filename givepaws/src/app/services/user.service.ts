@@ -104,8 +104,6 @@ export class UserService {
     for (const file of data.uploaded_images) {
       formData.append('uploaded_images', file);
     }
-    console.log(formData.get('dob'))
-    console.log(formData.get('dateauthen'))
 
     return this._http.post('http://127.0.0.1:8000/api/authens/',formData).pipe(
       catchError((error: HttpErrorResponse) => {

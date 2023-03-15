@@ -1,3 +1,36 @@
 p{
     color: black;
 }
+.main{
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgb(34,36,140);
+    background: linear-gradient(180deg, rgba(34,36,140,1) 0%, rgba(46,51,183,1) 15%, rgba(0,212,255,1) 100%);
+    .back{
+        display: flex;
+        width: 100%;
+        margin-left: 5rem;
+        margin-top: 2rem;
+        a{
+          width: 6rem;
+          color: aliceblue;
+          text-decoration: none;
+          h2:hover{
+            color:   #F0C993;
+          }
+          
+        }
+    }
+    .table-history{
+        width: auto;
+        height: 100%;
+        mat-form-field{
+            width: 100%;
+        }
+    }
+}

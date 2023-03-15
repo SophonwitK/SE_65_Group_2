@@ -1,0 +1,26 @@
+<div class="main-card">
+    <div mat-dialog-title class="title"><h2 style="color: black;">Edit Payment</h2></div>
+    <div mat-dialog-content class="content">
+      <form class="payment-form" [formGroup]="paymentData" (ngSubmit)="onSubmit()">
+        <p style="margin-bottom: 1rem; color: black;">{{data.comment}}</p>
+        <mat-form-field appearance="outline">
+          <mat-label style="color: black;">Contribution</mat-label>
+          <input style="color: black;" matInput formControlName="contribution">
+        </mat-form-field>
+        <div class="img-zone">
+            <ngx-dropzone [multiple]="false" (change)="onSelect($event)" class="img-zone-bg" required>
+                <ngx-dropzone-label *ngIf="imgMessage === 'Upload Images' else require_img">{{imgMessage}}</ngx-dropzone-label>
+                <ng-template #require_img>
+                    <ngx-dropzone-label style="color: red;">{{imgMessage}}</ngx-dropzone-label>
+                </ng-template>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" [file]="f">
+                <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+        </div>
+        <div mat-dialog-actions class="bt">
+          <button mat-button [mat-dialog-close]="false">Cancel</button>
+          <button mat-button cdkFocusInitial type="submit">Ok</button>
+        </div>
+      </form>
+</div>

@@ -62,7 +62,7 @@ def userupdate(request,pk):
 
 @api_view(['PUT'])
 @authentication_classes([JWTAuthentication])
-def update_passowrd(request,pk):
+def update_password(request,pk):
     try:
         user = User.objects.get(pk=pk)
     except:

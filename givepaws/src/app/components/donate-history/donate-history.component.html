@@ -1,1 +1,73 @@
-<p>donate-history works!</p>
+<div class="main">
+    <mat-nav-list  class="back">
+        <a routerLink="/profile/{{username}}"><h2>Back</h2></a>
+    </mat-nav-list>
+    <div class="table-history">
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+        </mat-form-field>
+        
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+        
+            <ng-container matColumnDef="paymentcardid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.paymentcardid}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="donatetopicid.cardid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Card Topic </th>
+                <td mat-cell *matCellDef="let row"> {{row.donatetopicid.cardid.topic}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="donatetopicid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Donate Topic </th>
+                <td mat-cell *matCellDef="let row"> {{row.donatetopicid.topic}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="contribution">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Contribution </th>
+                <td mat-cell *matCellDef="let row"> {{row.contribution}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                <td mat-cell *matCellDef="let row"> {{row.date | thaidate:'medium'}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let row" style="text-transform: uppercase;">
+                    <div style="color: red;" *ngIf="row.status === 'reject' "> {{row.status}} </div>
+                    <div style="color: blue;" *ngIf="row.status === 'waiting' "> {{row.status}} </div>
+                    <div style="color: green;" *ngIf="row.status === 'complete' "> {{row.status}} </div>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let row">
+                  <button type="button" (click)="openEdit('250ms', '250ms',row.paymentcardid)" *ngIf="row.status === 'reject'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;">
+                    EDIT  
+                  </button>
+                  <!-- <button *ngIf="row.statuse === 'complete'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;">
+                    VIEW  
+                  </button> -->
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+            </table>
+        
+            <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+    </div>
+</div>

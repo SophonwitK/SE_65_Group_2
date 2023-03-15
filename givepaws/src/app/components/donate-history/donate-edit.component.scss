@@ -1,0 +1,12 @@
+.main-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: aliceblue;
+    height: 100%;
+    .payment-form{
+        display: flex;
+        flex-direction: column;
+    }
+}

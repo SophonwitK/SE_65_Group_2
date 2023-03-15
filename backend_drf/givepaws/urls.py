@@ -16,4 +16,5 @@ urlpatterns = [
     path("user/authen/check/<int:pk>",views.user_check_authen,name="user_check_authen"),
     path("payments/",views.payment_list,name="payment_list"),
     path("payments/<int:pk>",views.payments_detail,name="payments_detail"),
+    path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"),
 ]

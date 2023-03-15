@@ -34,8 +34,9 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UploaderModule } from "angular-uploader";
-import { DonateHistoryComponent } from './components/donate-history/donate-history.component';
+import { DonateHistoryComponent,donateEditDialog } from './components/donate-history/donate-history.component';
 import { AcceptingDonationHistoryComponent } from './components/accepting-donation-history/accepting-donation-history.component';
+import { ThaidatePipe } from './pipe/thaidate.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,8 @@ import { AcceptingDonationHistoryComponent } from './components/accepting-donati
     UpdatePasswordDialog,
     DonateHistoryComponent,
     AcceptingDonationHistoryComponent,
+    ThaidatePipe,
+    donateEditDialog,
   ],
   imports: [
     BrowserModule,

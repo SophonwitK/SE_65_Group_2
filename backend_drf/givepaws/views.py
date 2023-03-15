@@ -288,8 +288,9 @@ def payments_detail(request, pk):
         if payment:
             return Response(payment_serializer.data, status=status.HTTP_200_OK) 
     elif request.method == 'PUT': 
-        payment_serializer = PaymentCardSerializer(payment, data=request.data) 
+        payment_serializer = PaymentCardSerializer(payment, data=request.data,partial=True) 
         if  payment_serializer.is_valid(): 
+            os.remove(payment.paymentcardimg.path) 
             payment_serializer.save() 
             return Response(payment_serializer.data) 
         return Response(payment_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
@@ -297,7 +298,21 @@ def payments_detail(request, pk):
         os.remove(payment.paymentcardimg.path) 
         payment.delete() 
         return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-    
+
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def get_user_payments(request, pk):
+    try:
+        payment = Paymentcard.objects.all().filter(user=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        payment_serializer =PaymentCardSerializer(payment, many=True)
+        if payment:
+            return Response(payment_serializer.data, status=status.HTTP_200_OK) 
+
+
 
 
 

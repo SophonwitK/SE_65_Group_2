@@ -70,7 +70,6 @@ class AuthenCheck(models.Model):
 class Card(models.Model):
     cardid = models.AutoField(db_column='cardID', primary_key=True)  # Field name made lowercase.
     topic = models.CharField(max_length=100)
-    donateacceptid = models.OneToOneField('Donateaccept', models.DO_NOTHING, db_column='donateacceptID')  # Field name made lowercase.
     description = models.CharField(max_length=10000)
     date = models.DateTimeField()
     iscomplete = models.CharField(max_length=100)
@@ -209,8 +208,9 @@ class Paymentcard(models.Model):
     contribution = models.FloatField()
     date = models.DateTimeField()
     paymentcardimg = models.ImageField(upload_to="img/payment", default="", null=True, blank=True)
-    iscomplete = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
     donatetopicid = models.ForeignKey(Donatetopic, models.DO_NOTHING, db_column='donatetopicID')  # Field name made lowercase.
+    comment = models.CharField(max_length=1000, blank=True, null=True)
 
     class Meta:
         managed = False

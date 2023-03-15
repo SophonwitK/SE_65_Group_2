@@ -15,7 +15,6 @@ export class UserProfileComponent implements OnInit {
   userData: any
   authenStatus: any
   authenData: any
-  authenDate: any
   authen_req = false
   auth_bt = true
   username = sessionStorage.getItem('username')
@@ -38,7 +37,7 @@ export class UserProfileComponent implements OnInit {
     this._userService.authenStatusCheck(Number(sessionStorage.getItem('id'))).subscribe({
       next: res=>{
         if(res){
-          this.authenStatus= res
+          this.authenStatus = res
         }
       }
     })
@@ -51,14 +50,7 @@ export class UserProfileComponent implements OnInit {
           this.authen_req=true
           this.auth_bt=false
           if(this.authenStatus){
-            console.log(res)
             this.authenData = res
-            const date = new Date(res.dob)
-            this.authenDate = date.toLocaleDateString('th-TH', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })
             this.auth_bt = false
             this.authen_req=false
           }
