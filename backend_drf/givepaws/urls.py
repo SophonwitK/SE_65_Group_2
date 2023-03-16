@@ -16,8 +16,9 @@ urlpatterns = [
     path("user/authen/check/<int:pk>",views.user_check_authen,name="user_check_authen"),
     path("payments/",views.payment_list,name="payment_list"),
     path("payments/<int:pk>",views.payments_detail,name="payments_detail"),
-    path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"),
-    path("cards/",views.card_list,name="card_list"),
+    path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"), #get all payment by userid
+    path("cards/users/<int:pk>",views.get_user_card,name="get_user_card"), #get all card by userid
+    path("cards/",views.card_list,name="card_list"), #post card and get all card
     path("cards/<int:pk>",views.card_detail,name="card_detail"),
-    path("donate/topic/",views.donate_topic_list,name="donate_topic_list"),
+    path("donate/topic/",views.donate_topic_list,name="donate_topic_list"), #post topic and get all topic
 ]

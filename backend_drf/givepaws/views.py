@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic,CardImg
 from rest_framework.parsers import JSONParser 
 from givepaws.serializers import (HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,
                                   AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer)
@@ -327,6 +327,19 @@ def card_list(request):
             card_serializer.save()
             return Response(card_serializer.data, status=status.HTTP_201_CREATED) 
         return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def get_user_card(request,pk):
+    try:
+        card = Card.objects.all().filter(user=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        card_serializer =CardSerializer(card, many=True)
+        if card:
+            return Response(card_serializer.data, status=status.HTTP_200_OK) 
     
 @api_view(['GET','POST', 'DELETE'])
 @authentication_classes([JWTAuthentication])
@@ -341,11 +354,13 @@ def card_detail(request, pk):
         if payment:
             return Response(payment_serializer.data, status=status.HTTP_200_OK) 
     elif request.method == 'DELETE':
-        images = Authenimage.objects.all().filter(card=pk)
+        images = CardImg.objects.all().filter(card=pk)
         for image in images:
              os.remove(image.image.path)
+        image = Card.objects.get(pk=pk)
+        os.remove(image.receiptimgpath.path) 
         payment.delete() 
-        return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Card was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication]) 
