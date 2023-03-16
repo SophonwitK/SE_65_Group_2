@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2023 at 04:35 PM
+-- Generation Time: Mar 16, 2023 at 04:40 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -226,7 +226,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (117, 'Can add authen check', 30, 'add_authencheck'),
 (118, 'Can change authen check', 30, 'change_authencheck'),
 (119, 'Can delete authen check', 30, 'delete_authencheck'),
-(120, 'Can view authen check', 30, 'view_authencheck');
+(120, 'Can view authen check', 30, 'view_authencheck'),
+(121, 'Can add card img', 31, 'add_cardimg'),
+(122, 'Can change card img', 31, 'change_cardimg'),
+(123, 'Can delete card img', 31, 'delete_cardimg'),
+(124, 'Can view card img', 31, 'view_cardimg');
 
 -- --------------------------------------------------------
 
@@ -240,9 +244,10 @@ CREATE TABLE `card` (
   `description` varchar(10000) NOT NULL,
   `date` datetime NOT NULL,
   `cardstatus` varchar(100) NOT NULL,
-  `receipttypeID` int(20) NOT NULL,
+  `receipttype` varchar(100) NOT NULL,
   `receiptnumber` varchar(100) NOT NULL,
-  `receiptimgpath` varchar(100) NOT NULL,
+  `receiptimgpath` varchar(1000) NOT NULL,
+  `price` float NOT NULL,
   `user` bigint(20) NOT NULL,
   `hospitalID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -251,8 +256,8 @@ CREATE TABLE `card` (
 -- Dumping data for table `card`
 --
 
-INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttypeID`, `receiptnumber`, `receiptimgpath`, `user`, `hospitalID`) VALUES
-(1, 'Topic Card', 'test', '2023-03-14 13:18:20', 'test', 1, 'test', 'test', 40, 1);
+INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `price`, `user`, `hospitalID`) VALUES
+(6, 'ช่วยเหลือ', 'ช่วยเหลือโรค........................', '2023-03-09 05:32:05', 'waiting', 'ใบเสร็จ', '432578', 'img/receipt/Squidward_Him3brX.jpg', 5000, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -299,6 +304,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (9, 'givepaws', 'authgrouppermissions'),
 (10, 'givepaws', 'authpermission'),
 (11, 'givepaws', 'card'),
+(31, 'givepaws', 'cardimg'),
 (27, 'givepaws', 'djangoadminlog'),
 (12, 'givepaws', 'djangocontenttype'),
 (13, 'givepaws', 'djangomigrations'),
@@ -359,7 +365,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (20, 'sessions', '0001_initial', '2023-03-07 17:42:18.908492'),
 (21, 'givepaws', '0002_authenimage', '2023-03-07 17:51:14.794455'),
 (22, 'givepaws', '0003_djangoadminlog_djangosession_givepawsauthenimage_and_more', '2023-03-08 09:50:45.879697'),
-(23, 'givepaws', '0004_authencheck', '2023-03-11 18:17:26.069633');
+(23, 'givepaws', '0004_authencheck', '2023-03-11 18:17:26.069633'),
+(24, 'givepaws', '0005_delete_receipttype', '2023-03-16 05:28:05.021414'),
+(25, 'givepaws', '0006_cardimg', '2023-03-16 13:39:38.943820');
 
 -- --------------------------------------------------------
 
@@ -421,7 +429,8 @@ CREATE TABLE `donatetopic` (
 --
 
 INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`) VALUES
-(1, 1, 'ค่าอาหาร', 5000);
+(5, 6, 'ค่าอาหาร', 1000),
+(6, 6, 'ค่ายา', 1000);
 
 -- --------------------------------------------------------
 
@@ -446,6 +455,27 @@ INSERT INTO `givepaws_authenimage` (`id`, `image`, `authen_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `givepaws_cardimg`
+--
+
+CREATE TABLE `givepaws_cardimg` (
+  `id` bigint(20) NOT NULL,
+  `image` varchar(100) DEFAULT NULL,
+  `card_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `givepaws_cardimg`
+--
+
+INSERT INTO `givepaws_cardimg` (`id`, `image`, `card_id`) VALUES
+(7, 'img/card/Egx5IKJWkAE2LMd.jpg', 6),
+(8, 'img/card/fantasy-mountain-landscape-uhdpaper.com-4K-8.1402.jpg', 6),
+(9, 'img/card/images.jpg', 6);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hospital`
 --
 
@@ -462,7 +492,8 @@ CREATE TABLE `hospital` (
 --
 
 INSERT INTO `hospital` (`hospitalID`, `name`, `email`, `address`, `tel`) VALUES
-(1, 'Hoospital', 'Hoospital', 'Hoospital', 'Hoospital');
+(1, 'Hoospital', 'Hoospital', 'Hoospital', 'Hoospital'),
+(2, '็Hospital2', '็Hospital2', '็Hospital2', '็Hospital2');
 
 -- --------------------------------------------------------
 
@@ -508,29 +539,10 @@ CREATE TABLE `paymentcard` (
 --
 
 INSERT INTO `paymentcard` (`paymentcardID`, `user`, `contribution`, `date`, `paymentcardimg`, `status`, `donatetopicID`, `comment`) VALUES
-(3, 40, 50000, '2023-03-06 05:32:05', 'img/payment/1124772.jpg', 'waiting', 1, ''),
-(5, 41, 500, '2023-03-15 07:37:16', 'test', 'test', 1, ''),
-(6, 40, 47584, '2023-03-09 05:32:05', 'img/payment/astronaut-black-hole-galaxy-space-4k-a0_8o6iHAN.jpg', 'complete', 1, ''),
-(18, 40, 5000, '2023-03-09 05:32:05', 'img/payment/kena-bridge-of-spirits-game-4k-wallpaper-3840x2160-uhdpaper.com-237.0_b.jpg', 'reject', 1, 'สลิปไม่ตรงกรุณาส่งมาใหม่');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `receipttype`
---
-
-CREATE TABLE `receipttype` (
-  `receipttypeID` int(20) NOT NULL,
-  `receiptname` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `receipttype`
---
-
-INSERT INTO `receipttype` (`receipttypeID`, `receiptname`) VALUES
-(1, 'ใบเสร็จ'),
-(2, 'ใบรับรอง');
+(3, 40, 50000, '2023-03-06 05:32:05', 'img/payment/1124772.jpg', 'waiting', 5, ''),
+(5, 41, 500, '2023-03-15 07:37:16', 'test', 'test', 5, ''),
+(6, 40, 47584, '2023-03-09 05:32:05', 'img/payment/astronaut-black-hole-galaxy-space-4k-a0_8o6iHAN.jpg', 'complete', 5, ''),
+(18, 40, 5000, '2023-03-09 05:32:05', 'img/payment/kena-bridge-of-spirits-game-4k-wallpaper-3840x2160-uhdpaper.com-237.0_b.jpg', 'reject', 5, 'สลิปไม่ตรงกรุณาส่งมาใหม่');
 
 -- --------------------------------------------------------
 
@@ -652,7 +664,6 @@ ALTER TABLE `auth_permission`
 --
 ALTER TABLE `card`
   ADD PRIMARY KEY (`cardID`),
-  ADD KEY `receipttypeID` (`receipttypeID`),
   ADD KEY `user` (`user`),
   ADD KEY `hospitalID` (`hospitalID`);
 
@@ -715,6 +726,13 @@ ALTER TABLE `givepaws_authenimage`
   ADD KEY `givepaws_authenimage_authen_id_35a6bde3_fk_authen_authID` (`authen_id`);
 
 --
+-- Indexes for table `givepaws_cardimg`
+--
+ALTER TABLE `givepaws_cardimg`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `givepaws_cardimg_card_id_3cf3c6c2_fk_card_cardID` (`card_id`);
+
+--
 -- Indexes for table `hospital`
 --
 ALTER TABLE `hospital`
@@ -736,12 +754,6 @@ ALTER TABLE `paymentcard`
   ADD KEY `memberID` (`user`),
   ADD KEY `donatetopicID` (`donatetopicID`),
   ADD KEY `donatetopicID_2` (`donatetopicID`);
-
---
--- Indexes for table `receipttype`
---
-ALTER TABLE `receipttype`
-  ADD PRIMARY KEY (`receipttypeID`);
 
 --
 -- Indexes for table `report`
@@ -789,7 +801,7 @@ ALTER TABLE `authen`
 -- AUTO_INCREMENT for table `authen_check`
 --
 ALTER TABLE `authen_check`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `auth_group`
@@ -807,13 +819,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -825,13 +837,13 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `donar`
@@ -849,7 +861,7 @@ ALTER TABLE `donateaccept`
 -- AUTO_INCREMENT for table `donatetopic`
 --
 ALTER TABLE `donatetopic`
-  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `givepaws_authenimage`
@@ -858,10 +870,16 @@ ALTER TABLE `givepaws_authenimage`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
+-- AUTO_INCREMENT for table `givepaws_cardimg`
+--
+ALTER TABLE `givepaws_cardimg`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `hospital`
 --
 ALTER TABLE `hospital`
-  MODIFY `hospitalID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `hospitalID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hospitalcoordinator`
@@ -874,12 +892,6 @@ ALTER TABLE `hospitalcoordinator`
 --
 ALTER TABLE `paymentcard`
   MODIFY `paymentcardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `receipttype`
---
-ALTER TABLE `receipttype`
-  MODIFY `receipttypeID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `report`
@@ -938,7 +950,6 @@ ALTER TABLE `auth_permission`
 -- Constraints for table `card`
 --
 ALTER TABLE `card`
-  ADD CONSTRAINT `card_ibfk_3` FOREIGN KEY (`receipttypeID`) REFERENCES `receipttype` (`receipttypeID`),
   ADD CONSTRAINT `card_ibfk_4` FOREIGN KEY (`user`) REFERENCES `users_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `card_ibfk_5` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -967,13 +978,19 @@ ALTER TABLE `donateaccept`
 -- Constraints for table `donatetopic`
 --
 ALTER TABLE `donatetopic`
-  ADD CONSTRAINT `donatetopic_ibfk_1` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`);
+  ADD CONSTRAINT `donatetopic_ibfk_1` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `givepaws_authenimage`
 --
 ALTER TABLE `givepaws_authenimage`
   ADD CONSTRAINT `givepaws_authenimage_authen_id_35a6bde3_fk_authen_authID` FOREIGN KEY (`authen_id`) REFERENCES `authen` (`authID`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `givepaws_cardimg`
+--
+ALTER TABLE `givepaws_cardimg`
+  ADD CONSTRAINT `givepaws_cardimg_card_id_3cf3c6c2_fk_card_cardID` FOREIGN KEY (`card_id`) REFERENCES `card` (`cardID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `hospitalcoordinator`
@@ -985,7 +1002,7 @@ ALTER TABLE `hospitalcoordinator`
 -- Constraints for table `paymentcard`
 --
 ALTER TABLE `paymentcard`
-  ADD CONSTRAINT `paymentcard_ibfk_2` FOREIGN KEY (`donatetopicID`) REFERENCES `donatetopic` (`donatetopicID`),
+  ADD CONSTRAINT `paymentcard_ibfk_2` FOREIGN KEY (`donatetopicID`) REFERENCES `donatetopic` (`donatetopicID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `paymentcard_ibfk_3` FOREIGN KEY (`user`) REFERENCES `users_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
