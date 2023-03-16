@@ -91,10 +91,19 @@ class CardImgSerializer(serializers.ModelSerializer):
         model = CardImg
         fields =  ['id','card','image'] 
 
+class DonateTopicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donatetopic
+        fields = ['donatetopicid',
+                  'topic',
+                  'amount',
+                  'cardid']
+
 class CardSerializer(serializers.ModelSerializer):
     user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
     hospitalid = RelatedFieldAlternative(queryset=Hospital.objects.all(), serializer=HospitalSerializer)
     images = CardImgSerializer(many=True,read_only=True)
+    donate_topic = DonateTopicSerializer(many=True,read_only=True)
     uploaded_images = serializers.ListField(
         child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
         write_only=True)
@@ -111,6 +120,7 @@ class CardSerializer(serializers.ModelSerializer):
                   'hospitalid',
                   'images',
                   'uploaded_images',
+                  'donate_topic',
                   'user']
         
     def create(self, validated_data):
@@ -121,15 +131,6 @@ class CardSerializer(serializers.ModelSerializer):
 
         return card
 
-class DonateTopicSerializer(serializers.ModelSerializer):
-    cardid = RelatedFieldAlternative(queryset=Card.objects.all(), serializer=CardSerializer)
-
-    class Meta:
-        model = Donatetopic
-        fields = ['donatetopicid',
-                  'topic',
-                  'amount',
-                  'cardid']
 
 class PaymentCardSerializer(serializers.ModelSerializer):
     user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)

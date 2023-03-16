@@ -159,7 +159,7 @@ class Donateaccept(models.Model):
 
 class Donatetopic(models.Model):
     donatetopicid = models.AutoField(db_column='donatetopicID', primary_key=True)  # Field name made lowercase.
-    cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
+    cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID',related_name = "donate_topic")  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     amount = models.FloatField()
 

@@ -1,10 +1,10 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic
 from rest_framework.parsers import JSONParser 
 from givepaws.serializers import (HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,
-                                  AuthenCheckSerializer,PaymentCardSerializer,CardSerializer)
+                                  AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer)
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
@@ -346,6 +346,22 @@ def card_detail(request, pk):
              os.remove(image.image.path)
         payment.delete() 
         return Response({'message': 'authen was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def donate_topic_list(request):
+    if request.method == 'GET': 
+        donate = Donatetopic.objects.all()
+        donate_serializer = DonateTopicSerializer( donate, many=True)
+        return Response( donate_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        donate_serializer = DonateTopicSerializer(data=request.data)
+        if donate_serializer.is_valid():
+            donate_serializer.save()
+            return Response(donate_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(donate_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
