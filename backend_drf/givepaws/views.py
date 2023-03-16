@@ -68,7 +68,7 @@ def user_check_authen(request, pk):
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication]) #check jwt are correct or not?
-@permission_classes([IsAdminUser]) #check user permission isAdmin = is_staff = true in user_users in database
+@permission_classes([IsAuthenticated]) #check user permission isAdmin = is_staff = true in user_users in database
 def hospital_list(request):
     if request.method == 'GET': #return all object
         hospitals = Hospital.objects.all()

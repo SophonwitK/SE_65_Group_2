@@ -8,24 +8,24 @@
                 <mat-card-header style="align-self: center;"><h2 style="color: black;">เปิดรับบริจาค</h2></mat-card-header>
                 <mat-form-field appearance="outline">
                     <mat-label>หัวข้อ</mat-label>
-                    <input matInput placeholder="ขอความช่วยเหลือน้อง...">
+                    <input formControlName="topic" matInput placeholder="ขอความช่วยเหลือน้อง...">
                 </mat-form-field>
                 <mat-form-field appearance="outline" >
                     <mat-label>รายละเอียด</mat-label>
-                    <input matInput placeholder="รายละเอียด..............">
+                    <input formControlName="description" matInput placeholder="รายละเอียด..............">
                     <textarea matInput style="resize:none; height: 9rem;" ></textarea>
                 </mat-form-field>
                 <div class="rows">
                     <mat-form-field appearance="outline">
                         <mat-label>ชนิดใบเสร็จ</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="receipttype">
                         <mat-option value="one">ใบเสร็จ</mat-option>
                         <mat-option value="two">ใบเสนอราคา</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>เลขใบเสร็จ</mat-label>
-                        <input matInput placeholder="47587....">
+                        <input formControlName="receiptnumber" matInput placeholder="47587....">
                     </mat-form-field>
                 </div>
                 <div class="img-zone-1">
@@ -39,18 +39,17 @@
                         </ngx-dropzone-image-preview>
                     </ngx-dropzone>
                     <div class="img-zone-item">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" *ngIf="hospitalList">
                             <mat-label>โรงพยาบาล</mat-label>
-                            <mat-select>
-                                <mat-option value="one">A</mat-option>
-                                <mat-option value="two">B</mat-option>
+                            <mat-select formControlName="hospitalid" required>
+                                <mat-option *ngFor="let hospital of hospitalList" [value]="hospital.hospitalid">{{hospital.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                             <mat-label>ค่ารักษา</mat-label>
                             <!-- <span matTextPrefix>$&nbsp;</span> -->
                             <span matTextSuffix>THB</span>
-                            <input matInput placeholder="4000.00">
+                            <input formControlName="price" matInput placeholder="4000">
                         </mat-form-field>
                     </div>
                 </div>
@@ -65,7 +64,7 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>จำนวน</mat-label>
                                 <span matTextSuffix>THB</span>
-                                <input matInput placeholder="4000.00"  formControlName="price">
+                                <input matInput placeholder="1000"  formControlName="amount">
                             </mat-form-field >
                         </div>
                         <button type="button" *ngIf="i>-1" style="margin-left: 1.2rem; margin-bottom: 2rem;" class="btn btn-danger float-end mb-3" (click)="removeTopic(i)">ลบหัวข้อ -</button>

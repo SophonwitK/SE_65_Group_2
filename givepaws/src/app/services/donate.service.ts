@@ -13,6 +13,48 @@ export class DonateService {
   ) { 
 
   }
+  postDonate(data:any): Observable<any>{
+    const formData = new FormData();
+    formData.append('topic',data.topic)
+    formData.append('description',data.description)
+    formData.append('date',data.date)
+    formData.append('cardstatus',data.cardstatus)
+    formData.append('receipttype',data.receipttype)
+    formData.append('receiptnumber',data.receiptnumber)
+    for (const file of data.receiptimgpath) {
+      formData.append('receiptimgpath', file);
+    }
+    formData.append('price',data.price)
+    for (const file of data.uploaded_images) {
+      formData.append('uploaded_images', file);
+    }
+    formData.append('hospitalid',data.hospitalid)
+    formData.append('user',data.user)
+
+
+    return this._http.post('http://127.0.0.1:8000/api/cards/',formData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+  postTopic(data:any): Observable<any>{
+    return this._http.post('http://127.0.0.1:8000/api/donate/topic/',data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
 
   donateHistory(id:number): Observable<any>{
     return this._http.get(`http://127.0.0.1:8000/api/payments/user/${id}`).pipe(

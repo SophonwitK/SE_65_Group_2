@@ -87,7 +87,8 @@ export class AuthenticationComponent {
       })
 
       // this._userService.requestAuthen(this.authenData.value)
-    }else{
+    }
+    else{
       this.imgMessage = "Images Require"
       this._toastr.warning("Please, Enter valid Data")
     }

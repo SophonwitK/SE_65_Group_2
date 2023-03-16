@@ -76,6 +76,7 @@ class Card(models.Model):
     receipttype = models.CharField(max_length=100)
     receiptnumber = models.CharField(max_length=100)
     receiptimgpath = models.ImageField(upload_to="img/receipt")
+    price = models.FloatField()
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     hospitalid = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
     class Meta:

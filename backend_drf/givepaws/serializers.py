@@ -117,6 +117,7 @@ class CardSerializer(serializers.ModelSerializer):
                   'receipttype',
                   'receiptnumber',
                   'receiptimgpath',
+                  'price',
                   'hospitalid',
                   'images',
                   'uploaded_images',
