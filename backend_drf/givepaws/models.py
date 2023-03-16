@@ -75,14 +75,16 @@ class Card(models.Model):
     cardstatus = models.CharField(max_length=100)
     receipttype = models.CharField(max_length=100)
     receiptnumber = models.CharField(max_length=100)
-    receiptimgpath = models.CharField(max_length=100)
+    receiptimgpath = models.ImageField(upload_to="img/receipt")
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     hospitalid = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
-
     class Meta:
         managed = False
         db_table = 'card'
-
+        
+class CardImg(models.Model):
+    card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name = "images")
+    image = models.ImageField(upload_to="img/card", default="", null=True, blank=True)
 
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
