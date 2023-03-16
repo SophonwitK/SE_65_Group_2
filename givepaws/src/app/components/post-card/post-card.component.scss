@@ -1,0 +1,78 @@
+mat-label{
+  margin-right: 0.75rem;
+}
+p{
+    color: black;
+}
+span{
+  color: black;
+}
+.main{
+    overflow-x: hidden;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #2980B9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    .back{
+        display: flex;
+        width: 100%;
+        margin-left: 5rem;
+        margin-top: 2rem;
+        a{
+          position: fixed;
+          width: 6rem;
+          color: aliceblue;
+          text-decoration: none;
+          h2:hover{
+            color:   #F0C993;
+          }
+          
+        }
+    }
+    .card{
+      background-color:aliceblue;
+      margin-top: 2rem;
+      width: 30%;
+      height: auto;
+      mat-form-field{
+        gap: 10px;
+        margin: 0.5rem;
+        align-self: center;
+        width: 90%;
+      }
+      .rows{
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+        width: 95%;
+      }
+      .img-zone-1{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 2.5rem;
+        align-self: center;
+        width: 95%;
+        margin-left: 1rem;
+        ngx-dropzone{
+          width: 40%;
+        }
+        .img-zone-item{
+          margin-left: 1rem;
+          width: 60%;
+        }
+      }
+      .topic-form{
+        .topic-group{
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+        }
+      }
+
+    }
+}

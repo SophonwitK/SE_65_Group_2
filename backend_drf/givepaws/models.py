@@ -73,7 +73,7 @@ class Card(models.Model):
     description = models.CharField(max_length=10000)
     date = models.DateTimeField()
     cardstatus = models.CharField(max_length=100)
-    receipttypeid = models.ForeignKey('Receipttype', models.DO_NOTHING, db_column='receipttypeID')  # Field name made lowercase.
+    receipttype = models.CharField(max_length=100)
     receiptnumber = models.CharField(max_length=100)
     receiptimgpath = models.CharField(max_length=100)
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
@@ -214,16 +214,6 @@ class Paymentcard(models.Model):
     class Meta:
         managed = False
         db_table = 'paymentcard'
-
-
-class Receipttype(models.Model):
-    receipttypeid = models.AutoField(db_column='receipttypeID', primary_key=True)  # Field name made lowercase.
-    receiptname = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'receipttype'
-
 
 class Report(models.Model):
     memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.

@@ -16,7 +16,7 @@
           <input matInput placeholder="pat@example.com" formControlName="email">
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Enter password to update</mat-label>
+          <mat-label style="margin-right: 1.5rem;">Enter password to update</mat-label>
           <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
           <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

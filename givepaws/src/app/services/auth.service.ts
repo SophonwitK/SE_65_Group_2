@@ -67,8 +67,8 @@ export class AuthService {
     this.exp = sessionStorage.getItem('expire-date')
     if(this.exp == null)
       return false
-    console.log(JSON.parse(this.exp).exp)
-    console.log(new Date().getTime() / 1000)
+    // console.log(JSON.parse(this.exp).exp)
+    // console.log(new Date().getTime() / 1000)
     if(JSON.parse(this.exp).exp > new Date().getTime() / 1000)
       return true
     return false

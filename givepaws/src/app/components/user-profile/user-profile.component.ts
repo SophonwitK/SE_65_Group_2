@@ -19,12 +19,14 @@ export class UserProfileComponent implements OnInit {
   auth_bt = true
   username = sessionStorage.getItem('username')
   role = sessionStorage.getItem('role')
+  user_id = sessionStorage.getItem('id')
 
   constructor(
     private _dialog: MatDialog,
     private _authService: AuthService,
     private _router : Router,
     private _userService: UserService,
+    private _toastr: ToastrService,
   ){
 
   }
@@ -35,7 +37,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   isApprove(){
-    this._userService.authenStatusCheck(Number(sessionStorage.getItem('id'))).subscribe({
+    this._userService.authenStatusCheck(Number(this.user_id)).subscribe({
       next: res=>{
         if(res){
           this.authenStatus = res
@@ -45,7 +47,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   isAuthen(){
-    this._userService.isAuthen(Number(sessionStorage.getItem('id'))).subscribe({
+    this._userService.isAuthen(Number(this.user_id)).subscribe({
       next: (res)=>{
         if(res){
           this.authen_req=true
@@ -54,6 +56,9 @@ export class UserProfileComponent implements OnInit {
             this.authenData = res
             this.auth_bt = false
             this.authen_req=false
+            if(this.authenStatus.isapprove){
+              sessionStorage.setItem('role','auth-user')
+            }
           }
         }else{
           this.auth_bt=true

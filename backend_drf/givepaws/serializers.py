@@ -95,7 +95,7 @@ class CardSerializer(serializers.ModelSerializer):
                   'description',
                   'date',
                   'cardstatus',
-                  'receipttypeid',
+                  'receipttype',
                   'receiptnumber',
                   'receiptimgpath',
                   'hospitalid',

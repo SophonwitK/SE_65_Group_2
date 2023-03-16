@@ -19,7 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent} from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -37,6 +37,9 @@ import { UploaderModule } from "angular-uploader";
 import { DonateHistoryComponent,donateEditDialog } from './components/donate-history/donate-history.component';
 import { AcceptingDonationHistoryComponent } from './components/accepting-donation-history/accepting-donation-history.component';
 import { ThaidatePipe } from './pipe/thaidate.pipe';
+import { CardAllComponent } from './components/card-all/card-all.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,8 @@ import { ThaidatePipe } from './pipe/thaidate.pipe';
     AcceptingDonationHistoryComponent,
     ThaidatePipe,
     donateEditDialog,
+    CardAllComponent,
+    PostCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +86,7 @@ import { ThaidatePipe } from './pipe/thaidate.pipe';
     NgxDropzoneModule,
     MatProgressSpinnerModule,
     UploaderModule,
+    MatRadioModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 2000,

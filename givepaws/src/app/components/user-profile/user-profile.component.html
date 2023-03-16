@@ -17,7 +17,7 @@
                             <button type="button" mat-stroked-button (click)="openUpdateUser('250ms', '250ms')">Update Profile</button>
                             <button type="button" mat-stroked-button (click)="openChangePwd('250ms', '250ms')">Change Password</button>
                             <button type="button" mat-stroked-button routerLink="/donate/history/{{username}}">Donate History</button>
-                            <button *ngIf="role==='auth-user'" type="button" mat-stroked-button routerLink="/acceptdonate/history/{{username}}">Accepting Donation History</button>
+                            <button *ngIf="role==='auth-user'" type="button" mat-stroked-button routerLink="/acceptdonate/history/{{username}}">Post Donation History</button>
                             <button *ngIf="auth_bt" type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
                         </div>
                         <div class="authen-status" *ngIf="authen_req">
