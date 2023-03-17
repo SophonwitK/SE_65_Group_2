@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2023 at 04:05 PM
+-- Generation Time: Mar 17, 2023 at 04:11 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -405,7 +405,6 @@ CREATE TABLE `donar` (
 
 CREATE TABLE `donateaccept` (
   `donateacceptID` int(20) NOT NULL,
-  `hospitalID` int(20) NOT NULL,
   `hcID` int(20) NOT NULL,
   `date` datetime NOT NULL,
   `description` varchar(10000) NOT NULL,
@@ -718,8 +717,7 @@ ALTER TABLE `donar`
 ALTER TABLE `donateaccept`
   ADD PRIMARY KEY (`donateacceptID`),
   ADD UNIQUE KEY `hcID` (`hcID`),
-  ADD UNIQUE KEY `cardID` (`cardID`),
-  ADD KEY `hospitalID` (`hospitalID`);
+  ADD UNIQUE KEY `cardID` (`cardID`);
 
 --
 -- Indexes for table `donatetopic`
@@ -981,7 +979,6 @@ ALTER TABLE `donar`
 --
 ALTER TABLE `donateaccept`
   ADD CONSTRAINT `donateaccept_ibfk_1` FOREIGN KEY (`hcID`) REFERENCES `hospitalcoordinator` (`hcID`),
-  ADD CONSTRAINT `donateaccept_ibfk_3` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`),
   ADD CONSTRAINT `donateaccept_ibfk_4` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
