@@ -29,6 +29,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uploader": "^3.9.0",
+    "webpack": "^5.76.2",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
