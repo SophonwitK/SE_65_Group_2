@@ -105,6 +105,8 @@ class DonateTopicSerializer(serializers.ModelSerializer):
                   'amount',
                   'cardid']
 
+
+
 class CardSerializer(serializers.ModelSerializer):
     user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
     hospitalid = RelatedFieldAlternative(queryset=Hospital.objects.all(), serializer=HospitalSerializer)

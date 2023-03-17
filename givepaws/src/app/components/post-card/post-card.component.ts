@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { FormGroup,Validators , FormArray, FormBuilder } from '@angular/forms'  
 import { DonateService } from 'src/app/services/donate.service';
 import { UserService } from '../../services/user.service';
