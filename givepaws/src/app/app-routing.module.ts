@@ -8,10 +8,10 @@ import { HospitalCoordinatorComponent } from './components/hospital-coordinator/
 import { EmployeeComponent } from './components/employee/employee.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
-import { AcceptingDonationHistoryComponent } from './components/accepting-donation-history/accepting-donation-history.component';
 import { DonateHistoryComponent } from './components/donate-history/donate-history.component';
 import { CardAllComponent } from './components/card-all/card-all.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { PostCardHistoryComponent } from './components/post-card-history/post-card-history.component';
 import { UserGuard } from './guard/user.guard';
 import { AuthGuard } from './guard/auth.guard';
 import { AuthenUserGuard } from './guard/authen-user.guard';
@@ -26,7 +26,7 @@ const routes: Routes = [
   {path:'profile/:username',component:UserProfileComponent},
   {path:'authentication/:username',component:AuthenticationComponent},
   {path:'donate/history/:username',component:DonateHistoryComponent},
-  {path:'acceptdonate/history/:username',component:AcceptingDonationHistoryComponent},
+  {path:'post/card/history/:username',component:PostCardHistoryComponent},
   {path:'post/donate',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'donate',component:CardAllComponent,canActivate:[AuthGuard]},
   

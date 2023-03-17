@@ -35,12 +35,11 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UploaderModule } from "angular-uploader";
 import { DonateHistoryComponent,donateEditDialog } from './components/donate-history/donate-history.component';
-import { AcceptingDonationHistoryComponent } from './components/accepting-donation-history/accepting-donation-history.component';
 import { ThaidatePipe } from './pipe/thaidate.pipe';
 import { CardAllComponent } from './components/card-all/card-all.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { MatRadioModule } from '@angular/material/radio';
-
+import { PostCardHistoryComponent } from './components/post-card-history/post-card-history.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,11 +55,12 @@ import { MatRadioModule } from '@angular/material/radio';
     AuthenticationComponent,
     UpdatePasswordDialog,
     DonateHistoryComponent,
-    AcceptingDonationHistoryComponent,
     ThaidatePipe,
     donateEditDialog,
     CardAllComponent,
     PostCardComponent,
+    PostCardHistoryComponent,
+
   ],
   imports: [
     BrowserModule,

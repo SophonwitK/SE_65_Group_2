@@ -14,10 +14,10 @@
                     <p>Email : {{userData.email}}</p>
                     <div class="content">
                         <div class="bt">
-                            <button type="button" mat-stroked-button (click)="openUpdateUser('250ms', '250ms')">Update Profile</button>
-                            <button type="button" mat-stroked-button (click)="openChangePwd('250ms', '250ms')">Change Password</button>
-                            <button type="button" mat-stroked-button routerLink="/donate/history/{{username}}">Donate History</button>
-                            <button *ngIf="role==='auth-user'" type="button" mat-stroked-button routerLink="/acceptdonate/history/{{username}}">Post Donation History</button>
+                            <button type="button" mat-stroked-button (click)="openUpdateUser('250ms', '250ms')">แก้ไข Profile</button>
+                            <button type="button" mat-stroked-button (click)="openChangePwd('250ms', '250ms')">แก้ไข Password</button>
+                            <button type="button" mat-stroked-button routerLink="/donate/history/{{username}}">ประวัติการบริจาค</button>
+                            <button *ngIf="role==='auth-user'" type="button" mat-stroked-button routerLink="/post/card/history/{{username}}">ประวัติการเปิดรับบริจาค</button>
                             <button *ngIf="auth_bt" type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
                         </div>
                         <div class="authen-status" *ngIf="authen_req">

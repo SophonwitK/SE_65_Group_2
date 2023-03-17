@@ -9,31 +9,30 @@ p{
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-size: 100%;
     background: #2980B9;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     .back{
-        margin-bottom: 3rem;
-        width: 100%;
-        margin-left: 5rem;
-        margin-top: 2rem;
-        a{
-          position: fixed;
-          width: 6rem;
-          color: aliceblue;
-          text-decoration: none;
-          h2:hover{
-            color:   #F0C993;
-          }
-          
+      margin-bottom: 3rem;
+      width: 100%;
+      margin-left: 5rem;
+      margin-top: 2rem;
+      a{
+        position: fixed;
+        width: 6rem;
+        color: aliceblue;
+        text-decoration: none;
+        h2:hover{
+          color:   #F0C993;
         }
+        
+      }
     }
     .table-history{
-        width: auto;
-        height: 100%;
-        mat-form-field{
-            width: 100%;
-        }
-    }
+      width: auto;
+      height: 100%;
+      mat-form-field{
+          width: 100%;
+      }
+  }
 }

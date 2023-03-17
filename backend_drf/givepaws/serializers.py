@@ -91,7 +91,13 @@ class CardImgSerializer(serializers.ModelSerializer):
         model = CardImg
         fields =  ['id','card','image'] 
 
+class CardNameSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Card
+        fields = ['topic']
+
 class DonateTopicSerializer(serializers.ModelSerializer):
+    cardid = RelatedFieldAlternative(queryset=Card.objects.all(), serializer=CardNameSerializer)
     class Meta:
         model = Donatetopic
         fields = ['donatetopicid',
