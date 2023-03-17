@@ -79,14 +79,21 @@
                         <ng-template #require_img2>
                             <ngx-dropzone-label style="color: red;">{{imgMessage}}</ngx-dropzone-label>
                         </ng-template>
-                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_2" [removable]="true" (removed)="onRemove_2(f)" [file]="f">
-                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f2 of files_2" [removable]="true" (removed)="onRemove_2(f2)" [file]="f2">
                         </ngx-dropzone-image-preview>
+                        
                     </ngx-dropzone>
                 </div>
                 <div style="width: 100%; display: flex; justify-content: center; margin-top: 2rem; margin-bottom: 2rem;">
                     <button style="width: 20%;" mat-raised-button color="primary" type="submit">POST</button>
                 </div>
+                
+                <!-- <ngx-dropzone (change)="onSelect($event)">
+                    <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                </ngx-dropzone> -->
             </form>
         </mat-card>
     </div>

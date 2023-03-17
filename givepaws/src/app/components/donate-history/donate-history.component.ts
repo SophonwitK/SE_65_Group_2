@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit,Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import  {MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { DonateService } from 'src/app/services/donate.service';
 import { MatDialog, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup,FormBuilder ,Validators} from '@angular/forms';
@@ -46,7 +46,6 @@ export class DonateHistoryComponent implements OnInit{
     this._donateService.donateHistory(Number(this.user_id)).subscribe({
       next: res =>{
         if(res){
-          console.log(res)
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

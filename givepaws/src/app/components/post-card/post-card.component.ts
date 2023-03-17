@@ -132,7 +132,7 @@ export class PostCardComponent implements OnInit {
                 }
               })
             }
-            this._router.navigate(['acceptdonate/history/',sessionStorage.getItem('username')])
+            this._router.navigate(['post/card/history/',sessionStorage.getItem('username')])
             this._toastr.success('sent post request successfully')
           }
           else{

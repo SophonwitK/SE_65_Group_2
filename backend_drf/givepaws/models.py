@@ -150,7 +150,6 @@ class Donateaccept(models.Model):
     hcid = models.OneToOneField('Hospitalcoordinator', models.DO_NOTHING, db_column='hcID')  # Field name made lowercase.
     date = models.DateTimeField()
     description = models.CharField(max_length=10000)
-    isaccept = models.CharField(max_length=100)
     cardid = models.OneToOneField(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
 
     class Meta:
