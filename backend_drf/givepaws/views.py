@@ -371,13 +371,11 @@ def donate_topic_list(request):
         donate_serializer = DonateTopicSerializer( donate, many=True)
         return Response( donate_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        donate_serializer = DonateTopicSerializer(data=request.data)
+        donate_serializer = DonateTopicSerializer(data=request.data,many=True)
         if donate_serializer.is_valid():
-            donate_serializer.save()
-            return Response(donate_serializer.data, status=status.HTTP_201_CREATED) 
+            donateTopics = donate_serializer.save()
+            return Response(DonateTopicSerializer(donateTopics,many=True).data, status=status.HTTP_201_CREATED) 
         return Response(donate_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 
 
 

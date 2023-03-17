@@ -54,6 +54,7 @@ export class PostCardComponent implements OnInit {
 
   private topicGroup(): FormGroup {
     return this._fb.group({
+      cardid: '',
       topic: this._fb.control('',[Validators.required]),
       amount: this._fb.control('',Validators.compose([Validators.required,Validators.pattern(/^[0-9]\d*$/)])),
     });
@@ -104,35 +105,46 @@ export class PostCardComponent implements OnInit {
   }
 
   onSubmit(){
-      if(this.cardForm.get('topicForm')?.get('topics')?.value.length == 0){
+    const topicLength = this.cardForm.get('topicForm')?.get('topics')?.value.length
+    if(topicLength == 0){
         this.cardForm.get('topicForm')?.get('topics')?.clearAsyncValidators()
         this.cardForm.get('topicForm')?.get('topics')?.updateValueAndValidity()
-      }
-
-      if(this.cardForm.valid){
-        console.log(this.cardForm.value)
-        const now = new Date();
-        this.cardForm.patchValue({
-          date: now.toISOString().slice(0, 19).replace('T', ' '),
-          user: sessionStorage.getItem('id')
-        })
-        this._donateSerivce.postDonate(this.cardForm.value).subscribe({
-          next: res =>{
-            if(res){
-              console.log(res)
-              this._router.navigate(['acceptdonate/history/',sessionStorage.getItem('username')])
-              this._toastr.success('sent post request successfully')
-            }
-            else{
-              this._toastr.error('Error !!!, Something wrong')
-            }
-          }
-        })
-      }
-      else{
-        this.imgMessage = "กรุณา Upload ใบเสร็จ"
-        this.imgMessage_2 = "กรุณา Upload รูป"
-      }
     }
+    if(this.cardForm.valid){
+      const now = new Date();
+      this.cardForm.patchValue({
+        date: now.toISOString().slice(0, 19).replace('T', ' '),
+        user: sessionStorage.getItem('id')
+      })
+      this._donateSerivce.postDonate(this.cardForm.value).subscribe({
+        next: res =>{
+          if(res){
+            const cardid = res.cardid
+            if(topicLength > 0){
+              for(let i=0;i<topicLength;i++){
+                this.topicsArray.at(i).patchValue({
+                  cardid: cardid
+                })
+              }
+              this._donateSerivce.postTopic(this.cardForm.get('topicForm')?.get('topics')?.value).subscribe({
+                next: res =>{
+                  console.log(res)
+                }
+              })
+            }
+            this._router.navigate(['acceptdonate/history/',sessionStorage.getItem('username')])
+            this._toastr.success('sent post request successfully')
+          }
+          else{
+            this._toastr.error('Error !!!, Something wrong')
+          }
+        }
+      })
+    }
+    else{
+      this.imgMessage = "กรุณา Upload ใบเสร็จ"
+      this.imgMessage_2 = "กรุณา Upload รูป"
+    }
+  }
   
 }
