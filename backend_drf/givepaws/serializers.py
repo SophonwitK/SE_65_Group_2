@@ -148,7 +148,4 @@ class PaymentCardSerializer(serializers.ModelSerializer):
                   'donatetopicid',
                   'comment']
         
-class DonateTopicListSerializer(serializers.Serializer):
-    topics = DonateTopicSerializer(many=True)
-        
     
