@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2023 at 04:40 PM
+-- Generation Time: Mar 17, 2023 at 04:01 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -257,7 +257,9 @@ CREATE TABLE `card` (
 --
 
 INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `price`, `user`, `hospitalID`) VALUES
-(6, 'ช่วยเหลือ', 'ช่วยเหลือโรค........................', '2023-03-09 05:32:05', 'waiting', 'ใบเสร็จ', '432578', 'img/receipt/Squidward_Him3brX.jpg', 5000, 40, 1);
+(6, 'ช่วยเหลือ', 'ช่วยเหลือโรค........................', '2023-03-09 05:32:05', 'reject', 'ใบเสร็จ', '432578', 'img/receipt/Squidward_Him3brX.jpg', 5000, 40, 1),
+(19, 'ขอความช่วยเหลือหมา', 'ขอความช่วยเหลือหมา', '2023-03-17 12:22:42', 'waiting', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 1111110000000, 40, 2),
+(20, 'ช่วยแมว', 'ช่วยแมว', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 2);
 
 -- --------------------------------------------------------
 
@@ -407,7 +409,7 @@ CREATE TABLE `donateaccept` (
   `hcID` int(20) NOT NULL,
   `date` datetime NOT NULL,
   `description` varchar(10000) NOT NULL,
-  `isaccept` varchar(100) NOT NULL,
+  `comment` varchar(1000) DEFAULT NULL,
   `cardID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -430,7 +432,9 @@ CREATE TABLE `donatetopic` (
 
 INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`) VALUES
 (5, 6, 'ค่าอาหาร', 1000),
-(6, 6, 'ค่ายา', 1000);
+(6, 6, 'ค่ายา', 1000),
+(10, 20, 'ค่าเดินทาง', 457),
+(11, 20, 'ค่ายา', 5544);
 
 -- --------------------------------------------------------
 
@@ -471,7 +475,13 @@ CREATE TABLE `givepaws_cardimg` (
 INSERT INTO `givepaws_cardimg` (`id`, `image`, `card_id`) VALUES
 (7, 'img/card/Egx5IKJWkAE2LMd.jpg', 6),
 (8, 'img/card/fantasy-mountain-landscape-uhdpaper.com-4K-8.1402.jpg', 6),
-(9, 'img/card/images.jpg', 6);
+(9, 'img/card/images.jpg', 6),
+(29, 'img/card/cropped-3840-2160-1213237.jpg', 19),
+(30, 'img/card/WH3_Khorne_Wallpaper_Desktop_4K_3840x2160.jpg', 19),
+(31, 'img/card/WH3_wallpaper_Valkia_2K-1.jpg', 19),
+(32, 'img/card/WH3_wallpaper_Festus_2k.jpg', 19),
+(33, 'img/card/cropped-3840-2160-1213230.jpg', 20),
+(34, 'img/card/cropped-3840-2160-1213231.jpg', 20);
 
 -- --------------------------------------------------------
 
@@ -493,7 +503,7 @@ CREATE TABLE `hospital` (
 
 INSERT INTO `hospital` (`hospitalID`, `name`, `email`, `address`, `tel`) VALUES
 (1, 'Hoospital', 'Hoospital', 'Hoospital', 'Hoospital'),
-(2, '็Hospital2', '็Hospital2', '็Hospital2', '็Hospital2');
+(2, 'Hoospital2', 'Hoospital2', 'Hoospital2', 'Hoospital2');
 
 -- --------------------------------------------------------
 
@@ -591,8 +601,9 @@ INSERT INTO `users_user` (`id`, `last_login`, `is_superuser`, `first_name`, `las
 (21, NULL, 0, '', '', 0, 1, '2023-03-10 07:30:53.631110', 'employee-spw', 'employee-spw@gmail.com', 'pbkdf2_sha256$390000$OFpej4UE7t80EWl6KvJjYY$WGyCCMpHUl0MDsgqIO3Oo6+ijrIDSqJgHpadocOl67Y=', 'employee-spw', 1, 0, 0),
 (22, NULL, 0, '', '', 0, 1, '2023-03-10 07:32:28.249206', 'hospital-spw', 'hospital-spw@gmail.com', 'pbkdf2_sha256$390000$oxeocjmFevo6YC1LH2IKhW$ibUmislx8P0b1UJnIHsGW/SBLcuYbZULSFMh8pYVOyo=', 'hospital-spw', 0, 1, 0),
 (35, NULL, 0, '', '', 0, 1, '2023-03-11 15:07:00.733636', 'spw-kwc007', 'spw-kwc@gmail.com', 'pbkdf2_sha256$390000$5QwiWHR4EYuUajQXOti7K9$HVQ45KSv9JFtEWs0c6RiGCegqj6vlzcE0ngY1FQS5ac=', 'spw-kwc007', 0, 0, 0),
-(40, NULL, 0, '', '', 0, 1, '2023-03-12 17:07:46.977567', 'Boss', 'Kwanchai@ku.th', 'pbkdf2_sha256$390000$ydzeSrsjGk0uEJEgiXjWHJ$ivWGWT4irEH8VYa9A/ftM3OiyUPT0WmM6DbdXLYD27c=', 'Kwanchai', 0, 0, 1),
-(41, NULL, 0, '', '', 0, 1, '2023-03-14 07:06:44.448066', 'test', 'test@gmail.com', 'pbkdf2_sha256$390000$kL9KyP8jUEJ5D6XRScNYy6$tFvi+SXOnNHBoGHSFPkdbzx4lHmulFZAz1U03dkG5yg=', 'test-authen', 0, 0, 0);
+(40, NULL, 0, '', '', 0, 1, '2023-03-12 17:07:46.977567', 'Kwanchai', 'Kwanchai@ku.th', 'pbkdf2_sha256$390000$s4h3s5oZGQiS1Nx6rArQfu$biPtC55BjqoLooVC5NiD+oWEDjGOeIvLmCXfTk1pr9w=', 'Kwanchai', 0, 0, 1),
+(41, NULL, 0, '', '', 0, 1, '2023-03-14 07:06:44.448066', 'test', 'test@gmail.com', 'pbkdf2_sha256$390000$kL9KyP8jUEJ5D6XRScNYy6$tFvi+SXOnNHBoGHSFPkdbzx4lHmulFZAz1U03dkG5yg=', 'test-authen', 0, 0, 0),
+(43, NULL, 0, '', '', 0, 1, '2023-03-17 12:51:56.860381', 'Sophonwit', 'Sophonwit.ksss@ku.th', 'pbkdf2_sha256$390000$qNBjuWVJb9DLxx0WJSV3r8$KY28AIBSQeybP+fTjbg2z1jySb7zAmhL0fBfF67y9tk=', 'Sophonwit', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -825,7 +836,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -861,7 +872,7 @@ ALTER TABLE `donateaccept`
 -- AUTO_INCREMENT for table `donatetopic`
 --
 ALTER TABLE `donatetopic`
-  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `givepaws_authenimage`
@@ -873,7 +884,7 @@ ALTER TABLE `givepaws_authenimage`
 -- AUTO_INCREMENT for table `givepaws_cardimg`
 --
 ALTER TABLE `givepaws_cardimg`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `hospital`
@@ -903,7 +914,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `users_user`
 --
 ALTER TABLE `users_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `users_user_groups`
