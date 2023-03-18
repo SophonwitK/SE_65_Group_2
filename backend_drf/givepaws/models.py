@@ -146,7 +146,6 @@ class Donar(models.Model):
 
 class Donateaccept(models.Model):
     donateacceptid = models.AutoField(db_column='donateacceptID', primary_key=True)  # Field name made lowercase.
-    hospitalid = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
     hcid = models.OneToOneField('Hospitalcoordinator', models.DO_NOTHING, db_column='hcID')  # Field name made lowercase.
     date = models.DateTimeField()
     description = models.CharField(max_length=10000)

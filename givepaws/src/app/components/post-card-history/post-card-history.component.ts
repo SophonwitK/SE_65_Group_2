@@ -23,7 +23,7 @@ export class PostCardHistoryComponent implements OnInit{
 
   constructor(
     private _donateService: DonateService,
-
+    private _dialog: MatDialog
   ){
 
   }
@@ -48,4 +48,35 @@ export class PostCardHistoryComponent implements OnInit{
     }
   }
 
+  openReject(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialog = this._dialog.open(RejectCardDialog, {
+      width:'auto',
+      height: 'auto',
+      minWidth:'25%',
+      minHeight: '50%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+
+      }
+    })
+  }
+
 }
+
+@Component({
+  selector: 'reject',
+  templateUrl: './reject-card.component.html',
+})
+export class RejectCardDialog{
+  constructor(
+    public _dialogRef: MatDialogRef<RejectCardDialog>,
+    ) {
+      
+    }
+
+}
+
+
