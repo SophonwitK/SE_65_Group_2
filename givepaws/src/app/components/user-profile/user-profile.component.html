@@ -18,7 +18,7 @@
                             <button type="button" mat-stroked-button (click)="openChangePwd('250ms', '250ms')">แก้ไข Password</button>
                             <button type="button" mat-stroked-button routerLink="/donate/history/{{username}}">ประวัติการบริจาค</button>
                             <button *ngIf="role==='auth-user'" type="button" mat-stroked-button routerLink="/post/card/history/{{username}}">ประวัติการเปิดรับบริจาค</button>
-                            <button *ngIf="auth_bt" type="button" mat-stroked-button (click)="openAuthen('250ms', '250ms')">Authentication</button>
+                            <button *ngIf="auth_bt" type="button" mat-stroked-button routerLink="/authentication">Authentication</button>
                         </div>
                         <div class="authen-status" *ngIf="authen_req">
                             <h3 style="color: black; margin-bottom: 3rem; margin-top: 1.5rem;">Wating for admin to approve</h3>
@@ -41,7 +41,7 @@
                             <ng-template #reject>
                                 <h3 style="color: red;" #reject>Authentication Reject</h3>
                                 <p class="pt-reject">{{authenStatus.comment}}</p>
-                                <button type="button" mat-stroked-button style="margin-top: 1rem;" (click)="openAuthen('250ms', '250ms')">Authentication Again</button>
+                                <button type="button" mat-stroked-button style="margin-top: 1rem;" routerLink="/authentication">Authentication Again</button>
                             </ng-template>
                         </div>
                     </div>

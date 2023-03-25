@@ -28,7 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
 import { EmployeeComponent } from './components/employee/employee.component';
-import { UserProfileComponent,UpdateUserDialog,AuthenDialog,UpdatePasswordDialog } from './components/user-profile/user-profile.component';
+import { UserProfileComponent,UpdateUserDialog,UpdatePasswordDialog } from './components/user-profile/user-profile.component';
 import { MatCommonModule } from '@angular/material/core';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -51,7 +51,6 @@ import { PostCardHistoryComponent } from './components/post-card-history/post-ca
     EmployeeComponent,
     UserProfileComponent,
     UpdateUserDialog,
-    AuthenDialog,
     AuthenticationComponent,
     UpdatePasswordDialog,
     DonateHistoryComponent,

@@ -115,43 +115,6 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  openAuthen(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    const dialog = this._dialog.open(AuthenDialog, {
-      data: this.userData,
-      width:'20%',
-      height: '20%',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-    dialog.afterClosed().subscribe({
-      next: (res) =>{
-        if(res){
-          this._router.navigate(['authentication/',sessionStorage.getItem('username')])
-        }
-      }
-    })
-  }
-
-   editAuthen(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    const dialog = this._dialog.open(AuthenDialog, {
-      data: this.userData,
-      width:'20%',
-      height: '20%',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-    dialog.afterClosed().subscribe({
-      next: (res) =>{
-        if(res){
-          this._router.navigate(['authentication/',sessionStorage.getItem('username')])
-        }
-      }
-    })
-  }
-
-
-
-
   refresh(){
     this._authService.isLogin().subscribe(
       data => this.userData=data
@@ -205,46 +168,6 @@ export class UpdateUserDialog {
       }
     }
 
-
-}
-
-@Component({
-  selector: 'authen-user',
-  templateUrl: './authen-user.component.html',
-  styleUrls: ['./authen-user.component.scss'],
-})
-export class AuthenDialog {
-  hide=true;
-  userData: FormGroup;
-  constructor(
-    public _dialogRef: MatDialogRef<UpdateUserDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private _fb : FormBuilder,
-    private _userService: UserService,
-    private _toastr : ToastrService,
-
-    ) {
-      this.userData = this._fb.group({
-        password:this._fb.control('',Validators.compose([Validators.required,Validators.minLength(8),Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)])),
-      })
-    }
-
-    confirmPwdUserDialog(){
-      if(this.userData.valid){
-        this._userService.confirmPwd(Number(sessionStorage.getItem('id')),this.userData.value).subscribe({
-          next: (res) =>{
-            if(res){
-              this._dialogRef.close(res);
-            }else{
-              this._toastr.warning('wrong password');
-            }
-          }
-        })
-      }
-      else{
-        this._toastr.warning('please enter valid data');
-      }
-    }
 
 }
 
