@@ -3,7 +3,7 @@ import { FormGroup,Validators , FormArray, FormBuilder } from '@angular/forms'
 import { DonateService } from 'src/app/services/donate.service';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -11,12 +11,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent implements OnInit {
+  username = sessionStorage.getItem('username')
   imgMessage = "Upload ใบเสร็จ"
   imgMessage_2 = "Upload รูป"
   files: File[] = [];
   files_2: File[] = [];
   cardForm: FormGroup;
   hospitalList: any;
+  card_id:any;
   // topicForm: FormGroup;
 
   constructor(
@@ -25,6 +27,7 @@ export class PostCardComponent implements OnInit {
     private _userService: UserService,
     private _toastr: ToastrService,
     private _router: Router,
+    private _activeRouter: ActivatedRoute,
   ){
     this.cardForm = this._fb.group({
       topic: this._fb.control('',[Validators.required]),
@@ -45,6 +48,28 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.card_id = this._activeRouter.snapshot.paramMap.get('id')
+    if(this.card_id){
+      this._donateSerivce.getCardByID(this.card_id).subscribe({
+        next: res =>{
+          this.cardForm.patchValue({
+            topic: res.topic,
+            description: res.description,
+            date: '',
+            cardstatus: 'waiting',
+            receipttype: res.receipttype,
+            receiptnumber: res.receiptnumber,
+            price: res.price,
+            hospitalid: res.hospitalid.hospitalid,
+          })
+          if(res.donate_topic.length > 0){
+            res.donate_topic.forEach((topic:any) => {
+              this.patchDonateTopic(topic)
+            });
+          }
+        }
+      })
+    }
     this._userService.getHospitalList().subscribe({
       next: res =>{
         this.hospitalList = res
@@ -62,6 +87,15 @@ export class PostCardComponent implements OnInit {
 
   addTopic(): void {
     this.topicsArray.push(this.topicGroup());
+  }
+
+  patchDonateTopic(data:any){
+    this.topicsArray.push(
+      this._fb.group({
+        topic: data.topic,
+        amount: data.amount,
+      })
+    );
   }
  
 
@@ -116,6 +150,9 @@ export class PostCardComponent implements OnInit {
         date: now.toISOString().slice(0, 19).replace('T', ' '),
         user: sessionStorage.getItem('id')
       })
+      if(this.card_id){
+        this._donateSerivce.deleteCardByID(this.card_id).subscribe({})
+      }
       this._donateSerivce.postDonate(this.cardForm.value).subscribe({
         next: res =>{
           if(res){

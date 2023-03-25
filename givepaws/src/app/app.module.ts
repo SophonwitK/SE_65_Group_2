@@ -39,7 +39,7 @@ import { ThaidatePipe } from './pipe/thaidate.pipe';
 import { CardAllComponent } from './components/card-all/card-all.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { PostCardHistoryComponent } from './components/post-card-history/post-card-history.component';
+import { PostCardHistoryComponent,RejectCardDialog } from './components/post-card-history/post-card-history.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +60,7 @@ import { PostCardHistoryComponent } from './components/post-card-history/post-ca
     PostCardComponent,
     PostCardHistoryComponent,
     AboutComponent,
+    RejectCardDialog,
 
   ],
   imports: [

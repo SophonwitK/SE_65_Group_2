@@ -1,3 +1,9 @@
-<div style="display: flex; justify-content: center;">
-    <h2 style=" color: black;">Reject</h2>
+<div style="display: flex; justify-content: center; flex-direction: column; align-items: center;" *ngIf="donate_accept">
+    <h2 style=" color: black; margin: 1rem;">Reject</h2>
+    <p style="color: black; margin: 1rem 2rem 1rem 2rem; text-align: center;">{{donate_accept.description}}</p>
+    <div>
+        <button (click)="closeDialog()" style="margin: 1rem; margin-bottom: 2rem;" type="button" mat-stroked-button>Cancel</button>
+        <button routerLink="/edit/card/{{data}}" (click)="closeDialog()" style="margin: 1rem; margin-bottom: 2rem;" type="button" mat-stroked-button>Edit</button>
+    </div>
+    
 </div>

@@ -21,4 +21,6 @@ urlpatterns = [
     path("cards/",views.card_list,name="card_list"), #post card and get all card
     path("cards/<int:pk>",views.card_detail,name="card_detail"),
     path("donate/topic/",views.donate_topic_list,name="donate_topic_list"), #post topic and get all topic
+    path("donate/accept/",views.donate_accept_list,name="donate_accept_list"), #post donate accept and get all donate accept
+    path("card/donate/accept/<int:pk>",views.donate_accept_detail,name="donate_accept_list"), #get donate accept by card id
 ]

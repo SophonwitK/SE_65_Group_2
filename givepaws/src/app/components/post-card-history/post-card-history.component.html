@@ -51,8 +51,8 @@
                     <button *ngIf="row.cardstatus === 'approve'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;" type="button">
                         View  
                     </button>
-                    <button (click)="openReject('250ms', '250ms')" *ngIf="row.cardstatus === 'reject'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;" type="button">
-                        View 
+                    <button (click)="openReject('250ms', '250ms',row.cardid)"  *ngIf="row.cardstatus === 'reject'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;" type="button">
+                        View
                     </button>
                 </td>
             </ng-container>

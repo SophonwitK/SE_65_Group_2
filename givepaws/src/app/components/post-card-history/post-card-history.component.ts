@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild,Inject} from '@angular/core';
 import { DonateService } from 'src/app/services/donate.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -31,7 +31,6 @@ export class PostCardHistoryComponent implements OnInit{
   ngOnInit(): void {
       this._donateService.getAllCardByUserID(Number(this.user_id)).subscribe({
         next: res =>{
-          console.log(res)
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
@@ -48,12 +47,12 @@ export class PostCardHistoryComponent implements OnInit{
     }
   }
 
-  openReject(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openReject(enterAnimationDuration: string, exitAnimationDuration: string,id:any): void {
     const dialog = this._dialog.open(RejectCardDialog, {
-      width:'auto',
+      data: id,
+      width:'30%',
       height: 'auto',
-      minWidth:'25%',
-      minHeight: '50%',
+      position: {top: '13rem'},
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -67,16 +66,31 @@ export class PostCardHistoryComponent implements OnInit{
 }
 
 @Component({
-  selector: 'reject',
+  selector: 'reject-card',
   templateUrl: './reject-card.component.html',
 })
-export class RejectCardDialog{
+export class RejectCardDialog implements OnInit{
+  donate_accept:any;
   constructor(
     public _dialogRef: MatDialogRef<RejectCardDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _donateService: DonateService,
     ) {
       
     }
 
+    ngOnInit(): void {
+        this._donateService.getDonateAcceptByCardID(this.data).subscribe({
+          next: res =>{
+            console.log(res)
+            this.donate_accept = res
+          }
+        })
+    }
+    
+    closeDialog(){
+      this._dialogRef.close()
+    }
 }
 
 

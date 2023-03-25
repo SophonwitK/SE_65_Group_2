@@ -1,12 +1,12 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic,CardImg
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic,CardImg,Hospitalcoordinator,Donateaccept
 from rest_framework.parsers import JSONParser 
 from givepaws.serializers import (HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,
-                                  AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer)
+                                  AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer,HospitalcoordinatorSerializer
+                                  ,DonateacceptSerializer)
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
-from django.views.decorators.csrf import csrf_exempt
 from givepaws.jwt import JWTAuthentication
 import jwt,os
 from users.models import User
@@ -376,5 +376,30 @@ def donate_topic_list(request):
             return Response(DonateTopicSerializer(donateTopics,many=True).data, status=status.HTTP_201_CREATED) 
         return Response(donate_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def donate_accept_list(request):
+    if request.method == 'GET': 
+        donate_accept = Donateaccept.objects.all()
+        donate_accept_serializer = DonateacceptSerializer( donate_accept, many=True)
+        return Response( donate_accept_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        donate_accept_serializer = DonateacceptSerializer(data=request.data)
+        if donate_accept_serializer.is_valid():
+            donate_accept_serializer.save()
+            return Response(donate_accept_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(donate_accept_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET','POST', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def donate_accept_detail(request, pk):
+    try:
+        donate_accept = Donateaccept.objects.get(cardid=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        donate_accept_serializer = DonateacceptSerializer( donate_accept)
+        if  donate_accept:
+            return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 

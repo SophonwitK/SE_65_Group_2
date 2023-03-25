@@ -30,6 +30,7 @@ const routes: Routes = [
   {path:'donate/history/:username',component:DonateHistoryComponent},
   {path:'post/card/history/:username',component:PostCardHistoryComponent},
   {path:'post/donate',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
+  {path:'edit/card/:id',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'donate',component:CardAllComponent,canActivate:[AuthGuard]},
   
 ];

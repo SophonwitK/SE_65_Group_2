@@ -8,7 +8,7 @@
           <input style="color: black;" matInput formControlName="contribution">
         </mat-form-field>
         <div class="img-zone">
-            <ngx-dropzone [multiple]="false" (change)="onSelect($event)" class="img-zone-bg" required>
+            <ngx-dropzone style="background-color: aliceblue;" [multiple]="false" (change)="onSelect($event)" class="img-zone-bg" required>
                 <ngx-dropzone-label *ngIf="imgMessage === 'Upload Images' else require_img">{{imgMessage}}</ngx-dropzone-label>
                 <ng-template #require_img>
                     <ngx-dropzone-label style="color: red;">{{imgMessage}}</ngx-dropzone-label>

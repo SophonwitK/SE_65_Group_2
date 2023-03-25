@@ -1,7 +1,7 @@
 import { Component,Inject,OnInit,OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
-import {MatDialog, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
