@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2023 at 04:12 PM
+-- Generation Time: Mar 25, 2023 at 08:07 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -44,7 +44,8 @@ CREATE TABLE `authen` (
 --
 
 INSERT INTO `authen` (`authID`, `firstname`, `surname`, `DOB`, `address`, `tel`, `DateAuthen`, `IDcard`, `user`) VALUES
-(70, 'โสภณวิชญ์', 'ควันไชย', '2023-03-07 17:00:00', '43 หมู่ 6 ตำบลกำแพงแสน จังหวัดนครปฐม', '0638545547', '2023-03-14 13:04:41', '1245874699875', 40);
+(70, 'โสภณวิชญ์', 'ควันไชย', '2023-03-07 17:00:00', '43 หมู่ 6 ตำบลกำแพงแสน จังหวัดนครปฐม', '0638545547', '2023-03-14 13:04:41', '1245874699875', 40),
+(109, '111111111111111', '111111111111111111', '2023-03-02 17:00:00', '111111111111', '1111111111', '2023-03-25 06:53:41', '1111111111111', 43);
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,8 @@ CREATE TABLE `authen_check` (
 --
 
 INSERT INTO `authen_check` (`id`, `comment`, `isApprove`, `authen`) VALUES
-(16, 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', 1, 70);
+(16, 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', 1, 70),
+(49, 'ไม่ผาน', 0, 109);
 
 -- --------------------------------------------------------
 
@@ -258,8 +260,8 @@ CREATE TABLE `card` (
 
 INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `price`, `user`, `hospitalID`) VALUES
 (6, 'ช่วยเหลือ', 'ช่วยเหลือโรค........................', '2023-03-09 05:32:05', 'reject', 'ใบเสร็จ', '432578', 'img/receipt/Squidward_Him3brX.jpg', 5000, 40, 1),
-(19, 'ขอความช่วยเหลือหมา', 'ขอความช่วยเหลือหมา', '2023-03-17 12:22:42', 'waiting', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 1111110000000, 40, 2),
-(20, 'ช่วยแมว', 'ช่วยแมว', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 2);
+(19, 'ขอความช่วยเหลือหมา', 'ขอความช่วยเหลือหมา', '2023-03-17 12:22:42', 'waiting', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 1111110000000, 40, 1),
+(20, 'ช่วยแมว', 'ช่วยแมว', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -452,7 +454,10 @@ CREATE TABLE `givepaws_authenimage` (
 
 INSERT INTO `givepaws_authenimage` (`id`, `image`, `authen_id`) VALUES
 (77, 'img/authen/012490_1280x720_740026_007.jpg', 70),
-(78, 'img/authen/936378.jpg', 70);
+(78, 'img/authen/936378.jpg', 70),
+(107, 'img/authen/012490_1280x720_740026_007_cMJkzY2.jpg', 109),
+(108, 'img/authen/936378_OH0VVqF.jpg', 109),
+(109, 'img/authen/1038532.jpg', 109);
 
 -- --------------------------------------------------------
 
@@ -512,18 +517,18 @@ INSERT INTO `hospital` (`hospitalID`, `name`, `email`, `address`, `tel`) VALUES
 CREATE TABLE `hospitalcoordinator` (
   `hcID` int(20) NOT NULL,
   `hospitalID` int(20) NOT NULL,
-  `hcdocID` int(20) NOT NULL,
   `firstname` varchar(100) NOT NULL,
   `surname` varchar(100) NOT NULL,
-  `tel` varchar(100) NOT NULL
+  `tel` varchar(100) NOT NULL,
+  `user` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `hospitalcoordinator`
 --
 
-INSERT INTO `hospitalcoordinator` (`hcID`, `hospitalID`, `hcdocID`, `firstname`, `surname`, `tel`) VALUES
-(1, 1, 1, 'HoospitalCoo', 'HoospitalCoo', 'HoospitalCoo');
+INSERT INTO `hospitalcoordinator` (`hcID`, `hospitalID`, `firstname`, `surname`, `tel`, `user`) VALUES
+(7, 1, 'Kwacha', 'OKI', '015645982', 22);
 
 -- --------------------------------------------------------
 
@@ -751,7 +756,7 @@ ALTER TABLE `hospital`
 --
 ALTER TABLE `hospitalcoordinator`
   ADD PRIMARY KEY (`hcID`),
-  ADD KEY `hcdocID` (`hcdocID`),
+  ADD UNIQUE KEY `user` (`user`),
   ADD KEY `hospitalcoordinator_ibfk_2` (`hospitalID`);
 
 --
@@ -803,13 +808,13 @@ ALTER TABLE `users_user_user_permissions`
 -- AUTO_INCREMENT for table `authen`
 --
 ALTER TABLE `authen`
-  MODIFY `authID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `authID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `authen_check`
 --
 ALTER TABLE `authen_check`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `auth_group`
@@ -875,7 +880,7 @@ ALTER TABLE `donatetopic`
 -- AUTO_INCREMENT for table `givepaws_authenimage`
 --
 ALTER TABLE `givepaws_authenimage`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `givepaws_cardimg`
@@ -893,7 +898,7 @@ ALTER TABLE `hospital`
 -- AUTO_INCREMENT for table `hospitalcoordinator`
 --
 ALTER TABLE `hospitalcoordinator`
-  MODIFY `hcID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `hcID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `paymentcard`
@@ -1003,7 +1008,8 @@ ALTER TABLE `givepaws_cardimg`
 -- Constraints for table `hospitalcoordinator`
 --
 ALTER TABLE `hospitalcoordinator`
-  ADD CONSTRAINT `hospitalcoordinator_ibfk_2` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`);
+  ADD CONSTRAINT `hospitalcoordinator_ibfk_2` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`),
+  ADD CONSTRAINT `hospitalcoordinator_ibfk_3` FOREIGN KEY (`user`) REFERENCES `users_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `paymentcard`
