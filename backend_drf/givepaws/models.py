@@ -192,10 +192,10 @@ class Hospital(models.Model):
 class Hospitalcoordinator(models.Model):
     hcid = models.AutoField(db_column='hcID', primary_key=True)  # Field name made lowercase.
     hospitalid = models.ForeignKey(Hospital, models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
-    hcdocid = models.IntegerField(db_column='hcdocID')  # Field name made lowercase.
     firstname = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
+    user = models.OneToOneField('UsersUser', models.DO_NOTHING, db_column='user')
 
     class Meta:
         managed = False
