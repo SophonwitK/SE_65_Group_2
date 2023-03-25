@@ -869,5 +869,31 @@ ul.img_icon li {
      color: #fbca47;
 }
 
+.green {
+     color: #29d16a;
+     font-size: 25px;
+     line-height: 50px;
+     font-weight: bold;
+}
+
+.Green_bg {
+     background: url(../images/img-about/DC2.jpg);
+     border-radius: 50px;
+     opacity: 0.9;
+     padding: 40px 35px;
+}
+
+.testimonialAbout {
+     padding-top: 70px;
+     background-color: #D7F8FF;
+}
+
+.footerAbout {
+     background-color: #D7F8FF;
+     text-align: center;
+     padding-top: 90px;
+}
+
+
 
 /** end footer **/

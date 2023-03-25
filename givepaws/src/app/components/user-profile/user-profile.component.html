@@ -41,7 +41,7 @@
                             <ng-template #reject>
                                 <h3 style="color: red;" #reject>Authentication Reject</h3>
                                 <p class="pt-reject">{{authenStatus.comment}}</p>
-                                <button type="button" mat-stroked-button style="margin-top: 1rem;" routerLink="/authentication">Authentication Again</button>
+                                <button type="button" mat-stroked-button style="margin-top: 1rem;" routerLink="/authentication/{{user_id}}">Authentication Again</button>
                             </ng-template>
                         </div>
                     </div>

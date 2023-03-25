@@ -176,8 +176,7 @@ def authen_detail(request, pk):
         if authen:
             return Response(authen_serializer.data, status=status.HTTP_200_OK) 
     elif request.method == 'PUT': 
-        authen_data = JSONParser().parse(request) 
-        authen_serializer = AuthenSerializer(authen, data=authen_data) 
+        authen_serializer = AuthenSerializer(authen, data=request.data) 
         if  authen_serializer.is_valid(): 
             authen_serializer.save() 
             return Response(authen_serializer.data) 

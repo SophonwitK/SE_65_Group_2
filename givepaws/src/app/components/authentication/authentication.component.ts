@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -10,17 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./authentication.component.scss']
 })
 
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit{
   username = sessionStorage.getItem('username')
   authenData: FormGroup;
   imgMessage = "Upload Images"
   files: File[] = [];
+  id: any
 
   constructor(
     private _fb: FormBuilder,
     private _userService: UserService,
     private _toastr: ToastrService,
     private _router: Router,
+    private _activeRouter: ActivatedRoute, 
   ){
     this.authenData = this._fb.group({
       firstname: this._fb.control('',Validators.required),
@@ -33,7 +35,29 @@ export class AuthenticationComponent {
       uploaded_images: [[], Validators.required],
       user: Number(sessionStorage.getItem('id')),
     })
+    console.log(this.authenData.value.dob)
   }
+
+  ngOnInit(): void {
+    this.id = this._activeRouter.snapshot.paramMap.get('id')
+    if(this.id){
+      this._userService.isAuthen(Number(sessionStorage.getItem('id'))).subscribe({
+        next: (res)=>{
+          if(res){
+            this.authenData.patchValue({
+              firstname: res.firstname,
+              surname: res.surname,
+              dob: res.dob,
+              address:res.address,
+              tel: res.tel,
+              idcard: res.idcard,
+            })
+          }
+        }
+      })
+    }
+  }
+
   getColorClass(value: string) {
     if (value === "Images Require") {
       return 'red';
@@ -60,21 +84,24 @@ export class AuthenticationComponent {
   onSubmit(){
     if(this.authenData.valid){
       const now = new Date();
+
+      if(this.authenData.value.dob.length === undefined){
+        this.authenData.patchValue({
+          dob: this.authenData.value.dob.toISOString().slice(0, 19).replace('T', ' '),
+        })
+      }
       this.authenData.patchValue({
-        dob: this.authenData.value.dob.toISOString().slice(0, 19).replace('T', ' '),
         dateauthen: now.toISOString().slice(0, 19).replace('T', ' ')
       })
+
       this._userService.isAuthen(Number(sessionStorage.getItem('id'))).subscribe({
         next: (res)=>{
           if(res){
-              this._userService.deleteAuthen(res.authid).subscribe({
-                next: (res) =>{
-                  console.log(res)
-                }
-              })
+              this._userService.deleteAuthen(res.authid).subscribe({})
           }
         }
       })
+      
       this._userService.requestAuthen(this.authenData.value).subscribe({
         next: (res) =>{
           if(res){
@@ -86,7 +113,6 @@ export class AuthenticationComponent {
         }
       })
 
-      // this._userService.requestAuthen(this.authenData.value)
     }
     else{
       this.imgMessage = "Images Require"

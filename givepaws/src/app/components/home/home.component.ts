@@ -1,4 +1,4 @@
-import { Component,Inject } from '@angular/core';
+import { Component,Inject,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -32,4 +32,28 @@ export class HomeComponent {
     this._authService.logout(null)
   } 
 }
+
+@Component({
+  selector: 'about-home',
+  templateUrl: './about.component.html',
+})
+export class AboutComponent implements OnInit {
+  back = true;
+  
+  constructor(
+    private _authService: AuthService
+  ){
+  }
+
+  ngOnInit(): void {
+    if(this._authService.isActive()){
+      this.back = false
+    }
+    else{
+      this.back= true
+    }
+
+  }
+}
+
 
