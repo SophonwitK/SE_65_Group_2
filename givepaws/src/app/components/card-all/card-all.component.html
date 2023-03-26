@@ -1,4 +1,4 @@
-<div class="body">
+<div class="body" >
     <mat-nav-list class = "nav-link">
         <a routerLink="/home" *ngIf="username else not_login"><h2>Back</h2></a>
         <ng-template #not_login>
@@ -6,8 +6,8 @@
         </ng-template>
         <img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" />
     </mat-nav-list>
-    <div class="main-card" *ngIf="cardData">
-        <mat-card class="card" *ngFor="let card of cardData">
+    <div class="main-card" *ngIf="cardData" >
+        <mat-card class="card" *ngFor="let card of cardData | async" >
             <mat-card-header>
               <mat-card-title>{{card.topic}}</mat-card-title>
             </mat-card-header>
@@ -20,5 +20,6 @@
             </mat-card-actions>
         </mat-card>
     </div>
+    <mat-paginator [pageSizeOptions]="[4 ,8, 24, 48, 80]"></mat-paginator>
 </div>
 

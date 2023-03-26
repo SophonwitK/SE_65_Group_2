@@ -1,3 +1,79 @@
 p{
     color: black;
 }
+.body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    background: #56CCF2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    .nav-link{
+        background: #56CCF2;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #2a74d4, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #2a74d4, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */        
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        z-index: 2;
+        width: 100%;
+        img{
+
+            margin-right: 2rem;
+            max-height: 4rem;
+        }
+        a{
+          
+          margin-left: 2rem;
+          width: 6rem;
+          color: aliceblue;
+          text-decoration: none;
+          h2:hover{
+            color:   #F0C993;
+          }
+          
+        }
+    }
+    .main-content{
+        display: flex;
+        .selection-1{
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            mat-card{
+                margin-top: 7rem;
+                margin-bottom: 3rem;
+                width: 80%;
+                display: flex;
+                align-items: center;
+                background-color: #d3eeff;
+                .img-slide{
+                    margin: 3rem;
+                    width: 42rem; 
+                    text-align:center;
+                }
+                p{
+                    margin: 0rem 8rem 8rem 8rem;
+                    align-self: flex-start;
+                }
+            }
+        }
+        .selection-2{
+            flex: 2;
+            .hc-comment{
+                
+            }
+            .comment{
+                
+            }
+        }
+    }
+
+}

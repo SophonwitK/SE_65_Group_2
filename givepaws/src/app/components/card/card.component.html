@@ -1,1 +1,34 @@
-<p>card works!</p>
+<div class="body">
+    <mat-nav-list class = "nav-link">
+        <a routerLink="/cards"><h2>Back</h2></a>
+        <img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" />
+    </mat-nav-list>
+    <div class="main-content" *ngIf="cardData">
+        <div class="selection-1">
+            <mat-card>
+                <h2 style="color: black; margin-top: 3rem;">{{cardData.topic}}</h2>
+                <div class="img-slide">
+                    <ng-image-slider
+                    #nav
+                    [images]="imageObject"
+                    [infinite]="true"
+                    [autoSlide]="1"
+                    [imageSize]=" {width: '100%', height: '40%', space: 5} "
+                    [slideImage]="1"
+                    [animationSpeed]="2"
+                    ></ng-image-slider>
+                </div>
+                <h3 style="color: black; align-self: flex-start; margin-left: 8rem;">รายละเอียด</h3>
+                <p>{{cardData.description}}</p>
+            </mat-card>
+        </div>
+        <div class="selection-2">
+            <div class="hc-comment">
+                2
+            </div>
+            <div class="comment">
+                3
+            </div>
+        </div>
+    </div>
+</div>

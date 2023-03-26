@@ -42,6 +42,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { PostCardHistoryComponent,RejectCardDialog } from './components/post-card-history/post-card-history.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CardComponent } from './components/card/card.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   declarations: [
@@ -92,12 +93,13 @@ import { CardComponent } from './components/card/card.component';
     MatProgressSpinnerModule,
     UploaderModule,
     MatRadioModule,
+    MatCardModule,
+    MatGridListModule,
+    NgImageSliderModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 2000,
     }),
-    MatCardModule,
-    MatGridListModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
