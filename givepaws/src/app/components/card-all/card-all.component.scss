@@ -1,0 +1,63 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    background: #2980B9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    .nav-link{
+        background: #246fa1;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left, #FFFFFF, #6DD5FA, #246fa1);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, #FFFFFF, #6DD5FA, #246fa1);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        img{
+            margin-right: 2rem;
+            max-height: 5rem;
+        }
+        a{
+          margin-left: 2rem;
+          width: 6rem;
+          color: aliceblue;
+          text-decoration: none;
+          h2:hover{
+            color:   #F0C993;
+          }
+          
+        }
+    }
+
+    .main-card{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .card {
+            display: flex;
+            background-color: #d3eeff;
+            max-width: 20%;
+            margin: 1.5rem;
+            mat-card-title{
+                color: black;
+            }
+            img{
+                align-self: center;
+                padding: 1rem;
+                max-height: 13rem;
+            }
+            p{
+                color: black;
+                display: -webkit-box;
+                max-width: 100%;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

@@ -10,7 +10,10 @@
                       <div class="full">
                          <div class="center-desk">
                             <div class="logo">
-                               <a href="index.html"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" /></a>
+                               <a routerLink="/" *ngIf="back else back_home2"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" /></a>
+                               <ng-template #back_home2>
+                                 <a routerLink="/home"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" /></a>
+                               </ng-template>
                             </div>
                          </div>
                       </div>

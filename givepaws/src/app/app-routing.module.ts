@@ -15,9 +15,10 @@ import { PostCardHistoryComponent } from './components/post-card-history/post-ca
 import { UserGuard } from './guard/user.guard';
 import { AuthGuard } from './guard/auth.guard';
 import { AuthenUserGuard } from './guard/authen-user.guard';
+import { CardComponent } from './components/card/card.component';
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent},
+  {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
   {path:'about',component:AboutComponent},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
@@ -29,9 +30,10 @@ const routes: Routes = [
   {path:'authentication/:id',component:AuthenticationComponent},
   {path:'donate/history/:username',component:DonateHistoryComponent},
   {path:'post/card/history/:username',component:PostCardHistoryComponent},
-  {path:'post/donate',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
+  {path:'post/card',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'edit/card/:id',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
-  {path:'donate',component:CardAllComponent,canActivate:[AuthGuard]},
+  {path:'cards',component:CardAllComponent},
+  {path:'cards/:id',component:CardComponent},
   
 ];
 

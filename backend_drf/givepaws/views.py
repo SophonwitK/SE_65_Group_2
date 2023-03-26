@@ -313,8 +313,6 @@ def get_user_payments(request, pk):
             return Response(payment_serializer.data, status=status.HTTP_200_OK) 
 
 @api_view(['GET', 'POST'])
-@authentication_classes([JWTAuthentication]) 
-@permission_classes([IsAuthenticated]) 
 def card_list(request):
     if request.method == 'GET': 
         cards = Card.objects.all()
@@ -403,3 +401,16 @@ def donate_accept_detail(request, pk):
         donate_accept_serializer = DonateacceptSerializer( donate_accept)
         if  donate_accept:
             return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 
+
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def approve_card_list(request):
+    try:
+        card = Card.objects.all().filter(cardstatus="approve")
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        card_serializer =CardSerializer(card, many=True)
+        if card:
+            return Response(card_serializer.data, status=status.HTTP_200_OK) 

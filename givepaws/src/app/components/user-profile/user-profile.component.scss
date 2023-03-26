@@ -16,6 +16,7 @@ mat-label{
       height: 100%;
       .nav-link{
           display: flex;
+          justify-content: space-between;
           margin-top: 2rem;
           margin-left: 2rem;
           a{

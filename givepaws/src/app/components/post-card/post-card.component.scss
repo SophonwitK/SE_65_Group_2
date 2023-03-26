@@ -35,11 +35,17 @@ span{
           }
           
         }
+        img{
+          position: fixed;
+          max-height: 5rem;
+          left: 86%;
+          bottom: 90%;
+        }
     }
     .card{
       background-color:aliceblue;
       margin-top: 2rem;
-      width: 30%;
+      width: 40%;
       height: auto;
       margin-bottom: 4%;
       mat-form-field{

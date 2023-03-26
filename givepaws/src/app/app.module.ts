@@ -40,6 +40,9 @@ import { CardAllComponent } from './components/card-all/card-all.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { PostCardHistoryComponent,RejectCardDialog } from './components/post-card-history/post-card-history.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { CardComponent } from './components/card/card.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +64,7 @@ import { PostCardHistoryComponent,RejectCardDialog } from './components/post-car
     PostCardHistoryComponent,
     AboutComponent,
     RejectCardDialog,
+    CardComponent,
 
   ],
   imports: [
@@ -93,6 +97,7 @@ import { PostCardHistoryComponent,RejectCardDialog } from './components/post-car
       timeOut: 2000,
     }),
     MatCardModule,
+    MatGridListModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

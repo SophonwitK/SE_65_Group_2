@@ -19,6 +19,7 @@ urlpatterns = [
     path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"), #get all payment by userid
     path("cards/users/<int:pk>",views.get_user_card,name="get_user_card"), #get all card by userid
     path("cards/",views.card_list,name="card_list"), #post card and get all card
+    path("cards/approve/",views.approve_card_list,name="approve_card_list"), #get all card approve
     path("cards/<int:pk>",views.card_detail,name="card_detail"),
     path("donate/topic/",views.donate_topic_list,name="donate_topic_list"), #post topic and get all topic
     path("donate/accept/",views.donate_accept_list,name="donate_accept_list"), #post donate accept and get all donate accept
