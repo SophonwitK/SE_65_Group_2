@@ -53,7 +53,6 @@ export class CardComponent implements OnInit {
   getDonar(){
     this._donateService.getAllDonarByCardID(this.id).subscribe({
       next: res=>{
-        console.log(res)
         this.donarData = res
       }
     })
