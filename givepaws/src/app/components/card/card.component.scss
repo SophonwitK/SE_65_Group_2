@@ -103,8 +103,6 @@ li{
         .selection-2{
             flex: 2;
             .hc-comment{
-                margin-top: 7rem;
-                margin-bottom: 3rem;
                 mat-card{
                     margin-top: 7rem;
                     margin-bottom: 3rem;
@@ -116,10 +114,8 @@ li{
                 
             }
             .comment{
-                margin-top: 3rem;
-                margin-bottom: 3rem;
                 mat-card{
-                    margin-top: 7rem;
+                    margin-top: 3rem;
                     margin-bottom: 3rem;
                     width: 80%;
                     display: flex;

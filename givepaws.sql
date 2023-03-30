@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2023 at 07:12 AM
+-- Generation Time: Mar 30, 2023 at 07:21 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -395,6 +395,7 @@ CREATE TABLE `donar` (
   `date` datetime NOT NULL,
   `topic` varchar(100) NOT NULL,
   `description` varchar(100) NOT NULL,
+  `img` varchar(1000) NOT NULL,
   `cardID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

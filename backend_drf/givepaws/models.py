@@ -137,6 +137,7 @@ class Donar(models.Model):
     date = models.DateTimeField()
     topic = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+    img =  models.ImageField(upload_to="img/donar", default="", null=True, blank=True)
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
 
     class Meta:
