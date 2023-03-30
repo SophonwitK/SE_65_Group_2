@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2023 at 07:21 AM
+-- Generation Time: Mar 30, 2023 at 08:03 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -485,8 +485,6 @@ CREATE TABLE `givepaws_cardimg` (
 INSERT INTO `givepaws_cardimg` (`id`, `image`, `card_id`) VALUES
 (29, 'img/card/cropped-3840-2160-1213237.jpg', 19),
 (30, 'img/card/WH3_Khorne_Wallpaper_Desktop_4K_3840x2160.jpg', 19),
-(31, 'img/card/WH3_wallpaper_Valkia_2K-1.jpg', 19),
-(32, 'img/card/WH3_wallpaper_Festus_2k.jpg', 19),
 (33, 'img/card/cropped-3840-2160-1213230.jpg', 20),
 (34, 'img/card/cropped-3840-2160-1213231.jpg', 20);
 
