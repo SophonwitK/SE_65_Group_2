@@ -11,6 +11,7 @@ export class CardComponent implements OnInit {
   username = sessionStorage.getItem('username')
   id:any
   cardData:any
+  acceptDonate:any
   imageObject: Array<object> = [];
 
   constructor(
@@ -24,7 +25,6 @@ export class CardComponent implements OnInit {
     this.id = this._activeRouter.snapshot.paramMap.get('id')
     this._donateService.getCardByID(this.id).subscribe({
       next: res =>{
-        console.log(res)
         this.cardData = res
         res.images.forEach((data:any) => {
           this.imageObject.push({
@@ -34,8 +34,13 @@ export class CardComponent implements OnInit {
         });
       }
     })
-    console.log(this.imageObject)
-    
+
+    this._donateService.getDonateAcceptByCardID(this.id).subscribe({
+      next: res =>{
+        console.log(res)
+        this.acceptDonate = res
+      }
+    })
   }
 
 

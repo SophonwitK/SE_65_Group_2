@@ -18,16 +18,43 @@
                     [animationSpeed]="2"
                     ></ng-image-slider>
                 </div>
+                <h3 
+                    style="color: black; align-self: flex-start; margin-left: 8rem; margin-bottom: 1rem; text-transform: uppercase;"
+                    >Status : {{cardData.cardstatus}}
+                </h3>
                 <h3 style="color: black; align-self: flex-start; margin-left: 8rem;">รายละเอียด</h3>
                 <p>{{cardData.description}}</p>
+                <div class="donate">
+                    <ul class="main-donate">
+                        <li style="margin-top: 1.4rem; list-style: inside;">ค่ารักษา</li>
+                        <p style="margin-top: 1.4rem;">จำนวน {{cardData.price}} บาท | ยอดบริจาครวม XXXX บาท</p>
+                        <button  type="button" mat-stroked-button style="margin-top: 1rem;">Donate</button>
+                    </ul>
+                    <ul class="optional-donate" *ngFor="let topic of cardData.donate_topic">
+                        <li style="margin-top: 1.4rem; list-style: inside;">{{topic.topic}}</li>
+                        <p style="margin-top: 1.4rem;">จำนวน {{topic.amount}} บาท | ยอดบริจาครวม XXXX บาท</p>
+                        <button type="button" mat-stroked-button style="margin-top: 1rem;">Donate</button>
+                    </ul>
+                </div>
+                <div class="report-bt">
+                    <button  type="button" mat-raised-button>REPORT</button>
+                </div>
             </mat-card>
         </div>
         <div class="selection-2">
             <div class="hc-comment">
-                2
+                <mat-card *ngIf="acceptDonate">
+                    <h3 style="color: black; margin: 2rem 2rem 1rem 2rem;">[ชื่อโรงพยาบาล] {{acceptDonate.hcid.hospitalid.name}}</h3>
+                    <h3 style="color: black; margin: 0rem 2rem 1rem 2rem;">[ชื่อผู้อนุมัติ] {{acceptDonate.hcid.firstname}} {{acceptDonate.hcid.surname}}</h3>
+                    <h3 style="color: black; margin: 0rem 2rem 1rem 2rem;">[วันที่อนุมัติ] {{acceptDonate.date | thaidate:'medium'}}</h3>
+                    <h3 style="color: black; margin: 0rem 2rem 0rem 2rem;">รายละเอียด</h3>
+                    <p style="color: black; margin: 0rem 2rem 2rem 2rem;">{{acceptDonate.description}}</p>
+                </mat-card>
             </div>
             <div class="comment">
-                3
+                <mat-card>
+                    3
+                </mat-card>
             </div>
         </div>
     </div>

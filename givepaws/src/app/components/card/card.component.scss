@@ -1,6 +1,10 @@
 p{
     color: black;
 }
+li{
+    color: black;
+    list-style-type: circle;
+}
 .body{
     display: flex;
     flex-direction: column;
@@ -60,18 +64,68 @@ p{
                     text-align:center;
                 }
                 p{
-                    margin: 0rem 8rem 8rem 8rem;
+                    margin: 0rem 8rem 0rem 8rem;
                     align-self: flex-start;
+                }
+                .donate{
+                    width: 100%;
+                    margin: 2rem;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-direction: column;
+                    padding-left: 5rem;
+                    padding-right: 5rem;
+                    .main-donate{
+                        margin-left: 1.4rem;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-evenly;
+                        
+                    }
+                    .optional-donate{
+                        margin-left: 1.4rem;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-evenly;
+                        
+                    }
+                }
+                .report-bt{
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    margin-left: 12rem;
+                    margin-bottom: 2rem;
                 }
             }
         }
         .selection-2{
             flex: 2;
             .hc-comment{
+                margin-top: 7rem;
+                margin-bottom: 3rem;
+                mat-card{
+                    margin-top: 7rem;
+                    margin-bottom: 3rem;
+                    width: 80%;
+                    display: flex;
+                    justify-content: flex-start;
+                    background-color: #d3eeff;
+                }
                 
             }
             .comment{
-                
+                margin-top: 3rem;
+                margin-bottom: 3rem;
+                mat-card{
+                    margin-top: 7rem;
+                    margin-bottom: 3rem;
+                    width: 80%;
+                    display: flex;
+                    justify-content: flex-start;
+                    background-color: #d3eeff;
+                }
             }
         }
     }
