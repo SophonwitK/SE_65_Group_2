@@ -70,7 +70,7 @@ export class DonateService {
 
   
   getCardByID(id:number): Observable<any>{
-    return this._http.get(`http://127.0.0.1:8000/api/cards/${id}`).pipe(
+    return this._http.get(`http://127.0.0.1:8000/api/cards/id/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {
           console.log('error:', error);

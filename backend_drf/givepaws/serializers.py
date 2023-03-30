@@ -52,7 +52,6 @@ class AuthenSerializer(serializers.ModelSerializer):
     uploaded_images = serializers.ListField(
         child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
         write_only=True)
-
     class Meta:
         model = Authen
         fields = ['authid',
@@ -103,6 +102,7 @@ class DonateTopicSerializer(serializers.ModelSerializer):
         fields = ['donatetopicid',
                   'topic',
                   'amount',
+                  'slipimgcomplete',
                   'cardid']
 
 

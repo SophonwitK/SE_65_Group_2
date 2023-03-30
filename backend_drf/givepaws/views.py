@@ -13,6 +13,28 @@ from users.models import User
 
 
 
+
+@api_view(['GET'])
+def get_card_by_id(request, pk):
+    try:
+      payment = Card.objects.get(pk=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    payment_serializer = CardSerializer(payment)
+    if payment:
+        return Response(payment_serializer.data, status=status.HTTP_200_OK) 
+    
+@api_view(['GET'])
+def get_donate_accept_by_card_id(request, pk):
+    try:
+        donate_accept = Donateaccept.objects.get(cardid=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    donate_accept_serializer = DonateacceptSerializer( donate_accept)
+    if  donate_accept:
+        return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 
+
+
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication]) #check jwt token are correct or not?
 @permission_classes([IsAdminUser]) #check user permission isAdmin = is_staff = true in user_users in database
@@ -403,8 +425,6 @@ def donate_accept_detail(request, pk):
             return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 
 
 @api_view(['GET'])
-@authentication_classes([JWTAuthentication]) 
-@permission_classes([IsAuthenticated]) 
 def approve_card_list(request):
     try:
         card = Card.objects.all().filter(cardstatus="approve")

@@ -161,6 +161,7 @@ class Donatetopic(models.Model):
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID',related_name = "donate_topic")  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     amount = models.FloatField()
+    slipimgcomplete =  models.ImageField(upload_to="img/payment/complete", default="", null=True, blank=True)
 
     class Meta:
         managed = False

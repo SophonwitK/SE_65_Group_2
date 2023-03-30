@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2023 at 08:07 AM
+-- Generation Time: Mar 30, 2023 at 07:12 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -259,9 +259,8 @@ CREATE TABLE `card` (
 --
 
 INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `price`, `user`, `hospitalID`) VALUES
-(6, 'ช่วยเหลือ', 'ช่วยเหลือโรค........................', '2023-03-09 05:32:05', 'reject', 'ใบเสร็จ', '432578', 'img/receipt/Squidward_Him3brX.jpg', 5000, 40, 1),
-(19, 'ขอความช่วยเหลือหมา', 'ขอความช่วยเหลือหมา', '2023-03-17 12:22:42', 'waiting', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 1111110000000, 40, 1),
-(20, 'ช่วยแมว', 'ช่วยแมว', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 1);
+(19, 'ขอความช่วยเหลือหมา', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:22:42', 'approve', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 5200, 40, 1),
+(20, 'ช่วยแมว', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -413,6 +412,14 @@ CREATE TABLE `donateaccept` (
   `cardID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `donateaccept`
+--
+
+INSERT INTO `donateaccept` (`donateacceptID`, `hcID`, `date`, `description`, `cardID`) VALUES
+(2, 7, '2023-03-30 07:07:56', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 19),
+(8, 7, '2023-03-30 07:11:10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 20);
+
 -- --------------------------------------------------------
 
 --
@@ -423,18 +430,17 @@ CREATE TABLE `donatetopic` (
   `donatetopicID` int(20) NOT NULL,
   `cardID` int(20) NOT NULL,
   `topic` varchar(100) NOT NULL,
-  `amount` float NOT NULL
+  `amount` float NOT NULL,
+  `slipImgComplete` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `donatetopic`
 --
 
-INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`) VALUES
-(5, 6, 'ค่าอาหาร', 1000),
-(6, 6, 'ค่ายา', 1000),
-(10, 20, 'ค่าเดินทาง', 457),
-(11, 20, 'ค่ายา', 5544);
+INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipImgComplete`) VALUES
+(10, 20, 'ค่าเดินทาง', 457, NULL),
+(11, 20, 'ค่ายา', 5544, NULL);
 
 -- --------------------------------------------------------
 
@@ -476,9 +482,6 @@ CREATE TABLE `givepaws_cardimg` (
 --
 
 INSERT INTO `givepaws_cardimg` (`id`, `image`, `card_id`) VALUES
-(7, 'img/card/Egx5IKJWkAE2LMd.jpg', 6),
-(8, 'img/card/fantasy-mountain-landscape-uhdpaper.com-4K-8.1402.jpg', 6),
-(9, 'img/card/images.jpg', 6),
 (29, 'img/card/cropped-3840-2160-1213237.jpg', 19),
 (30, 'img/card/WH3_Khorne_Wallpaper_Desktop_4K_3840x2160.jpg', 19),
 (31, 'img/card/WH3_wallpaper_Valkia_2K-1.jpg', 19),
@@ -546,16 +549,6 @@ CREATE TABLE `paymentcard` (
   `donatetopicID` int(20) NOT NULL,
   `comment` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `paymentcard`
---
-
-INSERT INTO `paymentcard` (`paymentcardID`, `user`, `contribution`, `date`, `paymentcardimg`, `status`, `donatetopicID`, `comment`) VALUES
-(3, 40, 50000, '2023-03-06 05:32:05', 'img/payment/1124772.jpg', 'waiting', 5, ''),
-(5, 41, 500, '2023-03-15 07:37:16', 'test', 'test', 5, ''),
-(6, 40, 47584, '2023-03-09 05:32:05', 'img/payment/astronaut-black-hole-galaxy-space-4k-a0_8o6iHAN.jpg', 'complete', 5, ''),
-(18, 40, 5000, '2023-03-09 05:32:05', 'img/payment/kena-bridge-of-spirits-game-4k-wallpaper-3840x2160-uhdpaper.com-237.0_b.jpg', 'reject', 5, 'สลิปไม่ตรงกรุณาส่งมาใหม่');
 
 -- --------------------------------------------------------
 
@@ -721,8 +714,8 @@ ALTER TABLE `donar`
 --
 ALTER TABLE `donateaccept`
   ADD PRIMARY KEY (`donateacceptID`),
-  ADD UNIQUE KEY `hcID` (`hcID`),
-  ADD UNIQUE KEY `cardID` (`cardID`);
+  ADD UNIQUE KEY `cardID` (`cardID`),
+  ADD KEY `hcID` (`hcID`) USING BTREE;
 
 --
 -- Indexes for table `donatetopic`
@@ -868,7 +861,7 @@ ALTER TABLE `donar`
 -- AUTO_INCREMENT for table `donateaccept`
 --
 ALTER TABLE `donateaccept`
-  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `donatetopic`
@@ -983,7 +976,7 @@ ALTER TABLE `donar`
 -- Constraints for table `donateaccept`
 --
 ALTER TABLE `donateaccept`
-  ADD CONSTRAINT `donateaccept_ibfk_1` FOREIGN KEY (`hcID`) REFERENCES `hospitalcoordinator` (`hcID`),
+  ADD CONSTRAINT `donateaccept_ibfk_1` FOREIGN KEY (`hcID`) REFERENCES `hospitalcoordinator` (`hcID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `donateaccept_ibfk_4` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
