@@ -1,11 +1,11 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic,CardImg,Hospitalcoordinator,Donateaccept
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic,CardImg,Hospitalcoordinator,Donateaccept,Donar
 from rest_framework.parsers import JSONParser 
 from givepaws.serializers import (HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,
                                   AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer,HospitalcoordinatorSerializer
-                                  ,DonateacceptSerializer)
+                                  ,DonateacceptSerializer,DonarSerializer)
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from givepaws.jwt import JWTAuthentication
 import jwt,os
@@ -434,3 +434,49 @@ def approve_card_list(request):
         card_serializer =CardSerializer(card, many=True)
         if card:
             return Response(card_serializer.data, status=status.HTTP_200_OK) 
+
+@api_view(['GET'])
+def get_all_donar_by_card_id(request, pk):
+    try:
+        donar = Donar.objects.all().filter(cardid=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    donar_serializer =  DonarSerializer( donar, many=True)
+    if  donar:
+        return Response(  donar_serializer.data, status=status.HTTP_200_OK) 
+
+
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def donar_list(request):
+    if request.method == 'GET': 
+        donar = Donar.objects.all()
+        donar_serializer = DonarSerializer( donar, many=True)
+        return Response( donar_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        donar_serializer = DonarSerializer(data=request.data)
+        if donar_serializer.is_valid():
+            donar_serializer.save()
+            return Response(donar_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(donar_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','POST', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def donar_detail(request, pk):
+    try:
+      donar = Donar.objects.get(pk=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET':
+        donar_serializer = DonarSerializer( donar)
+        if  donar:
+            return Response(donar_serializer.data, status=status.HTTP_200_OK) 
+    elif request.method == 'DELETE':
+        os.remove(donar.img.path) 
+        donar.delete() 
+        return Response({'message': 'Card was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
+

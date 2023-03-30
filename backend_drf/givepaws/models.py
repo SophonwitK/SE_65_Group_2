@@ -136,7 +136,7 @@ class Donar(models.Model):
     donarid = models.AutoField(db_column='donarID', primary_key=True)  # Field name made lowercase.
     date = models.DateTimeField()
     topic = models.CharField(max_length=100)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
     img =  models.ImageField(upload_to="img/donar", default="", null=True, blank=True)
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
 

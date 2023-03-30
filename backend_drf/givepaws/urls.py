@@ -22,8 +22,11 @@ urlpatterns = [
     path("cards/approve/",views.approve_card_list,name="approve_card_list"), #get all card approve
     path("cards/<int:pk>",views.card_detail,name="card_detail"),
     path("cards/id/<int:pk>",views.get_card_by_id,name="get_card_by_id"), #get card by id for all user
-
     path("donate/topic/",views.donate_topic_list,name="donate_topic_list"), #post topic and get all topic
     path("donate/accept/",views.donate_accept_list,name="donate_accept_list"), #post donate accept and get all donate accept
-    path("card/donate/accept/<int:pk>",views.get_donate_accept_by_card_id,name="get_donate_accept_by_card_id"), #get donate accept by card id
+    path("card/<int:pk>/donate/accept/",views.get_donate_accept_by_card_id,name="get_donate_accept_by_card_id"), #get donate accept by card id for all user
+    path("donar/",views.donar_list,name="donar_list"), #get all donar and post
+    path("donar/<int:pk>",views.donar_detail,name="donar_list"), #delete donar 
+    path("card/<int:pk>/donar/",views.get_all_donar_by_card_id,name="get_all_donar_by_card_id"), #get all donar by card id for all
+
 ]

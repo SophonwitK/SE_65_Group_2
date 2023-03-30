@@ -24,7 +24,7 @@ li{
         justify-content: space-between;
         align-items: center;
         position: fixed;
-        z-index: 2;
+        z-index: 10;
         width: 100%;
         img{
 
@@ -45,6 +45,7 @@ li{
     }
     .main-content{
         display: flex;
+        align-items: flex-start;
         .selection-1{
             flex: 3;
             display: flex;
@@ -121,6 +122,26 @@ li{
                     display: flex;
                     justify-content: flex-start;
                     background-color: #d3eeff;
+                    mat-card-header{
+                        display: flex;
+                        justify-content: flex-start;
+                        width: 100%;
+                        h3{
+                            color: black;
+                            margin: 1rem;
+                        }
+                        button{
+                            margin-left: 18rem;
+                            margin-top: 0.5rem;
+                        }
+                    }
+                    mat-card-content{
+                        .donar-content{
+                            display: flex;
+                            flex-direction: column;
+                            
+                        }
+                    }
                 }
             }
         }

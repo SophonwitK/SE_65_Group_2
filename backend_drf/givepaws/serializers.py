@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Donatetopic,Card,CardImg,Hospitalcoordinator,Donateaccept
+from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Donatetopic,Card,CardImg,Hospitalcoordinator,Donateaccept,Donar
 import os
 
 class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
@@ -180,6 +180,16 @@ class DonateacceptSerializer(serializers.ModelSerializer):
                   'date',
                   'description',
                   'cardid']
-        
+
+class DonarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donar
+        fields = ['donarid',
+                  'date',
+                  'topic',
+                  'description',
+                  'img',
+                  'cardid']
+
         
     

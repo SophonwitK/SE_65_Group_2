@@ -81,6 +81,18 @@ export class DonateService {
     );
   }
 
+  getAllDonarByCardID(id:number): Observable<any>{
+    return this._http.get(`http://127.0.0.1:8000/api/card/${id}/donar/`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
     
   deleteCardByID(id:number): Observable<any>{
     return this._http.delete(`http://127.0.0.1:8000/api/cards/${id}`).pipe(
@@ -95,7 +107,7 @@ export class DonateService {
   }
 
   getDonateAcceptByCardID(id:number): Observable<any>{
-    return this._http.get(`http://127.0.0.1:8000/api/card/donate/accept/${id}`).pipe(
+    return this._http.get(`http://127.0.0.1:8000/api/card/${id}/donate/accept/`).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {
           console.log('error:', error);
