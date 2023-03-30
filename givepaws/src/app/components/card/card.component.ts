@@ -94,6 +94,7 @@ export class CardComponent implements OnInit {
       data: card_id,
       width:'25%',
       height: 'auto',
+      position: {top: '10rem'},
       enterAnimationDuration,
       exitAnimationDuration,
     });
