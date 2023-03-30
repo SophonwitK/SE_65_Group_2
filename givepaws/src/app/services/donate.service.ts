@@ -175,4 +175,38 @@ export class DonateService {
     );
   }
 
+  deleteDonar(id:number): Observable<any>{
+    return this._http.delete(`http://127.0.0.1:8000/api/donar/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+  postDonar(data:any): Observable<any>{
+    const formData = new FormData();
+    formData.append('topic',data.topic)
+    formData.append('description',data.description)
+    formData.append('cardid',data.cardid)
+    formData.append('date',data.date)
+    for (const file of data.img) {
+      formData.append('img', file);
+    }
+
+    return this._http.post('http://127.0.0.1:8000/api/donar/',formData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+
 }

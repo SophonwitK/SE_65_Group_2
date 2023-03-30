@@ -41,7 +41,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { PostCardHistoryComponent,RejectCardDialog } from './components/post-card-history/post-card-history.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { CardComponent,DonarComponent } from './components/card/card.component';
+import { CardComponent,DonarComponent,ReportComponent,DeleteDonarComponent } from './components/card/card.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
@@ -66,7 +66,9 @@ import { NgImageSliderModule } from 'ng-image-slider';
     AboutComponent,
     RejectCardDialog,
     CardComponent,
-
+    DonarComponent,
+    ReportComponent,
+    DeleteDonarComponent,
   ],
   imports: [
     BrowserModule,

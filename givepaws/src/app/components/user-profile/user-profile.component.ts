@@ -26,7 +26,6 @@ export class UserProfileComponent implements OnInit {
     private _authService: AuthService,
     private _router : Router,
     private _userService: UserService,
-    private _toastr: ToastrService,
   ){
 
   }

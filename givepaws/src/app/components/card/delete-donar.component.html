@@ -1,0 +1,9 @@
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;"  *ngIf="donar">
+    <h3 style="color: black; margin: 2rem;">ต้องการจะลบ Comment</h3>
+    <p style="color: black;">[หัวข้อ] {{donar.topic}}</p>
+    <h3 style="color: black; margin: 2rem;">ใช่ไหม</h3>
+    <div mat-dialog-actions style="width: 100%; display: flex; justify-content: center; margin-bottom: 1rem;">
+        <button mat-button [mat-dialog-close]="false" type="button">Cancel</button>
+        <button mat-button cdkFocusInitial type="button" (click)="onDelete()">Ok</button>
+    </div>
+</div>
