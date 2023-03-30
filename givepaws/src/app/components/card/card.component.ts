@@ -88,6 +88,23 @@ export class CardComponent implements OnInit {
     })
   }
 
+  
+  openReport(enterAnimationDuration: string, exitAnimationDuration: string,card_id: any): void {
+    const dialog = this._dialog.open(ReportComponent, {
+      data: card_id,
+      width:'25%',
+      height: 'auto',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getDonar();
+      }
+    })
+  }
+
+
 }
 
 @Component({
@@ -191,10 +208,14 @@ export class DeleteDonarComponent{
   templateUrl: './report.component.html',
 })
 export class ReportComponent implements OnInit {
-
+  user_id = sessionStorage.getItem('id')
 
   constructor(
-
+    public _dialogRef: MatDialogRef<DonarComponent>,
+    private _fb:FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public card_id: any,
+    private _donateService: DonateService,
+    private _toastr: ToastrService,
   ){
 
   }

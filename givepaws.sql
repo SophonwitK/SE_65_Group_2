@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2023 at 08:03 AM
+-- Generation Time: Mar 30, 2023 at 04:23 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -393,11 +393,19 @@ CREATE TABLE `django_session` (
 CREATE TABLE `donar` (
   `donarID` int(20) NOT NULL,
   `date` datetime NOT NULL,
-  `topic` varchar(100) NOT NULL,
-  `description` varchar(100) NOT NULL,
+  `topic` varchar(1000) NOT NULL,
+  `description` varchar(1000) NOT NULL,
   `img` varchar(1000) NOT NULL,
   `cardID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `donar`
+--
+
+INSERT INTO `donar` (`donarID`, `date`, `topic`, `description`, `img`, `cardID`) VALUES
+(1, '2023-03-29 10:32:05', 'วันแรก', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/d21.jpg', 19),
+(2, '2023-03-29 10:32:05', 'วันสอง', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/ID_473_56f3a975adf76.jpg', 19);
 
 -- --------------------------------------------------------
 
@@ -441,7 +449,7 @@ CREATE TABLE `donatetopic` (
 
 INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipImgComplete`) VALUES
 (10, 20, 'ค่าเดินทาง', 457, NULL),
-(11, 20, 'ค่ายา', 5544, NULL);
+(11, 20, 'ค่ายา', 600, NULL);
 
 -- --------------------------------------------------------
 
@@ -556,7 +564,7 @@ CREATE TABLE `paymentcard` (
 --
 
 CREATE TABLE `report` (
-  `memberID` int(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
   `cardID` int(20) NOT NULL,
   `topic` varchar(100) NOT NULL,
   `description` varchar(10000) NOT NULL,
@@ -766,7 +774,7 @@ ALTER TABLE `paymentcard`
 ALTER TABLE `report`
   ADD PRIMARY KEY (`reportID`),
   ADD KEY `cardID` (`cardID`),
-  ADD KEY `memberID` (`memberID`);
+  ADD KEY `memberID` (`userid`);
 
 --
 -- Indexes for table `users_user`
@@ -854,7 +862,7 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT for table `donar`
 --
 ALTER TABLE `donar`
-  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `donateaccept`

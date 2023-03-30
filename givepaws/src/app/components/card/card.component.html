@@ -37,7 +37,10 @@
                     </ul>
                 </div>
                 <div class="report-bt">
-                    <button  type="button" mat-raised-button>REPORT</button>
+                    <button  type="button"  mat-raised-button *ngIf="cardData.user.id == user_id else report_bt" color="warn">ปิดการรับบริจาค</button>
+                    <ng-template #report_bt>
+                        <button type="button" mat-raised-button (click)="openReport('250ms','250ms',cardData.cardid)">Report</button>
+                    </ng-template>
                 </div>
             </mat-card>
         </div>
