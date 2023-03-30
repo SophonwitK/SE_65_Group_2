@@ -219,7 +219,7 @@ class Paymentcard(models.Model):
         db_table = 'paymentcard'
 
 class Report(models.Model):
-    memberid = models.IntegerField(db_column='memberID')  # Field name made lowercase.
+    userid = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='userid')
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID')  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     description = models.CharField(max_length=10000)

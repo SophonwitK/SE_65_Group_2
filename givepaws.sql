@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2023 at 04:23 PM
+-- Generation Time: Mar 30, 2023 at 05:11 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -1022,7 +1022,8 @@ ALTER TABLE `paymentcard`
 -- Constraints for table `report`
 --
 ALTER TABLE `report`
-  ADD CONSTRAINT `report_ibfk_1` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`);
+  ADD CONSTRAINT `report_ibfk_1` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`),
+  ADD CONSTRAINT `report_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `users_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users_user_groups`
