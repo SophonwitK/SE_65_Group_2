@@ -16,7 +16,7 @@ from users.models import User
 
 
 @api_view(['GET'])
-def get_card_by_id(request, pk):
+def get_card_by_id(request, pk):  ### pk mean PimaryKey
     try:
       payment = Card.objects.get(pk=pk)
     except:
@@ -509,3 +509,5 @@ def get_all_report_by_card_id(request,pk):
 
     
 
+#### Query เงินใน Donate Card
+#### 
