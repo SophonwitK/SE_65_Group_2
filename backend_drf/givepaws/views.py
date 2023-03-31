@@ -15,7 +15,7 @@ from users.models import User
 
 
 @api_view(['GET'])
-def get_card_by_id(request, pk):
+def get_card_by_id(request, pk):  ### pk mean PimaryKey
     try:
       payment = Card.objects.get(pk=pk)
     except:
@@ -480,3 +480,5 @@ def donar_detail(request, pk):
         return Response({'message': 'Card was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
 
+#### Query เงินใน Donate Card
+#### 
