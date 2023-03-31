@@ -208,5 +208,17 @@ export class DonateService {
     );
   }
 
+  postReport(data:any): Observable<any>{
+    return this._http.post('http://127.0.0.1:8000/api/reports/',data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
 
 }

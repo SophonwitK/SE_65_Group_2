@@ -210,6 +210,7 @@ export class DeleteDonarComponent{
 })
 export class ReportComponent implements OnInit {
   user_id = sessionStorage.getItem('id')
+  reportData: FormGroup
 
   constructor(
     public _dialogRef: MatDialogRef<DonarComponent>,
@@ -218,13 +219,36 @@ export class ReportComponent implements OnInit {
     private _donateService: DonateService,
     private _toastr: ToastrService,
   ){
-
+    this.reportData = this._fb.group({
+      topic: this._fb.control('',Validators.required),
+      description: this._fb.control('',Validators.required),
+      cardid: this.card_id,
+      userid: this.user_id,
+    })
   }
 
   ngOnInit(): void {
  
   }
 
+  onSubmit(){
+    if(this.reportData.valid){
+      this._donateService.postReport(this.reportData.value).subscribe({
+        next: res =>{
+          if(res){
+            this._dialogRef.close()
+            this._toastr.success("report successfully")
+          }
+          else{
+            this._toastr.error("error !, something wrong")
+          }
+        }
+      })
+    }
+    else{ 
+      this._toastr.warning("Please, Enter valid Data")
+    }
+  }
 
 
 }

@@ -28,5 +28,8 @@ urlpatterns = [
     path("donar/",views.donar_list,name="donar_list"), #get all donar and post
     path("donar/<int:pk>",views.donar_detail,name="donar_list"), #delete donar 
     path("card/<int:pk>/donar/",views.get_all_donar_by_card_id,name="get_all_donar_by_card_id"), #get all donar by card id for all
+    path("reports/",views.report_list,name="report_list"), #get all and post report
+    path("card/<int:pk>/reports/",views.get_all_report_by_card_id,name="get_all_report_by_card_id"), #get all report by card id
+
 
 ]

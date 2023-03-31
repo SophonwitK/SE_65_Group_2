@@ -1,11 +1,12 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
-from givepaws.models import Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,Donatetopic,CardImg,Hospitalcoordinator,Donateaccept,Donar
+from givepaws.models import (Hospital,UsersUser,Authen,Authenimage,AuthenCheck,Paymentcard,Card,
+                             Donatetopic,CardImg,Hospitalcoordinator,Donateaccept,Donar,Report)
 from rest_framework.parsers import JSONParser 
 from givepaws.serializers import (HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,
-                                  AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer,HospitalcoordinatorSerializer
-                                  ,DonateacceptSerializer,DonarSerializer)
+                                  AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer,
+                                  HospitalcoordinatorSerializer,DonateacceptSerializer,DonarSerializer,ReportSerializer)
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from givepaws.jwt import JWTAuthentication
 import jwt,os
@@ -478,5 +479,33 @@ def donar_detail(request, pk):
         os.remove(donar.img.path) 
         donar.delete() 
         return Response({'message': 'Card was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def report_list(request):
+    if request.method == 'GET': 
+        report = Report.objects.all()
+        report_serializer = ReportSerializer( report, many=True)
+        return Response( report_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        report_serializer = ReportSerializer(data=request.data)
+        if report_serializer.is_valid():
+            report_serializer.save()
+            return Response(report_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(report_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated]) 
+def get_all_report_by_card_id(request,pk):
+    print(pk)
+    try:
+        report = Report.objects.all().filter(cardid__cardid=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    report_serializer = ReportSerializer( report, many=True)
+    return Response( report_serializer.data, status=status.HTTP_200_OK)
+
     
 

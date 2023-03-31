@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2023 at 05:11 PM
+-- Generation Time: Mar 31, 2023 at 04:15 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -405,7 +405,8 @@ CREATE TABLE `donar` (
 
 INSERT INTO `donar` (`donarID`, `date`, `topic`, `description`, `img`, `cardID`) VALUES
 (1, '2023-03-29 10:32:05', 'วันแรก', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/d21.jpg', 19),
-(2, '2023-03-29 10:32:05', 'วันสอง', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/ID_473_56f3a975adf76.jpg', 19);
+(2, '2023-03-29 10:32:05', 'วันสอง', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/ID_473_56f3a975adf76.jpg', 19),
+(9, '2023-03-31 14:08:10', 'หลังจากรักษา', 'ostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat', 'img/donar/dFQROr7oWzulq5Fa5nRRVgnzYSSwUoPM7rigVHaj4QhdURLfyt90hBPNzf89n8vZ5bp.png', 20);
 
 -- --------------------------------------------------------
 
@@ -862,7 +863,7 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT for table `donar`
 --
 ALTER TABLE `donar`
-  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `donateaccept`
@@ -910,7 +911,7 @@ ALTER TABLE `paymentcard`
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `reportID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `reportID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users_user`
