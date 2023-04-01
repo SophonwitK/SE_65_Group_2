@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2023 at 10:17 AM
+-- Generation Time: Apr 01, 2023 at 11:42 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -556,7 +556,8 @@ CREATE TABLE `paymentcard` (
   `date` datetime NOT NULL,
   `paymentcardimg` varchar(1000) NOT NULL,
   `status` varchar(100) NOT NULL,
-  `donatetopicID` int(20) NOT NULL,
+  `donatetopicID` int(20) DEFAULT NULL,
+  `cardid` int(20) DEFAULT NULL,
   `comment` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -841,7 +842,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -889,7 +890,7 @@ ALTER TABLE `givepaws_authenimage`
 -- AUTO_INCREMENT for table `givepaws_cardimg`
 --
 ALTER TABLE `givepaws_cardimg`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `hospital`
