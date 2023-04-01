@@ -510,4 +510,5 @@ def get_all_report_by_card_id(request,pk):
     
 
 #### Query เงินใน Donate Card
-#### 
+#### First 4 Card
+#### Card with status Waiting
