@@ -93,6 +93,18 @@ export class DonateService {
     );
   }
 
+  getAllTotalDonateByTopicID(id:number): Observable<any>{
+    return this._http.get(`http://127.0.0.1:8000/api/donate/topic/${id}/payments/`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
     
   deleteCardByID(id:number): Observable<any>{
     return this._http.delete(`http://127.0.0.1:8000/api/cards/${id}`).pipe(

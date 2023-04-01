@@ -18,7 +18,8 @@ export class CardComponent implements OnInit {
   cardData:any
   acceptDonate:any
   donarData:any
-  imageObject: Array<object> = [];
+  imageObject: Array<object> = []
+  totalDonate: Array<any> = []
 
   constructor(
     private _activeRouter: ActivatedRoute,
@@ -48,10 +49,19 @@ export class CardComponent implements OnInit {
       }
     })
   }
+
   getCardByID(){
     this._donateService.getCardByID(this.id).subscribe({
       next: res =>{
         this.cardData = res
+        console.log(res)
+        res.donate_topic.forEach((topic:any) => {
+          this._donateService.getAllTotalDonateByTopicID(topic.donatetopicid).subscribe({
+            next: res =>{
+              this.totalDonate.push(res)
+            }
+          })
+        });
         res.images.forEach((data:any) => {
           this.imageObject.push({
             image: `http://127.0.0.1:8000/${data.image}`,
@@ -153,7 +163,7 @@ export class CardComponent implements OnInit {
     });
     dialog.afterClosed().subscribe({
       next: (res) =>{
-        this.getCardByID()
+
       }
     })
   }

@@ -41,7 +41,7 @@
                 <td mat-cell *matCellDef="let row" style="text-transform: uppercase;">
                     <div style="color: red;" *ngIf="row.status === 'reject' "> {{row.status}} </div>
                     <div style="color: blue;" *ngIf="row.status === 'waiting' "> {{row.status}} </div>
-                    <div style="color: green;" *ngIf="row.status === 'complete' "> {{row.status}} </div>
+                    <div style="color: green;" *ngIf="row.status === 'approve' "> {{row.status}} </div>
                 </td>
             </ng-container>
             

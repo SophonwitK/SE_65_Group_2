@@ -16,17 +16,35 @@ from datetime import datetime, timedelta
 # from django.db.models import Q
 
 
+# @api_view(['GET'])
+# def get_approve_total_donate_by_topic_id(request,pk):
+#     totalDonate = 0
+#     try:
+#         payment = Paymentcard.objects.all().filter(donatetopicid=pk,status="approve")
+#     except:
+#         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+#     payment_serializer = PaymentCardSerializer( payment, many=True)
+#     for value in payment_serializer.data:
+#         totalDonate+=value['contribution']
+#     total = {'topic_id': pk, 'total_donate': totalDonate}
+#     if(payment_serializer):
+#         return Response(  total, status=status.HTTP_200_OK)
+#     else:
+#         return Response(  total, status=status.HTTP_200_OK)
+    
 
 
 @api_view(['GET'])
 def get_card_by_id(request, pk):  ### pk mean PimaryKey
     try:
-      payment = Card.objects.get(pk=pk)
+      card = Card.objects.get(pk=pk)
     except:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
-    payment_serializer = CardSerializer(payment)
-    if payment:
-        return Response(payment_serializer.data, status=status.HTTP_200_OK) 
+    card_serializer = CardSerializer(card)
+    if card:
+        return Response(card_serializer.data, status=status.HTTP_200_OK) 
+    else:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
     
 @api_view(['GET'])
 def get_donate_accept_by_card_id(request, pk):
@@ -531,10 +549,11 @@ def get_approve_total_donate_by_topic_id(request,pk):
     payment_serializer = PaymentCardSerializer( payment, many=True)
     for value in payment_serializer.data:
         totalDonate+=value['contribution']
+    total = {'topic_id': pk, 'total_donate': totalDonate}
     if(payment_serializer):
-        return Response( totalDonate, status=status.HTTP_200_OK)
+        return Response(  total, status=status.HTTP_200_OK)
     else:
-        return Response( totalDonate, status=status.HTTP_200_OK)
+        return Response(  total, status=status.HTTP_200_OK)
     
 
     
