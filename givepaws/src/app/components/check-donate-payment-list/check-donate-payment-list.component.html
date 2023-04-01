@@ -1,0 +1,105 @@
+<div class="main">
+  
+    <form class="main-authen" [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>paymentcardID</mat-label>
+        <input matInput formControlName="paymentcardID">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>user</mat-label>
+        <input matInput formControlName="user">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>contribution</mat-label>
+        <input matInput formControlName="contribution">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>date</mat-label>
+        <input matInput formControlName="date">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>paymentcardimg</mat-label>
+        <input matInput formControlName="paymentcardimg">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>status</mat-label>
+        <input matInput formControlName="status">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>donatetopicID</mat-label>
+        <input matInput formControlName="donatetopicID">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Confirm</button>
+    </form>
+
+<div class="table-history">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="paymentcardID">
+    <th mat-header-cell *matHeaderCellDef> paymentcardID. </th>
+    <td mat-cell *matCellDef="let element"> {{element.paymentcardID}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="user">
+    <th mat-header-cell *matHeaderCellDef> user </th>
+    <td mat-cell *matCellDef="let element"> {{element.user.email}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="contribution">
+    <th mat-header-cell *matHeaderCellDef> contribution </th>
+    <td mat-cell *matCellDef="let element"> {{element.contribution}} </td>
+  </ng-container>
+
+ <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> date </th>
+    <td mat-cell *matCellDef="let element"> {{element.date| thaidate:'medium'}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="paymentcardimg">
+    <th mat-header-cell *matHeaderCellDef> paymentcardimg </th>
+    <td mat-cell *matCellDef="let element"> {{element.paymentcardimg}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> status </th>
+    <td mat-cell *matCellDef="let element"> {{element}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="donatetopicID">
+    <th mat-header-cell *matHeaderCellDef> donatetopicID </th>
+    <td mat-cell *matCellDef="let element"> {{element.donatetopicID}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> action </th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" (click)="popup(row)" >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete(row.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  
+ 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+</div>
