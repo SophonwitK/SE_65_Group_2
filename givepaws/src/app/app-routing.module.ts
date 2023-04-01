@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeComponent,AboutComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
-import { EmployeeComponent } from './components/employee/employee.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { DonateHistoryComponent } from './components/donate-history/donate-history.component';
@@ -16,6 +15,7 @@ import { UserGuard } from './guard/user.guard';
 import { AuthGuard } from './guard/auth.guard';
 import { AuthenUserGuard } from './guard/authen-user.guard';
 import { CardComponent } from './components/card/card.component';
+import { CheckDonatePaymentListComponent } from './components/check-donate-payment-list/check-donate-payment-list.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
@@ -23,7 +23,6 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
   {path:'admin',component:AdminComponent},
-  {path:'employee',component:EmployeeComponent},
   {path:'hospitalcoordinator',component:HospitalCoordinatorComponent},
   {path:'profile/:username',component:UserProfileComponent},
   {path:'authentication',component:AuthenticationComponent},
@@ -34,6 +33,8 @@ const routes: Routes = [
   {path:'edit/card/:id',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'cards',component:CardAllComponent},
   {path:'cards/:id',component:CardComponent},
+  {path:'cards',component:CardAllComponent},
+  {path:'employee',component:CheckDonatePaymentListComponent}
   
 ];
 

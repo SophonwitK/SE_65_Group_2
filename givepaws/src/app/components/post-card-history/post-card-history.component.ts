@@ -32,6 +32,7 @@ export class PostCardHistoryComponent implements OnInit{
       this._donateService.getAllCardByUserID(Number(this.user_id)).subscribe({
         next: res =>{
           if(res){
+            console.log(res)
             this.dataSource = new MatTableDataSource(res);
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;

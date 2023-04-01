@@ -60,10 +60,10 @@ export class PostCardComponent implements OnInit {
             cardstatus: 'waiting',
             receipttype: res.receipttype,
             receiptnumber: res.receiptnumber,
-            price: res.price,
+            price: res.donate_topic[0].amount,
             hospitalid: res.hospitalid.hospitalid,
           })
-          if(res.donate_topic.length > 0){
+          if(res.donate_topic.length > 1){
             res.donate_topic.forEach((topic:any) => {
               this.patchDonateTopic(topic)
             });

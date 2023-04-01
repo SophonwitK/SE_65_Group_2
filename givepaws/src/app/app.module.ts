@@ -27,7 +27,6 @@ import { MatCardModule } from '@angular/material/card';
 import { ToastrModule } from 'ngx-toastr';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HospitalCoordinatorComponent } from './components/hospital-coordinator/hospital-coordinator.component';
-import { EmployeeComponent } from './components/employee/employee.component';
 import { UserProfileComponent,UpdateUserDialog,UpdatePasswordDialog } from './components/user-profile/user-profile.component';
 import { MatCommonModule } from '@angular/material/core';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
@@ -43,16 +42,21 @@ import { PostCardHistoryComponent,RejectCardDialog } from './components/post-car
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CardComponent,DonarComponent,ReportComponent,DeleteDonarComponent,ViewSlipComponent,ViewSlipTopicComponent,PaymentComponent } from './components/card/card.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { TrasnferComponent } from './components/trasnfer/trasnfer.component';
+import { TrasnferpopupComponent } from './components/trasnferpopup/trasnferpopup.component';
+import { PopupComponent } from './components/popup/popup.component';
+import { CheckDonatePaymentListComponent } from './components/check-donate-payment-list/check-donate-payment-list.component';
 
 @NgModule({
   declarations: [
+    CheckDonatePaymentListComponent,
     AppComponent,
     HomeComponent,
+    PopupComponent,
     AdminComponent,
     LoginComponent,
     RegisterComponent,
     HospitalCoordinatorComponent,
-    EmployeeComponent,
     UserProfileComponent,
     UpdateUserDialog,
     AuthenticationComponent,
@@ -72,6 +76,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     ViewSlipComponent,
     ViewSlipTopicComponent,
     PaymentComponent,
+    TrasnferComponent,
+    TrasnferpopupComponent,
   ],
   imports: [
     BrowserModule,
