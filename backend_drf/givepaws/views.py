@@ -520,12 +520,6 @@ def get_all_report_by_card_id(request,pk):
         return Response( report_serializer.data, status=status.HTTP_200_OK)
     else:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
-
-
-
-
-
-
     
 @api_view(['GET', 'POST'])
 # @authentication_classes([JWTAuthentication]) 

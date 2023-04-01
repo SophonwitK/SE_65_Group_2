@@ -65,7 +65,9 @@ export class PostCardComponent implements OnInit {
           })
           if(res.donate_topic.length > 1){
             res.donate_topic.forEach((topic:any) => {
-              this.patchDonateTopic(topic)
+              if(res.donate_topic[0]!=topic){
+                this.patchDonateTopic(topic)
+              }
             });
           }
         }
@@ -94,8 +96,10 @@ export class PostCardComponent implements OnInit {
   patchDonateTopic(data:any){
     this.topicsArray.push(
       this._fb.group({
+        cardid: '',
         topic: data.topic,
         amount: data.amount,
+        status: 'waiting',
       })
     );
   }
@@ -159,13 +163,12 @@ export class PostCardComponent implements OnInit {
         next: res =>{
           if(res){
             const cardid = res.cardid
-            if(topicLength > 0){
-              for(let i=0;i<topicLength;i++){
-                this.topicsArray.at(i).patchValue({
-                  cardid: cardid
-                })
-              }
+            for(let i=0;i<topicLength;i++){
+              this.topicsArray.at(i).patchValue({
+                cardid: cardid
+              })
             }
+            console.log(this.cardForm.get('topicForm')?.get('topics')?.value)
             this._donateSerivce.postTopic(this.cardForm.get('topicForm')?.get('topics')?.value).subscribe({
               next: res =>{
                 console.log(res)
