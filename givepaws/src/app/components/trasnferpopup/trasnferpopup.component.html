@@ -1,0 +1,62 @@
+<div class="main">
+  
+
+    <div class="table-history">
+    <div mat-dialog-title >
+        <h1>Employee Form</h1>
+    </div>
+    <form [formGroup]="empForm" >
+        <div mat-dialog-content class="content">
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>First name</mat-label>
+                   
+                    <input matInput type="text" placeholder="Ex. Technical" formControlName="donatetopicID">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>cardID</mat-label>
+                    <input matInput placeholder="Ex. Babaji" formControlName="cardID">
+                </mat-form-field>
+            </div>
+    
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>topic</mat-label>
+                    <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="topic">
+                </mat-form-field>
+                
+            </div>
+    
+            
+    
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Education</mat-label>
+                    
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Company</mat-label>
+                    <input matInput placeholder="Ex. Google" formControlName="date">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Experience</mat-label>
+                    <input matInput placeholder="Ex. 4" type="number" formControlName="paymentcardimg">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Package</mat-label>
+                    <input matInput placeholder="Ex. 12" type="number" formControlName="donatetopicID">
+                    <mat-hint>In rupees</mat-hint>
+                    <mat-label>Package</mat-label>
+                    <input matInput placeholder="Ex. 12" type="number" formControlName="donatetopicID">
+                    <mat-hint>In rupees</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div mat-dialog-actions class="action">
+            <button mat-raised-button type="button" [mat-dialog-close]="false">Approve</button>
+            <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+            <button mat-raised-button type="button" [mat-dialog-close]="false">Reject</button>
+        </div>
+    </form>
