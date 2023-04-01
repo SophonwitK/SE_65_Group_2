@@ -12,6 +12,9 @@ from givepaws.jwt import JWTAuthentication
 import jwt,os
 from users.models import User
 
+from datetime import datetime, timedelta
+from django.db.models import Q
+
 
 
 
@@ -526,12 +529,14 @@ def payment_waiting_list(request):  #### payment waiting list Little
 
 
 
-from datetime import datetime, timedelta
+ #### First 4 Card that's still open Little
+
 @api_view(['GET', 'POST'])
-def emergency_card_list(request):  #### First 4 Card that's still open Little
+def emergency_card_list(request):
     if request.method == 'GET':
-        one_month_ago = datetime.now() - timedelta(days=30)
-        cards = Card.objects.filter(status='approve', date__gte=one_month_ago).order_by('-date')[:4]
+        today = datetime.now().date()
+        one_month_ago = today - timedelta(days=30)
+        cards = Card.objects.filter(Q(status='approve') & Q(created_at__gte=one_month_ago) & Q(created_at__lte=today)).order_by('created_at')[:4]
         card_serializer = CardSerializer(cards, many=True)
         return Response(card_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
@@ -540,6 +545,7 @@ def emergency_card_list(request):  #### First 4 Card that's still open Little
             card_serializer.save()
             return Response(card_serializer.data, status=status.HTTP_201_CREATED) 
         return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
