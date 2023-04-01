@@ -31,10 +31,9 @@ urlpatterns = [
     path("reports/",views.report_list,name="report_list"), #get all and post report
     path("card/<int:pk>/reports/",views.get_all_report_by_card_id,name="get_all_report_by_card_id"), #get all report by card id
 
-
-
     #Little
-    path("payments_waiting/",views.payment_waiting_list,name="payments_waiting"),
+    path("payments_waiting/",views.payment_waiting_list,name="payments_waiting"),  ## get all payments with waiting status  + order form oldest
+    path("card/emergency/",views.emergency_card_list,name="card_emergency"),  ## get oldest 7 card + order form oldest
 
 
 ]

@@ -512,7 +512,7 @@ def get_all_report_by_card_id(request,pk):
 @api_view(['GET', 'POST'])
 # @authentication_classes([JWTAuthentication]) 
 # @permission_classes([IsAuthenticated]) 
-def payment_waiting_list(request):
+def payment_waiting_list(request):  #### payment waiting list Little
     if request.method == 'GET':
         payments = Paymentcard.objects.filter(status='waiting').order_by('-date')
         payment_serializer = PaymentCardSerializer(payments, many=True)
@@ -524,6 +524,24 @@ def payment_waiting_list(request):
             return Response(payment_serializer.data, status=status.HTTP_201_CREATED)
         return Response(payment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+from datetime import datetime, timedelta
+@api_view(['GET', 'POST'])
+def emergency_card_list(request):  #### First 4 Card that's still open Little
+    if request.method == 'GET':
+        one_month_ago = datetime.now() - timedelta(days=30)
+        cards = Card.objects.filter(status='approve', date__gte=one_month_ago).order_by('-date')[:4]
+        card_serializer = CardSerializer(cards, many=True)
+        return Response(card_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        card_serializer = CardSerializer(data=request.data)
+        if card_serializer.is_valid():
+            card_serializer.save()
+            return Response(card_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
 #### Query เงินใน Donate Card
-#### First 4 Card
-#### Card with status Waiting
+#### Donate Topic
