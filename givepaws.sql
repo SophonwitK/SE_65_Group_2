@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2023 at 04:15 PM
+-- Generation Time: Apr 01, 2023 at 04:33 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -249,7 +249,6 @@ CREATE TABLE `card` (
   `receipttype` varchar(100) NOT NULL,
   `receiptnumber` varchar(100) NOT NULL,
   `receiptimgpath` varchar(1000) NOT NULL,
-  `price` float NOT NULL,
   `user` bigint(20) NOT NULL,
   `hospitalID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -258,9 +257,9 @@ CREATE TABLE `card` (
 -- Dumping data for table `card`
 --
 
-INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `price`, `user`, `hospitalID`) VALUES
-(19, 'ขอความช่วยเหลือหมา', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:22:42', 'approve', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 5200, 40, 1),
-(20, 'ช่วยแมว', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 1);
+INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `user`, `hospitalID`) VALUES
+(25, 'ช่วยหมาผมด้วย', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2023-04-01 14:21:15', 'approve', 'ใบเสนอราคา', '4587A', 'img/receipt/QuotationNew.png', 40, 1),
+(26, 'ช่วยแมวผมด้วย', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-04-01 14:22:49', 'approve', 'ใบเสร็จ', '4488B', 'img/receipt/003.png', 40, 1);
 
 -- --------------------------------------------------------
 
@@ -399,15 +398,6 @@ CREATE TABLE `donar` (
   `cardID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `donar`
---
-
-INSERT INTO `donar` (`donarID`, `date`, `topic`, `description`, `img`, `cardID`) VALUES
-(1, '2023-03-29 10:32:05', 'วันแรก', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/d21.jpg', 19),
-(2, '2023-03-29 10:32:05', 'วันสอง', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/ID_473_56f3a975adf76.jpg', 19),
-(9, '2023-03-31 14:08:10', 'หลังจากรักษา', 'ostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat', 'img/donar/dFQROr7oWzulq5Fa5nRRVgnzYSSwUoPM7rigVHaj4QhdURLfyt90hBPNzf89n8vZ5bp.png', 20);
-
 -- --------------------------------------------------------
 
 --
@@ -427,8 +417,8 @@ CREATE TABLE `donateaccept` (
 --
 
 INSERT INTO `donateaccept` (`donateacceptID`, `hcID`, `date`, `description`, `cardID`) VALUES
-(2, 7, '2023-03-30 07:07:56', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 19),
-(8, 7, '2023-03-30 07:11:10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 20);
+(9, 7, '2023-04-01 16:25:55', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text', 26),
+(11, 7, '2023-04-01 16:26:14', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature,', 25);
 
 -- --------------------------------------------------------
 
@@ -441,16 +431,19 @@ CREATE TABLE `donatetopic` (
   `cardID` int(20) NOT NULL,
   `topic` varchar(100) NOT NULL,
   `amount` float NOT NULL,
-  `slipImgComplete` varchar(1000) DEFAULT NULL
+  `slipImgComplete` varchar(1000) DEFAULT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `donatetopic`
 --
 
-INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipImgComplete`) VALUES
-(10, 20, 'ค่าเดินทาง', 457, NULL),
-(11, 20, 'ค่ายา', 600, NULL);
+INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipImgComplete`, `status`) VALUES
+(12, 25, 'ค่ารักษา', 5000, '', 'waiting'),
+(13, 26, 'ค่ารักษา', 5000, '', 'waiting'),
+(14, 26, 'ค่ายา', 1000, '', 'waiting'),
+(15, 26, 'ค่าอาหาร', 300, '', 'waiting');
 
 -- --------------------------------------------------------
 
@@ -492,10 +485,10 @@ CREATE TABLE `givepaws_cardimg` (
 --
 
 INSERT INTO `givepaws_cardimg` (`id`, `image`, `card_id`) VALUES
-(29, 'img/card/cropped-3840-2160-1213237.jpg', 19),
-(30, 'img/card/WH3_Khorne_Wallpaper_Desktop_4K_3840x2160.jpg', 19),
-(33, 'img/card/cropped-3840-2160-1213230.jpg', 20),
-(34, 'img/card/cropped-3840-2160-1213231.jpg', 20);
+(40, 'img/card/1515139688095.jpg', 25),
+(41, 'img/card/GR-1_008.jpg', 25),
+(42, 'img/card/20210613145726.jpg', 26),
+(43, 'img/card/c3.jpg', 26);
 
 -- --------------------------------------------------------
 
@@ -516,8 +509,7 @@ CREATE TABLE `hospital` (
 --
 
 INSERT INTO `hospital` (`hospitalID`, `name`, `email`, `address`, `tel`) VALUES
-(1, 'Hoospital', 'Hoospital', 'Hoospital', 'Hoospital'),
-(2, 'Hoospital2', 'Hoospital2', 'Hoospital2', 'Hoospital2');
+(1, 'โรงพยาบาลสัตว์ มก. กำแพงแสน', 'ku-hospital@ku.th', 'เลขที่ 1 หมู่ 6 ต.กำแพงแสน อ.กำแพงแสน จ.นครปฐม 73140', '0343519013');
 
 -- --------------------------------------------------------
 
@@ -539,7 +531,7 @@ CREATE TABLE `hospitalcoordinator` (
 --
 
 INSERT INTO `hospitalcoordinator` (`hcID`, `hospitalID`, `firstname`, `surname`, `tel`, `user`) VALUES
-(7, 1, 'Kwacha', 'OKI', '015645982', 22);
+(7, 1, 'สุนิสร', 'วงวรางค์', '0638754478', 22);
 
 -- --------------------------------------------------------
 
@@ -766,8 +758,7 @@ ALTER TABLE `hospitalcoordinator`
 ALTER TABLE `paymentcard`
   ADD PRIMARY KEY (`paymentcardID`),
   ADD KEY `memberID` (`user`),
-  ADD KEY `donatetopicID` (`donatetopicID`),
-  ADD KEY `donatetopicID_2` (`donatetopicID`);
+  ADD KEY `donatetopicID` (`donatetopicID`);
 
 --
 -- Indexes for table `report`
@@ -839,7 +830,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -869,13 +860,13 @@ ALTER TABLE `donar`
 -- AUTO_INCREMENT for table `donateaccept`
 --
 ALTER TABLE `donateaccept`
-  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `donatetopic`
 --
 ALTER TABLE `donatetopic`
-  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `givepaws_authenimage`
@@ -887,7 +878,7 @@ ALTER TABLE `givepaws_authenimage`
 -- AUTO_INCREMENT for table `givepaws_cardimg`
 --
 ALTER TABLE `givepaws_cardimg`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `hospital`
@@ -905,7 +896,7 @@ ALTER TABLE `hospitalcoordinator`
 -- AUTO_INCREMENT for table `paymentcard`
 --
 ALTER TABLE `paymentcard`
-  MODIFY `paymentcardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `paymentcardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `report`
@@ -978,7 +969,7 @@ ALTER TABLE `django_admin_log`
 -- Constraints for table `donar`
 --
 ALTER TABLE `donar`
-  ADD CONSTRAINT `donar_ibfk_1` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`);
+  ADD CONSTRAINT `donar_ibfk_1` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `donateaccept`

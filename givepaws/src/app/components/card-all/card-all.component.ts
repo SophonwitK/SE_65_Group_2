@@ -26,7 +26,6 @@ export class CardAllComponent implements OnInit {
       this._donateService.getAllApproveCard().subscribe({
         next: res =>{
           if(res){
-            console.log(res)
             this._changeDetectorRef.detectChanges();
             this.dataSource = new MatTableDataSource(res);
             this.dataSource.paginator = this.paginator;

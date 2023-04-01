@@ -64,7 +64,7 @@ li{
                     width: 42rem; 
                     text-align:center;
                 }
-                p{
+                .description{
                     margin: 0rem 8rem 0rem 8rem;
                     align-self: flex-start;
                 }
@@ -77,18 +77,12 @@ li{
                     flex-direction: column;
                     padding-left: 5rem;
                     padding-right: 5rem;
-                    .main-donate{
-                        margin-left: 1.4rem;
+                    .donate-topic{
+                        width: 100%;
                         display: flex;
-                        flex-direction: row;
-                        justify-content: space-evenly;
-                        
-                    }
-                    .optional-donate{
-                        margin-left: 1.4rem;
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-evenly;
+                        word-break: break-all;
+                        white-space: normal;
+    
                         
                     }
                 }
@@ -96,7 +90,7 @@ li{
                     width: 100%;
                     display: flex;
                     justify-content: flex-start;
-                    margin-left: 12rem;
+                    margin-left: 9rem;
                     margin-bottom: 2rem;
                 }
             }

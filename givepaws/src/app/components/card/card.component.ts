@@ -1,5 +1,5 @@
 import { Component, OnInit,Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DonateService } from '../../services/donate.service';
 import { MatDialog, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,7 +9,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
   username = sessionStorage.getItem('username')
@@ -24,24 +24,15 @@ export class CardComponent implements OnInit {
     private _activeRouter: ActivatedRoute,
     private _donateService: DonateService,
     private _dialog: MatDialog,
+    private _router: Router,
+    private _toastr: ToastrService,
   ){
 
   }
 
   ngOnInit(): void {
     this.id = this._activeRouter.snapshot.paramMap.get('id')
-    this._donateService.getCardByID(this.id).subscribe({
-      next: res =>{
-        this.cardData = res
-        res.images.forEach((data:any) => {
-          this.imageObject.push({
-            image: `http://127.0.0.1:8000/${data.image}`,
-            thumbImage: `http://127.0.0.1:8000/${data.image}`,
-          })
-        });
-      }
-    })
-
+    this.getCardByID()
     this._donateService.getDonateAcceptByCardID(this.id).subscribe({
       next: res =>{
         this.acceptDonate = res
@@ -54,6 +45,19 @@ export class CardComponent implements OnInit {
     this._donateService.getAllDonarByCardID(this.id).subscribe({
       next: res=>{
         this.donarData = res
+      }
+    })
+  }
+  getCardByID(){
+    this._donateService.getCardByID(this.id).subscribe({
+      next: res =>{
+        this.cardData = res
+        res.images.forEach((data:any) => {
+          this.imageObject.push({
+            image: `http://127.0.0.1:8000/${data.image}`,
+            thumbImage: `http://127.0.0.1:8000/${data.image}`,
+          })
+        });
       }
     })
   }
@@ -91,6 +95,7 @@ export class CardComponent implements OnInit {
   
   openReport(enterAnimationDuration: string, exitAnimationDuration: string,card_id: any): void {
     const dialog = this._dialog.open(ReportComponent, {
+      
       data: card_id,
       width:'25%',
       height: 'auto',
@@ -103,6 +108,60 @@ export class CardComponent implements OnInit {
         this.getDonar();
       }
     })
+  }
+
+  openSlip(enterAnimationDuration: string, exitAnimationDuration: string,card: any): void {
+    const dialog = this._dialog.open(ViewSlipComponent, {
+      data: card,
+      width:'20%',
+      height: 'auto',
+      position: {top: '10rem'},
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getDonar();
+      }
+    })
+  }
+
+  openSlipOption(enterAnimationDuration: string, exitAnimationDuration: string,topic: any): void {
+    const dialog = this._dialog.open(ViewSlipTopicComponent, {
+      data: topic,
+      width:'20%',
+      height: 'auto',
+      position: {top: '10rem'},
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getDonar();
+      }
+    })
+  }
+
+  openPayment(enterAnimationDuration: string, exitAnimationDuration: string,card: any): void {
+    const dialog = this._dialog.open(PaymentComponent, {
+      data: card,
+      width:'20%',
+      height: 'auto',
+      position: {top: '10rem'},
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getCardByID()
+      }
+    })
+  }
+
+
+  login(){
+    this._router.navigate(['login']);
+    this._toastr.error('please login');
   }
 
 
@@ -201,9 +260,6 @@ export class DeleteDonarComponent{
 }
     
 
-
-
-
 @Component({
   selector: 'report-card',
   templateUrl: './report.component.html',
@@ -228,7 +284,7 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
- 
+
   }
 
   onSubmit(){
@@ -250,6 +306,112 @@ export class ReportComponent implements OnInit {
     }
   }
 
+}
+
+@Component({
+  selector: 'payment-card',
+  templateUrl: './payment.component.html',
+})
+export class PaymentComponent {
+  imgMessage = "Upload Images"
+  files: File[] = [];
+  paymentData: FormGroup;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public _dialogRef: MatDialogRef<DonarComponent>,
+    private _fb:FormBuilder,
+    private _donateService: DonateService,
+    private _toastr: ToastrService,
+  ){
+    this.paymentData = this._fb.group({
+      user: sessionStorage.getItem('id'),
+      contribution : this._fb.control('',Validators.compose([Validators.required,Validators.pattern(/^[0-9]\d*$/)])),
+      date:'',
+      paymentcardimg:this._fb.control('',Validators.required),
+      status: 'waiting',
+      cardid:'',
+      donatetopicid:'',
+    })
+  }
+  ngOnInit(): void {
+
+    console.log(this.data)
+  }
+
+  onSelect(event:any) {
+    this.imgMessage = "Upload Images"
+    this.files.push(...event.addedFiles);
+    this.paymentData.patchValue({
+      paymentcardimg: this.files
+    })
+  }
+  onRemove(event:any) {
+    this.files.splice(this.files.indexOf(event), 1);
+    this.paymentData.patchValue({
+      paymentcardimg: this.files
+    })
+  }
+
+  onSubmit(){
+    if(this.paymentData.valid){
+      const now = new Date();
+      this.paymentData.patchValue({
+        date: now.toISOString().slice(0, 19).replace('T', ' ')
+      })
+      if(this.data.donatetopicid){
+        this.paymentData.patchValue({
+          donatetopicid: this.data.donatetopicid
+        })
+      }
+      else{
+        this.paymentData.patchValue({
+          cardid: this.data.cardid
+        })
+      }
+      this._donateService.postPayment(this.paymentData.value).subscribe({
+        next: res =>{
+          if(res){
+            this._dialogRef.close()
+            this._toastr.success("post successfully")
+          }
+          else{
+            this._toastr.error("error !, something wrong")
+          }
+        }
+      })
+
+    }
+    else{ 
+      this.imgMessage = "Images Require"
+      this._toastr.warning("Please, Enter valid Data")
+    }
+  }
+}
+
+
+
+
+@Component({
+  selector: 'view-slip-card',
+  templateUrl: './view-slip.component.html',
+})
+export class ViewSlipComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public card: any,
+  ){
+  }
+}
+
+@Component({
+  selector: 'view-slip-topic-card',
+  templateUrl: './view-slip-topic.component.html',
+})
+export class ViewSlipTopicComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public topic: any,
+  ){
+  }
 
 }
 

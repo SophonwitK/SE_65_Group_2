@@ -16,8 +16,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" >
                     <mat-label>รายละเอียด</mat-label>
-                    <input formControlName="description" matInput placeholder="รายละเอียด..............">
-                    <textarea matInput style="resize:none; height: 9rem;" ></textarea>
+                    <textarea matInput style="resize:none; height: 9rem;" formControlName="description" placeholder="รายละเอียด.............."></textarea>
                 </mat-form-field>
                 <div class="rows">
                     <mat-form-field appearance="outline">
@@ -53,14 +52,14 @@
                             <mat-label>ค่ารักษา</mat-label>
                             <!-- <span matTextPrefix>$&nbsp;</span> -->
                             <span matTextSuffix>THB</span>
-                            <input formControlName="price" matInput placeholder="4000">
+                            <input formControlName="price" matInput placeholder="4000" required>
                         </mat-form-field>
                     </div>
                 </div>
                 <h3 style="color: black; margin-left: 1.2rem; margin-top: -35px; margin-bottom: 1rem;">หัวข้อที่ต้องการรับบริจาคเพิ่มเติม</h3>
                 <form formGroupName="topicForm" class="topic-form"> 
                     <div *ngFor="let group of topicsArray.controls; let i = index;" formArrayName="topics">
-                        <div class="topic-group" [formGroupName]='i'>
+                        <div class="topic-group" [formGroupName]='i' *ngIf="i>0">
                             <mat-form-field appearance="outline">
                                 <mat-label>หัวข้อ</mat-label>
                                 <input matInput placeholder="ค่าเดินทาง"  formControlName="topic">
@@ -68,10 +67,10 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>จำนวน</mat-label>
                                 <span matTextSuffix>THB</span>
-                                <input matInput placeholder="1000"  formControlName="amount">
+                                <input matInput placeholder="1000"  formControlName="amount" required>
                             </mat-form-field >
                         </div>
-                        <button type="button" *ngIf="i>-1" style="margin-left: 1.2rem; margin-bottom: 2rem;" class="btn btn-danger float-end mb-3" (click)="removeTopic(i)">ลบหัวข้อ -</button>
+                        <button type="button" *ngIf="i>0" style="margin-left: 1.2rem; margin-bottom: 2rem;" class="btn btn-danger float-end mb-3" (click)="removeTopic(i)">ลบหัวข้อ -</button>
                     </div>
                     <div class="form-row org-desc-parent-margin">
                         <button type="button" style=" margin-left: 1.5rem; margin-bottom: 2rem; " class="btn btn-primary" (click)="addTopic()">เพิ่มหัวข้อ +</button>

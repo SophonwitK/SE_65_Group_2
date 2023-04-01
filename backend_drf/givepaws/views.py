@@ -12,6 +12,9 @@ from givepaws.jwt import JWTAuthentication
 import jwt,os
 from users.models import User
 
+from datetime import datetime, timedelta
+# from django.db.models import Q
+
 
 
 
@@ -34,6 +37,10 @@ def get_donate_accept_by_card_id(request, pk):
     donate_accept_serializer = DonateacceptSerializer( donate_accept)
     if  donate_accept:
         return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 
+    else:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
+
 
 
 @api_view(['GET', 'POST'])
@@ -292,7 +299,7 @@ def payment_list(request):
         payment_serializer = PaymentCardSerializer( payments, many=True)
         return Response( payment_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        payment_serializer = PaymentCardSerializer(data=request.data)
+        payment_serializer = PostPaymentSerializer(data=request.data)
         if payment_serializer.is_valid():
             payment_serializer.save()
             return Response(payment_serializer.data, status=status.HTTP_201_CREATED) 
@@ -424,6 +431,9 @@ def donate_accept_detail(request, pk):
         donate_accept_serializer = DonateacceptSerializer( donate_accept)
         if  donate_accept:
             return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 
+        else:
+            return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
 
 @api_view(['GET'])
 def approve_card_list(request):
@@ -445,6 +455,8 @@ def get_all_donar_by_card_id(request, pk):
     donar_serializer =  DonarSerializer( donar, many=True)
     if  donar:
         return Response(  donar_serializer.data, status=status.HTTP_200_OK) 
+    else:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
 
 
 @api_view(['GET', 'POST'])
@@ -499,20 +511,26 @@ def report_list(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated]) 
 def get_all_report_by_card_id(request,pk):
-    print(pk)
     try:
         report = Report.objects.all().filter(cardid__cardid=pk)
     except:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
     report_serializer = ReportSerializer( report, many=True)
-    return Response( report_serializer.data, status=status.HTTP_200_OK)
+    if(report_serializer):
+        return Response( report_serializer.data, status=status.HTTP_200_OK)
+    else:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
+
+
+
 
 
     
 @api_view(['GET', 'POST'])
 # @authentication_classes([JWTAuthentication]) 
 # @permission_classes([IsAuthenticated]) 
-def payment_waiting_list(request):
+def payment_waiting_list(request):  #### payment waiting list Little
     if request.method == 'GET':
         payments = Paymentcard.objects.filter(status='waiting').order_by('-date')
         payment_serializer = PaymentCardSerializer(payments, many=True)
@@ -524,6 +542,49 @@ def payment_waiting_list(request):
             return Response(payment_serializer.data, status=status.HTTP_201_CREATED)
         return Response(payment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+# #### First 4 Card that's still open Little
+# @api_view(['GET', 'POST'])
+# def emergency_card_list(request):
+#     if request.method == 'GET':
+#         today = datetime.now().date()
+#         one_month_ago = today - timedelta(days=30)
+#         cards = Card.objects.filter(Q(status='approve') & Q(created_at__gte=one_month_ago) & Q(created_at__lte=today)).order_by('created_at')[:4]
+#         card_serializer = CardSerializer(cards, many=True)
+#         return Response(card_serializer.data, status=status.HTTP_200_OK)
+#     elif request.method == 'POST':
+#         card_serializer = CardSerializer(data=request.data)
+#         if card_serializer.is_valid():
+#             card_serializer.save()
+#             return Response(card_serializer.data, status=status.HTTP_201_CREATED) 
+#         return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+#### set status of payment to "reject" by paymentcardID
+@api_view(['PUT'])
+def reject_payment(request, pk):
+    try:
+        payment = Paymentcard.objects.get(paymentcardID=pk)
+    except Paymentcard.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    payment.status = 'reject'
+    payment.save()
+    return Response({'message': 'Payment rejected successfully'}, status=status.HTTP_200_OK)
+
+
+#### set status of payment to "approve" by paymentcardID
+@api_view(['PUT'])
+def approve_payment(request, pk):
+    try:
+        payment = Paymentcard.objects.get(paymentcardID=pk)
+    except Paymentcard.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    payment.status = 'approve'
+    payment.save()
+    return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
+    
+
+
 #### Query เงินใน Donate Card
-#### First 4 Card
-#### Card with status Waiting
+#### Donate Topic

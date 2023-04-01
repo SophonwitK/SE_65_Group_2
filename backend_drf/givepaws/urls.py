@@ -14,7 +14,7 @@ urlpatterns = [
     path("authen/check/",views.authen_check_list,name="authen_check_list"),
     path("authen/check/<int:pk>",views.authen_check_detail,name="authen_check_detail"),
     path("user/authen/check/<int:pk>",views.user_check_authen,name="user_check_authen"),
-    path("payments/",views.payment_list,name="payment_list"),
+    path("payments/",views.payment_list,name="payment_list"), #post payment and get all payment
     path("payments/<int:pk>",views.payments_detail,name="payments_detail"),
     path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"), #get all payment by userid
     path("cards/users/<int:pk>",views.get_user_card,name="get_user_card"), #get all card by userid
@@ -31,10 +31,12 @@ urlpatterns = [
     path("reports/",views.report_list,name="report_list"), #get all and post report
     path("card/<int:pk>/reports/",views.get_all_report_by_card_id,name="get_all_report_by_card_id"), #get all report by card id
 
-
-
     #Little
-    path("payments_waiting/",views.payment_waiting_list,name="payments_waiting"),
+    path("payments_waiting/",views.payment_waiting_list,name="payments_waiting"),  ## get all payments with waiting status  + order form oldest
+    # path("card/emergency/",views.emergency_card_list,name="card_emergency"),  ## get oldest 4 card + order form oldest
+
+    path("payments/<int:pk>/approve/",views.approve_payment,name="approve_payment"),  ##  set status of payment to "approve_payment" by paymentcardID
+    path("payments/<int:pk>/reject/",views.reject_payment,name="reject_payment"),  ##  set status of payment to "reject" by paymentcardID
 
 
 ]
