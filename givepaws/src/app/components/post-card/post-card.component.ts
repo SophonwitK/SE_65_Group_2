@@ -48,6 +48,7 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.topicsArray.push(this.topicGroup());
     this.card_id = this._activeRouter.snapshot.paramMap.get('id')
     if(this.card_id){
       this._donateSerivce.getCardByID(this.card_id).subscribe({
@@ -82,6 +83,7 @@ export class PostCardComponent implements OnInit {
       cardid: '',
       topic: this._fb.control('',[Validators.required]),
       amount: this._fb.control('',Validators.compose([Validators.required,Validators.pattern(/^[0-9]\d*$/)])),
+      status: 'waiting',
     });
   }
 
@@ -140,10 +142,10 @@ export class PostCardComponent implements OnInit {
 
   onSubmit(){
     const topicLength = this.cardForm.get('topicForm')?.get('topics')?.value.length
-    if(topicLength == 0){
-        this.cardForm.get('topicForm')?.get('topics')?.clearAsyncValidators()
-        this.cardForm.get('topicForm')?.get('topics')?.updateValueAndValidity()
-    }
+    this.topicsArray.at(0).patchValue({
+      topic: "ค่ารักษา",
+      amount: this.cardForm.get('price')?.value,
+    })
     if(this.cardForm.valid){
       const now = new Date();
       this.cardForm.patchValue({
@@ -163,12 +165,12 @@ export class PostCardComponent implements OnInit {
                   cardid: cardid
                 })
               }
-              this._donateSerivce.postTopic(this.cardForm.get('topicForm')?.get('topics')?.value).subscribe({
-                next: res =>{
-                  console.log(res)
-                }
-              })
             }
+            this._donateSerivce.postTopic(this.cardForm.get('topicForm')?.get('topics')?.value).subscribe({
+              next: res =>{
+                console.log(res)
+              }
+            })
             this._router.navigate(['post/card/history/',sessionStorage.getItem('username')])
             this._toastr.success('sent post request successfully')
           }

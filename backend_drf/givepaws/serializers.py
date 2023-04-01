@@ -103,7 +103,8 @@ class DonateTopicSerializer(serializers.ModelSerializer):
                   'topic',
                   'amount',
                   'slipimgcomplete',
-                  'cardid']
+                  'cardid',
+                  'status']
 
 
 
@@ -125,13 +126,11 @@ class CardSerializer(serializers.ModelSerializer):
                   'receipttype',
                   'receiptnumber',
                   'receiptimgpath',
-                  'price',
                   'hospitalid',
                   'images',
                   'uploaded_images',
                   'donate_topic',
-                  'user',
-                  'slipimgcomplete']
+                  'user']
         
     def create(self, validated_data):
         uploaded_imgs = validated_data.pop("uploaded_images")
@@ -145,6 +144,7 @@ class CardSerializer(serializers.ModelSerializer):
 class PaymentCardSerializer(serializers.ModelSerializer):
     user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
     donatetopicid = RelatedFieldAlternative(queryset=Donatetopic.objects.all(), serializer=DonateTopicSerializer)
+    cardid = RelatedFieldAlternative(queryset=Card.objects.all(), serializer=CardSerializer)
 
     class Meta:
         model = Paymentcard

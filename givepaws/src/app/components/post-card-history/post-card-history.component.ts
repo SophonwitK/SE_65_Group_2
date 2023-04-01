@@ -31,9 +31,11 @@ export class PostCardHistoryComponent implements OnInit{
   ngOnInit(): void {
       this._donateService.getAllCardByUserID(Number(this.user_id)).subscribe({
         next: res =>{
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
+          if(res){
+            this.dataSource = new MatTableDataSource(res);
+            this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
+          }
         }
       })
   }

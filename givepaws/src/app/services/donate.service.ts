@@ -25,7 +25,6 @@ export class DonateService {
     for (const file of data.receiptimgpath) {
       formData.append('receiptimgpath', file);
     }
-    formData.append('price',data.price)
     for (const file of data.uploaded_images) {
       formData.append('uploaded_images', file);
     }
@@ -67,6 +66,7 @@ export class DonateService {
       })
     );
   }
+
 
   
   getCardByID(id:number): Observable<any>{
@@ -210,6 +210,36 @@ export class DonateService {
 
   postReport(data:any): Observable<any>{
     return this._http.post('http://127.0.0.1:8000/api/reports/',data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+  postPayment(data:any): Observable<any>{
+    const formData = new FormData();
+    formData.append('status',data.status)
+    formData.append('user',data.user)
+    formData.append('contribution',data.contribution)
+    formData.append('date',data.date)
+    if(data.cardid){
+      formData.append('cardid',data.cardid)
+      formData.append('donatetopicid','')
+    }
+    if(data.donatetopicid){
+      formData.append('donatetopicid',data.donatetopicid)
+      formData.append('cardid','')
+    }
+
+    for (const file of data.paymentcardimg) {
+      formData.append('paymentcardimg', file);
+    }
+
+    return this._http.post('http://127.0.0.1:8000/api/payments/',formData).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {
           console.log('error:', error);

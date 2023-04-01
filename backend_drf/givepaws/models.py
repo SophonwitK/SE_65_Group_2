@@ -76,10 +76,8 @@ class Card(models.Model):
     receipttype = models.CharField(max_length=100)
     receiptnumber = models.CharField(max_length=100)
     receiptimgpath = models.ImageField(upload_to="img/receipt")
-    price = models.FloatField()
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     hospitalid = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
-    slipimgcomplete =  models.ImageField(upload_to="img/payment/hospital", default="", null=True, blank=True)
 
     class Meta:
         managed = False
@@ -164,7 +162,8 @@ class Donatetopic(models.Model):
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID',related_name = "donate_topic")  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     amount = models.FloatField()
-    slipimgcomplete =  models.ImageField(upload_to="img/payment/topic", default="", null=True, blank=True)
+    slipimgcomplete =  models.ImageField(upload_to="img/payment/complete", default="", null=True, blank=True)
+    status = models.CharField(max_length=100)
 
     class Meta:
         managed = False
@@ -211,7 +210,7 @@ class Paymentcard(models.Model):
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     contribution = models.FloatField()
     date = models.DateTimeField()
-    paymentcardimg = models.ImageField(upload_to="img/payment", default="", null=True, blank=True)
+    paymentcardimg = models.ImageField(upload_to="img/payment")
     status = models.CharField(max_length=100)
     donatetopicid = models.ForeignKey(Donatetopic, models.DO_NOTHING, db_column='donatetopicID')  # Field name made lowercase.
     comment = models.CharField(max_length=1000, blank=True, null=True)

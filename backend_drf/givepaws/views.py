@@ -37,6 +37,10 @@ def get_donate_accept_by_card_id(request, pk):
     donate_accept_serializer = DonateacceptSerializer( donate_accept)
     if  donate_accept:
         return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 
+    else:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
+
 
 
 @api_view(['GET', 'POST'])
@@ -295,7 +299,7 @@ def payment_list(request):
         payment_serializer = PaymentCardSerializer( payments, many=True)
         return Response( payment_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        payment_serializer = PaymentCardSerializer(data=request.data)
+        payment_serializer = PostPaymentSerializer(data=request.data)
         if payment_serializer.is_valid():
             payment_serializer.save()
             return Response(payment_serializer.data, status=status.HTTP_201_CREATED) 
@@ -427,6 +431,9 @@ def donate_accept_detail(request, pk):
         donate_accept_serializer = DonateacceptSerializer( donate_accept)
         if  donate_accept:
             return Response(  donate_accept_serializer.data, status=status.HTTP_200_OK) 
+        else:
+            return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
 
 @api_view(['GET'])
 def approve_card_list(request):
@@ -448,6 +455,8 @@ def get_all_donar_by_card_id(request, pk):
     donar_serializer =  DonarSerializer( donar, many=True)
     if  donar:
         return Response(  donar_serializer.data, status=status.HTTP_200_OK) 
+    else:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
 
 
 @api_view(['GET', 'POST'])
@@ -502,13 +511,19 @@ def report_list(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated]) 
 def get_all_report_by_card_id(request,pk):
-    print(pk)
     try:
         report = Report.objects.all().filter(cardid__cardid=pk)
     except:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
     report_serializer = ReportSerializer( report, many=True)
-    return Response( report_serializer.data, status=status.HTTP_200_OK)
+    if(report_serializer):
+        return Response( report_serializer.data, status=status.HTTP_200_OK)
+    else:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
+
+
+
 
 
     
