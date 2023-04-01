@@ -7,13 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class CheckdonateService {
   constructor(private _http: HttpClient) {}
-
   
   add(data: any): Observable<any> {
     return this._http.post('http://localhost:3000/checkdonate', data);
   }
   get(): Observable<any> {
-    return this._http.get(`http://localhost:3000/checkdonate`);
+    return this._http.get(`http://127.0.0.1:8000/api/payments_waiting/`);
   }
   delete(id:number): Observable<any> {
     return this._http.delete(`http://localhost:3000/checkdonate/${id}`);
@@ -25,5 +24,4 @@ export class CheckdonateService {
     return this._http.get(`http://localhost:3000/checkdonate/${id}`);
   }
  
-
 }

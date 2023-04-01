@@ -144,8 +144,7 @@ class CardSerializer(serializers.ModelSerializer):
 class PaymentCardSerializer(serializers.ModelSerializer):
     user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
     donatetopicid = RelatedFieldAlternative(queryset=Donatetopic.objects.all(), serializer=DonateTopicSerializer)
-    cardid = RelatedFieldAlternative(queryset=Card.objects.all(), serializer=CardSerializer)
-
+    
     class Meta:
         model = Paymentcard
         fields = ['paymentcardid',
