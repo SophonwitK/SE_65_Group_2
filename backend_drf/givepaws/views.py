@@ -557,12 +557,15 @@ def get_approve_total_donate_by_topic_id(request,pk):
     
 
     
+
+
+
 @api_view(['GET', 'POST'])
 # @authentication_classes([JWTAuthentication]) 
 # @permission_classes([IsAuthenticated]) 
-def payment_waiting_list(request):  #### payment waiting list Little
+def payments_waiting(request):  #### payment waiting list Little
     if request.method == 'GET':
-        payments = Paymentcard.objects.filter(status='waiting').order_by('-date')
+        payments = Paymentcard.objects.filter(status='waiting').order_by('date')
         payment_serializer = PaymentCardSerializer(payments, many=True)
         return Response(payment_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
@@ -578,7 +581,7 @@ def payment_waiting_list(request):  #### payment waiting list Little
 def emergency_card_list(request):
     if request.method == 'GET':
         thirty_days_ago = datetime.now() - timedelta(days=30)
-        cards = Card.objects.filter(cardstatus='approve', date__gte=thirty_days_ago).order_by('-date')[:4]
+        cards = Card.objects.filter(cardstatus='approve', date__gte=thirty_days_ago).order_by('date')[:4]
         card_serializer = CardSerializer(cards, many=True)
         return Response(card_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
