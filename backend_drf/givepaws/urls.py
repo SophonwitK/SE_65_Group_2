@@ -33,7 +33,7 @@ urlpatterns = [
 
     #Little
     path("payments_waiting/",views.payment_waiting_list,name="payments_waiting"),  ## get all payments with waiting status  + order form oldest
-    path("card/emergency/",views.emergency_card_list,name="card_emergency"),  ## get oldest 4 card + order form oldest
+    # path("card/emergency/",views.emergency_card_list,name="card_emergency"),  ## get oldest 4 card + order form oldest
 
     path("payments/<int:pk>/approve/",views.approve_payment,name="approve_payment"),  ##  set status of payment to "approve_payment" by paymentcardID
     path("payments/<int:pk>/reject/",views.reject_payment,name="reject_payment"),  ##  set status of payment to "reject" by paymentcardID
