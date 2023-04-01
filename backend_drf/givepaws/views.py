@@ -576,7 +576,7 @@ def payment_waiting_list(request):  #### payment waiting list Little
 @api_view(['PUT'])
 def reject_payment(request, pk):
     try:
-        payment = Paymentcard.objects.get(paymentcardID=pk)
+        payment = Paymentcard.objects.get(paymentcardid=pk)
     except Paymentcard.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     payment.status = 'reject'
@@ -588,7 +588,7 @@ def reject_payment(request, pk):
 @api_view(['PUT'])
 def approve_payment(request, pk):
     try:
-        payment = Paymentcard.objects.get(paymentcardID=pk)
+        payment = Paymentcard.objects.get(paymentcardid=pk)
     except Paymentcard.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     payment.status = 'approve'
