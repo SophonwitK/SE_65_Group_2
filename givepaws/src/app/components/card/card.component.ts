@@ -1,15 +1,16 @@
 import { Component, OnInit,Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DonateService } from '../../services/donate.service';
 import { MatDialog, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DialogRef } from '@angular/cdk/dialog';
+import { AuthGuard } from 'src/app/guard/auth.guard';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
   username = sessionStorage.getItem('username')
@@ -24,6 +25,8 @@ export class CardComponent implements OnInit {
     private _activeRouter: ActivatedRoute,
     private _donateService: DonateService,
     private _dialog: MatDialog,
+    private _router: Router,
+    private _toastr: ToastrService,
   ){
 
   }
@@ -91,6 +94,7 @@ export class CardComponent implements OnInit {
   
   openReport(enterAnimationDuration: string, exitAnimationDuration: string,card_id: any): void {
     const dialog = this._dialog.open(ReportComponent, {
+      
       data: card_id,
       width:'25%',
       height: 'auto',
@@ -103,6 +107,43 @@ export class CardComponent implements OnInit {
         this.getDonar();
       }
     })
+  }
+
+  openSlip(enterAnimationDuration: string, exitAnimationDuration: string,card: any): void {
+    const dialog = this._dialog.open(ViewSlipComponent, {
+      data: card,
+      width:'20%',
+      height: 'auto',
+      position: {top: '10rem'},
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getDonar();
+      }
+    })
+  }
+
+  openSlipOption(enterAnimationDuration: string, exitAnimationDuration: string,topic: any): void {
+    const dialog = this._dialog.open(ViewSlipTopicComponent, {
+      data: topic,
+      width:'20%',
+      height: 'auto',
+      position: {top: '10rem'},
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getDonar();
+      }
+    })
+  }
+
+  login(){
+    this._router.navigate(['login']);
+    this._toastr.error('please login');
   }
 
 
@@ -201,9 +242,6 @@ export class DeleteDonarComponent{
 }
     
 
-
-
-
 @Component({
   selector: 'report-card',
   templateUrl: './report.component.html',
@@ -218,6 +256,7 @@ export class ReportComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public card_id: any,
     private _donateService: DonateService,
     private _toastr: ToastrService,
+    private _authGuard: AuthGuard,
   ){
     this.reportData = this._fb.group({
       topic: this._fb.control('',Validators.required),
@@ -228,7 +267,7 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
- 
+
   }
 
   onSubmit(){
@@ -250,6 +289,28 @@ export class ReportComponent implements OnInit {
     }
   }
 
+}
+
+@Component({
+  selector: 'view-slip-card',
+  templateUrl: './view-slip.component.html',
+})
+export class ViewSlipComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public card: any,
+  ){
+  }
+}
+
+@Component({
+  selector: 'view-slip-topic-card',
+  templateUrl: './view-slip-topic.component.html',
+})
+export class ViewSlipTopicComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public topic: any,
+  ){
+  }
 
 }
 

@@ -130,7 +130,8 @@ class CardSerializer(serializers.ModelSerializer):
                   'images',
                   'uploaded_images',
                   'donate_topic',
-                  'user']
+                  'user',
+                  'slipimgcomplete']
         
     def create(self, validated_data):
         uploaded_imgs = validated_data.pop("uploaded_images")

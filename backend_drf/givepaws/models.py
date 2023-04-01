@@ -79,6 +79,8 @@ class Card(models.Model):
     price = models.FloatField()
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     hospitalid = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
+    slipimgcomplete =  models.ImageField(upload_to="img/payment/hospital", default="", null=True, blank=True)
+
     class Meta:
         managed = False
         db_table = 'card'
@@ -162,7 +164,7 @@ class Donatetopic(models.Model):
     cardid = models.ForeignKey(Card, models.DO_NOTHING, db_column='cardID',related_name = "donate_topic")  # Field name made lowercase.
     topic = models.CharField(max_length=100)
     amount = models.FloatField()
-    slipimgcomplete =  models.ImageField(upload_to="img/payment/complete", default="", null=True, blank=True)
+    slipimgcomplete =  models.ImageField(upload_to="img/payment/topic", default="", null=True, blank=True)
 
     class Meta:
         managed = False
