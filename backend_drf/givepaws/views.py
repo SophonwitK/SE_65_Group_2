@@ -13,7 +13,7 @@ import jwt,os
 from users.models import User
 
 from datetime import datetime, timedelta
-# from django.db.models import Q
+
 
 
 # @api_view(['GET'])
@@ -573,22 +573,20 @@ def payment_waiting_list(request):  #### payment waiting list Little
         return Response(payment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# #### First 4 Card that's still open Little
-# @api_view(['GET', 'POST'])
-# def emergency_card_list(request):
-#     if request.method == 'GET':
-#         today = datetime.now().date()
-#         one_month_ago = today - timedelta(days=30)
-#         cards = Card.objects.filter(Q(status='approve') & Q(created_at__gte=one_month_ago) & Q(created_at__lte=today)).order_by('created_at')[:4]
-#         card_serializer = CardSerializer(cards, many=True)
-#         return Response(card_serializer.data, status=status.HTTP_200_OK)
-#     elif request.method == 'POST':
-#         card_serializer = CardSerializer(data=request.data)
-#         if card_serializer.is_valid():
-#             card_serializer.save()
-#             return Response(card_serializer.data, status=status.HTTP_201_CREATED) 
-#         return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+# #### 4 Card that's still open order from oldest Little
+@api_view(['GET', 'POST'])
+def emergency_card_list(request):
+    if request.method == 'GET':
+        thirty_days_ago = datetime.now() - timedelta(days=30)
+        cards = Card.objects.filter(cardstatus='approve', date__gte=thirty_days_ago).order_by('-date')[:4]
+        card_serializer = CardSerializer(cards, many=True)
+        return Response(card_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        card_serializer = CardSerializer(data=request.data)
+        if card_serializer.is_valid():
+            card_serializer.save()
+            return Response(card_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 #### set status of payment to "reject" by paymentcardID
