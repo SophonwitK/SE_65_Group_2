@@ -544,6 +544,8 @@ def emergency_card_list(request):
             return Response(card_serializer.data, status=status.HTTP_201_CREATED) 
         return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
 #### set status of payment to "reject" by paymentcardID
 @api_view(['PUT'])
 def reject_payment(request, pk):
@@ -551,11 +553,11 @@ def reject_payment(request, pk):
         payment = Paymentcard.objects.get(paymentcardID=pk)
     except Paymentcard.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
     payment.status = 'reject'
     payment.save()
     return Response({'message': 'Payment rejected successfully'}, status=status.HTTP_200_OK)
-    
+
+
 #### set status of payment to "approve" by paymentcardID
 @api_view(['PUT'])
 def approve_payment(request, pk):
@@ -563,7 +565,6 @@ def approve_payment(request, pk):
         payment = Paymentcard.objects.get(paymentcardID=pk)
     except Paymentcard.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
     payment.status = 'approve'
     payment.save()
     return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
