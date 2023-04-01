@@ -7,7 +7,7 @@
                 <span matTextSuffix style="color: black;">THB</span>
                 <input matInput placeholder="100"  formControlName="contribution" required>
             </mat-form-field>
-            <ngx-dropzone style="background-color: aliceblue; width: 55%; margin-bottom: 1rem;" [multiple]="false" (change)="onSelect($event)" class="img-zone-bg" required>
+            <ngx-dropzone style="background-color: aliceblue; width: 70%; margin-bottom: 1rem;" [multiple]="false" (change)="onSelect($event)" class="img-zone-bg" required>
                 <ngx-dropzone-label *ngIf="imgMessage === 'Upload Images' else require_img">{{imgMessage}}</ngx-dropzone-label>
                 <ng-template #require_img>
                     <ngx-dropzone-label style="color: red;">{{imgMessage}}</ngx-dropzone-label>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2023 at 04:33 PM
+-- Generation Time: Apr 01, 2023 at 07:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -398,6 +398,13 @@ CREATE TABLE `donar` (
   `cardID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `donar`
+--
+
+INSERT INTO `donar` (`donarID`, `date`, `topic`, `description`, `img`, `cardID`) VALUES
+(10, '2023-04-01 17:31:25', 'หลังจากรักษา', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/download.jfif', 26);
+
 -- --------------------------------------------------------
 
 --
@@ -549,6 +556,17 @@ CREATE TABLE `paymentcard` (
   `donatetopicID` int(20) NOT NULL,
   `comment` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `paymentcard`
+--
+
+INSERT INTO `paymentcard` (`paymentcardID`, `user`, `contribution`, `date`, `paymentcardimg`, `status`, `donatetopicID`, `comment`) VALUES
+(24, 43, 1000, '2023-04-01 16:09:52', 'img/payment/12.jpg', 'approve', 13, NULL),
+(25, 43, 500, '2023-04-01 16:10:13', 'img/payment/pkc4crr18IPHdKDtsA6-o.png', 'approve', 14, NULL),
+(26, 43, 200, '2023-04-01 16:11:47', 'img/payment/open_13.png', 'approve', 13, NULL),
+(28, 43, 1200, '2023-04-01 16:18:29', 'img/payment/open_13_WTvn1M3.png', 'waiting', 15, 'slip ผิด'),
+(29, 43, 300, '2023-04-01 17:24:15', 'img/payment/pkc4crr18IPHdKDtsA6-o_iYzea4l.png', 'approve', 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -830,7 +848,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -854,19 +872,19 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT for table `donar`
 --
 ALTER TABLE `donar`
-  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `donateaccept`
 --
 ALTER TABLE `donateaccept`
-  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `donatetopic`
 --
 ALTER TABLE `donatetopic`
-  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `givepaws_authenimage`
@@ -878,7 +896,7 @@ ALTER TABLE `givepaws_authenimage`
 -- AUTO_INCREMENT for table `givepaws_cardimg`
 --
 ALTER TABLE `givepaws_cardimg`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `hospital`
@@ -896,7 +914,7 @@ ALTER TABLE `hospitalcoordinator`
 -- AUTO_INCREMENT for table `paymentcard`
 --
 ALTER TABLE `paymentcard`
-  MODIFY `paymentcardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `paymentcardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `report`

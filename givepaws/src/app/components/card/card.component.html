@@ -13,7 +13,7 @@
                     [images]="imageObject"
                     [infinite]="true"
                     [autoSlide]="1"
-                    [imageSize]=" {width: '100%', height: '40%', space: 5} "
+                    [imageSize]=" {width: '100%', height: '50%', space: 5} "
                     [slideImage]="1"
                     [animationSpeed]="2"
                     ></ng-image-slider>
@@ -24,22 +24,24 @@
                 </h3>
                 <h3 style="color: black; align-self: flex-start; margin-left: 8rem;">รายละเอียด</h3>
                 <p class="description">{{cardData.description}}</p>
-                <div class="donate">
-                    <ul class="donate-topic" *ngFor="let topic of cardData.donate_topic">
-                        <li style="margin-top: 1.4rem; list-style: inside; width: 20%;">{{topic.topic}}</li>
-                        <p style="margin-top: 1.4rem; margin-left: 2rem; margin-right: 2rem; width: 70%;">จำนวน {{topic.amount}} บาท | ยอดบริจาครวม XXXX บาท</p>
-                        <button  type="button" mat-stroked-button style="margin-top: 1.4rem; width: 10%;" 
-                            *ngIf="cardData.user.id == user_id else donate_optional" (click)="openSlipOption('250ms','250ms',topic)">
-                            ดูสลิป</button>
-                        <ng-template #donate_optional>
-                            <div *ngIf="user_id else go_login" style="margin-top: 1.4rem; width: 11%;">
-                                <button type="button" mat-stroked-button (click)="openPayment('250ms','250ms',topic)">บริจาค</button>
-                            </div>
-                            <ng-template #go_login>
-                                <button type="button" mat-stroked-button (click)="login()" style="margin-top: 1.4rem; width: 10%;">บริจาค</button>
-                            </ng-template>  
-                        </ng-template>
-                    </ul>
+                <div class="donate" *ngFor="let topic of cardData.donate_topic">
+                    <div *ngFor="let total of totalDonate" style="width: 100%;">
+                        <ul class="donate-topic" *ngIf="total.topic_id == topic.donatetopicid">
+                            <li style="margin-top: 1.4rem; list-style: inside; width: 20%;">{{topic.topic}}</li>
+                            <p style="margin-top: 1.4rem; margin-left: 2rem; margin-right: 2rem; width: 70%;">จำนวน {{topic.amount}} บาท | ยอดบริจาครวม {{total.total_donate}} บาท</p>
+                            <button  type="button" mat-stroked-button style="margin-top: 1.4rem; width: 10%;" 
+                                *ngIf="cardData.user.id == user_id else donate_optional" (click)="openSlipOption('250ms','250ms',topic)">
+                                ดูสลิป</button>
+                            <ng-template #donate_optional>
+                                <div *ngIf="user_id else go_login" style="margin-top: 1.4rem; width: 11%;">
+                                    <button type="button" mat-stroked-button (click)="openPayment('250ms','250ms',topic)">บริจาค</button>
+                                </div>
+                                <ng-template #go_login>
+                                    <button type="button" mat-stroked-button (click)="login()" style="margin-top: 1.4rem; width: 10%;">บริจาค</button>
+                                </ng-template>  
+                            </ng-template>
+                        </ul>
+                    </div>
                 </div>
                 <div class="report-bt">
                     <button  type="button"  mat-raised-button *ngIf="cardData.user.id == user_id else report_bt" color="warn">ปิดการรับบริจาค</button>
