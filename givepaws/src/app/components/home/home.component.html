@@ -164,7 +164,7 @@
                    <h2> <span class="yellow">Help</span><br>ช่วยเหลือเหล่าสุนัขและแมวจรจัด</h2>
                    <p>แบ่งปันความรักและความห่วงใยให้แก่เหล่าสัตว์จรจัด เพื่อให้พวกเขามีชีวิตความเป็นอยู่ที่ดีขึ้น</p>
                    <p>และช่วยกันแก้ไขปัญหาสังคมให้โลกน่าอยู่มากยิ่งขึ้นในทุก ๆวันได้แล้ววันนี้</p>
-                   <a class="read_more" href="#"><img src="../../../assets/images/img-home/heart.png" alt="#"/> บริจาค</a>
+                   <a class="read_more" routerLink="/cards"><img src="../../../assets/images/img-home/heart.png" alt="#"/> บริจาค</a>
                 </div>
              </div>
           </div>
@@ -199,7 +199,7 @@
                                  โดยเว็บแอปพลิเคชันจะทำหน้าที่เป็นศูนย์กลางในการกระจายข่าวสารในการขอรับบริจาคกับผู้ที่มีความต้องการสนับสนุนให้ความช่วยเหลือโดยการบริจาคเข้ามามีส่วนร่วมในการช่วยเหลือหมาหรือแมวจรจัดได้ง่ายและน่าเชื่อถือมากยิ่งขึ้น</p>
                                  <p>โรงพยาบาลรักษาสัตว์ที่มีความประสงค์ที่อยากจะเข้าร่วมเป็นส่วนหนึ่งของพลังที่ช่วยเปลี่ยนให้โลกนี้น่าอยู่มากยิ่งขึ้น สามารถติดต่อกับพวกเราได้ที่ ติดต่อเรา ได้แล้ววันนี้</p>  
                                  <div class= "con" style="align-content: center;">
-                                    <a class="read_more" href="#"><img src="../../../assets/images/img-home/love.png" alt="#"/> ติดต่อเรา</a> 
+                                    <a class="read_more" routerLink="/about"><img src="../../../assets/images/img-home/love.png" alt="#"/> ติดต่อเรา</a> 
                                  </div>
                               </div>
                          </div>
@@ -224,7 +224,12 @@
              <div class="row">   
                      <div class="col-lg-3 col-md-6 col-sm-6">
                         <div style="margin-right: 20px;margin-left: 20px;">
-                           <a class="logo2" href="index.html"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#"/></a>
+                           <div *ngIf="main else login_img">
+                              <a class="logo2" routerLink="/"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#"/></a>
+                           </div>
+                           <ng-template #login_img>
+                              <a class="logo2" routerLink="/home"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#"/></a>
+                           </ng-template>
                         <div class="follow">
                            <p>พวกเรายินดีที่จะทำหน้าที่เป็นส่วนหนึ่งในการช่วยเหลือสุนัขและแมวจรจัดที่กำลังเผชิญอยู่กับความเจ็บปวดให้มีชีวิตที่ดีขึ้นนอกจากนี้ก็ยังเป็นการร่วมแก้ไขปัญหาภายในสังคมไทยเราให้น่าอยู่มากยิ่งขึ้น</p>
                         </div>
@@ -235,7 +240,7 @@
                    <h3>ช่องทางการติดต่อ</h3>
                    <ul class="link_icon">
                       <li class="active"> <a href="#"> <i class="fa fa-chevron-right" aria-hidden="index.html"></i>หน้าหลัก</a></li>
-                      <li> <a href="#"> <i class="fa fa-chevron-right" aria-hidden="blog"></i>ติดต่อเรา</a></li>
+                      <li> <a routerLink="/about"> <i class="fa fa-chevron-right" aria-hidden="blog"></i>ติดต่อเรา</a></li>
                    </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">

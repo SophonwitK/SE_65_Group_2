@@ -40,7 +40,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { PostCardHistoryComponent,RejectCardDialog } from './components/post-card-history/post-card-history.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { CardComponent,DonarComponent,ReportComponent,DeleteDonarComponent,ViewSlipComponent,ViewSlipTopicComponent,PaymentComponent } from './components/card/card.component';
+import { CardComponent,DonarComponent,ReportComponent,DeleteDonarComponent,ViewSlipComponent,PaymentComponent } from './components/card/card.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { TrasnferComponent } from './components/trasnfer/trasnfer.component';
 import { TrasnferpopupComponent } from './components/trasnferpopup/trasnferpopup.component';
@@ -74,7 +74,6 @@ import { CheckDonatePaymentListComponent } from './components/check-donate-payme
     ReportComponent,
     DeleteDonarComponent,
     ViewSlipComponent,
-    ViewSlipTopicComponent,
     PaymentComponent,
     TrasnferComponent,
     TrasnferpopupComponent,

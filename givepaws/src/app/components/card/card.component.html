@@ -30,7 +30,7 @@
                             <li style="margin-top: 1.4rem; list-style: inside; width: 20%;">{{topic.topic}}</li>
                             <p style="margin-top: 1.4rem; margin-left: 2rem; margin-right: 2rem; width: 70%;">จำนวน {{topic.amount}} บาท | ยอดบริจาครวม {{total.total_donate}} บาท</p>
                             <button  type="button" mat-stroked-button style="margin-top: 1.4rem; width: 10%;" 
-                                *ngIf="cardData.user.id == user_id else donate_optional" (click)="openSlipOption('250ms','250ms',topic)">
+                                *ngIf="cardData.user.id == user_id else donate_optional" (click)="openSlip('250ms','250ms',topic)">
                                 ดูสลิป</button>
                             <ng-template #donate_optional>
                                 <div *ngIf="user_id else go_login" style="margin-top: 1.4rem; width: 11%;">

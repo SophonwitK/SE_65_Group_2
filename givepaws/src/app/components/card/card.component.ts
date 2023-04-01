@@ -120,24 +120,8 @@ export class CardComponent implements OnInit {
     })
   }
 
-  openSlip(enterAnimationDuration: string, exitAnimationDuration: string,card: any): void {
+  openSlip(enterAnimationDuration: string, exitAnimationDuration: string,topic: any): void {
     const dialog = this._dialog.open(ViewSlipComponent, {
-      data: card,
-      width:'20%',
-      height: 'auto',
-      position: {top: '10rem'},
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-    dialog.afterClosed().subscribe({
-      next: (res) =>{
-        this.getDonar();
-      }
-    })
-  }
-
-  openSlipOption(enterAnimationDuration: string, exitAnimationDuration: string,topic: any): void {
-    const dialog = this._dialog.open(ViewSlipTopicComponent, {
       data: topic,
       width:'20%',
       height: 'auto',
@@ -399,25 +383,11 @@ export class PaymentComponent {
   }
 }
 
-
-
-
 @Component({
-  selector: 'view-slip-card',
+  selector: 'view-slip-topic-card',
   templateUrl: './view-slip.component.html',
 })
 export class ViewSlipComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public card: any,
-  ){
-  }
-}
-
-@Component({
-  selector: 'view-slip-topic-card',
-  templateUrl: './view-slip-topic.component.html',
-})
-export class ViewSlipTopicComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public topic: any,
   ){
