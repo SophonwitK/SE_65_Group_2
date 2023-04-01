@@ -530,7 +530,6 @@ def payment_waiting_list(request):  #### payment waiting list Little
 
 
  #### First 4 Card that's still open Little
-
 @api_view(['GET', 'POST'])
 def emergency_card_list(request):
     if request.method == 'GET':
