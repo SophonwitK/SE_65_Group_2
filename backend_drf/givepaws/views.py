@@ -566,7 +566,7 @@ def approve_payment(request, pk):
     
     payment.status = 'approve'
     payment.save()
-    return Response({'message': 'Payment rejected successfully'}, status=status.HTTP_200_OK)
+    return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
     
 
 
