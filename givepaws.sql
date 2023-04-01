@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2023 at 04:15 PM
+-- Generation Time: Apr 01, 2023 at 10:17 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -251,16 +251,17 @@ CREATE TABLE `card` (
   `receiptimgpath` varchar(1000) NOT NULL,
   `price` float NOT NULL,
   `user` bigint(20) NOT NULL,
-  `hospitalID` int(20) NOT NULL
+  `hospitalID` int(20) NOT NULL,
+  `slipImgComplete` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `card`
 --
 
-INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `price`, `user`, `hospitalID`) VALUES
-(19, 'ขอความช่วยเหลือหมา', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:22:42', 'approve', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 5200, 40, 1),
-(20, 'ช่วยแมว', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 1);
+INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `price`, `user`, `hospitalID`, `slipImgComplete`) VALUES
+(19, 'ขอความช่วยเหลือหมา', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:22:42', 'approve', 'ใบเสร็จ', 'GWE-1231', 'img/receipt/cropped-3840-2160-1213237.jpg', 5200, 40, 1, NULL),
+(20, 'ช่วยแมว', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-03-17 12:25:20', 'approve', 'ใบเสนอราคา', '7878', 'img/receipt/Desktop_4K__3840_x_2160_.png', 5875, 40, 1, 'img/payment/hospital/img-07-en.png');
 
 -- --------------------------------------------------------
 
@@ -441,16 +442,17 @@ CREATE TABLE `donatetopic` (
   `cardID` int(20) NOT NULL,
   `topic` varchar(100) NOT NULL,
   `amount` float NOT NULL,
-  `slipImgComplete` varchar(1000) DEFAULT NULL
+  `slipImgComplete` varchar(1000) DEFAULT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `donatetopic`
 --
 
-INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipImgComplete`) VALUES
-(10, 20, 'ค่าเดินทาง', 457, NULL),
-(11, 20, 'ค่ายา', 600, NULL);
+INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipImgComplete`, `status`) VALUES
+(10, 20, 'ค่าเดินทาง', 457, 'img/payment/topic/721698.jpg', 'waiting'),
+(11, 20, 'ค่ายา', 600, NULL, 'waiting');
 
 -- --------------------------------------------------------
 
