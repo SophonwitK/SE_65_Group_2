@@ -528,7 +528,7 @@ def payment_waiting_list(request):  #### payment waiting list Little
 
 from datetime import datetime, timedelta
 @api_view(['GET', 'POST'])
-def emergency_card_list(request):  #### First 4 Card Little
+def emergency_card_list(request):  #### First 4 Card that's still open Little
     if request.method == 'GET':
         one_month_ago = datetime.now() - timedelta(days=30)
         cards = Card.objects.filter(status='approve', date__gte=one_month_ago).order_by('-date')[:4]
@@ -544,3 +544,4 @@ def emergency_card_list(request):  #### First 4 Card Little
 
 
 #### Query เงินใน Donate Card
+#### Donate Topic
