@@ -507,7 +507,23 @@ def get_all_report_by_card_id(request,pk):
     report_serializer = ReportSerializer( report, many=True)
     return Response( report_serializer.data, status=status.HTTP_200_OK)
 
+
     
+@api_view(['GET', 'POST'])
+# @authentication_classes([JWTAuthentication]) 
+# @permission_classes([IsAuthenticated]) 
+def payment_waiting_list(request):
+    if request.method == 'GET':
+        payments = Paymentcard.objects.filter(status='waiting').order_by('-date')
+        payment_serializer = PaymentCardSerializer(payments, many=True)
+        return Response(payment_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        payment_serializer = PaymentCardSerializer(data=request.data)
+        if payment_serializer.is_valid():
+            payment_serializer.save()
+            return Response(payment_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(payment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #### Query เงินใน Donate Card
-#### 
+#### First 4 Card
+#### Card with status Waiting

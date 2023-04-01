@@ -32,4 +32,9 @@ urlpatterns = [
     path("card/<int:pk>/reports/",views.get_all_report_by_card_id,name="get_all_report_by_card_id"), #get all report by card id
 
 
+
+    #Little
+    path("payments_waiting/",views.payment_waiting_list,name="payments_waiting"),
+
+
 ]
