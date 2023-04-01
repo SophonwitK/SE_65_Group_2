@@ -1,5 +1,5 @@
 <mat-card style="width: 100%; height: 100%; display: flex; flex-direction: column;">
-    <img *ngIf="card.slipimgcomplete else slip" style="align-self: center; max-width: 75%; margin: 2rem;" mat-card-image src="http://127.0.0.1:8000/{{card.slipimgcomplete}}" alt="slip-img">
+    <img *ngIf="topic.slipimgcomplete else slip" style="align-self: center; max-width: 75%; margin: 2rem;" mat-card-image src="http://127.0.0.1:8000/{{topic.slipimgcomplete}}" alt="slip-img">
     <ng-template #slip>
         <h2 style="color: black; margin: 5rem; display: flex; justify-content: center; align-items: center;">ยังไม่ได้โอน</h2>
     </ng-template>
