@@ -19,7 +19,8 @@ urlpatterns = [
     path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"), #get all payment by userid
     path("cards/users/<int:pk>",views.get_user_card,name="get_user_card"), #get all card by userid
     path("cards/",views.card_list,name="card_list"), #post card and get all card
-    path("cards/approve/",views.approve_card_list,name="approve_card_list"), #get all card approve
+    path("cards/approve/",views.approve_card_list,name="approve_card_list"), #get all approve card 
+    path("cards/complete/",views.complete_card_list,name="approve_card_list"), #get all complete card 
     path("cards/<int:pk>",views.card_detail,name="card_detail"), #delete card
     path("cards/id/<int:pk>",views.get_card_by_id,name="get_card_by_id"), #get card by id for all user
     path("donate/topic/",views.donate_topic_list,name="donate_topic_list"), #post topic and get all topic
@@ -31,6 +32,7 @@ urlpatterns = [
     path("reports/",views.report_list,name="report_list"), #get all and post report
     path("card/<int:pk>/reports/",views.get_all_report_by_card_id,name="get_all_report_by_card_id"), #get all report by card id
     path("donate/topic/<int:pk>/payments/",views.get_approve_total_donate_by_topic_id,name="get_approve_total_donate_by_topic_id"), #get TotalDonate by topic id
+    path("card/<int:pk>/close",views.close_card_by_id,name="close_card_by_id"),
 
 
     #Little

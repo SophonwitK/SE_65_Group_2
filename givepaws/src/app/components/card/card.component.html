@@ -1,9 +1,12 @@
-<div class="body">
+<div class="body" *ngIf="cardData">
     <mat-nav-list class = "nav-link">
-        <a routerLink="/cards"><h2>Back</h2></a>
+        <a routerLink="/cards" *ngIf="cardData.cardstatus === 'approve' else com"><h2>Back</h2></a>
+        <ng-template #com>
+            <a routerLink="/cards/complete/history"><h2>Back</h2></a>
+        </ng-template>
         <img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" />
     </mat-nav-list>
-    <div class="main-content" *ngIf="cardData">
+    <div class="main-content" >
         <div class="selection-1">
             <mat-card>
                 <h2 style="color: black; margin-top: 3rem;">{{cardData.topic}}</h2>
@@ -24,34 +27,49 @@
                 </h3>
                 <h3 style="color: black; align-self: flex-start; margin-left: 8rem;">รายละเอียด</h3>
                 <p class="description">{{cardData.description}}</p>
-                <div class="donate" *ngFor="let topic of cardData.donate_topic">
-                    <div *ngFor="let total of totalDonate" style="width: 100%;">
-                        <ul class="donate-topic" *ngIf="total.topic_id == topic.donatetopicid">
-                            <li style="margin-top: 1.4rem; list-style: inside; width: 20%;">{{topic.topic}}</li>
-                            <p style="margin-top: 1.4rem; margin-left: 2rem; margin-right: 2rem; width: 70%;">จำนวน {{topic.amount}} บาท | ยอดบริจาครวม {{total.total_donate}} บาท</p>
-                            <button  type="button" mat-stroked-button style="margin-top: 1.4rem; width: 10%;" 
-                                *ngIf="cardData.user.id == user_id else donate_optional" (click)="openSlip('250ms','250ms',topic)">
-                                ดูสลิป</button>
-                            <ng-template #donate_optional>
-                                <div *ngIf="user_id else go_login" style="margin-top: 1.4rem; width: 11%;">
-                                    <button type="button" mat-stroked-button (click)="openPayment('250ms','250ms',topic)">บริจาค</button>
-                                </div>
-                                <ng-template #go_login>
-                                    <button type="button" mat-stroked-button (click)="login()" style="margin-top: 1.4rem; width: 10%;">บริจาค</button>
-                                </ng-template>  
-                            </ng-template>
-                        </ul>
+                <div *ngIf="cardData.cardstatus === 'approve' else card_com" style="width: 100%;">
+                    <div class="donate" *ngFor="let topic of cardData.donate_topic">
+                        <div *ngFor="let total of totalDonate" style="width: 100%;">
+                            <ul class="donate-topic" *ngIf="total.topic_id == topic.donatetopicid">
+                                <li style=" list-style: inside; width: 20%;">{{topic.topic}}</li>
+                                <p style=" margin-left: 2rem; margin-right: 2rem; width: 70%;">จำนวน {{topic.amount}} บาท | ยอดบริจาครวม {{total.total_donate}} บาท</p>
+                                <button  type="button" mat-stroked-button style=" width: 10%;" 
+                                    *ngIf="cardData.user.id == user_id else donate_optional" (click)="openSlip('250ms','250ms',topic)">
+                                    ดูสลิป</button>
+                                <ng-template #donate_optional>
+                                    <div *ngIf="user_id else go_login" style=" width: 11%;">
+                                        <button type="button" mat-stroked-button (click)="openPayment('250ms','250ms',topic)">บริจาค</button>
+                                    </div>
+                                    <ng-template #go_login>
+                                        <button type="button" mat-stroked-button (click)="login()" style=" width: 10%;">บริจาค</button>
+                                    </ng-template>  
+                                </ng-template>
+                            </ul>
+                        </div>
+                    </div>                  
+                    <div class="report-bt">
+                        <button (click)="closeCard('250ms','250ms',cardData.cardid)"  type="button"  mat-raised-button *ngIf="cardData.user.id == user_id else report_bt" color="warn" >ปิดการรับบริจาค</button>
+                        <ng-template #report_bt>
+                            <button *ngIf="user_id else go_login" type="button" mat-raised-button (click)="openReport('250ms','250ms',cardData.cardid)">Report</button>
+                            <ng-template #go_login>
+                                <button type="button" mat-raised-button (click)="login()">Report</button>
+                            </ng-template>  
+                        </ng-template>
                     </div>
                 </div>
-                <div class="report-bt">
-                    <button  type="button"  mat-raised-button *ngIf="cardData.user.id == user_id else report_bt" color="warn">ปิดการรับบริจาค</button>
-                    <ng-template #report_bt>
-                        <button *ngIf="user_id else go_login" type="button" mat-raised-button (click)="openReport('250ms','250ms',cardData.cardid)">Report</button>
-                        <ng-template #go_login>
-                            <button type="button" mat-raised-button (click)="login()">Report</button>
-                        </ng-template>  
-                    </ng-template>
-                </div>
+                <ng-template #card_com>
+                    <div class="donate" *ngFor="let topic of cardData.donate_topic">
+                        <div *ngFor="let total of totalDonate" style="width: 100%;">
+                            <ul class="donate-topic" *ngIf="total.topic_id == topic.donatetopicid">
+                                <li style=" list-style: inside; width: 20%;">{{topic.topic}}</li>
+                                <p style=" margin-left: 2rem; margin-right: 2rem; width: 70%;">จำนวน {{topic.amount}} บาท | ยอดบริจาครวม {{total.total_donate}} บาท</p>
+                                <button  type="button" mat-stroked-button style=" width: 10%;" 
+                                    *ngIf="cardData.user.id == user_id" (click)="openSlip('250ms','250ms',topic)">
+                                    ดูสลิป</button>
+                            </ul>
+                        </div>
+                    </div>                  
+                </ng-template>
             </mat-card>
         </div>
         <div class="selection-2">
@@ -65,7 +83,7 @@
                 </mat-card>
             </div>
             <div class="comment">
-                <mat-card>
+                <mat-card *ngIf="cardData==='approve' else card_com2">
                     <mat-card-header>
                         <h3>ติดตามผลการรักษา</h3>
                         <button type="button" (click)="openDonar('250ms','250ms',cardData.cardid)" mat-raised-button *ngIf="cardData.user.id == user_id"> Add </button>
@@ -81,6 +99,22 @@
                         </div>
                     </mat-card-content>
                 </mat-card>
+                <ng-template #card_com2>
+                    <mat-card>
+                        <mat-card-header>
+                            <h3>ติดตามผลการรักษา</h3>
+                        </mat-card-header>
+                        <mat-card-content *ngIf="donarData">
+                            <div *ngFor="let donar of donarData" class="donar-content">
+                                <h4 style="color: black; margin: 1rem 1rem 0.5rem 1rem;">[วันที่] {{donar.date | thaidate:'medium'}}</h4>
+                                <h4 style="color: black; margin: 0rem 1rem 0.5rem 1rem;">[หัวข้อ] {{donar.topic}}</h4>
+                                <h4 style="color: black; margin: 0rem 1rem 0.5rem 1rem;">รายละเอียด</h4>
+                                <p style="color: black; margin: 0rem 1rem 1rem 1rem;">{{donar.description}}</p>
+                                <img style="align-self: center; max-width: 75%; margin: 2rem;" mat-card-image src="http://127.0.0.1:8000/{{donar.img}}" alt="donar-img">
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </ng-template>
             </div>
         </div>
     </div>

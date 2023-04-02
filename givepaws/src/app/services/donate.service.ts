@@ -67,6 +67,18 @@ export class DonateService {
     );
   }
 
+  getAllCompleteCard(): Observable<any>{
+    return this._http.get(`http://127.0.0.1:8000/api/cards/complete/`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
 
   
   getCardByID(id:number): Observable<any>{
@@ -262,5 +274,16 @@ export class DonateService {
     );
   }
 
+  closeCardByID(id:number,data:any): Observable<any>{
+    return this._http.put(`http://127.0.0.1:8000/api/card/${id}/close`,data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
 
 }

@@ -16,24 +16,6 @@ from datetime import datetime, timedelta
 
 
 
-# @api_view(['GET'])
-# def get_approve_total_donate_by_topic_id(request,pk):
-#     totalDonate = 0
-#     try:
-#         payment = Paymentcard.objects.all().filter(donatetopicid=pk,status="approve")
-#     except:
-#         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
-#     payment_serializer = PaymentCardSerializer( payment, many=True)
-#     for value in payment_serializer.data:
-#         totalDonate+=value['contribution']
-#     total = {'topic_id': pk, 'total_donate': totalDonate}
-#     if(payment_serializer):
-#         return Response(  total, status=status.HTTP_200_OK)
-#     else:
-#         return Response(  total, status=status.HTTP_200_OK)
-    
-
-
 @api_view(['GET'])
 def get_card_by_id(request, pk):  ### pk mean PimaryKey
     try:
@@ -45,6 +27,21 @@ def get_card_by_id(request, pk):  ### pk mean PimaryKey
         return Response(card_serializer.data, status=status.HTTP_200_OK) 
     else:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    
+@api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def close_card_by_id(request, pk):  ### pk mean PimaryKey
+    try:
+      card = Card.objects.get(pk=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    card_serializer = CardSerializer(card,data=request.data,partial=True)
+    if  card_serializer.is_valid():
+        card_serializer.save()
+        return Response( card_serializer.data, status=status.HTTP_201_CREATED) 
+    return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
     
 @api_view(['GET'])
 def get_donate_accept_by_card_id(request, pk):
@@ -76,6 +73,7 @@ def authen_check_list(request):
             authen_check_serializer.save()
             return Response(authen_check_serializer.data, status=status.HTTP_201_CREATED) 
         return Response(authen_check_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 
 @api_view(['GET','PUT', 'DELETE'])
 @authentication_classes([JWTAuthentication])
@@ -459,10 +457,24 @@ def approve_card_list(request):
         card = Card.objects.all().filter(cardstatus="approve")
     except:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
-    if request.method == 'GET':
-        card_serializer =CardSerializer(card, many=True)
-        if card:
-            return Response(card_serializer.data, status=status.HTTP_200_OK) 
+    card_serializer =CardSerializer(card, many=True)
+    if card_serializer:
+        return Response(card_serializer.data, status=status.HTTP_200_OK) 
+    return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
+@api_view(['GET'])
+def complete_card_list(request):
+    try:
+        card = Card.objects.all().filter(cardstatus="complete")
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    card_serializer =CardSerializer(card, many=True)
+    if card_serializer:
+        return Response(card_serializer.data, status=status.HTTP_200_OK) 
+    return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    
+
+
 
 @api_view(['GET'])
 def get_all_donar_by_card_id(request, pk):

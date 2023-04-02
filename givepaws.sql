@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2023 at 07:34 PM
+-- Generation Time: Apr 02, 2023 at 07:16 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -259,7 +259,8 @@ CREATE TABLE `card` (
 
 INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `user`, `hospitalID`) VALUES
 (25, 'ช่วยหมาผมด้วย', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2023-04-01 14:21:15', 'approve', 'ใบเสนอราคา', '4587A', 'img/receipt/QuotationNew.png', 40, 1),
-(26, 'ช่วยแมวผมด้วย', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-04-01 14:22:49', 'approve', 'ใบเสร็จ', '4488B', 'img/receipt/003.png', 40, 1);
+(26, 'ช่วยแมวผมด้วย', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-04-01 14:22:49', 'approve', 'ใบเสร็จ', '4488B', 'img/receipt/003.png', 40, 1),
+(34, 'ขอรับบริจาคช่วยน้องส้ม', '\"ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2023-04-02 15:32:01', 'complete', 'ใบเสร็จ', '5544A', 'img/receipt/003_kSE45Lq.png', 40, 1);
 
 -- --------------------------------------------------------
 
@@ -403,7 +404,8 @@ CREATE TABLE `donar` (
 --
 
 INSERT INTO `donar` (`donarID`, `date`, `topic`, `description`, `img`, `cardID`) VALUES
-(10, '2023-04-01 17:31:25', 'หลังจากรักษา', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/download.jfif', 26);
+(10, '2023-04-01 17:31:25', 'หลังจากรักษา', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', 'img/donar/download.jfif', 26),
+(11, '2023-04-02 15:33:28', 'หลังจากรักษา', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\',', 'img/donar/pun-earn-thai-ridgeback12.jpg', 34);
 
 -- --------------------------------------------------------
 
@@ -425,7 +427,8 @@ CREATE TABLE `donateaccept` (
 
 INSERT INTO `donateaccept` (`donateacceptID`, `hcID`, `date`, `description`, `cardID`) VALUES
 (9, 7, '2023-04-01 16:25:55', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text', 26),
-(11, 7, '2023-04-01 16:26:14', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature,', 25);
+(11, 7, '2023-04-01 16:26:14', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature,', 25),
+(19, 7, '2023-04-02 17:32:13', 'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 34);
 
 -- --------------------------------------------------------
 
@@ -450,7 +453,9 @@ INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipIm
 (12, 25, 'ค่ารักษา', 5000, '', 'waiting'),
 (13, 26, 'ค่ารักษา', 5000, '', 'waiting'),
 (14, 26, 'ค่ายา', 1000, '', 'waiting'),
-(15, 26, 'ค่าอาหาร', 300, '', 'waiting');
+(15, 26, 'ค่าอาหาร', 300, '', 'waiting'),
+(27, 34, 'ค่ารักษา', 4000, '', 'waiting'),
+(28, 34, 'ค่าอาหารหมา', 300, '', 'waiting');
 
 -- --------------------------------------------------------
 
@@ -495,7 +500,9 @@ INSERT INTO `givepaws_cardimg` (`id`, `image`, `card_id`) VALUES
 (40, 'img/card/1515139688095.jpg', 25),
 (41, 'img/card/GR-1_008.jpg', 25),
 (42, 'img/card/20210613145726.jpg', 26),
-(43, 'img/card/c3.jpg', 26);
+(43, 'img/card/c3.jpg', 26),
+(51, 'img/card/4DQpjUtzLUwmJZZPHZ5KFQ0PsOMdk9paspAyAHhjMpvg.jpg', 34),
+(52, 'img/card/577720_267456990028497_2095.jpg', 34);
 
 -- --------------------------------------------------------
 
@@ -848,7 +855,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `cardID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -872,19 +879,19 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT for table `donar`
 --
 ALTER TABLE `donar`
-  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `donarID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `donateaccept`
 --
 ALTER TABLE `donateaccept`
-  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `donateacceptID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `donatetopic`
 --
 ALTER TABLE `donatetopic`
-  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `donatetopicID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `givepaws_authenimage`
@@ -896,7 +903,7 @@ ALTER TABLE `givepaws_authenimage`
 -- AUTO_INCREMENT for table `givepaws_cardimg`
 --
 ALTER TABLE `givepaws_cardimg`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `hospital`

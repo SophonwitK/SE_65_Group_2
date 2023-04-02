@@ -51,6 +51,9 @@
                     <button routerLink="/cards/{{row.cardid}}" *ngIf="row.cardstatus === 'approve'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;" type="button">
                         View  
                     </button>
+                    <button routerLink="/cards/{{row.cardid}}" *ngIf="row.cardstatus === 'complete'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;" type="button">
+                        View  
+                    </button>
                     <button (click)="openReject('250ms', '250ms',row.cardid)"  *ngIf="row.cardstatus === 'reject'" mat-icon-button color="primary" style="display: flex; justify-content: center; align-items: center; font-size: medium;" type="button">
                         View
                     </button>

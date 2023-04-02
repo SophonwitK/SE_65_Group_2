@@ -40,12 +40,14 @@ import { PostCardComponent } from './components/post-card/post-card.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { PostCardHistoryComponent,RejectCardDialog } from './components/post-card-history/post-card-history.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { CardComponent,DonarComponent,ReportComponent,DeleteDonarComponent,ViewSlipComponent,PaymentComponent } from './components/card/card.component';
+import { CardComponent,DonarComponent,ReportComponent,DeleteDonarComponent,ViewSlipComponent,PaymentComponent,CloseCardComponent } from './components/card/card.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { TrasnferComponent } from './components/trasnfer/trasnfer.component';
 import { TrasnferpopupComponent } from './components/trasnferpopup/trasnferpopup.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { CheckDonatePaymentListComponent } from './components/check-donate-payment-list/check-donate-payment-list.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CompleteCardComponent } from './components/complete-card/complete-card.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { CheckDonatePaymentListComponent } from './components/check-donate-payme
     PaymentComponent,
     TrasnferComponent,
     TrasnferpopupComponent,
+    CloseCardComponent,
+    CompleteCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +110,7 @@ import { CheckDonatePaymentListComponent } from './components/check-donate-payme
     MatCardModule,
     MatGridListModule,
     NgImageSliderModule,
+    MatTabsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 2000,

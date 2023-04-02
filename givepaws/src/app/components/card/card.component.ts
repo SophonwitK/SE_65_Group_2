@@ -152,6 +152,16 @@ export class CardComponent implements OnInit {
     })
   }
 
+  closeCard(enterAnimationDuration: string, exitAnimationDuration: string,card_id: any): void {
+    const dialog = this._dialog.open(CloseCardComponent, {
+      data: card_id,
+      width:'20%',
+      height: 'auto',
+      position: {top: '20rem'},
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
 
   login(){
     this._router.navigate(['login']);
@@ -393,5 +403,34 @@ export class ViewSlipComponent {
   ){
   }
 
+}
+
+@Component({
+  selector: 'close-card-topic-card',
+  templateUrl: './close-card-component.html',
+})
+export class CloseCardComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public card_id: any,
+    private _donateService:DonateService,
+    private _router: Router,
+    private _toaster: ToastrService,
+    public _dialogRef: MatDialogRef<CloseCardComponent>,
+  ){
+  }
+  onClose(){
+    const data = {
+      "cardstatus":"complete"
+    }
+    this._donateService.closeCardByID(this.card_id,data).subscribe({
+      next: res =>{
+        if(res){
+          this._dialogRef.close()
+          this._toaster.success('close card successfully')
+          this._router.navigate(['cards'])
+        }
+      } 
+    })
+  }
 }
 

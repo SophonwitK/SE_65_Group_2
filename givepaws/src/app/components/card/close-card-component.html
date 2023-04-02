@@ -1,0 +1,7 @@
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <h3 style="color: black; margin: 2rem 2rem 1rem 2rem; align-self: center;">คุณต้องการจะปิดการรับบริจาคใช่ไหม</h3>
+    <div mat-dialog-actions style="width: 100%; display: flex; justify-content: center; margin-bottom: 1rem;">
+        <button mat-button [mat-dialog-close]="false" type="button">Cancel</button>
+        <button mat-button cdkFocusInitial type="button" (click)="onClose()">Ok</button>
+    </div>
+</div>

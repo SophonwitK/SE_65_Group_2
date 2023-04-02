@@ -16,6 +16,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { AuthenUserGuard } from './guard/authen-user.guard';
 import { CardComponent } from './components/card/card.component';
 import { CheckDonatePaymentListComponent } from './components/check-donate-payment-list/check-donate-payment-list.component';
+import { CompleteCardComponent } from './components/complete-card/complete-card.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
@@ -33,9 +34,8 @@ const routes: Routes = [
   {path:'edit/card/:id',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'cards',component:CardAllComponent},
   {path:'cards/:id',component:CardComponent},
-  {path:'cards',component:CardAllComponent},
-  {path:'employee',component:CheckDonatePaymentListComponent}
-  
+  {path:'employee',component:CheckDonatePaymentListComponent},
+  {path:'cards/complete/history',component:CompleteCardComponent},
 ];
 
 @NgModule({
