@@ -629,7 +629,6 @@ def approve_payment(request, pk):
     return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
     
 
-# donate = Donatetopic.objects.all()
 @api_view(['POST'])
 def card_refresh_status(request):
     thirty_days_ago = datetime.now() - timedelta(days=30)
@@ -649,5 +648,24 @@ def complete_donatetopic_list(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-#### Query เงินใน Donate Card
-#### Donate Topic
+@api_view(['GET'])
+def waiting_card_list(request):
+    try:
+        card = Card.objects.all().filter(cardstatus="waiting")
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    card_serializer =CardSerializer(card, many=True)
+    if card_serializer:
+        return Response(card_serializer.data, status=status.HTTP_200_OK) 
+    return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
+@api_view(['GET'])
+def reject_card_list(request):
+    try:
+        card = Card.objects.all().filter(cardstatus="reject")
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    card_serializer =CardSerializer(card, many=True)
+    if card_serializer:
+        return Response(card_serializer.data, status=status.HTTP_200_OK) 
+    return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
