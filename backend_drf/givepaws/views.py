@@ -13,6 +13,7 @@ import jwt,os
 from users.models import User
 
 from datetime import datetime, timedelta
+from django.db.models import Q
 
 
 
@@ -641,6 +642,25 @@ def approve_payment(request, pk):
     payment.save()
     return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
     
+
+# donate = Donatetopic.objects.all()
+@api_view(['POST'])
+def card_refresh_status(request):
+    thirty_days_ago = datetime.now() - timedelta(days=30)
+    expired_cards = Card.objects.filter(date__lte=thirty_days_ago, cardstatus='approve')
+    for card in expired_cards:
+        card.cardstatus = 'complete'
+        card.save()
+        Donatetopic.objects.filter(cardid=card.pk).update(status='complete')
+    return Response({'message': f"{len(expired_cards)} card(s) and related DonateTopic(s) updated"}, status=status.HTTP_200_OK)
+
+
+
+@api_view(['GET'])
+def complete_donatetopic_list(request):
+    donatetopics = Donatetopic.objects.filter(Q(status='complete'), (Q(slipimgcomplete='') | Q(slipimgcomplete__isnull=True)))
+    serializer = DonateTopicSerializer(donatetopics, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 #### Query เงินใน Donate Card
