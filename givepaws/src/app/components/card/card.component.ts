@@ -419,12 +419,16 @@ export class CloseCardComponent {
   ){
   }
   onClose(){
-    const data = {
+    const data_card = {
       "cardstatus":"complete"
     }
-    this._donateService.closeCardByID(this.card_id,data).subscribe({
+    const data_topic = {
+      "status":"complete"
+    }
+    this._donateService.closeCardByID(this.card_id,data_card).subscribe({
       next: res =>{
         if(res){
+          this._donateService.closeTopicsByCardID(this.card_id,data_topic).subscribe({})
           this._dialogRef.close()
           this._toaster.success('close card successfully')
           this._router.navigate(['cards'])

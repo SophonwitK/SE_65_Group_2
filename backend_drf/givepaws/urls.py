@@ -32,7 +32,8 @@ urlpatterns = [
     path("reports/",views.report_list,name="report_list"), #get all and post report
     path("card/<int:pk>/reports/",views.get_all_report_by_card_id,name="get_all_report_by_card_id"), #get all report by card id
     path("donate/topic/<int:pk>/payments/",views.get_approve_total_donate_by_topic_id,name="get_approve_total_donate_by_topic_id"), #get TotalDonate by topic id
-    path("card/<int:pk>/close",views.close_card_by_id,name="close_card_by_id"),
+    path("card/<int:pk>/close",views.close_card_by_id,name="close_card_by_id"), #close card by id
+    path("card/<int:pk>/topics/close",views.close_topics_by_card_id,name="close_topics_by_card_id"), #close all donate topic by card id
 
 
     #Little
