@@ -43,6 +43,20 @@ def close_card_by_id(request, pk):  ### pk mean PimaryKey
         return Response( card_serializer.data, status=status.HTTP_201_CREATED) 
     return Response(card_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
+@api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def close_topics_by_card_id(request, pk):  ### pk mean PimaryKey
+    try:
+      donate_topic_list = Donatetopic.objects.all().filter(cardid=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    for topic in donate_topic_list:
+        donate_topic_serializer = DonateTopicSerializer(topic,data=request.data,partial=True)
+        if  donate_topic_serializer.is_valid():
+            donate_topic_serializer.save()
+    return Response( donate_topic_serializer.data, status=status.HTTP_201_CREATED) 
+
     
 @api_view(['GET'])
 def get_donate_accept_by_card_id(request, pk):

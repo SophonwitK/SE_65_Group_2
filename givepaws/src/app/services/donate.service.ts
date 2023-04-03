@@ -141,6 +141,19 @@ export class DonateService {
     );
   }
 
+  closeTopicsByCardID(id:number,data:any): Observable<any>{
+    return this._http.put(`http://127.0.0.1:8000/api/card/${id}/topics/close`,data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+
   getDonateAcceptByCardID(id:number): Observable<any>{
     return this._http.get(`http://127.0.0.1:8000/api/card/${id}/donate/accept/`).pipe(
       catchError((error: HttpErrorResponse) => {
