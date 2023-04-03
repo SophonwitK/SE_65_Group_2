@@ -893,7 +893,11 @@ ul.img_icon li {
      text-align: center;
      padding-top: 90px;
 }
-
+.card-home{
+     padding: 10px;
+     margin: 20px;
+     box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.39);
+}
 
 
 /** end footer **/

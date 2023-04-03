@@ -117,6 +117,17 @@ export class DonateService {
     );
   }
 
+  getEmergencyCard(): Observable<any>{
+    return this._http.get(`http://127.0.0.1:8000/api/card/emergency/`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
     
   deleteCardByID(id:number): Observable<any>{
     return this._http.delete(`http://127.0.0.1:8000/api/cards/${id}`).pipe(

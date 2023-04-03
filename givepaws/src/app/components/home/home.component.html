@@ -1,286 +1,257 @@
 <div class="main-layout">
-    <!-- header -->
-    <header>
-       <!-- header inner -->
-       <div class="header">
-          <div class="white_bg">
-             <div class="container-fluid">
-                <div class="row">
-                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                      <div class="full">
-                         <div class="center-desk">
-                            <div class="logo">
-                              <div *ngIf="main else login_img">
-                                 <a routerLink="/"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" /></a>
-                              </div>
-                              <ng-template #login_img>
-                                 <a routerLink="/home"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" /></a>
+   <!-- header -->
+   <header>
+      <!-- header inner -->
+      <div class="header">
+         <div class="white_bg">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo">
+                             <div *ngIf="main else login_img">
+                                <a routerLink="/"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" /></a>
+                             </div>
+                             <ng-template #login_img>
+                                <a routerLink="/home"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#" /></a>
+                             </ng-template>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                           <ul class="navbar-nav mr-auto" >
+                             <div *ngIf="main else login" style="display:flex; flex-direction: row; ">
+                                <li class="nav-item" >
+                                   <a class="nav-link" routerLink="/">หน้าหลัก</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" routerLink="/about">   ติดต่อเรา</a>
+                                </li>
+                                <li class="nav-item d_none le_co">
+                                   <a class="nav-link" routerLink="login"><i  class="fa fa-user" aria-hidden="true"></i>เข้าสู่ระบบ</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" routerLink="register">สมัครสมาชิก</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" routerLink="/cards/complete/history">การเปิดบริจาคที่ปิดแล้ว</a>
+                                </li>
+                             </div>
+                              <ng-template #login>
+                                <li class="nav-item">
+                                   <a class="nav-link" routerLink="/home">หน้าหลัก</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" routerLink="/about">   ติดต่อเรา</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" routerLink="/profile/{{username}}">หน้าโปรไฟล์</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" routerLink="/cards/complete/history">การเปิดบริจาคที่ปิดแล้ว</a>
+                                </li>
+                                <li class="nav-item d_none le_co">
+                                   <a class="nav-link" (click)="logout()" style="cursor: pointer;">ออกจากระบบ</a>
+                                </li>
                               </ng-template>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                   <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                      <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                         <span class="navbar-toggler-icon"></span>
-                         </button>
-                         <div class="collapse navbar-collapse" id="navbarsExample04">
-                            <ul class="navbar-nav mr-auto" >
-                              <div *ngIf="main else login" style="display:flex; flex-direction: row; ">
-                                 <li class="nav-item" >
-                                    <a class="nav-link" routerLink="/">หน้าหลัก</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" routerLink="/about">   ติดต่อเรา</a>
-                                 </li>
-                                 <li class="nav-item d_none le_co">
-                                    <a class="nav-link" routerLink="login"><i  class="fa fa-user" aria-hidden="true"></i>เข้าสู่ระบบ</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" routerLink="register">สมัครสมาชิก</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" routerLink="/cards/complete/history">การเปิดบริจาคที่ปิดแล้ว</a>
-                                 </li>
+                           </ul>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+            <!-- end header inner -->
+            <!-- end header -->
+            <!-- banner -->
+            <section class="banner_main">
+               <div id="banner1" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                     <li data-target="#banner1" data-slide-to="0" class="active"></li>
+                     <li data-target="#banner1" data-slide-to="1"></li>
+                     <li data-target="#banner1" data-slide-to="2"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <div class="container-fluid">
+                           <div class="carousel-caption">
+                              <div class="row">
+                                 <div class="col-md-12 col-lg-7">
+                                    <div class="text-bg">
+                                       <h1>C h a r i t y</h1>
+                                       <h2>ช่วยเหลือสุนัขและแมวจรจัดกับพวกเราได้แล้ววันนี้</h2>
+                                       <div class="row">
+                                           <a class="read_more" routerLink="/post/card" style="margin: 2%;"><img src="../../../assets/images/img-home/pet-care.png" alt="#"/> ขอรับบริจาค</a>
+                                           <a class="read_more" routerLink="/cards" style="margin: 2%;"><img src="../../../assets/images/img-home/heart.png" alt="#"/> บริจาค</a>
+                                       </div>               
+                                   </div>                                     
+                                 </div>
                               </div>
-                               <ng-template #login>
-                                 <li class="nav-item">
-                                    <a class="nav-link" routerLink="/home">หน้าหลัก</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" routerLink="/about">   ติดต่อเรา</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" routerLink="/profile/{{username}}">หน้าโปรไฟล์</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" routerLink="/cards/complete/history">การเปิดบริจาคที่ปิดแล้ว</a>
-                                 </li>
-                                 <li class="nav-item d_none le_co">
-                                    <a class="nav-link" (click)="logout()" style="cursor: pointer;">ออกจากระบบ</a>
-                                 </li>
-                               </ng-template>
-                            </ul>
-                         </div>
-                      </nav>
-                   </div>
-                </div>
-             </div>
-             <!-- end header inner -->
-             <!-- end header -->
-             <!-- banner -->
-             <section class="banner_main">
-                <div id="banner1" class="carousel slide" data-ride="carousel">
-                   <ol class="carousel-indicators">
-                      <li data-target="#banner1" data-slide-to="0" class="active"></li>
-                      <li data-target="#banner1" data-slide-to="1"></li>
-                      <li data-target="#banner1" data-slide-to="2"></li>
-                   </ol>
-                   <div class="carousel-inner">
-                      <div class="carousel-item active">
-                         <div class="container-fluid">
-                            <div class="carousel-caption">
-                               <div class="row">
-                                  <div class="col-md-12 col-lg-7">
-                                     <div class="text-bg">
-                                        <h1>C h a r i t y</h1>
-                                        <h2>ช่วยเหลือสุนัขและแมวจรจัดกับพวกเราได้แล้ววันนี้</h2>
-                                        <div class="row">
-                                            <a class="read_more" routerLink="/post/card" style="margin: 2%;"><img src="../../../assets/images/img-home/pet-care.png" alt="#"/> ขอรับบริจาค</a>
-                                            <a class="read_more" routerLink="/cards" style="margin: 2%;"><img src="../../../assets/images/img-home/heart.png" alt="#"/> บริจาค</a>
-                                        </div>               
-                                    </div>                                     
-                                  </div>
-                               </div>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </section>
-          </div>
-       </div>
-    </header>
-    <!-- end banner -->
-      <!-- services section --> 
-      <div class="services">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2> <span class="yellow">Save</span><br>ต้องการความช่วยเหลือโดยด่วน!</h2>
-                  </div>
-               </div> 
-               <div class="col-md-3 col-sm-6">
-                  <div id="ho_color" class="services_main">
-                     <div class="card">
-                        <i><img src="../../../assets/images/img-home/catin3.jpg" alt="#"/></i>
-                        <h3>รับบริจาคเพื่อรักษาแผลและอาหารแมว</h3>
-                        <p>น้องแมวถูกแมวตัวอื่นรุมกัดทำให้บาดแผลทั่วตัวและผอมมาก</p>
-                        <a class="read_more" href="#">บริจาคด่วน</a>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
-               <div class="col-md-3 col-sm-6">
-                  <div id="ho_color" class="services_main">
-                     <div class="card">
-                        <i><img src="../../../assets/images/img-home/dogin1.jpg" alt="#"/></i>
-                        <h3>รับบริจาคเพื่อรักษาน้องหมา</h3>
-                        <p>เจอน้องถูกทิ้งอยู่ในกองถังขยะ มีบาดแผลเล็ก ๆตามลำตัวและอ่อนแรงมากค่ะ</p>
-                        <a class="read_more" href="#">บริจาคด่วน</a>
-                     </div>
-                  </div>
+            </section>
+         </div>
+      </div>
+   </header>
+   <!-- end banner -->
+     <!-- services section --> 
+     <div class="services">
+        <div class="container">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="titlepage">
+                    <h2> <span class="yellow">Save</span><br>ต้องการความช่วยเหลือโดยด่วน!</h2>
+                 </div>
+              </div> 
+              <div class="col-md-3 col-sm-6">
+                 <div id="ho_color" class="services_main" *ngIf="cardData">
+                    <div class="card-home" *ngFor="let card of cardData | async">
+                       <i><img src="http://127.0.0.1:8000/{{card.images[0].image}}" alt="card-img"/></i>
+                       <h3>{{card.topic}}</h3>
+                       <p style="                
+                       color: black;
+                       display: -webkit-box;
+                       max-width: 100%;
+                       -webkit-line-clamp: 3;
+                       -webkit-box-orient: vertical;
+                       overflow: hidden;
+                       text-overflow: ellipsis;">{{card.description}}</p>
+                       <a class="read_more" routerLink="/cards/{{card.cardid}}">บริจาคด่วน</a>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- end services section --> 
+   <!-- about section -->
+   <div class="about">
+      <div class="container">
+         <div class="row d_flex">
+            <div class="col-md-12 col-lg-5">
+               <div class="about_img">
+                  <figure><img src="../../../assets/images/img-home/all.png" alt="#"/></figure>
                </div>
-               <div class="col-md-3 col-sm-6">
-                  <div id="ho_color" class="services_main">
-                     <div class="card">
-                        <i><img src="../../../assets/images/img-home/catin2.jpg" alt="#"/></i>
-                        <h3>รับบริจาคเพื่อรักษาแผลบริเวณใบหน้า</h3>
-                        <p>น้องเป็นแผลบริเวณใบหน้าและดวงตาร่างกายอ่อนแอมาก</p>
-                        <a class="read_more" href="#">บริจาคด่วน</a>
-                     </div>
-                  </div>
+            </div>
+            <div class="col-md-12 col-lg-7">
+               <div class="titlepage">
+                  <h2> <span class="yellow">Help</span><br>ช่วยเหลือเหล่าสุนัขและแมวจรจัด</h2>
+                  <p>แบ่งปันความรักและความห่วงใยให้แก่เหล่าสัตว์จรจัด เพื่อให้พวกเขามีชีวิตความเป็นอยู่ที่ดีขึ้น</p>
+                  <p>และช่วยกันแก้ไขปัญหาสังคมให้โลกน่าอยู่มากยิ่งขึ้นในทุก ๆวันได้แล้ววันนี้</p>
+                  <a class="read_more" routerLink="/cards"><img src="../../../assets/images/img-home/heart.png" alt="#"/> บริจาค</a>
                </div>
-               <div class="col-md-3 col-sm-6">
-                  <div id="ho_color" class="services_main">
-                     <div class="card">
-                        <i><img src="../../../assets/images/img-home/dogin2.jpg" alt="#"/></i>
-                        <h3>รับบริจาคเพื่อรักษาแผลหลังน้องหมา</h3>
-                        <p>น้องถูกเจ้าของทิ้งไว้ข้างถนนค่ะ มีแผลเหวอะหวะที่บริเวณหลังตรงสะโพก ขาหลังสองข้างพิการ</p>
-                        <a class="read_more" href="#">บริจาคด่วน</a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- about section -->
+   <!-- testimonial -->
+   <div  class="testimonial">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12 ">
+               <div class="titlepage">
+                  <h2> <span class="yellow">About Web application</span><br>เว็บแอปพลิเคชันนี้มีไว้เพื่ออะไร?</h2>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="testimoni" class="carousel slide testimonial_Carousel " data-ride="carousel">
+         <ol class="carousel-indicators">
+            <li data-target="#testimoni" data-slide-to="0" class="active"></li>
+         </ol>
+         <div class="carousel-inner">
+            <div class="carousel-item active">
+               <div class="container">
+                  <div class="carousel-caption ">
+                     <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                           <div class="test_box">
+                              <i><img src="../../../assets/images/img-home/catdog.jpg"></i>
+                              <h3>จุดประสงค์ของเรา</h3>
+                              <p>เว็บแอปพลิเคชันเพื่อการบริจาคเงินหมาและแมว(Givepaws)ถูกสร้างขึ้นมาเพื่อช่วยบรรเทาและแก้ปัญหาสังคมอย่างหมาเเละแมวจรจัด 
+                                โดยเว็บแอปพลิเคชันจะทำหน้าที่เป็นศูนย์กลางในการกระจายข่าวสารในการขอรับบริจาคกับผู้ที่มีความต้องการสนับสนุนให้ความช่วยเหลือโดยการบริจาคเข้ามามีส่วนร่วมในการช่วยเหลือหมาหรือแมวจรจัดได้ง่ายและน่าเชื่อถือมากยิ่งขึ้น</p>
+                                <p>โรงพยาบาลรักษาสัตว์ที่มีความประสงค์ที่อยากจะเข้าร่วมเป็นส่วนหนึ่งของพลังที่ช่วยเปลี่ยนให้โลกนี้น่าอยู่มากยิ่งขึ้น สามารถติดต่อกับพวกเราได้ที่ ติดต่อเรา ได้แล้ววันนี้</p>  
+                                <div class= "con" style="align-content: center;">
+                                   <a class="read_more" routerLink="/about"><img src="../../../assets/images/img-home/love.png" alt="#"/> ติดต่อเรา</a> 
+                                </div>
+                             </div>
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <!-- end services section --> 
-    <!-- about section -->
-    <div class="about">
-       <div class="container">
-          <div class="row d_flex">
-             <div class="col-md-12 col-lg-5">
-                <div class="about_img">
-                   <figure><img src="../../../assets/images/img-home/all.png" alt="#"/></figure>
-                </div>
-             </div>
-             <div class="col-md-12 col-lg-7">
-                <div class="titlepage">
-                   <h2> <span class="yellow">Help</span><br>ช่วยเหลือเหล่าสุนัขและแมวจรจัด</h2>
-                   <p>แบ่งปันความรักและความห่วงใยให้แก่เหล่าสัตว์จรจัด เพื่อให้พวกเขามีชีวิตความเป็นอยู่ที่ดีขึ้น</p>
-                   <p>และช่วยกันแก้ไขปัญหาสังคมให้โลกน่าอยู่มากยิ่งขึ้นในทุก ๆวันได้แล้ววันนี้</p>
-                   <a class="read_more" routerLink="/cards"><img src="../../../assets/images/img-home/heart.png" alt="#"/> บริจาค</a>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
-    <!-- about section -->
-    <!-- testimonial -->
-    <div  class="testimonial">
-       <div class="container">
-          <div class="row">
-             <div class="col-md-12 ">
-                <div class="titlepage">
-                   <h2> <span class="yellow">About Web application</span><br>เว็บแอปพลิเคชันนี้มีไว้เพื่ออะไร?</h2>
-                </div>
-             </div>
-          </div>
-       </div>
-       <div id="testimoni" class="carousel slide testimonial_Carousel " data-ride="carousel">
-          <ol class="carousel-indicators">
-             <li data-target="#testimoni" data-slide-to="0" class="active"></li>
-          </ol>
-          <div class="carousel-inner">
-             <div class="carousel-item active">
-                <div class="container">
-                   <div class="carousel-caption ">
-                      <div class="row">
-                         <div class="col-md-10 offset-md-1">
-                            <div class="test_box">
-                               <i><img src="../../../assets/images/img-home/catdog.jpg"></i>
-                               <h3>จุดประสงค์ของเรา</h3>
-                               <p>เว็บแอปพลิเคชันเพื่อการบริจาคเงินหมาและแมว(Givepaws)ถูกสร้างขึ้นมาเพื่อช่วยบรรเทาและแก้ปัญหาสังคมอย่างหมาเเละแมวจรจัด 
-                                 โดยเว็บแอปพลิเคชันจะทำหน้าที่เป็นศูนย์กลางในการกระจายข่าวสารในการขอรับบริจาคกับผู้ที่มีความต้องการสนับสนุนให้ความช่วยเหลือโดยการบริจาคเข้ามามีส่วนร่วมในการช่วยเหลือหมาหรือแมวจรจัดได้ง่ายและน่าเชื่อถือมากยิ่งขึ้น</p>
-                                 <p>โรงพยาบาลรักษาสัตว์ที่มีความประสงค์ที่อยากจะเข้าร่วมเป็นส่วนหนึ่งของพลังที่ช่วยเปลี่ยนให้โลกนี้น่าอยู่มากยิ่งขึ้น สามารถติดต่อกับพวกเราได้ที่ ติดต่อเรา ได้แล้ววันนี้</p>  
-                                 <div class= "con" style="align-content: center;">
-                                    <a class="read_more" routerLink="/about"><img src="../../../assets/images/img-home/love.png" alt="#"/> ติดต่อเรา</a> 
-                                 </div>
-                              </div>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-          <a class="carousel-control-prev" href="#testimoni" role="button" data-slide="prev">
-          <i class="fa fa-chevron-left" aria-hidden="true"></i>
-          </a>
-          <a class="carousel-control-next" href="#testimoni" role="button" data-slide="next">
-          <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          </a>
-       </div>
-    </div>
-    <!-- end testimonial section -->
-    <!--  footer -->
-    <footer >
-       <div class="footer">
-          <div class="container">
-             <div class="row">   
-                     <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div style="margin-right: 20px;margin-left: 20px;">
-                           <div *ngIf="main else login_img">
-                              <a class="logo2" routerLink="/"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#"/></a>
-                           </div>
-                           <ng-template #login_img>
-                              <a class="logo2" routerLink="/home"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#"/></a>
-                           </ng-template>
-                        <div class="follow">
-                           <p>พวกเรายินดีที่จะทำหน้าที่เป็นส่วนหนึ่งในการช่วยเหลือสุนัขและแมวจรจัดที่กำลังเผชิญอยู่กับความเจ็บปวดให้มีชีวิตที่ดีขึ้นนอกจากนี้ก็ยังเป็นการร่วมแก้ไขปัญหาภายในสังคมไทยเราให้น่าอยู่มากยิ่งขึ้น</p>
-                        </div>
-                        </div>
-                        
-                     </div>         
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                   <h3>ช่องทางการติดต่อ</h3>
-                   <ul class="link_icon">
-                      <li class="active"> <a href="#"> <i class="fa fa-chevron-right" aria-hidden="index.html"></i>หน้าหลัก</a></li>
-                      <li> <a routerLink="/about"> <i class="fa fa-chevron-right" aria-hidden="blog"></i>ติดต่อเรา</a></li>
-                   </ul>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                   <h3>ช่องทางการติดตามข่าวสาร</h3>
-                   <div class="follow">
-                      <p>ติดตามข่าวสารที่จะอัพเดตความช่วยเหลือใหม่ ๆได้ที่นี่</p>
-                      <ul class="social_icon">
-                         <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                         <li> <a href="#">   <i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                      </ul>
-                   </div>
-                </div>
-             </div>
-          </div>
-          <div class="copyright">
-             <div class="container">
-                <div class="row">
-                   <div class="col-md-10 offset-md-1">
-                      <p>Copyright 2023 For Study By Group.2</p>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-    </footer>
-    <!-- end footer -->
-    <!-- Javascript files-->
-    <script src="../../../assets/js/jquery.min.js"></script>
-    <script src="../../../assets/js/popper.min.js"></script>
-    <script src="../../../assets/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../assets/js/jquery-3.0.0.min.js"></script>
-    <!-- sidebar -->
-    <script src="../../../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="../../../assets/js/custom.js"></script>
+   </div>
+   <!-- end testimonial section -->
+   <!--  footer -->
+   <footer >
+      <div class="footer">
+         <div class="container">
+            <div class="row">   
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                       <div style="margin-right: 20px;margin-left: 20px;">
+                          <div *ngIf="main else login_img">
+                             <a class="logo2" routerLink="/"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#"/></a>
+                          </div>
+                          <ng-template #login_img>
+                             <a class="logo2" routerLink="/home"><img src="../../../assets/images/img-home/logoGivepaws.png" alt="#"/></a>
+                          </ng-template>
+                       <div class="follow">
+                          <p>พวกเรายินดีที่จะทำหน้าที่เป็นส่วนหนึ่งในการช่วยเหลือสุนัขและแมวจรจัดที่กำลังเผชิญอยู่กับความเจ็บปวดให้มีชีวิตที่ดีขึ้นนอกจากนี้ก็ยังเป็นการร่วมแก้ไขปัญหาภายในสังคมไทยเราให้น่าอยู่มากยิ่งขึ้น</p>
+                       </div>
+                       </div>
+                       
+                    </div>         
+               <div class="col-lg-3 col-md-6 col-sm-6">
+                  <h3>ช่องทางการติดต่อ</h3>
+                  <ul class="link_icon">
+                     <li class="active"> <a href="#"> <i class="fa fa-chevron-right" aria-hidden="index.html"></i>หน้าหลัก</a></li>
+                     <li> <a routerLink="/about"> <i class="fa fa-chevron-right" aria-hidden="blog"></i>ติดต่อเรา</a></li>
+                  </ul>
+               </div>
+               <div class="col-lg-3 col-md-6 col-sm-6">
+                  <h3>ช่องทางการติดตามข่าวสาร</h3>
+                  <div class="follow">
+                     <p>ติดตามข่าวสารที่จะอัพเดตความช่วยเหลือใหม่ ๆได้ที่นี่</p>
+                     <ul class="social_icon">
+                        <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                        <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li> <a href="#">   <i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-10 offset-md-1">
+                     <p>Copyright 2023 For Study By Group.2</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- end footer -->
+   <!-- Javascript files-->
+   <script src="../../../assets/js/jquery.min.js"></script>
+   <script src="../../../assets/js/popper.min.js"></script>
+   <script src="../../../assets/js/bootstrap.bundle.min.js"></script>
+   <script src="../../../assets/js/jquery-3.0.0.min.js"></script>
+   <!-- sidebar -->
+   <script src="../../../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="../../../assets/js/custom.js"></script>
 </div>
