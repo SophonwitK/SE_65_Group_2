@@ -683,3 +683,13 @@ def reject_card_list(request):
     if card_serializer:
         return Response(card_serializer.data, status=status.HTTP_200_OK) 
     return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+
+
+@api_view(['GET'])   
+def card_quotation_complete_treatment_cost(request):
+    cards = Card.objects.filter(Q(cardstatus='approve'), Q(receipttype='ใบเสนอราคา'),
+                                Q(donate_topic__topic='ค่ารักษา'), 
+                                Q(donate_topic__status='complete'),
+                                (Q(donate_topic__slipimgcomplete__exact='') | Q(donate_topic__slipimgcomplete__isnull=True)))
+    card_serializer = CardSerializer(cards, many=True)
+    return Response(card_serializer.data, status=status.HTTP_200_OK)
