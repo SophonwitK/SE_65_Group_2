@@ -24,7 +24,6 @@ export class CheckDonatePaymentListComponent implements OnInit {
      'user', 
      'contribution',
      'date', 
-     'paymentcardimg', 
      'status', 
      'action',
      
