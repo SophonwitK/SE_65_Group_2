@@ -746,6 +746,8 @@ def get_card_byID_with_report_count(request, pk):
 
 
 
+
+
 @api_view(['GET'])
 def get_card_hospital_donatetopic_by_id(request, pk):
     for field in Card._meta.get_fields():
@@ -785,3 +787,31 @@ def get_card_donatetopic_by_id(request, pk):
     }
     
     return Response(data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_card_donatetopic_by_id(request, pk):
+    try:
+        card = Card.objects.get(pk=pk)
+    except Card.DoesNotExist:
+        return Response({'message': 'Card does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+    donatetopic = Donatetopic.objects.filter(cardid=pk).first()
+    
+    data = {
+        'card': CardSerializer(card).data,
+        'donatetopic': DonateTopicSerializer(donatetopic).data if donatetopic else {}
+    }
+    
+    return Response(data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_card_by_cardid(request, pk):
+    try:
+        card = Card.objects.get(pk=pk)
+    except Card.DoesNotExist:
+        return Response({'message': 'Card does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = CardSerializer(card)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
