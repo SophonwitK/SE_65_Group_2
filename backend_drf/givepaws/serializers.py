@@ -112,6 +112,7 @@ class CardNameSerializer(serializers.ModelSerializer):
                   'bankname',
                   'accountname',
                   'accountnumber',
+                  'receipttype',
                   'user']
 
 class DonateTopicSerializer(serializers.ModelSerializer):
