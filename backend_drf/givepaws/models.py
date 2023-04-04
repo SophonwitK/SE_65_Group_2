@@ -60,7 +60,7 @@ class Authenimage(models.Model):
 class AuthenCheck(models.Model):
     comment = models.CharField(max_length=1000, blank=True, null=True)
     isapprove = models.IntegerField(db_column='isApprove')  # Field name made lowercase.
-    authen = models.OneToOneField(Authen, models.DO_NOTHING, db_column='authen')
+    authen = models.OneToOneField(Authen, models.DO_NOTHING, db_column='authen',related_name = "status")
 
     class Meta:
         managed = False

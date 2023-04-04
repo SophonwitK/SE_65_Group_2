@@ -25,7 +25,7 @@ const routes: Routes = [
   {path:'about',component:AboutComponent},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
-  {path:'hospitalcoordinator',component:HospitalCoordinatorComponent},
+  {path:'hc',component:HospitalCoordinatorComponent},
   {path:'profile/:username',component:UserProfileComponent},
   {path:'authentication',component:AuthenticationComponent},
   {path:'authentication/:id',component:AuthenticationComponent},

@@ -168,7 +168,7 @@ export class PostCardComponent implements OnInit {
                 cardid: cardid
               })
             }
-            console.log(this.cardForm.get('topicForm')?.get('topics')?.value)
+
             this._donateSerivce.postTopic(this.cardForm.get('topicForm')?.get('topics')?.value).subscribe({
               next: res =>{
                 console.log(res)
@@ -182,6 +182,7 @@ export class PostCardComponent implements OnInit {
           }
         }
       })
+
     }
     else{
       this.imgMessage = "กรุณา Upload ใบเสร็จ"

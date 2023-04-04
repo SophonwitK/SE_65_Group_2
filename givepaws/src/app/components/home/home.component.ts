@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
         }
       }
     })
+    this._donateService.card_refresh_status().subscribe({})
 }
 
 ngOnDestroy() {

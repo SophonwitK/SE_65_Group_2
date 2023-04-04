@@ -21,10 +21,10 @@
                     [animationSpeed]="2"
                     ></ng-image-slider>
                 </div>
-                <h3 
+                <!-- <h3 
                     style="color: black; align-self: flex-start; margin-left: 8rem; margin-bottom: 1rem; text-transform: uppercase;"
                     >Status : {{cardData.cardstatus}}
-                </h3>
+                </h3> -->
                 <h3 style="color: black; align-self: flex-start; margin-left: 8rem;">รายละเอียด</h3>
                 <p class="description">{{cardData.description}}</p>
                 <div *ngIf="cardData.cardstatus === 'approve' else card_com" style="width: 100%;">
@@ -37,12 +37,14 @@
                                     *ngIf="cardData.user.id == user_id else donate_optional" (click)="openSlip('250ms','250ms',topic)">
                                     ดูสลิป</button>
                                 <ng-template #donate_optional>
-                                    <div *ngIf="user_id else go_login" style=" width: 11%;">
-                                        <button type="button" mat-stroked-button (click)="openPayment('250ms','250ms',topic)">บริจาค</button>
-                                    </div>
-                                    <ng-template #go_login>
-                                        <button type="button" mat-stroked-button (click)="login()" style=" width: 10%;">บริจาค</button>
-                                    </ng-template>  
+                                    <div *ngIf="total.status === 'waiting'" style="width: 11%;">
+                                        <div *ngIf="user_id else go_login">
+                                            <button type="button" mat-stroked-button (click)="openPayment('250ms','250ms',topic)">บริจาค</button>
+                                        </div>
+                                        <ng-template #go_login>
+                                            <button type="button" mat-stroked-button (click)="login()" style=" width: 10%;">บริจาค</button>
+                                        </ng-template>
+                                    </div>  
                                 </ng-template>
                             </ul>
                         </div>

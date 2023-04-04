@@ -71,6 +71,13 @@ def get_donate_accept_by_card_id(request, pk):
     else:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
 
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAdminUser]) 
+def authen_request_list(request):
+    authen_checks = AuthenCheck.objects.filter(status!=None)
+    authen_checks_serializer = AuthenCheckSerializer( authen_checks, many=True)
+    return Response( authen_checks_serializer.data, status=status.HTTP_200_OK)
 
 
 
@@ -89,7 +96,7 @@ def authen_check_list(request):
             authen_check_serializer.save()
             return Response(authen_check_serializer.data, status=status.HTTP_201_CREATED) 
         return Response(authen_check_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+  
 
 @api_view(['GET','PUT', 'DELETE'])
 @authentication_classes([JWTAuthentication])
@@ -575,9 +582,13 @@ def get_approve_total_donate_by_topic_id(request,pk):
     except:
         return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
     payment_serializer = PaymentCardSerializer( payment, many=True)
+
+    donate_topic = Donatetopic.objects.get(pk=pk)
+    donate_topic_serializer = DonateTopicSerializer(donate_topic)
+
     for value in payment_serializer.data:
         totalDonate+=value['contribution']
-    total = {'topic_id': pk, 'total_donate': totalDonate}
+    total = {'topic_id': pk, 'total_donate': totalDonate,'status': donate_topic_serializer.data['status']}
     if(payment_serializer):
         return Response(  total, status=status.HTTP_200_OK)
     else:

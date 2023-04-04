@@ -30,10 +30,10 @@ export class CardAllComponent implements OnInit {
             this.dataSource = new MatTableDataSource(res);
             this.dataSource.paginator = this.paginator;
             this.cardData = this.dataSource.connect()
-            console.log(this.cardData)
           }
         }
       })
+      this._donateService.card_refresh_status().subscribe({})
   }
   
   ngOnDestroy() {

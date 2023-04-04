@@ -46,12 +46,20 @@ class AuthenimageSerializer(serializers.ModelSerializer):
         model = Authenimage
         fields = ['id','authen','image']
 
+class ReverseAuthCheckSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthenCheck
+        fields = ['id',
+                  'comment',
+                  'isapprove']
+
 class AuthenSerializer(serializers.ModelSerializer):
     user = RelatedFieldAlternative(queryset=UsersUser.objects.all(), serializer=UsersUserSerializer)
     images = AuthenimageSerializer(many=True,read_only=True)
     uploaded_images = serializers.ListField(
         child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
         write_only=True)
+    status = ReverseAuthCheckSerializer(read_only=True)
     class Meta:
         model = Authen
         fields = ['authid',
@@ -65,6 +73,7 @@ class AuthenSerializer(serializers.ModelSerializer):
                   'images',
                   'uploaded_images',
                   'user',
+                  'status'
                   ]
         
     def create(self, validated_data):

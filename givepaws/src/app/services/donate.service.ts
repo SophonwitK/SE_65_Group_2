@@ -43,6 +43,18 @@ export class DonateService {
     );
   }
 
+  card_refresh_status(): Observable<any>{
+    return this._http.post('http://127.0.0.1:8000/api/card/refresh/status/',null).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
   getAllCardByUserID(id:number): Observable<any>{
     return this._http.get(`http://127.0.0.1:8000/api/cards/users/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
