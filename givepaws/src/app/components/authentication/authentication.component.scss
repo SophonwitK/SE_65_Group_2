@@ -1,82 +1,84 @@
-
-  .body{
-    background-image: url("/assets/background/authen-bg.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
+.body{
+  background-image: url("/assets/background/authen-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .blur{
+    backdrop-filter: blur(2px);
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .blur{
-      backdrop-filter: blur(2px);
-      width: 100%;
-      height: 100%;
-      .card{
-        width: 40rem;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-        margin-top: 2rem;
-        background-color: aliceblue;
-        mat-card-content{
-          width: 93%;
-          .main-authen{
+    .card{
+      width: 40rem;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      margin-top: 2rem;
+      background-color: aliceblue;
+      mat-card-content{
+        mat-label{
+          margin-right: 0.75rem;
+        }
+        width: 93%;
+        .main-authen{
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          .address{
+            height: auto;
+            padding: 0.5rem;
+            box-sizing: border-box;
+          }
+          .img-zone{
+            margin-top: 1.5rem;
+            margin: auto;
+            width: 97%;
+            .img-zone-bg{
+              background-color: aliceblue;
+            }
+          }
+          .rows{
             display: flex;
+            flex-direction: row;
             justify-content: center;
-            flex-direction: column;
-            .address{
-              height: auto;
+            align-items: center;
+            mat-form-field {
+              width: 100%;
               padding: 0.5rem;
-              box-sizing: border-box;
-            }
-            .img-zone{
-              margin-top: 1.5rem;
-              margin: auto;
-              width: 97%;
-              .img-zone-bg{
-                background-color: aliceblue;
-              }
-            }
-            .rows{
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
-              mat-form-field {
-                width: 100%;
-                padding: 0.5rem;
-                mat-hint{
-                  color: gray;
-                }
+              mat-hint{
+                color: gray;
               }
             }
           }
-          
-          .bt-add-std{
-              button{
-                font-size: 1rem;
-                width: 7rem;
-                height: 3rem;
-                margin-top: 2rem;
-                margin-left: 2rem;
-                margin-right: 2rem;
-            }
+        }
+        
+        .bt-add-std{
+            button{
+              font-size: 1rem;
+              width: 7rem;
+              height: 3rem;
+              margin-top: 2rem;
+              margin-left: 2rem;
+              margin-right: 2rem;
           }
         }
       }
     }
   }
-  .red {
-    border-color: red;
-    color: red;
-  }
-  
-  .green {
-    color: gray;
-  }
+}
+.red {
+  border-color: red;
+  color: red;
+}
+
+.green {
+  color: gray;
+}
   

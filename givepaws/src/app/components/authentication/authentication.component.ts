@@ -96,16 +96,13 @@ export class AuthenticationComponent implements OnInit{
 
       this._userService.isAuthen(Number(sessionStorage.getItem('id'))).subscribe({
         next: (res)=>{
-          if(res){
-              this._userService.deleteAuthen(res.authid).subscribe({})
-          }
+            this._userService.deleteAuthen(res.authid).subscribe({})
         }
       })
       
       this._userService.requestAuthen(this.authenData.value).subscribe({
         next: (res) =>{
           if(res){
-
             this._router.navigate(['profile/',sessionStorage.getItem('username')])
             this._toastr.success('sent request successfuly')
           }else{

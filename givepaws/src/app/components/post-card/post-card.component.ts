@@ -44,6 +44,9 @@ export class PostCardComponent implements OnInit {
       }),
       uploaded_images: [[], Validators.required],
       user:'',
+      bankname:this._fb.control('',[Validators.required]),
+      accountname:this._fb.control('',[Validators.required]),
+      accountnumber:this._fb.control('',[Validators.required]),
     });
   }
 
@@ -62,6 +65,9 @@ export class PostCardComponent implements OnInit {
             receiptnumber: res.receiptnumber,
             price: res.donate_topic[0].amount,
             hospitalid: res.hospitalid.hospitalid,
+            bankname:res.bankname,
+            accountname:res.accountname,
+            accountnumber:res.accountnumber,
           })
           if(res.donate_topic.length > 1){
             res.donate_topic.forEach((topic:any) => {

@@ -18,6 +18,18 @@
                     <mat-label>รายละเอียด</mat-label>
                     <textarea matInput style="resize:none; height: 9rem;" formControlName="description" placeholder="รายละเอียด.............."></textarea>
                 </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>ธนาคาร</mat-label>
+                    <input formControlName="bankname" matInput placeholder="กรุงไทย" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>ชื่อบัญชี</mat-label>
+                    <input formControlName="accountname" matInput placeholder="สถาพร" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>เลขบัญชี</mat-label>
+                    <input formControlName="accountnumber" matInput placeholder="758-557-xxx" required>
+                </mat-form-field>
                 <div class="rows">
                     <mat-form-field appearance="outline">
                         <mat-label>ชนิดใบเสร็จ</mat-label>

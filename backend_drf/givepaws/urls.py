@@ -18,7 +18,6 @@ urlpatterns = [
     path("payments/<int:pk>",views.payments_detail,name="payments_detail"),
     path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"), #get all payment by userid
     path("cards/users/<int:pk>",views.get_user_card,name="get_user_card"), #get all card by userid
-    path("authen/requests",views.authen_request_list,name="authen_request_list"),
     path("cards/",views.card_list,name="card_list"), #post card and get all card
     path("cards/approve/",views.approve_card_list,name="approve_card_list"), #get all approve card 
     path("cards/complete/",views.complete_card_list,name="approve_card_list"), #get all complete card 
@@ -35,6 +34,7 @@ urlpatterns = [
     path("donate/topic/<int:pk>/payments/",views.get_approve_total_donate_by_topic_id,name="get_approve_total_donate_by_topic_id"), #get TotalDonate by topic id
     path("card/<int:pk>/close",views.close_card_by_id,name="close_card_by_id"), #close card by id
     path("card/<int:pk>/topics/close",views.close_topics_by_card_id,name="close_topics_by_card_id"), #close all donate topic by card id
+    path("authen/requests",views.authen_request_list,name="authen_request_list"), #show auth in admin page
 
 
     #Little

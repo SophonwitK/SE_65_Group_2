@@ -16,6 +16,9 @@ export class DonateService {
 
   postDonate(data:any): Observable<any>{
     const formData = new FormData();
+    formData.append('bankname',data.bankname)
+    formData.append('accountname',data.accountname)
+    formData.append('accountnumber',data.accountnumber)
     formData.append('topic',data.topic)
     formData.append('description',data.description)
     formData.append('date',data.date)

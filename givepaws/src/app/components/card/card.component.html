@@ -38,11 +38,11 @@
                                     ดูสลิป</button>
                                 <ng-template #donate_optional>
                                     <div *ngIf="total.status === 'waiting'" style="width: 11%;">
-                                        <div *ngIf="user_id else go_login">
+                                        <div *ngIf="user_id else go_login" style=" width: 100%;">
                                             <button type="button" mat-stroked-button (click)="openPayment('250ms','250ms',topic)">บริจาค</button>
                                         </div>
                                         <ng-template #go_login>
-                                            <button type="button" mat-stroked-button (click)="login()" style=" width: 10%;">บริจาค</button>
+                                            <button type="button" mat-stroked-button (click)="login()">บริจาค</button>
                                         </ng-template>
                                     </div>  
                                 </ng-template>

@@ -13,9 +13,11 @@ import { AuthenService } from '../Authensevice/authen.service';
 })
 export class AuthenComponent implements OnInit {
   displayedColumns: string[] = [
-    'userName', 
-    'displayName', 
-    'status'
+    'user.id',
+    'user.username',
+    'user.name',
+    'user.email',
+    'action'
   ];
     dataSource!: MatTableDataSource<any>;
   
@@ -35,6 +37,7 @@ export class AuthenComponent implements OnInit {
     getAuthenList() {
       this._authenService.getAuthenList().subscribe({
         next: (res) => {
+          console.log(res)
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

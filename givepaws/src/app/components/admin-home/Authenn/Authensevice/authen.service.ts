@@ -9,19 +9,8 @@ export class AuthenService {
 
   constructor(private _http: HttpClient) { }
 
-  addAuthen(data: any): Observable<any> {
-    return this._http.post('http://localhost:3000/authen', data)
-  }
-
-  updateAuthen(id: number,data: any): Observable<any> {
-    return this._http.put(`http://localhost:3000/authen/${id}`, data)
-  }
-
   getAuthenList(): Observable<any> {
-    return this._http.get('http://localhost:3000/authen')
+    return this._http.get('http://127.0.0.1:8000/api/authen/requests')
   }
 
-  deleteAuthen(id: number): Observable<any> {
-    return this._http.delete(`http://localhost:3000/authen/${id}`)
-  }
 }
