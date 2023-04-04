@@ -90,8 +90,7 @@ def authen_check_list(request):
         authen_checks_serializer = AuthenCheckSerializer( authen_checks, many=True)
         return Response( authen_checks_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST': #create object
-        authen_check_data = JSONParser().parse(request)
-        authen_check_serializer = AuthenCheckSerializer(data=authen_check_data)
+        authen_check_serializer = AuthenCheckSerializer(data=request.data)
         if authen_check_serializer.is_valid():
             authen_check_serializer.save()
             return Response(authen_check_serializer.data, status=status.HTTP_201_CREATED) 
@@ -176,7 +175,7 @@ def hospital_detail(request, pk):
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication]) 
-@permission_classes([IsAdminUser]) 
+@permission_classes([IsAuthenticated]) 
 def user_list(request):
     if request.method == 'GET': 
         token = request.COOKIES.get('jwt')
@@ -195,7 +194,7 @@ def user_list(request):
 
 @api_view(['GET','PUT', 'POST', 'DELETE'])
 @authentication_classes([JWTAuthentication])
-@permission_classes([IsAdminUser]) 
+@permission_classes([IsAuthenticated]) 
 def user_detail(request, pk):
     try:
        user = UsersUser.objects.get(pk=pk)
@@ -206,8 +205,7 @@ def user_detail(request, pk):
         if user:
             return Response(user_serializer.data, status=status.HTTP_200_OK) 
     elif request.method == 'PUT': 
-        user_data = JSONParser().parse(request) 
-        user_serializer = UsersUserSerializer( user, data=user_data) 
+        user_serializer = UsersUserSerializer( user, data=request.data,partial=True) 
         if  user_serializer.is_valid(): 
             user_serializer.save() 
             return Response(user_serializer.data) 

@@ -50,7 +50,7 @@ import { CompleteCardComponent } from './components/complete-card/complete-card.
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminAddEditComponent } from './components/admin-home/Adminn/admin-add-edit/admin-add-edit.component';
 import { AdminComponent } from './components/admin-home/Adminn/admin/admin.component';
-import { AuthenComponent,deleteAuthComponent } from './components/admin-home/Authenn/authen/authen.component';
+import { AuthenComponent,deleteAuthComponent,viewAuthComponent } from './components/admin-home/Authenn/authen/authen.component';
 import { AuthenPopupComponent } from './components/admin-home/Authenn/authen-popup/authen-popup.component';
 import { AdminCardComponent } from './components/admin-home/Cardd/card/card.component';
 import { CarddetailComponent } from './components/admin-home/Cardd/carddetail/carddetail.component';
@@ -110,6 +110,7 @@ import { AdminReportComponent } from './components/admin-home/report/report.comp
     CheckDonatePaymentListComponent,
     AuthenPopupComponent,
     deleteAuthComponent,
+    viewAuthComponent,
   ],
   imports: [
     BrowserModule,

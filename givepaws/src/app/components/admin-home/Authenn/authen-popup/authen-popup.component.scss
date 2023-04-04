@@ -1,0 +1,39 @@
+p{
+    color: black;
+    word-break: break-all;
+    white-space: normal;
+}
+mat-card{
+    mat-card-header{
+        display: flex;
+        justify-content: center;
+
+    }
+    mat-card-content{
+        form{
+            .main{
+                display: flex;
+                flex-direction: row;
+                .main-text{
+                    width: 30%;
+                    margin-left: 2rem;
+                    mat-form-field{
+                        width: 100%;
+                        margin-top: 2rem;
+                    }
+                }
+                .main-img{
+                margin-left: 4rem;
+                width: 60%;
+                height: 40%;
+                }
+            }
+            .bt-pop{
+                margin-left: 1rem;
+                button{
+                    margin: 1rem;
+                }
+            }
+        }
+    }
+}

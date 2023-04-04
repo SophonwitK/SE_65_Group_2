@@ -88,7 +88,7 @@ class AuthenSerializer(serializers.ModelSerializer):
         return authen
 
 class AuthenCheckSerializer(serializers.ModelSerializer):
-    authen = RelatedFieldAlternative(read_only=True)
+    authen = RelatedFieldAlternative(queryset=Authen.objects.all(), serializer=AuthenSerializer)
 
     class Meta:
         model = AuthenCheck

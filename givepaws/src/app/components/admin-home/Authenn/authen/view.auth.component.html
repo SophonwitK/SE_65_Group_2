@@ -1,0 +1,27 @@
+<mat-card >
+    <mat-card-header><h2>User Authentication</h2></mat-card-header>
+    <mat-card-content>
+        <div class="main">
+            <div class="main-text">
+                <p>Username: {{data.user.username}}</p>
+                <p>วันที่ยืนยัน: {{data.dateauthen | thaidate:'medium'}}</p>
+                <p>ชื่อ-นามสกุล: {{data.firstname}} {{data.surname}}</p>
+                <p>วัน/เดือน/ปี เกิด: {{data.dob | thaidate:'medium'}}</p>
+                <p>ที่อยู่: {{data.address}}</p>
+                <p>เบอร์โทรศัพท์: {{data.tel}}</p>
+                <p>รหัสบัตรประชาชน: {{data.idcard}}</p>
+            </div>
+            <div class="main-img">
+                <ng-image-slider
+                #nav
+                [images]="imageObject"
+                [infinite]="true"
+                [autoSlide]="1"
+                [imageSize]=" {width: '100%', height: '50%', space: 5} "
+                [slideImage]="1"
+                [animationSpeed]="2"
+                ></ng-image-slider>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
