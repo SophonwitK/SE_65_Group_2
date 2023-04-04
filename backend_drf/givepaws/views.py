@@ -707,6 +707,6 @@ def get_cards_by_report_count(request):
     data = {
         'cards': card_serializer.data,
         'totalCard': len(cards),
-        'report_count': [card.report_count for card in cards],
+        'report_count_for_each_card': [card.report_count for card in cards],
     }
     return Response(data, status=status.HTTP_200_OK)
