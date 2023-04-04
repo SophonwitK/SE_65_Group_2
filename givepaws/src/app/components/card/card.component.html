@@ -96,7 +96,7 @@
                             <h4 style="color: black; margin: 0rem 1rem 0.5rem 1rem;">[หัวข้อ] {{donar.topic}}</h4>
                             <h4 style="color: black; margin: 0rem 1rem 0.5rem 1rem;">รายละเอียด</h4>
                             <p style="color: black; margin: 0rem 1rem 1rem 1rem;">{{donar.description}}</p>
-                            <img style="align-self: center; max-width: 75%; margin: 1rem;" mat-card-image src="http://127.0.0.1:8000/{{donar.img}}" alt="donar-img">
+                            <img style="align-self: center; max-width: 75%; margin: 1rem;" mat-card-image src="http://127.0.0.1:8000{{donar.img}}" alt="donar-img">
                             <button type="button" (click)="deleteDonar('250ms','250ms',donar)" style="width: 20%; margin: auto;" color="warn" mat-raised-button *ngIf="cardData.user.id == user_id"> Delete</button>
                         </div>
                     </mat-card-content>
@@ -112,7 +112,7 @@
                                 <h4 style="color: black; margin: 0rem 1rem 0.5rem 1rem;">[หัวข้อ] {{donar.topic}}</h4>
                                 <h4 style="color: black; margin: 0rem 1rem 0.5rem 1rem;">รายละเอียด</h4>
                                 <p style="color: black; margin: 0rem 1rem 1rem 1rem;">{{donar.description}}</p>
-                                <img style="align-self: center; max-width: 75%; margin: 2rem;" mat-card-image src="http://127.0.0.1:8000/{{donar.img}}" alt="donar-img">
+                                <img style="align-self: center; max-width: 75%; margin: 2rem;" mat-card-image src="http://127.0.0.1:8000{{donar.img}}" alt="donar-img">
                             </div>
                         </mat-card-content>
                     </mat-card>
