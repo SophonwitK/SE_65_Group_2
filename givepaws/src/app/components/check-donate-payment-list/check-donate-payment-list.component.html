@@ -20,18 +20,18 @@
 
   <!-- Name Column -->
   <ng-container matColumnDef="user">
-    <th mat-header-cell *matHeaderCellDef> user </th>
+    <th mat-header-cell *matHeaderCellDef> User Email </th>
     <td mat-cell *matCellDef="let element"> {{element.user.email}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="contribution">
-    <th mat-header-cell *matHeaderCellDef> contribution </th>
+    <th mat-header-cell *matHeaderCellDef> Amount </th>
     <td mat-cell *matCellDef="let element"> {{element.contribution}} </td>
   </ng-container>
 
  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> date </th>
+    <th mat-header-cell *matHeaderCellDef> Date </th>
     <td mat-cell *matCellDef="let element"> {{element.date| thaidate:'medium'}} </td>
   </ng-container>
 
@@ -42,17 +42,17 @@
   </ng-container>
 
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> status </th>
+    <th mat-header-cell *matHeaderCellDef> Status </th>
     <td mat-cell *matCellDef="let element"> {{element.status}} </td>
   </ng-container>
 
   <ng-container matColumnDef="donatetopicID">
-    <th mat-header-cell *matHeaderCellDef> donatetopicID </th>
+    <th mat-header-cell *matHeaderCellDef> Donatetopic-ID </th>
     <td mat-cell *matCellDef="let element"> {{element.paymentcardid}} </td>
   </ng-container>
 
   <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef> action </th>
+    <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let row">
       <button mat-icon-button color="primary" (click)="popup(row)" >
         <mat-icon>edit</mat-icon>

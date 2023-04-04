@@ -15,8 +15,9 @@
                     <h1>หัวข้อ : {{data.topic}}</h1>
                     <h1>จำนวนเงิน : {{data.amount}}</h1>
                     <h1>สถานะ : {{data.status}}</h1>
-                    <div *ngIf="data.topic == 'ค่ารักษา'&&data.accountnumber == 'ใบเสร็จ'; else elseBlock">หมายเลขบัญชีโรงพยาบาล :{{data.cardid.hospitalid.accountnumber}}</div>
-                   
+                    <h1>ชนิดใบเสร็จ : {{data.cardid.receipttype}}</h1>
+                    <div *ngIf="data.topic == 'ค่ารักษา'&&data.cardid.receipttype == 'ใบเสนอราคา'; else elseBlock">หมายเลขบัญชีโรงพยาบาล :{{data.cardid.hospitalid.accountnumber}}</div>
+                    
                     <ng-template #elseBlock>หมายเลขบัญชีผู้ใช้ :{{data.cardid.accountnumber}}</ng-template>
                   <!-- <h1>1 : {{data.cardid.accountnumber}}</h1>
                     <h1>2 : {{data.cardid.hospitalid.accountnumber}}</h1>
