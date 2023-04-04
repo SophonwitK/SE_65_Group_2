@@ -55,7 +55,6 @@ export class CardComponent implements OnInit {
     this._donateService.getCardByID(this.id).subscribe({
       next: res =>{
         this.cardData = res
-        console.log(res)
         res.donate_topic.forEach((topic:any) => {
           this._donateService.getAllTotalDonateByTopicID(topic.donatetopicid).subscribe({
             next: res =>{

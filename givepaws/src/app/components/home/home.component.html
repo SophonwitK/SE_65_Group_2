@@ -115,7 +115,7 @@
               <div class="col-md-3 col-sm-6">
                  <div id="ho_color" class="services_main" *ngIf="cardData">
                     <div class="card-home" *ngFor="let card of cardData | async">
-                       <i><img src="http://127.0.0.1:8000{{card.images[0].image}}" alt="card-img"/></i>
+                       <i><img src="http://127.0.0.1:8000/{{card.images[0].image}}" alt="card-img"/></i>
                        <h3>{{card.topic}}</h3>
                        <p style="                
                        color: black;

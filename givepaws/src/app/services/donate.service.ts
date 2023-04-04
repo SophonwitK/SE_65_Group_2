@@ -221,7 +221,8 @@ export class DonateService {
 
   updatePayment(id:number,data:any): Observable<any>{
     const formData = new FormData();
-    
+
+    formData.append('contribution',data.contribution)
     formData.append('status',data.status)
     for (const file of data.paymentcardimg) {
       formData.append('paymentcardimg', file);

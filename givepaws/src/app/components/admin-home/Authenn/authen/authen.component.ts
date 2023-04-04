@@ -19,7 +19,7 @@ export class AuthenComponent implements OnInit {
     'user.id',
     'user.username',
     'user.name',
-    'user.email',
+    'status',
     'action'
   ];
     dataSource!: MatTableDataSource<any>;

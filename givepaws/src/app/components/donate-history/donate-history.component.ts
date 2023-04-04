@@ -59,8 +59,8 @@ export class DonateHistoryComponent implements OnInit{
       next: res =>{
         const dialog = this._dialog.open(donateEditDialog, {
           data: res,
-          width:'25%',
-          height: '50%',
+          width:'20%',
+          height: 'auto',
           enterAnimationDuration,
           exitAnimationDuration,
         });
@@ -93,12 +93,15 @@ export class donateEditDialog{
     private _toastr: ToastrService,
     ) {
       this.paymentData = this._fb.group({
-        contribution: this._fb.control({value: this.data.contribution, disabled: true}),
+        contribution: this._fb.control(this.data.contribution,Validators.compose([Validators.required,Validators.pattern(/^[0-9]\d*$/)])),
         status: this._fb.control('waiting'),
         paymentcardimg: ['', Validators.required],
       })
     }
   
+    ngOnInit(){
+      console.log(this.data)
+    }
     onSelect(event:any) {
       this.imgMessage = "Upload Images"
       this.files.push(...event.addedFiles);

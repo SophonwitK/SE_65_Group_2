@@ -27,15 +27,24 @@
         <td mat-cell *matCellDef="let row"> {{row.user.name}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="user.email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-        <td mat-cell *matCellDef="let row"> {{row.user.email}} </td>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Approve</th>
+        <td mat-cell *matCellDef="let row" > 
+          <h4 *ngIf="row.status==null else have" style="color: red;">
+            Not Approve 
+          </h4>
+          <ng-template #have>
+            <h4 style="color: green;">
+              Approve 
+            </h4>
+          </ng-template>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
         <td mat-cell *matCellDef="let row"> 
-          <button mat-icon-button color="primary" >
+          <button mat-icon-button color="primary" *ngIf="row.status==null">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" type="button" (click)="deleteAuth('250ms','250ms',row)">
