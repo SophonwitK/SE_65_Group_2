@@ -721,7 +721,7 @@ def get_cards_by_report_count(request):
 
 
 @api_view(['GET'])
-def get_card_with_report_count(request, pk):
+def get_card_byID_with_report_count(request, pk):
     try:
         card = Card.objects.get(pk=pk)
     except Card.DoesNotExist:
