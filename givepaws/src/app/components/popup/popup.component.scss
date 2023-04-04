@@ -6,8 +6,9 @@
     display: flex;
     gap: 10px;
     color: rgb(0, 255, 68);
+    flex-direction: column;
     mat-form-field {
-      width: 100%;
+    width: 100%;
     }
   }
   
