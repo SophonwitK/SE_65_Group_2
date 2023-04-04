@@ -65,8 +65,8 @@ export class CardComponent implements OnInit {
         });
         res.images.forEach((data:any) => {
           this.imageObject.push({
-            image: `http://127.0.0.1:8000/${data.image}`,
-            thumbImage: `http://127.0.0.1:8000/${data.image}`,
+            image: `http://127.0.0.1:8000${data.image}`,
+            thumbImage: `http://127.0.0.1:8000${data.image}`,
           })
         });
       }

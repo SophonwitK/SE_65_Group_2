@@ -1,0 +1,9 @@
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;"  *ngIf="data">
+    <h3 style="color: black; margin: 2rem 1rem 1rem 1rem;">ต้องการจะลบ Auth ของ</h3>
+    <h4 style="color: black; margin: 1rem;">{{data.user.username}}</h4>
+    <h3 style="color: black; margin: 1rem;">ใช่ไหม</h3>
+    <div mat-dialog-actions style="width: 100%; display: flex; justify-content: center; margin-bottom: 1rem;">
+        <button mat-button [mat-dialog-close]="false" type="button">Cancel</button>
+        <button mat-button cdkFocusInitial type="button" (click)="onDelete()">Ok</button>
+    </div>
+</div>
