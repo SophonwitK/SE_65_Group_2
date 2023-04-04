@@ -3,60 +3,44 @@
 
     <div class="table-history">
     <div mat-dialog-title >
-        <h1>Employee Form</h1>
+        <h1>การรับบริจาค</h1>
     </div>
-    <form [formGroup]="empForm" >
+    <form >
         <div mat-dialog-content class="content">
             <div class="row">
-                <mat-form-field appearance="outline">
-                    <mat-label>First name</mat-label>
+                
                    
-                    <input matInput type="text" placeholder="Ex. Technical" formControlName="donatetopicID">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>cardID</mat-label>
-                    <input matInput placeholder="Ex. Babaji" formControlName="cardID">
-                </mat-form-field>
-            </div>
-    
-            <div class="row">
-                <mat-form-field appearance="outline">
-                    <mat-label>topic</mat-label>
-                    <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="topic">
-                </mat-form-field>
+                    <!--<span>{{data.paymentcardID}}</span>!-->
+                    <h1>Card Name : {{data.cardid.topic}}</h1>
+                    <h1>หัวข้อ : {{data.topic}}</h1>
+                    <h1>จำนวนเงิน : {{data.amount}}</h1>
+                    <h1>สถานะ : {{data.status}}</h1>
+                
+                             
+                        <ngx-dropzone style="background-color: aliceblue; width: 55%; margin-bottom: 1rem;" (change)="onSelect($event)" class="img-zone-bg" required>
+                            <ngx-dropzone-label *ngIf="imgMessage === 'Upload Images' else require_img">{{imgMessage}}</ngx-dropzone-label>
+                            <ng-template #require_img>
+                                <ngx-dropzone-label style="color: red;">{{imgMessage}}</ngx-dropzone-label>
+                            </ng-template>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" [file]="f">
+                            <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+                        
+                    
+                     
+                
+               
                 
             </div>
     
-            
-    
-            <div class="row">
-                <mat-form-field appearance="outline">
-                    <mat-label>Education</mat-label>
-                    
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Company</mat-label>
-                    <input matInput placeholder="Ex. Google" formControlName="date">
-                </mat-form-field>
-            </div>
-            <div class="row">
-                <mat-form-field appearance="outline">
-                    <mat-label>Experience</mat-label>
-                    <input matInput placeholder="Ex. 4" type="number" formControlName="paymentcardimg">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Package</mat-label>
-                    <input matInput placeholder="Ex. 12" type="number" formControlName="donatetopicID">
-                    <mat-hint>In rupees</mat-hint>
-                    <mat-label>Package</mat-label>
-                    <input matInput placeholder="Ex. 12" type="number" formControlName="donatetopicID">
-                    <mat-hint>In rupees</mat-hint>
-                </mat-form-field>
-            </div>
+           
         </div>
         <div mat-dialog-actions class="action">
-            <button mat-raised-button type="button" [mat-dialog-close]="false">Approve</button>
-            <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-            <button mat-raised-button type="button" [mat-dialog-close]="false">Reject</button>
+       <!-- <button mat-raised-button type="button" (click)="approve(data.paymentcardid,data)" [mat-dialog-close]="false">Approve</button>
+            
+            <button mat-raised-button type="button" (click)="reject(data.paymentcardid,data)" [mat-dialog-close]="false">Reject</button> -->
+         <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+         <button mat-raised-button type="button" (click)="saveIMG(data.donatetopicid)" [mat-dialog-close]="false">Submit</button>
         </div>
     </form>
