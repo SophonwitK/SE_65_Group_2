@@ -18,6 +18,7 @@ urlpatterns = [
     path("payments/<int:pk>",views.payments_detail,name="payments_detail"),
     path("payments/user/<int:pk>",views.get_user_payments,name="get_user_payments"), #get all payment by userid
     path("cards/users/<int:pk>",views.get_user_card,name="get_user_card"), #get all card by userid
+
     path("cards/",views.card_list,name="card_list"), #post card and get all card
     path("cards/approve/",views.approve_card_list,name="approve_card_list"), #get all approve card 
     path("cards/complete/",views.complete_card_list,name="approve_card_list"), #get all complete card 
@@ -48,5 +49,6 @@ urlpatterns = [
     path("donate/topic/complete/list/",views.complete_donatetopic_list,name="complete_donatetopic_list"),  ##  complete_donatetopic_list
 
     path("card/quotation/complete/treatment_cost/no_slip/",views.card_quotation_complete_treatment_cost,name="card_quotation_complete_treatment_cost"),  ### แสดง ListCard ที่เป็นใบเสนอราคา  ยอดรักษาครบ  แต่ยังไม่โอนเงิน(ลงสลีป)
+    path("card/report/order_count/list/",views.get_cards_by_report_count,name="get_cards_by_report_count"),  ##  complete_donatetopic_list
 
 ]

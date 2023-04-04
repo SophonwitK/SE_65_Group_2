@@ -14,6 +14,7 @@ from users.models import User
 
 from datetime import datetime, timedelta
 from django.db.models import Q
+from django.db.models import Count
 
 
 
@@ -583,6 +584,9 @@ def get_approve_total_donate_by_topic_id(request,pk):
         return Response(  total, status=status.HTTP_200_OK)
     
 
+
+
+
     
 
 
@@ -693,3 +697,16 @@ def card_quotation_complete_treatment_cost(request):
                                 (Q(donate_topic__slipimgcomplete__exact='') | Q(donate_topic__slipimgcomplete__isnull=True)))
     card_serializer = CardSerializer(cards, many=True)
     return Response(card_serializer.data, status=status.HTTP_200_OK)
+
+
+
+@api_view(['GET'])
+def get_cards_by_report_count(request):
+    cards = Card.objects.annotate(report_count=Count('report')).filter(report_count__gt=0).order_by('-report_count')
+    card_serializer = CardSerializer(cards, many=True)
+    data = {
+        'cards': card_serializer.data,
+        'totalCard': len(cards),
+        'report_count': [card.report_count for card in cards],
+    }
+    return Response(data, status=status.HTTP_200_OK)
