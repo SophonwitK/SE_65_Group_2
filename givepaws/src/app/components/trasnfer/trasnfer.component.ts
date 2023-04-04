@@ -13,6 +13,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
 import {TrasnferpopupComponent} from '../trasnferpopup/trasnferpopup.component';
 import { MatDialog } from '@angular/material/dialog';
+import {  CheckdonateService } from 'src/app/services/checkdonate.service';
 @Component({
   selector: 'app-trasnfer',
   templateUrl: './trasnfer.component.html',
@@ -20,13 +21,13 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class TrasnferComponent {
   displayedColumns: string[] = [
-    'paymentcardID',
-     'user', 
+    
+     'cardID', 
      'contribution',
      'date', 
-     'paymentcardimg', 
+     'slipimgcomplete', 
      
-     'donatetopicID',
+     'status',
      'action',
      
      
@@ -39,6 +40,7 @@ export class TrasnferComponent {
   constructor(
     private _dialog: MatDialog,
     private _fb: FormBuilder,
+    private Tranfer : TranferService,
     private check : TranferService
     ){
     this.empForm = this._fb.group({
@@ -54,7 +56,7 @@ export class TrasnferComponent {
     this.getAll();
   }
   getAll(){
-        this.check.gett().subscribe({
+        this.Tranfer.gett().subscribe({
               next: (res) => {
                 console.log(res);
                 this.dataSource = new MatTableDataSource(res);
@@ -65,9 +67,14 @@ export class TrasnferComponent {
             });
   }
   popup(data: any){
-    this._dialog.open(TrasnferpopupComponent,{
+    const dialog = this._dialog.open(TrasnferpopupComponent,{
       data,
     });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getAll();
+      }
+    })
   }
   onFormSubmit() {
     if(this.empForm.valid){
