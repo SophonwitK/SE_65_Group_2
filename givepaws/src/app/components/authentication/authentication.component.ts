@@ -105,6 +105,7 @@ export class AuthenticationComponent implements OnInit{
       this._userService.requestAuthen(this.authenData.value).subscribe({
         next: (res) =>{
           if(res){
+
             this._router.navigate(['profile/',sessionStorage.getItem('username')])
             this._toastr.success('sent request successfuly')
           }else{

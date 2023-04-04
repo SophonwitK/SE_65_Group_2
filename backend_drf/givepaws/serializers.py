@@ -25,6 +25,9 @@ class HospitalSerializer(serializers.ModelSerializer):
                   'name',
                   'email',
                   'address',
+                  'bankname',
+                  'accountname',
+                  'accountnumber',
                   'tel']
 
 class UsersUserSerializer(serializers.ModelSerializer):
@@ -139,6 +142,9 @@ class CardSerializer(serializers.ModelSerializer):
                   'images',
                   'uploaded_images',
                   'donate_topic',
+                  'bankname',
+                  'accountname',
+                  'accountnumber',
                   'user']
         
     def create(self, validated_data):

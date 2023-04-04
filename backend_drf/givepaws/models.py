@@ -78,6 +78,9 @@ class Card(models.Model):
     receiptimgpath = models.ImageField(upload_to="img/receipt")
     user = models.ForeignKey('UsersUser', models.DO_NOTHING, db_column='user')
     hospitalid = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='hospitalID')  # Field name made lowercase.
+    bankname = models.CharField(db_column='bankName', max_length=255)  # Field name made lowercase.
+    accountname = models.CharField(db_column='accountName', max_length=255)  # Field name made lowercase.
+    accountnumber = models.CharField(db_column='accountNumber', max_length=255)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -186,6 +189,9 @@ class Hospital(models.Model):
     email = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
+    bankname = models.CharField(db_column='bankName', max_length=255)  # Field name made lowercase.
+    accountname = models.CharField(db_column='accountName', max_length=255)  # Field name made lowercase.
+    accountnumber = models.CharField(db_column='accountNumber', max_length=255)  # Field name made lowercase.
 
     class Meta:
         managed = False

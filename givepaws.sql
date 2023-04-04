@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 07:16 PM
+-- Generation Time: Apr 04, 2023 at 04:13 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -45,7 +45,7 @@ CREATE TABLE `authen` (
 
 INSERT INTO `authen` (`authID`, `firstname`, `surname`, `DOB`, `address`, `tel`, `DateAuthen`, `IDcard`, `user`) VALUES
 (70, 'โสภณวิชญ์', 'ควันไชย', '2023-03-07 17:00:00', '43 หมู่ 6 ตำบลกำแพงแสน จังหวัดนครปฐม', '0638545547', '2023-03-14 13:04:41', '1245874699875', 40),
-(109, '111111111111111', '111111111111111111', '2023-03-02 17:00:00', '111111111111', '1111111111', '2023-03-25 06:53:41', '1111111111111', 43);
+(110, '111111111111111', '111111111111111111', '2023-03-02 17:00:00', '111111111111', '1111111111', '2023-04-04 12:49:19', '1111111111111', 43);
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE `authen_check` (
 
 INSERT INTO `authen_check` (`id`, `comment`, `isApprove`, `authen`) VALUES
 (16, 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', 1, 70),
-(49, 'ไม่ผาน', 0, 109);
+(50, 'qqqqqqqqq', 1, 110);
 
 -- --------------------------------------------------------
 
@@ -250,17 +250,20 @@ CREATE TABLE `card` (
   `receiptnumber` varchar(100) NOT NULL,
   `receiptimgpath` varchar(1000) NOT NULL,
   `user` bigint(20) NOT NULL,
-  `hospitalID` int(20) NOT NULL
+  `hospitalID` int(20) NOT NULL,
+  `bankName` varchar(255) NOT NULL,
+  `accountName` varchar(255) NOT NULL,
+  `accountNumber` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `card`
 --
 
-INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `user`, `hospitalID`) VALUES
-(25, 'ช่วยหมาผมด้วย', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2023-04-01 14:21:15', 'approve', 'ใบเสนอราคา', '4587A', 'img/receipt/QuotationNew.png', 40, 1),
-(26, 'ช่วยแมวผมด้วย', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-04-01 14:22:49', 'approve', 'ใบเสร็จ', '4488B', 'img/receipt/003.png', 40, 1),
-(34, 'ขอรับบริจาคช่วยน้องส้ม', '\"ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2023-04-02 15:32:01', 'complete', 'ใบเสร็จ', '5544A', 'img/receipt/003_kSE45Lq.png', 40, 1);
+INSERT INTO `card` (`cardID`, `topic`, `description`, `date`, `cardstatus`, `receipttype`, `receiptnumber`, `receiptimgpath`, `user`, `hospitalID`, `bankName`, `accountName`, `accountNumber`) VALUES
+(25, 'ช่วยหมาผมด้วย', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2023-04-01 14:21:15', 'approve', 'ใบเสนอราคา', '4587A', 'img/receipt/QuotationNew.png', 40, 1, 'กรุงไทย', 'โสภณวิชญ์ ควันไชย', '277-887-8576'),
+(26, 'ช่วยแมวผมด้วย', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2023-04-04 14:22:49', 'approve', 'ใบเสร็จ', '4488B', 'img/receipt/003.png', 40, 1, 'กรุงไทย', 'โสภณวิชญ์ ควันไชย', '277-887-8576'),
+(34, 'ขอรับบริจาคช่วยน้องส้ม', '\"ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2023-04-02 15:32:01', 'complete', 'ใบเสร็จ', '5544A', 'img/receipt/003_kSE45Lq.png', 40, 1, 'กรุงไทย', 'โสภณวิชญ์ ควันไชย', '277-887-8576');
 
 -- --------------------------------------------------------
 
@@ -454,8 +457,8 @@ INSERT INTO `donatetopic` (`donatetopicID`, `cardID`, `topic`, `amount`, `slipIm
 (13, 26, 'ค่ารักษา', 5000, '', 'waiting'),
 (14, 26, 'ค่ายา', 1000, '', 'waiting'),
 (15, 26, 'ค่าอาหาร', 300, '', 'waiting'),
-(27, 34, 'ค่ารักษา', 4000, '', 'waiting'),
-(28, 34, 'ค่าอาหารหมา', 300, '', 'waiting');
+(27, 34, 'ค่ารักษา', 4000, '', 'complete'),
+(28, 34, 'ค่าอาหารหมา', 300, '', 'complete');
 
 -- --------------------------------------------------------
 
@@ -476,9 +479,7 @@ CREATE TABLE `givepaws_authenimage` (
 INSERT INTO `givepaws_authenimage` (`id`, `image`, `authen_id`) VALUES
 (77, 'img/authen/012490_1280x720_740026_007.jpg', 70),
 (78, 'img/authen/936378.jpg', 70),
-(107, 'img/authen/012490_1280x720_740026_007_cMJkzY2.jpg', 109),
-(108, 'img/authen/936378_OH0VVqF.jpg', 109),
-(109, 'img/authen/1038532.jpg', 109);
+(110, 'img/authen/1038532.jpg', 110);
 
 -- --------------------------------------------------------
 
@@ -515,15 +516,18 @@ CREATE TABLE `hospital` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `tel` varchar(100) NOT NULL
+  `tel` varchar(100) NOT NULL,
+  `bankName` varchar(255) NOT NULL,
+  `accountName` varchar(255) NOT NULL,
+  `accountNumber` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `hospital`
 --
 
-INSERT INTO `hospital` (`hospitalID`, `name`, `email`, `address`, `tel`) VALUES
-(1, 'โรงพยาบาลสัตว์ มก. กำแพงแสน', 'ku-hospital@ku.th', 'เลขที่ 1 หมู่ 6 ต.กำแพงแสน อ.กำแพงแสน จ.นครปฐม 73140', '0343519013');
+INSERT INTO `hospital` (`hospitalID`, `name`, `email`, `address`, `tel`, `bankName`, `accountName`, `accountNumber`) VALUES
+(1, 'โรงพยาบาลสัตว์ มก. กำแพงแสน', 'ku-hospital@ku.th', 'เลขที่ 1 หมู่ 6 ต.กำแพงแสน อ.กำแพงแสน จ.นครปฐม 73140', '0343519013', 'กรุงไทย', 'โรงพยาบาลสัตว์ มก. กำแพงแสน', '255-887-9976');
 
 -- --------------------------------------------------------
 
@@ -825,13 +829,13 @@ ALTER TABLE `users_user_user_permissions`
 -- AUTO_INCREMENT for table `authen`
 --
 ALTER TABLE `authen`
-  MODIFY `authID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `authID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `authen_check`
 --
 ALTER TABLE `authen_check`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `auth_group`
@@ -897,7 +901,7 @@ ALTER TABLE `donatetopic`
 -- AUTO_INCREMENT for table `givepaws_authenimage`
 --
 ALTER TABLE `givepaws_authenimage`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `givepaws_cardimg`
