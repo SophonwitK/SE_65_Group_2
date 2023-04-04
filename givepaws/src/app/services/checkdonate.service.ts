@@ -23,5 +23,12 @@ export class CheckdonateService {
   geti(id: number): Observable<any> {
     return this._http.get(`http://localhost:3000/checkdonate/${id}`);
   }
+  approve(id: number, data: any): Observable<any> {
+    return this._http.put(`http://127.0.0.1:8000/api/payments/${id}/approve/`, data);
+  }
+  reject(id: number, data: any): Observable<any> {
+    console.log(data)
+    return this._http.put(`http://127.0.0.1:8000/api/payments/${id}/reject/`, data);
+  }
  
 }
