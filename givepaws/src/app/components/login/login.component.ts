@@ -51,7 +51,7 @@ export class LoginComponent {
                 }
                 else if(res.is_hospitalcoordinator){
                   sessionStorage.setItem('role',"hospital-coordinator");
-                  this._router.navigate(['hospitalcoordinator']);
+                  this._router.navigate(['hc']);
 
                 }else if(res.is_authen){
                   sessionStorage.setItem('role',"auth-user");
