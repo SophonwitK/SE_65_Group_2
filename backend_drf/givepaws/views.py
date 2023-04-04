@@ -75,15 +75,15 @@ def get_donate_accept_by_card_id(request, pk):
 @authentication_classes([JWTAuthentication]) 
 @permission_classes([IsAdminUser]) 
 def authen_request_list(request):
-    authen_checks = AuthenCheck.objects.filter(status!=None)
-    authen_checks_serializer = AuthenCheckSerializer( authen_checks, many=True)
-    return Response( authen_checks_serializer.data, status=status.HTTP_200_OK)
+    authen = Authen.objects.filter(status=None)
+    authen_serializer = AuthenSerializer( authen, many=True)
+    return Response( authen_serializer.data, status=status.HTTP_200_OK)
 
 
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication]) #check jwt token are correct or not?
-@permission_classes([IsAdminUser]) #check user permission isAdmin = is_staff = true in user_users in database
+@permission_classes([IsAuthenticated]) #check user permission isAdmin = is_staff = true in user_users in database
 def authen_check_list(request):
     if request.method == 'GET': #return all object
         authen_checks = AuthenCheck.objects.all()
@@ -100,7 +100,7 @@ def authen_check_list(request):
 
 @api_view(['GET','PUT', 'DELETE'])
 @authentication_classes([JWTAuthentication])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def authen_check_detail(request, pk):
     try:
         authen_check = AuthenCheck.objects.get(pk=pk)
