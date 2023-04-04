@@ -1,3 +1,4 @@
+
 p{
   color: black;
 }
@@ -11,23 +12,36 @@ p{
   flex-direction: column;
   background: #2980B9;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to left, #ffffff, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  .rows{  
+    display: flex;
+    flex-direction: row;
+    .out{
+    text-align: center;
+  }
   .back{
-    margin-bottom: 3rem;
+    text-align: center;
+    //margin-bottom: 3rem;
     width: 100%;
     margin-left: 5rem;
-    margin-top: 2rem;
+    //margin-top: 2rem;
     a{
+      text-align: center;
       position: fixed;
       width: 6rem;
-      color: aliceblue;
+      color: rgb(0, 123, 231);
       text-decoration: none;
+      text-align: right;
       h2:hover{
-        color:   #F0C993;
+        color:   #f09394;
+        
+        
       }
       
     }
-  }
+  }}
+
+  
   .table-history{
     min-width: 50%;
     width: auto;
