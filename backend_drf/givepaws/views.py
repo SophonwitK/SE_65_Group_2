@@ -15,6 +15,8 @@ from users.models import User
 from datetime import datetime, timedelta
 from django.db.models import Q
 from django.db.models import Count
+from django.db.models import Sum
+
 
 
 
@@ -651,6 +653,28 @@ def reject_payment(request, pk):
 
 
 #### set status of payment to "approve" by paymentcardID
+# @api_view(['PUT'])
+# def approve_payment(request, pk):
+#     try:
+#         payment = Paymentcard.objects.get(paymentcardid=pk)
+#     except Paymentcard.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+#     payment.status = 'approve'
+
+
+#     #Insert Here
+
+
+#     payment.save()
+#     payment_serializer = PaymentCardSerializer(payment,data=request.data,partial=True)
+#     if  payment_serializer.is_valid():
+#         payment_serializer.save()
+#         return Response( payment_serializer.data, status=status.HTTP_201_CREATED)
+#     return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
+
+
+
+### set status of payment to "approve" by paymentcardID
 @api_view(['PUT'])
 def approve_payment(request, pk):
     try:
@@ -658,12 +682,26 @@ def approve_payment(request, pk):
     except Paymentcard.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     payment.status = 'approve'
-    payment.save()
-    payment_serializer = PaymentCardSerializer(payment,data=request.data,partial=True)
-    if  payment_serializer.is_valid():
-        payment_serializer.save()
-        return Response( payment_serializer.data, status=status.HTTP_201_CREATED)
-    return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
+
+    # Check if the total donation is more than the donatetopic amount
+    total_donation = Paymentcard.objects.filter(donatetopicid=payment.donatetopicid, status='approve').aggregate(total=Sum('contribution'))['total']
+    donatetopic = Donatetopic.objects.get(pk=payment.donatetopicid.pk)
+    if total_donation >= donatetopic.amount:
+        donatetopic.status = 'complete'
+        donatetopic.save()
+        payment.status = 'approve'
+        payment.save()
+        payment_serializer = PaymentCardSerializer(payment, data=request.data, partial=True)
+        if payment_serializer.is_valid():
+            payment_serializer.save()
+            return Response(payment_serializer.data, status=status.HTTP_201_CREATED)
+        return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
+    else:
+        return Response({'message': 'Total donation is not enough'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
     
 
 @api_view(['POST'])
