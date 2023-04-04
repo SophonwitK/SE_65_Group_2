@@ -1,5 +1,10 @@
 <div class="main">
+  <div class="rows">
+  <a routerLink="/bill" class="back"><h2>       Bill      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </h2></a>
   
+  <a (click)="logout()"  class="out"><h2>      Logout       </h2></a>
+  
+  </div>
  
 <div class="table-history">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -52,9 +57,7 @@
       <button mat-icon-button color="primary" (click)="popup(row)" >
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="delete(row.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
+      
     </td>
   </ng-container>
   
