@@ -18,7 +18,7 @@ import { CheckDonatePaymentListComponent } from './components/check-donate-payme
 import { CompleteCardComponent } from './components/complete-card/complete-card.component';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminGuard } from './guard/admin.guard';
-
+import { TrasnferComponent } from './components/trasnfer/trasnfer.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
@@ -38,6 +38,8 @@ const routes: Routes = [
   {path:'employee',component:CheckDonatePaymentListComponent},
   {path:'cards/complete/history',component:CompleteCardComponent},
   {path:'admin',component:AdminHomeComponent,canActivate:[AuthGuard,AdminGuard]},
+  {path:'bill',component:TrasnferComponent}
+
 ];
 
 @NgModule({
