@@ -12,7 +12,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
 import {PopupComponent} from '../popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-check-donate-payment-list',
   templateUrl: './check-donate-payment-list.component.html',
@@ -39,7 +39,8 @@ export class CheckDonatePaymentListComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _fb: FormBuilder,
-    private check : CheckdonateService
+    private check : CheckdonateService,
+    private _authService: AuthService,
     ){
     this.empForm = this._fb.group({
       paymentcardID:'',
@@ -88,6 +89,9 @@ export class CheckDonatePaymentListComponent implements OnInit {
 
       })
     }
+  }
+  logout(){
+    this._authService.logout(null)
   }
   delete(id: number) {
     this.check.delete(id).subscribe({

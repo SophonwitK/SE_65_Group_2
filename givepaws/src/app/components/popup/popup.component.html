@@ -14,8 +14,7 @@
                 <h1>จำนวนเงิน : {{data.contribution}}</h1>
                 <h1>วันที่่ : {{data.date| thaidate:'medium'}}</h1>
                 <h1>สถานะ : {{data.status}}</h1>
-                <h1>ID : {{data.paymentcardid}}</h1>
-                <img mat-card-image src="http://127.0.0.1:8000/{{data.paymentcardimg}}" alt="card-img">
+                <img mat-card-image src="http://127.0.0.1:8000{{data.paymentcardimg}}" alt="card-img">
                 
                 <input matInput placeholder="comment" formControlName="comment">
         </div>

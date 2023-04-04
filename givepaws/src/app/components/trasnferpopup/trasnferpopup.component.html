@@ -15,7 +15,11 @@
                     <h1>หัวข้อ : {{data.topic}}</h1>
                     <h1>จำนวนเงิน : {{data.amount}}</h1>
                     <h1>สถานะ : {{data.status}}</h1>
-                
+                    <div *ngIf="data.topic == 'ค่ารักษา'; else elseBlock">หมายเลขบัญชีโรวพยาบาล :{{data.cardid.hospitalid.accountnumber}}</div>
+                   <ng-template #elseBlock>หมายเลขบัญชีผู้ใช้ :{{data.cardid.accountnumber}}</ng-template>
+                  <!-- <h1>1 : {{data.cardid.accountnumber}}</h1>
+                    <h1>2 : {{data.cardid.hospitalid.accountnumber}}</h1>
+               --> 
                              
                         <ngx-dropzone style="background-color: aliceblue; width: 55%; margin-bottom: 1rem;" (change)="onSelect($event)" class="img-zone-bg" required>
                             <ngx-dropzone-label *ngIf="imgMessage === 'Upload Images' else require_img">{{imgMessage}}</ngx-dropzone-label>
