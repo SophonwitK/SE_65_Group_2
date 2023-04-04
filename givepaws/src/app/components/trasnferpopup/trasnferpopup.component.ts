@@ -22,6 +22,8 @@ import {  TranferService } from 'src/app/services/tranfer.service';
   styleUrls: ['./trasnferpopup.component.scss']
 })
 export class TrasnferpopupComponent {
+  imgMessage = "Upload Images"
+  files: File[] = [];
   displayedColumns: string[] = [
     'paymentcardID',
      'user', 
@@ -45,12 +47,11 @@ export class TrasnferpopupComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     ){
     this.empForm = this._fb.group({
-      donatetopicID :'',
-      cardID:'',
-      topic:'',
-      amount:'',
-      slipfilepath:'',
-      id:'',
+      amount :'',
+      cardid:'',
+      donatetopicid:'',
+      slipimgcomplete:'',
+      status:'',
     });
   }
   ngOnInit(): void {
@@ -95,4 +96,34 @@ export class TrasnferpopupComponent {
       error: console.log,
     });
   }
+
+  onSelect(event:any) {
+    this.imgMessage = "Upload Images"
+    this.files.push(...event.addedFiles);
+    console.log(this.files);
+    this.empForm.patchValue({
+      slipimgcomplete: this.files
+      
+    })
+  }
+  onRemove(event:any) {
+    this.files.splice(this.files.indexOf(event), 1);
+    this.empForm.patchValue({
+      slipimgcomplete: this.files
+    })
+  }
+  saveIMG(id: number){  
+    console.log(id)
+    this.check.update_slipimg(this.empForm.value,id).subscribe({
+      next:(val:any)=>{
+        alert("successful");
+      },
+      error:(err:any)=>{
+        console.error(err);
+      }
+
+    })
+
+  }
+  
 }
