@@ -772,38 +772,38 @@ def get_card_hospital_donatetopic_by_id(request, pk):
     
     return Response(data, status=status.HTTP_200_OK)
 
-@api_view(['GET'])
-def get_card_donatetopic_by_id(request, pk):
-    try:
-        card = Card.objects.get(pk=pk)
-    except Card.DoesNotExist:
-        return Response({'message': 'Card does not exist'}, status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET'])
+# def get_card_donatetopic_by_id(request, pk):
+#     try:
+#         card = Card.objects.get(pk=pk)
+#     except Card.DoesNotExist:
+#         return Response({'message': 'Card does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
-    donatetopic = Donatetopic.objects.filter(cardid=pk).first()
+#     donatetopic = Donatetopic.objects.filter(cardid=pk).first()
     
-    data = {
-        'card': CardSerializer(card).data,
-        'donatetopic': DonateTopicSerializer(donatetopic).data if donatetopic else {}
-    }
+#     data = {
+#         'card': CardSerializer(card).data,
+#         'donatetopic': DonateTopicSerializer(donatetopic).data if donatetopic else {}
+#     }
     
-    return Response(data, status=status.HTTP_200_OK)
+#     return Response(data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
-def get_card_donatetopic_by_id(request, pk):
-    try:
-        card = Card.objects.get(pk=pk)
-    except Card.DoesNotExist:
-        return Response({'message': 'Card does not exist'}, status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET'])
+# def get_card_donatetopic_by_id(request, pk):
+#     try:
+#         card = Card.objects.get(pk=pk)
+#     except Card.DoesNotExist:
+#         return Response({'message': 'Card does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
-    donatetopic = Donatetopic.objects.filter(cardid=pk).first()
+#     donatetopic = Donatetopic.objects.filter(cardid=pk).first()
     
-    data = {
-        'card': CardSerializer(card).data,
-        'donatetopic': DonateTopicSerializer(donatetopic).data if donatetopic else {}
-    }
+#     data = {
+#         'card': CardSerializer(card).data,
+#         'donatetopic': DonateTopicSerializer(donatetopic).data if donatetopic else {}
+#     }
     
-    return Response(data, status=status.HTTP_200_OK)
+#     return Response(data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def get_card_by_cardid(request, pk):
