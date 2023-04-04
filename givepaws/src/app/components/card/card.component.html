@@ -85,7 +85,7 @@
                 </mat-card>
             </div>
             <div class="comment">
-                <mat-card *ngIf="cardData==='approve' else card_com2">
+                <mat-card *ngIf="cardData.cardstatus==='approve' else card_com2">
                     <mat-card-header>
                         <h3>ติดตามผลการรักษา</h3>
                         <button type="button" (click)="openDonar('250ms','250ms',cardData.cardid)" mat-raised-button *ngIf="cardData.user.id == user_id"> Add </button>
