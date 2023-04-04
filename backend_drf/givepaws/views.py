@@ -632,6 +632,10 @@ def reject_payment(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
     payment.status = 'reject'
     payment.save()
+    payment_serializer = PaymentCardSerializer(payment,data=request.data,partial=True)
+    if  payment_serializer.is_valid():
+        payment_serializer.save()
+        return Response( payment_serializer.data, status=status.HTTP_201_CREATED)
     return Response({'message': 'Payment rejected successfully'}, status=status.HTTP_200_OK)
 
 
@@ -644,6 +648,10 @@ def approve_payment(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
     payment.status = 'approve'
     payment.save()
+    payment_serializer = PaymentCardSerializer(payment,data=request.data,partial=True)
+    if  payment_serializer.is_valid():
+        payment_serializer.save()
+        return Response( payment_serializer.data, status=status.HTTP_201_CREATED)
     return Response({'message': 'Payment approve successfully'}, status=status.HTTP_200_OK)
     
 
@@ -710,3 +718,17 @@ def get_cards_by_report_count(request):
         'report_count_for_each_card': [card.report_count for card in cards],
     }
     return Response(data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_card_with_report_count(request, pk):
+    try:
+        card = Card.objects.get(pk=pk)
+    except Card.DoesNotExist:
+        return Response({'message': 'Card not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    report_count = Report.objects.filter(cardid=pk).count()
+    card_data = CardSerializer(card).data
+    card_data['report_count'] = report_count
+
+    return Response(card_data, status=status.HTTP_200_OK)
