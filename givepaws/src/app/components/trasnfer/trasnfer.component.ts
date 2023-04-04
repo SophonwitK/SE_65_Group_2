@@ -14,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {TrasnferpopupComponent} from '../trasnferpopup/trasnferpopup.component';
 import { MatDialog } from '@angular/material/dialog';
 import {  CheckdonateService } from 'src/app/services/checkdonate.service';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-trasnfer',
   templateUrl: './trasnfer.component.html',
@@ -41,7 +42,9 @@ export class TrasnferComponent {
     private _dialog: MatDialog,
     private _fb: FormBuilder,
     private Tranfer : TranferService,
-    private check : TranferService
+    private check : TranferService,
+    private _authService: AuthService,
+
     ){
     this.empForm = this._fb.group({
       donatetopicID :'',
@@ -98,5 +101,8 @@ export class TrasnferComponent {
       },
       error: console.log,
     });
+  }
+  logout(){
+    this._authService.logout(null)
   }
 }
