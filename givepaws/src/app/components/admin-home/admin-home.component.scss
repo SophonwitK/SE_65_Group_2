@@ -1,0 +1,23 @@
+.head{
+    flex:50 ;
+}
+.main-member{
+    padding-top: 20px;
+    margin: 0px;
+    max-width: 1248px;
+    mat-form-field{
+        width: 100%;
+    }
+}
+.mat-mdc-tab-list {
+    color:red;
+    background-color: green;
+}
+
+.logout-admin{
+    margin-right: 3rem;
+    color: white;
+}
+.logout-admin:hover{
+    color: #CCCC00;
+}

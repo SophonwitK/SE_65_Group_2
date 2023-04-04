@@ -20,7 +20,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent,AboutComponent } from './components/home/home.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatCardModule } from '@angular/material/card';
@@ -48,14 +47,27 @@ import { PopupComponent } from './components/popup/popup.component';
 import { CheckDonatePaymentListComponent } from './components/check-donate-payment-list/check-donate-payment-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CompleteCardComponent } from './components/complete-card/complete-card.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { AdminAddEditComponent } from './components/admin-home/Adminn/admin-add-edit/admin-add-edit.component';
+import { AdminComponent } from './components/admin-home/Adminn/admin/admin.component';
+import { AuthenComponent } from './components/admin-home/Authenn/authen/authen.component';
+import { AuthenPopupComponent } from './components/admin-home/Authenn/authen-popup/authen-popup.component';
+import { AdminCardComponent } from './components/admin-home/Cardd/card/card.component';
+import { CarddetailComponent } from './components/admin-home/Cardd/carddetail/carddetail.component';
+import { EmployeeAddEditComponent } from './components/admin-home/Employeee/employee-add-edit/employee-add-edit.component';
+import { EmployeeComponent } from './components/admin-home/Employeee/employee/employee.component';
+import { HcComponent } from './components/admin-home/HCC/hc/hc.component';
+import { HcAddEditComponent } from './components/admin-home/HCC/hc-add-edit/hc-add-edit.component';
+import { HospitalComponent } from './components/admin-home/Hospitall/hospital/hospital.component';
+import { HospitalAddEditComponent } from './components/admin-home/Hospitall/hospital-add-edit/hospital-add-edit.component';
+import { MemberAddEditComponent } from './components/admin-home/Memberr/member-add-edit/member-add-edit.component';
+import { AdminReportComponent } from './components/admin-home/report/report.component';
 
 @NgModule({
   declarations: [
-    CheckDonatePaymentListComponent,
     AppComponent,
     HomeComponent,
     PopupComponent,
-    AdminComponent,
     LoginComponent,
     RegisterComponent,
     HospitalCoordinatorComponent,
@@ -81,6 +93,22 @@ import { CompleteCardComponent } from './components/complete-card/complete-card.
     TrasnferpopupComponent,
     CloseCardComponent,
     CompleteCardComponent,
+    AdminHomeComponent,
+    MemberAddEditComponent,
+    EmployeeComponent,
+    EmployeeAddEditComponent,
+    HcComponent,
+    HcAddEditComponent,
+    AdminComponent,
+    AdminAddEditComponent,
+    HospitalComponent,
+    HospitalAddEditComponent,
+    AuthenComponent,
+    AdminCardComponent,
+    CarddetailComponent,
+    AdminReportComponent,
+    CheckDonatePaymentListComponent,
+    AuthenPopupComponent,
   ],
   imports: [
     BrowserModule,

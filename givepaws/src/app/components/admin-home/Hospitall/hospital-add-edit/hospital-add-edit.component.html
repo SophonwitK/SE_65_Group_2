@@ -1,0 +1,35 @@
+<div mat-dialog-title>
+    <h1>Add Hospital</h1>
+</div>
+<form [formGroup]="hospitalForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content class="content">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+                <input matInput type="text" formControlName="name">
+        </mat-form-field>   
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+        </mat-form-field> 
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+                <input matInput type="text" formControlName="address">
+        </mat-form-field>  
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Tel</mat-label>
+                <input matInput formControlName="tel">
+        </mat-form-field> 
+    </div>
+</div>
+<div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancle</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+</div>
+</form>
