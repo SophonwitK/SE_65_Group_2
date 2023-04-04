@@ -20,13 +20,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CheckDonatePaymentListComponent implements OnInit {
   displayedColumns: string[] = [
-    
+    'donatetopicID',
      'user', 
      'contribution',
      'date', 
      'paymentcardimg', 
      'status', 
      'action',
+     
      
      
     ];
@@ -65,9 +66,14 @@ export class CheckDonatePaymentListComponent implements OnInit {
             });
   }
   popup(data: any){
-    this._dialog.open(PopupComponent,{
-      data,
+    const dialog = this._dialog.open(PopupComponent,{
+      data
     });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+        this.getAll();
+      }
+    })
   }
   onFormSubmit() {
     if(this.empForm.valid){
@@ -92,5 +98,6 @@ export class CheckDonatePaymentListComponent implements OnInit {
       error: console.log,
     });
   }
+  
   
 }
