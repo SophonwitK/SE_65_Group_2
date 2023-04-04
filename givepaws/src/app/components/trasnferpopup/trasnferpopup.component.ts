@@ -52,6 +52,7 @@ export class TrasnferpopupComponent {
       donatetopicid:'',
       slipimgcomplete:'',
       status:'',
+      
     });
   }
   ngOnInit(): void {
