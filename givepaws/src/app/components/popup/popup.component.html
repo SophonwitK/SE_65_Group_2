@@ -3,31 +3,29 @@
 
 <div class="table-history">
 <div mat-dialog-title >
-    <h1>Employee Form</h1>
+    <h1>ข้อมูลการโอนเงิน</h1>
 </div>
 <form [formGroup]="empForm" >
     <div mat-dialog-content class="content">
         <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>First name</mat-label>
+                
                 <!--<span>{{data.paymentcardID}}</span>!-->
-                <h1>{{data.user.email}}</h1>
-                <h1>{{data.contribution}}</h1>
-                <h1>{{data.date| thaidate:'medium'}}</h1>
-                <h1>{{data.status}}</h1>
-                <h1>{{data.donatetopicID}}</h1>
-               <!-- <img mat-card-image src="http://127.0.0.1:8000/{{data.paymentcardimg.image}}" alt="card-img">
-               -->
-            </mat-form-field>
-          
+                <h1>ชื่อ : {{data.user.email}}</h1>
+                <h1>จำนวนเงิน : {{data.contribution}}</h1>
+                <h1>วันที่่ : {{data.date| thaidate:'medium'}}</h1>
+                <h1>สถานะ : {{data.status}}</h1>
+                <h1>ID : {{data.paymentcardid}}</h1>
+                <img mat-card-image src="http://127.0.0.1:8000/{{data.paymentcardimg.image}}" alt="card-img">
+                
+                <input matInput placeholder="comment" formControlName="comment">
         </div>
 
        
     </div>
     <div mat-dialog-actions class="action">
-    <!--<button mat-raised-button type="button" (click)="Approve(data.)">Approve</button>
+   <button mat-raised-button type="button" (click)="approve(data.paymentcardid)" [mat-dialog-close]="false">Approve</button>
         <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-        <button mat-raised-button type="button" (click)="Reject(data)" >Reject</button>
-        -->
+        <button mat-raised-button type="button" (click)="reject(data.paymentcardid)" [mat-dialog-close]="false">Reject</button>
+     
     </div>
 </form>

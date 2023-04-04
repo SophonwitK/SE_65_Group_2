@@ -19,6 +19,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent {
+  imgMessage = "Upload Images"
+  files: File[] = [];
+   donarData:any
   displayedColumns: string[] = [
     'donatetopicID ',
      'cardID ', 
@@ -43,13 +46,7 @@ export class PopupComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     ){
     this.empForm = this._fb.group({
-      paymentcardID:'',
-      user:'',
-      contribution:'',
-      date:'',
-      paymentcardimg:'',
-      iscomplete:'',
-      donatetopicID :''
+      comment:''
     });
   }
   ngOnInit(): void {
@@ -91,6 +88,42 @@ export class PopupComponent {
       },
       error: console.log,
     });
+  }
+  approve(id: number) {
+    console.log(this.data);
+    this.check.approve(id,this.empForm.value).subscribe({
+      
+      next: (res) => {
+        
+        this.getAll();
+      },
+      error: console.log,
+    });
+  }
+  reject(id: number) {
+    this.check.reject(id,this.empForm.value).subscribe({
+      next: (res) => {
+        
+        this.getAll();
+      },
+      error: console.log,
+    });
+  }
+  onSelect(event:any) {
+    this.imgMessage = "Upload Images"
+    this.files.push(...event.addedFiles);
+    console.log(this.files);
+    this.empForm.patchValue({
+      paymentcardimg: this.files
+      
+    })
+    
+  }
+  onRemove(event:any) {
+    this.files.splice(this.files.indexOf(event), 1);
+    this.empForm.patchValue({
+      paymentcardimg: this.files
+    })
   }
   
 }
