@@ -815,3 +815,16 @@ def get_card_by_cardid(request, pk):
     serializer = CardSerializer(card)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def update_slipimg_donateTopic(request, pk):  ### pk mean PimaryKey
+    try:
+      donate_topic = Donatetopic.objects.get(pk=pk)
+    except:
+        return Response({'message' : 'no content'}, status=status.HTTP_204_NO_CONTENT) 
+    donate_topic_serializer = DonateTopicSerializer(donate_topic,data=request.data,partial=True)
+    if  donate_topic_serializer.is_valid():
+        donate_topic_serializer.save()
+        return Response( donate_topic_serializer.data, status=status.HTTP_201_CREATED)

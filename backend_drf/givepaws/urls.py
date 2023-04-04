@@ -35,6 +35,7 @@ urlpatterns = [
     path("card/<int:pk>/close",views.close_card_by_id,name="close_card_by_id"), #close card by id
     path("card/<int:pk>/topics/close",views.close_topics_by_card_id,name="close_topics_by_card_id"), #close all donate topic by card id
     path("authen/requests",views.authen_request_list,name="authen_request_list"), #show auth in admin page
+    path("topic/<int:pk>/update/slip",views.update_slipimg_donateTopic,name="update_slipimg_donateTopic"), #close all donate topic by card id
 
 
     #Little
