@@ -49,6 +49,6 @@ urlpatterns = [
     path("donate/topic/complete/list/",views.complete_donatetopic_list,name="complete_donatetopic_list"),  ##  complete_donatetopic_list
 
     path("card/quotation/complete/treatment_cost/no_slip/",views.card_quotation_complete_treatment_cost,name="card_quotation_complete_treatment_cost"),  ### แสดง ListCard ที่เป็นใบเสนอราคา  ยอดรักษาครบ  แต่ยังไม่โอนเงิน(ลงสลีป)
-    path("card/report/order_count/list/",views.get_cards_by_report_count,name="get_cards_by_report_count"),  ##  complete_donatetopic_list
+    path("card/report/order_count/list/",views.get_cards_by_report_count,name="get_cards_by_report_count"),  ## แสดง Cards ที่มี Report โดยเรียงตามจำนวน Report (แนบจำนวน Reports ของแต่ละ Card ไปไว้ด้วย)
 
 ]
