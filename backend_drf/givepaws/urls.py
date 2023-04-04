@@ -52,5 +52,9 @@ urlpatterns = [
     path("card/report/order_count/list/",views.get_cards_by_report_count,name="get_cards_by_report_count"),  ## แสดง Cards ที่มี Report โดยเรียงตามจำนวน Report (แนบจำนวน Reports ของแต่ละ Card ไปไว้ด้วย)
     path("card/<int:pk>/report/count/",views.get_card_byID_with_report_count,name="get_card_byID_with_report_count"),  ## get Card report count
     path("card/<int:pk>/hospital/donatetopic/",views.get_card_hospital_donatetopic_by_id,name="get_card_hospital_donatetopic_by_id"),  ## 
+    path("card/<int:pk>/donatetopic/",views.get_card_donatetopic_by_id,name="get_card_donatetopic_by_id"),  ## 
+
+
+
 
 ]
