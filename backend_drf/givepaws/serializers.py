@@ -30,7 +30,19 @@ class HospitalSerializer(serializers.ModelSerializer):
                   'accountnumber',
                   'tel']
 
+class HCSerializer(serializers.ModelSerializer):
+    hospitalid = RelatedFieldAlternative(queryset=Hospital.objects.all(), serializer=HospitalSerializer)
+   
+    class Meta:
+        model = Hospitalcoordinator
+        fields = ['hcid',
+                  'hospitalid',
+                  'firstname',
+                  'surname',
+                  'tel',]
+
 class UsersUserSerializer(serializers.ModelSerializer):
+    hc = RelatedFieldAlternative(queryset=Hospitalcoordinator.objects.all(), serializer=HCSerializer)
     class Meta:
         model = UsersUser
         fields = [
@@ -42,7 +54,8 @@ class UsersUserSerializer(serializers.ModelSerializer):
                   'is_staff',
                   'is_employee',
                   'is_hospitalcoordinator',
-                  'is_authen']
+                  'is_authen',
+                  'hc']
 
 class AuthenimageSerializer(serializers.ModelSerializer):
     class Meta:

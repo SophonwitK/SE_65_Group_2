@@ -13,10 +13,11 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class HcComponent implements OnInit {
   displayedColumns: string[] = [
-    'id', 
-    'userName', 
-    'firstName', 
-    'surName',
+    'hcid', 
+    'hospitalid.name', 
+    'user.username',
+    'firstname', 
+    'surname',
     'tel',
     'action'
   ];
@@ -35,7 +36,9 @@ export class HcComponent implements OnInit {
     }
   
     openAddEditHcForm() {
-      const dialogRef = this._dialog.open(HcAddEditComponent);
+      const dialogRef = this._dialog.open(HcAddEditComponent,{
+        width:'40%'
+      });
       dialogRef.afterClosed().subscribe({
         next: (val) => {
           if(val) {
@@ -48,6 +51,7 @@ export class HcComponent implements OnInit {
     getHcList() {
       this._hcService.getHcList().subscribe({
         next: (res) => {
+          console.log(res)
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

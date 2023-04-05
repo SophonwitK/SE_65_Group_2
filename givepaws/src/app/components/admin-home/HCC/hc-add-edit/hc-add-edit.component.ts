@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HcService } from '../Hcsevice/hc.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-hc-add-edit',
@@ -10,23 +12,38 @@ import { HcService } from '../Hcsevice/hc.service';
 })
 export class HcAddEditComponent implements OnInit {
   hcForm: FormGroup;
+  hospitalList:any;
+  userHcList:any
 
   constructor(
     private _fb: FormBuilder, 
-    private _hcService: HcService, 
     private _dialogRef: MatDialogRef<HcAddEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private _userService:UserService,
+    private _hcService:HcService,
     ) {
     this.hcForm = this._fb.group({
-      userName: '',
-      firstName:'',
-      surName:'',
-      tel: '',
+      firstname:this._fb.control('',Validators.required),
+      surname:this._fb.control('',Validators.required),
+      tel: this._fb.control('',Validators.required),
+      hospitalid:this._fb.control('',Validators.required),
+      user:this._fb.control('',Validators.required),
     })
   }
 
   ngOnInit(): void {
     this.hcForm.patchValue(this.data);
+    this._userService.getHospitalList().subscribe({
+      next: res =>{
+        this.hospitalList = res
+      }
+    })
+    this._hcService.getUserHcList().subscribe({
+      next: res =>{
+        console.log(res)
+        this.userHcList = res
+      }
+    })
   }
 
   onFormSubmit() {

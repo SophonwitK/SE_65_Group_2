@@ -53,7 +53,7 @@ def hc_detail(request, pk):
             return Response(hc_serializer.data) 
         return Response(hc_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
     elif request.method == 'DELETE': #delete object
-        hc_serializer.delete() 
+        hc.delete() 
         return Response({'message': 'authen check was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
@@ -650,6 +650,13 @@ def user_list_member(request):
             return Response(user_serializer.data, status=status.HTTP_201_CREATED) 
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def user_hc_list(request):
+    users = UsersUser.objects.all().filter(is_hospitalcoordinator=1,hc=None)
+    users_serializer = UsersUserSerializer( users, many=True)
+    return Response( users_serializer.data, status=status.HTTP_200_OK)
 
 
     

@@ -204,7 +204,7 @@ class Hospitalcoordinator(models.Model):
     firstname = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
-    user = models.OneToOneField('UsersUser', models.DO_NOTHING, db_column='user')
+    user = models.OneToOneField('UsersUser', models.DO_NOTHING, db_column='user',related_name = "hc")
 
     class Meta:
         managed = False
