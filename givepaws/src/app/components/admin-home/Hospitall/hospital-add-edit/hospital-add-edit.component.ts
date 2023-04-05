@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HospitalService } from '../Hospitalsevice/hospital.service';
 
@@ -18,10 +18,13 @@ export class HospitalAddEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
     this.hospitalForm = this._fb.group({
-      name: '',
-      email: '',
-      address: '',
-      tel: ''
+      name: this._fb.control('',Validators.required),
+      email: this._fb.control('',Validators.required),
+      address: this._fb.control('',Validators.required),
+      tel: this._fb.control('',Validators.required),
+      bankname: this._fb.control('',Validators.required),
+      accountname:this._fb.control('',Validators.required),
+      accountnumber:this._fb.control('',Validators.required),
     })
   }
 
@@ -32,7 +35,7 @@ export class HospitalAddEditComponent implements OnInit {
   onFormSubmit() {
     if (this.hospitalForm.valid) {
       if(this.data) {
-        this._hospitalService.updateHospital(this.data.id,this.hospitalForm.value).subscribe({
+        this._hospitalService.updateHospital(this.data.hospitalid,this.hospitalForm.value).subscribe({
           next: (val: any) => {
             alert('Hospital detail updated');
             this._dialogRef.close(true);

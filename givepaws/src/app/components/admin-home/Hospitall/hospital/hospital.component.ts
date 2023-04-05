@@ -13,11 +13,14 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class HospitalComponent implements OnInit {
   displayedColumns: string[] = [
-    'id', 
+    'hospitalid', 
     'name',
     'email',
     'address' ,
     'tel',
+    'bankname',
+    'accountname',
+    'accountnumber',
     'action'
   ];
     dataSource!: MatTableDataSource<any>;
@@ -35,7 +38,11 @@ export class HospitalComponent implements OnInit {
     }
   
     openAddEditHospitalForm() {
-      const dialogRef = this._dialog.open(HospitalAddEditComponent);
+      const dialogRef = this._dialog.open(HospitalAddEditComponent,{
+        width:'30%',
+        height: 'auto',
+      }
+      );
       dialogRef.afterClosed().subscribe({
         next: (val) => {
           if(val) {
@@ -48,6 +55,7 @@ export class HospitalComponent implements OnInit {
     getHospitalList() {
       this._hospitalService.getHospitalList().subscribe({
         next: (res) => {
+          console.log(res)
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

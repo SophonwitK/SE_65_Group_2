@@ -12,9 +12,9 @@
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort>
   
-      <ng-container matColumnDef="id">
+      <ng-container matColumnDef="hospitalid">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.hospitalid}} </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
@@ -36,6 +36,19 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Tel</th>
         <td mat-cell *matCellDef="let row"> {{row.tel}} </td>
       </ng-container>
+
+      <ng-container matColumnDef="bankname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Bank</th>
+        <td mat-cell *matCellDef="let row"> {{row.bankname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="accountname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Name</th>
+        <td mat-cell *matCellDef="let row"> {{row.accountname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="accountnumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Number</th>
+        <td mat-cell *matCellDef="let row"> {{row.accountnumber}} </td>
+      </ng-container>
       
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
@@ -43,7 +56,7 @@
           <button mat-icon-button color="primary" (click)="openEditHospitalForm(row)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteHospital(row.id)">
+          <button mat-icon-button color="warn" (click)="deleteHospital(row.hospitalid)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

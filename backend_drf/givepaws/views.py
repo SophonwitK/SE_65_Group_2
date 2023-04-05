@@ -154,7 +154,7 @@ def hospital_list(request):
 
 @api_view(['GET','PUT', 'POST', 'DELETE'])
 @authentication_classes([JWTAuthentication])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def hospital_detail(request, pk):
     try:
         hospital = Hospital.objects.get(pk=pk)
