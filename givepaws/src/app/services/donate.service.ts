@@ -59,7 +59,7 @@ export class DonateService {
   }
 
   getHcDataByID(id:number): Observable<any>{
-    return this._http.get(`http://127.0.0.1:8000/api/hc/${id}`).pipe(
+    return this._http.get(`http://127.0.0.1:8000/api/hc/by/user/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {
           console.log('error:', error);
@@ -328,6 +328,18 @@ export class DonateService {
     }
 
     return this._http.post('http://127.0.0.1:8000/api/payments/',formData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+  postDonateAccept(data:any): Observable<any>{
+    return this._http.post('http://127.0.0.1:8000/api/donate/accept/',data).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {
           console.log('error:', error);

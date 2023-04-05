@@ -63,6 +63,7 @@ import { HospitalAddEditComponent } from './components/admin-home/Hospitall/hosp
 import { MemberAddEditComponent } from './components/admin-home/Memberr/member-add-edit/member-add-edit.component';
 import { AdminReportComponent } from './components/admin-home/report/report.component';
 import { EditMemberComponent } from './components/admin-home/Memberr/edit-member/edit-member.component';
+import { HCRequestDialog } from './components/hospital-coordinator/hospital-coordinator.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { EditMemberComponent } from './components/admin-home/Memberr/edit-member
     AuthenPopupComponent,
     deleteAuthComponent,
     viewAuthComponent,
+    HCRequestDialog,
   ],
   imports: [
     BrowserModule,

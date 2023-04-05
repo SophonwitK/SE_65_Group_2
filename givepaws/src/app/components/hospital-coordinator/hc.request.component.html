@@ -1,0 +1,16 @@
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <h2 style="color: black; margin: 1rem;">{{data.topic}}</h2>
+    <img mat-card-image src="http://127.0.0.1:8000{{data.receiptimgpath}}" alt="card-img" style="width: 80%; height: 80%;">
+    <h2 style="color: black; margin: 1rem;">ค่ารักษา:{{data.donate_topic[0].amount}}</h2>
+    <form [formGroup]="acceptForm"> 
+        <mat-form-field appearance="outline" >
+            <mat-label>รายละเอียด</mat-label>
+            <textarea matInput style="resize:none; height: 9rem;" formControlName="description" placeholder="รายละเอียด.............."></textarea>
+        </mat-form-field>
+        <div mat-dialog-actions style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
+            <button mat-raised-button [mat-dialog-close]="false" type="button">Cancel</button>
+            <button mat-raised-button type="button" (click)="onReject()">Reject</button>
+            <button mat-raised-button type="button" (click)="onApprove()">Approve</button>
+        </div>
+    </form>
+</div>
