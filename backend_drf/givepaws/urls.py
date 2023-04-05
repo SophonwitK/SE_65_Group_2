@@ -66,6 +66,7 @@ urlpatterns = [
     path("card/<int:pk>/",views.get_card_by_cardid,name="get_card_by_cardid"),  ## 
     path("cards/reject/",views.reject_card_list,name="reject_card_list"), #get all waiting card 
 
+    path("money/rotate/card/<int:pk>",views.money_rotate,name="money_rotate"),  ##  
 
 
 ]
