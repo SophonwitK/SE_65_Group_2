@@ -14,7 +14,16 @@ export class MemberService {
   }
 
   updateMember(id: number,data: any): Observable<any> {
-    return this._http.put(`http://localhost:3000/member/${id}`, data)
+    const formData = new FormData();
+    formData.append('username',data.username)
+    formData.append('name',data.name)
+    formData.append('email',data.email)
+    formData.append('is_staff',data.is_staff)
+    formData.append('is_hospitalcoordinator',data.is_hospitalcoordinator)
+    formData.append('is_employee',data.is_employee)
+    formData.append('is_authen',data.is_authen)
+
+    return this._http.put(`http://127.0.0.1:8000/api/users/${id}`, formData)
   }
 
   getMemberList(): Observable<any> {
@@ -22,9 +31,7 @@ export class MemberService {
   }
 
   deleteMember(id: number): Observable<any> {
-    return this._http.delete(`http://localhost:3000/member/${id}`)
+    return this._http.delete(`http://127.0.0.1:8000/api/users/${id}`)
   }
-  getMember(id: number): Observable<any> {
-    return this._http.get(`http://localhost:3000/member/${id}`)
-  }
+
 }

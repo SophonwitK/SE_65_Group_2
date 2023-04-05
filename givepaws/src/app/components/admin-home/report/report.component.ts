@@ -23,10 +23,10 @@ export class AdminReportComponent {
   }
   onClose(){
     const data_card = {
-      "cardstatus":"complete"
+      "cardstatus":"close"
     }
     const data_topic = {
-      "status":"complete"
+      "status":"close"
     }
     this._donateService.closeCardByID(this.data.cardid,data_card).subscribe({
       next: res =>{
