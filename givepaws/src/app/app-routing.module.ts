@@ -20,6 +20,7 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
 import { AdminGuard } from './guard/admin.guard';
 import { TrasnferComponent } from './components/trasnfer/trasnfer.component';
 import { CarddetailComponent } from './components/admin-home/Cardd/carddetail/carddetail.component';
+import { EmployeeGuard } from './guard/employee.guard';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
@@ -31,16 +32,16 @@ const routes: Routes = [
   {path:'authentication',component:AuthenticationComponent},
   {path:'authentication/:id',component:AuthenticationComponent},
   {path:'donate/history/:username',component:DonateHistoryComponent},
-  {path:'post/card/history/:username',component:PostCardHistoryComponent},
+  {path:'post/card/history/:username',component:PostCardHistoryComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'post/card',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'edit/card/:id',component:PostCardComponent,canActivate:[AuthGuard,AuthenUserGuard]},
   {path:'cards',component:CardAllComponent},
   {path:'cards/:id',component:CardComponent},
-  {path:'employee',component:CheckDonatePaymentListComponent},
+  {path:'employee',component:CheckDonatePaymentListComponent,canActivate:[AuthGuard,EmployeeGuard]},
   {path:'cards/complete/history',component:CompleteCardComponent},
   {path:'admin',component:AdminHomeComponent,canActivate:[AuthGuard,AdminGuard]},
-  {path:'bill',component:TrasnferComponent},
-  {path:'admin/card/:id/reports',component:CarddetailComponent},
+  {path:'bill',component:TrasnferComponent,canActivate:[AuthGuard,EmployeeGuard]},
+  {path:'admin/card/:id/reports',component:CarddetailComponent,canActivate:[AuthGuard,AdminGuard]},
 
 ];
 
