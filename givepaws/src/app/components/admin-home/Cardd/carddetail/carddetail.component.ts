@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DonateService } from 'src/app/services/donate.service';
 import { CardService } from '../Cardsevice/card.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { MatDialog} from '@angular/material/dialog';
+import { AdminReportComponent } from '../../report/report.component';
 
 @Component({
   selector: 'app-carddetail',
@@ -18,6 +20,8 @@ export class CarddetailComponent implements OnInit {
     private _cardService:CardService,
     private _activeRouter:ActivatedRoute,
     private _donateService:DonateService,
+    private _dialog:MatDialog,
+    private _router:Router,
   ){
     
   }
@@ -41,6 +45,21 @@ export class CarddetailComponent implements OnInit {
       next: res =>{
         console.log(res)
         this.CardData = res
+      }
+    })
+  }
+
+  onClose(enterAnimationDuration: string, exitAnimationDuration: string,data: any): void {
+    const dialog = this._dialog.open(AdminReportComponent, {
+      data: data,
+      width:'auto',
+      height: '20%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialog.afterClosed().subscribe({
+      next: (res) =>{
+
       }
     })
   }
