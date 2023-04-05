@@ -19,7 +19,8 @@ export class AdminHomeComponent implements OnInit {
     'id', 
     'userName', 
     'displayName',
-    'email', 
+    'email',
+    'role', 
     'action'
   ];
     dataSource!: MatTableDataSource<any>;

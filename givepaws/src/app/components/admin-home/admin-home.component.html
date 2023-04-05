@@ -17,13 +17,13 @@
    </p>
 
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="Member" class="main-member">
+      <mat-tab label="User" class="main-member">
         
         <mat-form-field>
           <mat-label>Search</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
         </mat-form-field>
-        <button mat-raised-button (click)="openAddEditMemberForm()">Add Member</button>
+        <button mat-raised-button (click)="openAddEditMemberForm()">Add User</button>
         <div class="table-container">
           
           <table mat-table [dataSource]="dataSource" matSort>
@@ -35,12 +35,12 @@
 
             <ng-container matColumnDef="userName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>User Name</th>
-              <td mat-cell *matCellDef="let row"> {{row.userName}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.username}} </td>
             </ng-container>
 
             <ng-container matColumnDef="displayName">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> DisplaynName </th>
-              <td mat-cell *matCellDef="let row"> {{row.displayName}} </td>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Display Name </th>
+              <td mat-cell *matCellDef="let row"> {{row.name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="email">
@@ -48,6 +48,31 @@
               <td mat-cell *matCellDef="let row"> {{row.email}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Role</th>
+              <td mat-cell *matCellDef="let row"> 
+                <div *ngIf="row.is_staff||row.is_authen||row.is_hospitalcoordinator||row.is_employee else user">
+                  <div *ngIf="row.is_staff">
+                    Admin
+                  </div>
+                  <div *ngIf="row.is_authen">
+                    Auth User
+                  </div>
+                  <div *ngIf="row.is_hospitalcoordinator">
+                    HC
+                  </div>
+                  <div *ngIf="row.is_employee">
+                    Employee
+                  </div>
+                </div>
+                <ng-template #user>
+               
+                  User
+                  
+                </ng-template>
+              </td>
+            </ng-container>
+        
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
               <td mat-cell *matCellDef="let row"> 
@@ -69,26 +94,12 @@
             </tr>
           </table>
         
-          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
         </div>
 
         
       </mat-tab>
-      <mat-tab label="Employee">
-        <app-employee>
-          
-        </app-employee>
-      </mat-tab>
-      <mat-tab label="HC">
-        <app-hc>
-          
-        </app-hc>
-      </mat-tab>
-      <mat-tab label="Admin">
-        <app-admin>
-          
-        </app-admin>
-      </mat-tab>
+    
     </mat-tab-group>
     </mat-tab>
   

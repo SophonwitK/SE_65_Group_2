@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MemberService } from '../Memberservice/member.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-member-add-edit',
@@ -17,41 +18,33 @@ export class MemberAddEditComponent implements OnInit {
     private _memberService: MemberService, 
     private _dialogRef: MatDialogRef<MemberAddEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private _toastr:ToastrService,
     ) {
     this.memberForm = this._fb.group({
-      userName: '',
-      displayName: '',
-      email: ''
+      username: this._fb.control('',Validators.required),
+      name: this._fb.control('',Validators.required),
+      email: this._fb.control('',Validators.required),
+      password:this._fb.control('',Validators.required)
     })
   }
 
   ngOnInit(): void {
-    this.memberForm.patchValue(this.data);
+ 
   }
 
   onFormSubmit() {
-    if (this.memberForm.valid) {
-      if(this.data) {
-        this._memberService.updateMember(this.data.id,this.memberForm.value).subscribe({
-          next: (val: any) => {
-            alert('Member detail updated');
-            this._dialogRef.close(true);
-          },
-          error: (err: any) => {
-            console.error(err);
-          },
-        });
-      }else{
+    console.log(this.memberForm.value)
+    if (this.memberForm.valid){
         this._memberService.addMember(this.memberForm.value).subscribe({
         next: (val: any) => {
           alert('Member added!');
           this._dialogRef.close(true);
         },
         error: (err: any) => {
+          this._toastr.error('something wrong')
           console.error(err);
         },
       });
       }
     }
-  }
 }

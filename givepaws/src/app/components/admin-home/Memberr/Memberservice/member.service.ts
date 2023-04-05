@@ -10,7 +10,7 @@ export class MemberService {
   constructor(private _http: HttpClient) { }
 
   addMember(data: any): Observable<any> {
-    return this._http.post('http://localhost:3000/member', data)
+    return this._http.post('http://127.0.0.1:8000/api/users/list', data)
   }
 
   updateMember(id: number,data: any): Observable<any> {
@@ -18,7 +18,7 @@ export class MemberService {
   }
 
   getMemberList(): Observable<any> {
-    return this._http.get('http://localhost:3000/member')
+    return this._http.get('http://127.0.0.1:8000/api/users/list')
   }
 
   deleteMember(id: number): Observable<any> {

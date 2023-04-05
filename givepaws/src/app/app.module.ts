@@ -62,9 +62,11 @@ import { HospitalComponent } from './components/admin-home/Hospitall/hospital/ho
 import { HospitalAddEditComponent } from './components/admin-home/Hospitall/hospital-add-edit/hospital-add-edit.component';
 import { MemberAddEditComponent } from './components/admin-home/Memberr/member-add-edit/member-add-edit.component';
 import { AdminReportComponent } from './components/admin-home/report/report.component';
+import { EditMemberComponent } from './components/admin-home/Memberr/edit-member/edit-member.component';
 
 @NgModule({
   declarations: [
+    EditMemberComponent,
     AppComponent,
     HomeComponent,
     PopupComponent,

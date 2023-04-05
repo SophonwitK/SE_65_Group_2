@@ -7,6 +7,7 @@ from rest_framework.parsers import JSONParser
 from givepaws.serializers import (HospitalSerializer,UsersUserSerializer,AuthenSerializer,AuthenimageSerializer,
                                   AuthenCheckSerializer,PaymentCardSerializer,CardSerializer,DonateTopicSerializer,
                                   HospitalcoordinatorSerializer,DonateacceptSerializer,DonarSerializer,ReportSerializer)
+from users.serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAuthenticatedOrReadOnly
 from givepaws.jwt import JWTAuthentication
 import jwt,os
@@ -593,6 +594,28 @@ def get_approve_total_donate_by_topic_id(request,pk):
         return Response(  total, status=status.HTTP_200_OK)
     else:
         return Response(  total, status=status.HTTP_200_OK)
+
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication]) 
+@permission_classes([IsAuthenticated]) 
+def user_list_member(request):
+    if request.method == 'GET': 
+        token = request.COOKIES.get('jwt')
+        payload = jwt.decode(token, "secret", algorithms=["HS256"])
+        user = User.objects.filter(id=payload['id']).first()
+        users = UsersUser.objects.all().exclude(pk=user.id)
+        users_serializer = UsersUserSerializer( users, many=True)
+        return Response( users_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        user_data = JSONParser().parse(request)
+        user_serializer = UserSerializer(data=user_data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
     
 
 
