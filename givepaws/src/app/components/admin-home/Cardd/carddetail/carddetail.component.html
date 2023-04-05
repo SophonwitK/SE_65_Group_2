@@ -1,15 +1,21 @@
 <p>
     <mat-toolbar >
-      <span class="head"></span>
+      <span class="head"><a routerLink="/admin">BACK</a></span>
       <span class="head">Card</span>
     </mat-toolbar>
 </p>
+<div class="main-bd" *ngIf="report">
+  <h2 style="color: black; padding: 2rem;">จำนวน Report {{reportNumber}}</h2>
+  <div class="main-content" *ngFor="let rp of report">
+    <mat-card>
+      <h3 >Username: {{rp.userid.username}}</h3>
+      <h3 >Report Topic: {{rp.topic}}</h3>
+      <p>Description: {{rp.description}}</p>
+    </mat-card>
+  </div>
+  <div class="bt">
+    <button mat-raised-button >Close Donate</button>
+  </div>
+</div>
 
-<h1>จำนวน Report</h1>
-<button mat-raised-button >All Report</button>
-<h1>Card Status</h1>
-<h1>HC Status</h1>
-<p class="close">
-  <button mat-raised-button >Close Donation</button>
-</p>
 

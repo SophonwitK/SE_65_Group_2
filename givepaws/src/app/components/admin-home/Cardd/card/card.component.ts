@@ -4,16 +4,19 @@ import { CardService } from '../Cardsevice/card.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { DonateService } from 'src/app/services/donate.service';
 
 @Component({
-  selector: 'app-card',
+  selector: 'admin-app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
 export class AdminCardComponent implements OnInit {
   displayedColumns: string[] = [
-    'id', 
-    'cardName', 
+    'cardid', 
+    'topic',
+    'date',
+    'action' 
   ];
     dataSource!: MatTableDataSource<any>;
   
@@ -23,6 +26,7 @@ export class AdminCardComponent implements OnInit {
     constructor(
       private _dialog: MatDialog, 
       private _cardService: CardService,
+      private _donateService: DonateService,
       ) {}
     
     ngOnInit(): void {
@@ -31,8 +35,9 @@ export class AdminCardComponent implements OnInit {
   
   
     getCardList() {
-      this._cardService.getCardList().subscribe({
+      this._donateService.getAllApproveCard().subscribe({
         next: (res) => {
+          console.log(res)
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

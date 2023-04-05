@@ -13,14 +13,24 @@
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort>
   
-      <ng-container matColumnDef="id">
+      <ng-container matColumnDef="cardid">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.cardid}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="cardName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Card Name</th>
-        <td mat-cell *matCellDef="let row"> {{row.userName}} </td>
+      <ng-container matColumnDef="topic">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Topic</th>
+        <td mat-cell *matCellDef="let row"> {{row.topic}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Topic</th>
+        <td mat-cell *matCellDef="let row"> {{row.date | thaidate:'medium'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>action</th>
+        <td mat-cell *matCellDef="let row"> <a routerLink="card/{{row.cardid}}/reports">view</a> </td>
       </ng-container>
 
 

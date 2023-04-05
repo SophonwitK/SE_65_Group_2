@@ -19,6 +19,7 @@ import { CompleteCardComponent } from './components/complete-card/complete-card.
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminGuard } from './guard/admin.guard';
 import { TrasnferComponent } from './components/trasnfer/trasnfer.component';
+import { CarddetailComponent } from './components/admin-home/Cardd/carddetail/carddetail.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
@@ -38,7 +39,8 @@ const routes: Routes = [
   {path:'employee',component:CheckDonatePaymentListComponent},
   {path:'cards/complete/history',component:CompleteCardComponent},
   {path:'admin',component:AdminHomeComponent,canActivate:[AuthGuard,AdminGuard]},
-  {path:'bill',component:TrasnferComponent}
+  {path:'bill',component:TrasnferComponent},
+  {path:'admin/card/:id/reports',component:CarddetailComponent},
 
 ];
 
