@@ -1,24 +1,36 @@
 <div class="bd-main">
   <h2 style="color: black; margin: 5%;">Edit User</h2>
-  <div>
-    <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-            <input matInput type="text" formControlName="username">
-    </mat-form-field>   
-    
-    <mat-form-field appearance="outline">
-        <mat-label>Display Name</mat-label>
-            <input matInput formControlName="name">
-    </mat-form-field> 
 
-    <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-            <input matInput formControlName="email">
-    </mat-form-field> 
+    <form [formGroup]="memberForm">
+      <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+              <input matInput type="text" formControlName="username">
+      </mat-form-field>   
 
-    <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-            <input matInput formControlName="password">
-    </mat-form-field> 
+      <mat-form-field appearance="outline">
+          <mat-label>Display Name</mat-label>
+              <input matInput formControlName="name">
+      </mat-form-field> 
 
+      <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+      </mat-form-field> 
+
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+          <mat-option value="employee">Employee</mat-option>
+          <mat-option value="hc">HC</mat-option>
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="authUser">Auth User</mat-option>
+          <mat-option value="user">User</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+      <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </form>
 </div>

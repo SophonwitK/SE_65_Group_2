@@ -88,7 +88,7 @@ export class AdminHomeComponent implements OnInit {
       openEditMemberForm(data: any) {
         const dialogRef = this._dialog.open(EditMemberComponent, {
           data,
-          width: '35%',
+          width: '25%',
         });
   
         dialogRef.afterClosed().subscribe({

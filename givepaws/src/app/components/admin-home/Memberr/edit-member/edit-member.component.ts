@@ -27,12 +27,35 @@ export class EditMemberComponent implements OnInit {
       is_staff:0,
       is_hospitalcoordinator:0,
       is_employee:0,
+      is_authen:0,
+      role:this._fb.control('',Validators.required),
     })
    }
 
   ngOnInit() {
     console.log(this.data)
     this.memberForm.patchValue(this.data)
+    if(this.data.is_hospitalcoordinator==1){
+      this.memberForm.patchValue({
+        role:'hc'
+      })
+    }else if(this.data.is_employee==1){
+      this.memberForm.patchValue({
+        role:'employee'
+      })
+    }else if(this.data.is_staff==1){
+      this.memberForm.patchValue({
+        role:'admin'
+      })
+    }else if(this.data.is_authen==1){
+      this.memberForm.patchValue({
+        role:'authUser'
+      })
+    }else{
+      this.memberForm.patchValue({
+        role:'user'
+      })
+    }
   }
 
 }
