@@ -39,6 +39,7 @@ export class LoginComponent {
             sessionStorage.setItem('expire-date',JSON.stringify(jwt_decode(res.jwt)))
             this._authService.isLogin().subscribe({
               next: (res)=>{
+                console.log(res)
                 sessionStorage.setItem('id',res.id)
                 sessionStorage.setItem('username',res.username)
                 if(res.is_staff){

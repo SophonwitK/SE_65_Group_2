@@ -58,8 +58,21 @@ export class DonateService {
     );
   }
 
-  getRequestCardByHospital(): Observable<any>{
-    return this._http.get(`http://127.0.0.1:8000/api/cards/waiting/`).pipe(
+  getHcDataByID(id:number): Observable<any>{
+    return this._http.get(`http://127.0.0.1:8000/api/hc/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error) {
+          console.log('error:', error);
+          return of(false);
+        }
+        return of(true);
+      })
+    );
+  }
+
+
+  getRequestCardByHospital(id:number): Observable<any>{
+    return this._http.get(`http://127.0.0.1:8000/api/cards/waiting/by/hospital/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {
           console.log('error:', error);

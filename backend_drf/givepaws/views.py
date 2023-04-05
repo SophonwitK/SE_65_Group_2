@@ -38,12 +38,14 @@ def hc_list(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def hc_detail(request, pk):
+
     try:
         hc = Hospitalcoordinator.objects.get(pk=pk)
     except:
         return Response(status=status.HTTP_204_NO_CONTENT) 
     if request.method == 'GET': #return sigle object
-        hc_serializer = HospitalcoordinatorSerializer(hc)
+        hc2 = Hospitalcoordinator.objects.get(user=pk)
+        hc_serializer = HospitalcoordinatorSerializer(hc2)
         if hc_serializer:
             return Response(hc_serializer.data, status=status.HTTP_200_OK) 
     elif request.method == 'PUT': #update object
