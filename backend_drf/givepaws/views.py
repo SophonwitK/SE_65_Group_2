@@ -977,5 +977,5 @@ def hospital_coordinator_by_user_id(request, pk):
     except Hospitalcoordinator.DoesNotExist:
         return Response({"error": "Hospital coordinator not found."}, status=status.HTTP_404_NOT_FOUND)
     
-    hospital_coordinator_serializer = HospitalCoordinatorSerializer(hospital_coordinator)
+    hospital_coordinator_serializer = HospitalcoordinatorSerializer(hospital_coordinator)
     return Response(hospital_coordinator_serializer.data)
