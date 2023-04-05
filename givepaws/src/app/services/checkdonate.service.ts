@@ -26,6 +26,9 @@ export class CheckdonateService {
   approve(id: number, data: any): Observable<any> {
     return this._http.put(`http://127.0.0.1:8000/api/payments/${id}/approve/`, data);
   }
+  check_topic_amount(id: number, data: any): Observable<any> {
+    return this._http.put(`http://127.0.0.1:8000/api/topic/by/payment/${id}/check/`, data);
+  }
   reject(id: number, data: any): Observable<any> {
     console.log(data)
     return this._http.put(`http://127.0.0.1:8000/api/payments/${id}/reject/`, data);
