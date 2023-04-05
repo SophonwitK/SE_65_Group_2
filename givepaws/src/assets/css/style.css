@@ -585,12 +585,13 @@ ul.btn li:last-child {
      align-items: center;
      text-align: center;
      margin-bottom: 30px;
+     width: 1080px;
 
    }
    .services_main img {
      width: 400px;
      height: 300px;
-     object-fit: cover;
+     
    } 
       
 .services_main .ho {
