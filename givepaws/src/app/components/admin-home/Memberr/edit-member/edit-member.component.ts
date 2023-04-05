@@ -88,7 +88,7 @@ export class EditMemberComponent implements OnInit {
           is_employee:0,
           is_authen:1,
         })
-      }else{
+      }else if(this.memberForm.value.role==='user'){
         this.memberForm.patchValue({
           is_staff:0,
           is_hospitalcoordinator:0,
