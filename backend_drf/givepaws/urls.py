@@ -44,7 +44,10 @@ urlpatterns = [
 
     path("payments_waiting/",views.payments_waiting,name="payments_waiting"),  ## get all payments with waiting status  + order form oldest
     path("card/emergency/",views.emergency_card_list,name="card_emergency"),  ## 4 Card that's still open order from oldest
+    
     path("payments/<int:pk>/approve/",views.approve_payment,name="approve_payment"),  ##  set status of payment to "approve_payment" by paymentcardID
+    path("topic/by/payment/<int:pk>/check/",views.topic_payment_check,name="topic_payment_check"),  ## 
+
     path("payments/<int:pk>/reject/",views.reject_payment,name="reject_payment"),  ##  set status of payment to "reject" by paymentcardID
     path("card/refresh/status/",views.card_refresh_status,name="card_refresh_status"),  ##  set status of card that is out dated to "complete" (Also DonateTopic)  #
     path("donate/topic/complete/list/",views.complete_donatetopic_list,name="complete_donatetopic_list"),  ##  complete_donatetopic_list

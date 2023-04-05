@@ -89,17 +89,38 @@ export class PopupComponent {
       error: console.log,
     });
   }
+  // approve(id: number) {
+  //   console.log(this.data);
+  //   this.check.approve(id,this.empForm.value).subscribe({
+      
+  //     next: (res) => {
+        
+  //       this.getAll();
+  //     },
+  //     error: console.log,
+  //   });
+  // }
+
   approve(id: number) {
     console.log(this.data);
+  
+    // Call the first API
     this.check.approve(id,this.empForm.value).subscribe({
-      
       next: (res) => {
-        
-        this.getAll();
+  
+        // Call the second API
+        this.check.check_topic_amount(id,this.empForm.value).subscribe({
+          next: (res2) => {
+            this.getAll();
+          },
+          error: console.log
+        });
       },
-      error: console.log,
+      error: console.log
     });
   }
+
+
   reject(id: number) {
     this.check.reject(id,this.empForm.value).subscribe({
       next: (res) => {
