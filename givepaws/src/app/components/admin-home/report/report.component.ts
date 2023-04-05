@@ -25,13 +25,9 @@ export class AdminReportComponent {
     const data_card = {
       "cardstatus":"close"
     }
-    const data_topic = {
-      "status":"close"
-    }
     this._donateService.closeCardByID(this.data.cardid,data_card).subscribe({
       next: res =>{
         if(res){
-          this._donateService.closeTopicsByCardID(this.data.cardid,data_topic).subscribe({})
           this._dialogRef.close()
           this._toaster.success('close card successfully')
           this._router.navigate(['admin'])

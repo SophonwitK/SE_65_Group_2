@@ -37,6 +37,8 @@ urlpatterns = [
     path("authen/requests",views.authen_request_list,name="authen_request_list"), #show auth in admin page
     path("topic/<int:pk>/update/slip",views.update_slipimg_donateTopic,name="update_slipimg_donateTopic"), #close all donate topic by card id
     path("users/list",views.user_list_member,name="user_list_member"), #post get user
+    path("hc/",views.hc_list,name="hc_list"), #post and get all hc
+    path("hc/",views.hc_detail,name="hc_detail"), #post and get all hc
 
 
 

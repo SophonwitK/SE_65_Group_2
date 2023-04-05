@@ -17,8 +17,44 @@ from datetime import datetime, timedelta
 from django.db.models import Q
 from django.db.models import Count
 from django.db.models import Sum
+\
+@api_view(['GET', 'POST'])
+@authentication_classes([JWTAuthentication]) #check jwt token are correct or not?
+@permission_classes([IsAuthenticated]) #check user permission isAdmin = is_staff = true in user_users in database
+def hc_list(request):
+    if request.method == 'GET': #return all object
+        hc = Hospitalcoordinator.objects.all()
+        hc_serializer = HospitalcoordinatorSerializer( hc , many=True)
+        return Response(  hc_serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST': #create object
+        authen_check_serializer = HospitalcoordinatorSerializer(data=request.data)
+        if authen_check_serializer.is_valid():
+            authen_check_serializer.save()
+            return Response(authen_check_serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(authen_check_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+  
 
-
+@api_view(['GET','PUT', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def hc_detail(request, pk):
+    try:
+        hc = Hospitalcoordinator.objects.get(pk=pk)
+    except:
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+    if request.method == 'GET': #return sigle object
+        hc_serializer = HospitalcoordinatorSerializer(hc)
+        if hc_serializer:
+            return Response(hc_serializer.data, status=status.HTTP_200_OK) 
+    elif request.method == 'PUT': #update object
+        hc_serializer = HospitalcoordinatorSerializer( hc, data=request.data) 
+        if  hc_serializer.is_valid(): 
+            hc_serializer.save() 
+            return Response(hc_serializer.data) 
+        return Response(hc_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    elif request.method == 'DELETE': #delete object
+        hc_serializer.delete() 
+        return Response({'message': 'authen check was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET'])
