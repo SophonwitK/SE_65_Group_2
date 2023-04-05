@@ -972,96 +972,12 @@ def waiting_card_list_hospital(request, pk):
 
 
 
-from django.db import transaction
-
-
-@api_view(['POST'])
-@transaction.atomic
-def money_rotate(request, pk):
+@api_view(['GET'])
+def hospital_coordinator_by_user_id(request, pk):
     try:
-        card = Card.objects.get(pk=pk)
-    except Card.DoesNotExist:
-        return Response({'message': 'Card not found or not eligible for transfer'}, status=status.HTTP_400_BAD_REQUEST)
-
-    thirty_days_ago = datetime.now() - timedelta(days=30)
-    old_cards = Card.objects.filter(cardstatus='approve', date__gte=thirty_days_ago).exclude(pk=card.pk).order_by('date')
-
-    if not old_cards:
-        return Response({'message': 'No eligible old cards found'}, status=status.HTTP_400_BAD_REQUEST)
-
-    current_card_donatetopics = Donatetopic.objects.filter(cardid=card.cardid, status='waiting').order_by('donatetopicid')
-
-    if not current_card_donatetopics:
-        return Response({'message': 'No waiting donatetopics found'}, status=status.HTTP_400_BAD_REQUEST)
-
-    current_card_paymentcards = Paymentcard.objects.filter(donatetopicid__in=current_card_donatetopics, status='approve').order_by('paymentcardid')
-
-    if not current_card_paymentcards:
-        return Response({'message': 'No approved paymentcards found for the waiting donatetopics'}, status=status.HTTP_400_BAD_REQUEST)
-
-    for old_card in old_cards:
-        old_card_donatetopics = Donatetopic.objects.filter(cardid=old_card, status='waiting').order_by('donatetopicid')
-
-        if not old_card_donatetopics:
-            continue
-
-        old_card_paymentcards = Paymentcard.objects.filter(donatetopicid__in=old_card_donatetopics, status='approve').order_by('paymentcardid')
-
-        if not old_card_paymentcards:
-            continue
-
-        total_transfer_amount = current_card_paymentcards.aggregate(total=Sum('contribution'))['total']
-
-        for paymentcard in old_card_paymentcards:
-            if total_transfer_amount <= 0:
-                break
-
-            transfer_amount = min(total_transfer_amount, paymentcard.contribution)
-            total_transfer_amount -= transfer_amount
-
-            paymentcard.contribution -= transfer_amount
-            if paymentcard.contribution == 0:
-                paymentcard.status = 'close'
-            paymentcard.save()
-
-        # create a new paymentcard with the remaining balance
-        remaining_amount = current_card_donatetopics.aggregate(total=Sum('amount'))['total'] - current_card_paymentcards.aggregate(total=Sum('contribution'))['total']
-        if remaining_amount <= 0:
-            continue
-
-        new_paymentcard = Paymentcard.objects.create(
-            donatetopicid=current_card_donatetopics[0],
-            contribution=remaining_amount,
-            status='system'
-        )
-
-        # find other waiting donatetopics to contribute to in other cards
-        other_donatetopics = Donatetopic.objects.filter(status='waiting').exclude(cardid=card.cardid).order_by('donatetopicid')
-
-        for other_donatetopic in other_donatetopics:
-            if new_paymentcard.contribution <= 0:
-                break
-
-            other_paymentcards = Paymentcard.objects.filter(donatetopicid=other_donatetopic, status='approve').order_by('paymentcardid')
-
-            for other_paymentcard in other_paymentcards:
-                if new_paymentcard.contribution <= 0:
-                    break
-
-                transfer_amount = min(new_paymentcard.contribution, other_paymentcard.contribution)
-                new_paymentcard.contribution -= transfer_amount
-                other_paymentcard.contribution -= transfer_amount
-                
-        # Create new paymentcard for the remaining amount
-        remaining_donatetopic = Donatetopic.objects.filter(status='waiting', amount__gt=current_card_paymentcards.aggregate(total=Sum('contribution'))['total']).order_by('donatetopicid').first()
-        if remaining_amount > 0:
-            new_paymentcard = Paymentcard.objects.create(
-            donatetopicid=remaining_donatetopic,
-            contribution=remaining_amount,
-            status='approve',
-            comment='system',
-            user=21,
-        )
-            new_paymentcard.save()
-
-    return Response({'message': 'Funds successfully transferred'}, status=status.HTTP_200_OK)
+        hospital_coordinator = Hospitalcoordinator.objects.get(user=pk)
+    except Hospitalcoordinator.DoesNotExist:
+        return Response({"error": "Hospital coordinator not found."}, status=status.HTTP_404_NOT_FOUND)
+    
+    hospital_coordinator_serializer = HospitalCoordinatorSerializer(hospital_coordinator)
+    return Response(hospital_coordinator_serializer.data)

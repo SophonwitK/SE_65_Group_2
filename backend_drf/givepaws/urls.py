@@ -46,6 +46,7 @@ urlpatterns = [
     #Little
     path("cards/waiting/",views.waiting_card_list,name="waiting_card_list"), #get all waiting card 
     path("cards/reject/",views.reject_card_list,name="reject_card_list"), #get all waiting card 
+    path("hc/by/user/<int:pk>/",views.hospital_coordinator_by_user_id,name="hospital_coordinator_by_user_id"), #
     path("cards/waiting/by/hospital/<int:pk>",views.waiting_card_list_hospital,name="waiting_card_list_hospital"), #get all waiting card Hospital
 
     path("payments_waiting/",views.payments_waiting,name="payments_waiting"),  ## get all payments with waiting status  + order form oldest
@@ -65,7 +66,6 @@ urlpatterns = [
     # path("card/<int:pk>/donatetopic/",views.get_card_donatetopic_by_id,name="get_card_donatetopic_by_id"),  ## 
     path("card/<int:pk>/",views.get_card_by_cardid,name="get_card_by_cardid"),  ## 
     path("cards/reject/",views.reject_card_list,name="reject_card_list"), #get all waiting card 
-
 
 
 ]
