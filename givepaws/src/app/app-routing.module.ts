@@ -10,7 +10,6 @@ import { DonateHistoryComponent } from './components/donate-history/donate-histo
 import { CardAllComponent } from './components/card-all/card-all.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { PostCardHistoryComponent } from './components/post-card-history/post-card-history.component';
-import { UserGuard } from './guard/user.guard';
 import { AuthGuard } from './guard/auth.guard';
 import { AuthenUserGuard } from './guard/authen-user.guard';
 import { CardComponent } from './components/card/card.component';
@@ -21,13 +20,14 @@ import { AdminGuard } from './guard/admin.guard';
 import { TrasnferComponent } from './components/trasnfer/trasnfer.component';
 import { CarddetailComponent } from './components/admin-home/Cardd/carddetail/carddetail.component';
 import { EmployeeGuard } from './guard/employee.guard';
+import { HospitalCoordinatorGuard } from './guard/hospital-coordinator.guard';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
   {path:'about',component:AboutComponent},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
-  {path:'hc',component:HospitalCoordinatorComponent},
+  {path:'hc',component:HospitalCoordinatorComponent,canActivate:[AuthGuard, HospitalCoordinatorGuard]},
   {path:'profile/:username',component:UserProfileComponent},
   {path:'authentication',component:AuthenticationComponent},
   {path:'authentication/:id',component:AuthenticationComponent},

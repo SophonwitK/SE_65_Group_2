@@ -44,11 +44,13 @@ export class HospitalCoordinatorComponent implements OnInit {
         console.log(res)
         this._donateService.getRequestCardByHospital(res.hospitalid.hospitalid).subscribe({
           next: res=>{
-            console.log(res)
-            this.dataSource = new MatTableDataSource(res);
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
-            this.requestCard = res
+            if(res){
+              this.dataSource = new MatTableDataSource(res);
+              this.dataSource.sort = this.sort;
+              this.dataSource.paginator = this.paginator;
+              this.requestCard = res
+            }
+
           }
         })
       }
