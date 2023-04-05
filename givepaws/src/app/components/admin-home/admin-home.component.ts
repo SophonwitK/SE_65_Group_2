@@ -6,6 +6,7 @@ import { MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
+import { EditMemberComponent } from './Memberr/edit-member/edit-member.component';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class AdminHomeComponent implements OnInit {
     }
 
     openAddEditMemberForm() {
-      const dialogRef = this._dialog.open(MemberAddEditComponent);
+      const dialogRef = this._dialog.open(MemberAddEditComponent,{});
       dialogRef.afterClosed().subscribe({
         next: (val) => {
           if(val) {
@@ -74,6 +75,7 @@ export class AdminHomeComponent implements OnInit {
       }
   
       deleteMember(id: number) {
+
         this._memberService.deleteMember(id).subscribe({
           next: (res) => {
             alert('Member deleted')
@@ -84,8 +86,9 @@ export class AdminHomeComponent implements OnInit {
       }
   
       openEditMemberForm(data: any) {
-        const dialogRef = this._dialog.open(MemberAddEditComponent, {
+        const dialogRef = this._dialog.open(EditMemberComponent, {
           data,
+          width: '35%',
         });
   
         dialogRef.afterClosed().subscribe({
